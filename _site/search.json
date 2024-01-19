@@ -1,68 +1,5 @@
 [
   {
-    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html",
-    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html",
-    "title": "Hands-on Exercise 1",
-    "section": "",
-    "text": "The code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(tidyverse)\n\n\n\n\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")\n\nRows: 322 Columns: 7\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (4): ID, CLASS, GENDER, RACE\ndbl (3): ENGLISH, MATHS, SCIENCE\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\n\n\n\nggplot(data = exam_data, \n      aes(x = RACE)) +\n  geom_bar()"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "ISSS608-VAA",
-    "section": "",
-    "text": "Welcome to ISSS608 Visual Analytics and Applications! In this website, you will find my coursework prepared for this course."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#install-and-launching-r-packages",
-    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#install-and-launching-r-packages",
-    "title": "Hands-on Exercise 1",
-    "section": "",
-    "text": "The code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(tidyverse)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#importing-the-data",
-    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#importing-the-data",
-    "title": "Hands-on Exercise 1",
-    "section": "",
-    "text": "exam_data &lt;- read_csv(\"data/Exam_data.csv\")\n\nRows: 322 Columns: 7\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (4): ID, CLASS, GENDER, RACE\ndbl (3): ENGLISH, MATHS, SCIENCE\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#plotting-a-simple-bar-chart",
-    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#plotting-a-simple-bar-chart",
-    "title": "Hands-on Exercise 1",
-    "section": "",
-    "text": "ggplot(data = exam_data, \n      aes(x = RACE)) +\n  geom_bar()"
-  },
-  {
-    "objectID": "In-class_Ex/In-class_Ex01/In-Class_Ex01.html",
-    "href": "In-class_Ex/In-class_Ex01/In-Class_Ex01.html",
-    "title": "In-class Exercise 01: Now You See It!",
-    "section": "",
-    "text": "In this hands-on exercise, two R packages will be used. They are:\n\ntidyverse, and\n[haven] (https://www.tidyverse.org/)\n\nThe code chunk used is as follows:\n\npacman::p_load(tidyverse, haven)"
-  },
-  {
-    "objectID": "In-class_Ex/In-class_Ex01/In-Class_Ex01.html#loading-r-packages",
-    "href": "In-class_Ex/In-class_Ex01/In-Class_Ex01.html#loading-r-packages",
-    "title": "In-class Exercise 01: Now You See It!",
-    "section": "",
-    "text": "In this hands-on exercise, two R packages will be used. They are:\n\ntidyverse, and\n[haven] (https://www.tidyverse.org/)\n\nThe code chunk used is as follows:\n\npacman::p_load(tidyverse, haven)"
-  },
-  {
-    "objectID": "In-class_Ex/In-class_Ex01/In-Class_Ex01.html#importing-pisa-data",
-    "href": "In-class_Ex/In-class_Ex01/In-Class_Ex01.html#importing-pisa-data",
-    "title": "In-class Exercise 01: Now You See It!",
-    "section": "Importing PISA data",
-    "text": "Importing PISA data\nThe code chunk below uses read_sas() of haven to import PISA data into R environment.\n\nstu_qqq &lt;- read_sas(\"data/cy08msp_stu_qqq.sas7bdat\")\n\n\nstu_qqq_SG &lt;- stu_qqq %&gt;%\n  filter(CNT == \"SGP\")\n\n\nwrite_rds(stu_qqq_SG,\n          \"data/stu_qqq_SG.rds\")\n\n\nstu_qqq_SG &lt;- read_rds(\"data/stu_qqq_SG.rds\")"
-  },
-  {
     "objectID": "Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html",
     "href": "Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html",
     "title": "Hands-on Exercise 2",
@@ -103,5 +40,68 @@
     "title": "Hands-on Exercise 2",
     "section": "",
     "text": "It is common to require multiple graphs to effectively convey a compelling visual narrative. Various ggplot2 extensions offer functions for composing figures with multiple graphs. In this section, we will discover how to generate a composite plot by combining three statistical graphics using the code chunk below:\nMaths\n\np1 &lt;- ggplot(data=exam_data, \n             aes(x = MATHS)) +\n  geom_histogram(bins=20, \n                 boundary = 100,\n                 color=\"grey25\", \n                 fill=\"grey90\") + \n  coord_cartesian(xlim=c(0,100)) +\n  ggtitle(\"Distribution of Maths scores\")\n\nEnglish\n\np2 &lt;- ggplot(data=exam_data, \n             aes(x = ENGLISH)) +\n  geom_histogram(bins=20, \n                 boundary = 100,\n                 color=\"grey25\", \n                 fill=\"grey90\") +\n  coord_cartesian(xlim=c(0,100)) +\n  ggtitle(\"Distribution of English scores\")\n\nFinally, we will generate a scatterplot illustrating the relationship between English scores and Maths scores, as demonstrated below.\nEnglish vs Maths\n\np3 &lt;- ggplot(data=exam_data, \n             aes(x= MATHS, \n                 y=ENGLISH)) +\n  geom_point() +\n  geom_smooth(method=lm, \n              size=0.5) +  \n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100)) +\n  ggtitle(\"English scores versus Maths scores for Primary 3\")\n\n\n\nVarious functions from ggplot2 extensions cater to the requirements of preparing composite figures by combining multiple graphs. Examples include grid.arrange() from the gridExtra package and plot_grid() from the cowplot package. There is a ggplot2 extension called patchwork, specifically designed for merging separate ggplot2 graphs into a unified figure.\nThe patchwork package features a straightforward syntax, allowing for the easy creation of layouts. The general syntax includes:\n\nA Two-Column Layout using the Plus Sign +\nParentheses () to establish a subplot group\nA Two-Row Layout using the Division Sign /\n\nThis simplicity in syntax makes patchwork an efficient tool for combining ggplot2 graphs seamlessly.\n\n\n\nThe figure in the tabset below displays a composite of two histograms, seamlessly created using patchwork. Take note of the simplicity in the syntax employed to generate this plot!\n\np1 + p2\n\n\n\n\n\n\n\nMore intricate composite figures can be constructed by employing appropriate operators. In the composite figure below, the following operators are utilised:\n\nThe | operator is used to stack two ggplot2 graphs vertically\nThe / operator is employed to position the plots next to each other horizontally\nThe () operator is utilised to define the sequence of the plotting operations\n\n\n(p1 / p2) | p3\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\nTo delve deeper into this topic, please refer to the documentation on Plot Assembly.\n\n\n\nTo facilitate the identification of subplots in text, patchwork includes auto-tagging capabilities, as illustrated in the figure below.\n\n((p1 / p2) | p3) + \n  plot_annotation(tag_levels = 'I')\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\nIn addition to offering functions for arranging plots based on a specified layout, patchwork introduces the inset_element() function. This feature allows the flexible placement of one or multiple plots or graphic elements on top or below another plot.\n\np3 + inset_element(p2, \n                   left = 0.02, \n                   bottom = 0.7, \n                   right = 0.5, \n                   top = 1)\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\nThe figure below is generated by combining patchwork with the theme_wsj() from the ggthemes package, which was discussed earlier.\n\npatchwork &lt;- (p1 / p2) | p3\npatchwork & theme_wsj()\n\n`geom_smooth()` using formula = 'y ~ x'"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html",
+    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html",
+    "title": "Hands-on Exercise 1",
+    "section": "",
+    "text": "The code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(tidyverse)\n\n\n\n\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")\n\nRows: 322 Columns: 7\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (4): ID, CLASS, GENDER, RACE\ndbl (3): ENGLISH, MATHS, SCIENCE\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\n\n\n\nggplot(data = exam_data, \n      aes(x = RACE)) +\n  geom_bar()"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#install-and-launching-r-packages",
+    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#install-and-launching-r-packages",
+    "title": "Hands-on Exercise 1",
+    "section": "",
+    "text": "The code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.\n\npacman::p_load(tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#importing-the-data",
+    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#importing-the-data",
+    "title": "Hands-on Exercise 1",
+    "section": "",
+    "text": "exam_data &lt;- read_csv(\"data/Exam_data.csv\")\n\nRows: 322 Columns: 7\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (4): ID, CLASS, GENDER, RACE\ndbl (3): ENGLISH, MATHS, SCIENCE\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#plotting-a-simple-bar-chart",
+    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#plotting-a-simple-bar-chart",
+    "title": "Hands-on Exercise 1",
+    "section": "",
+    "text": "ggplot(data = exam_data, \n      aes(x = RACE)) +\n  geom_bar()"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ISSS608-VAA",
+    "section": "",
+    "text": "Welcome to ISSS608 Visual Analytics and Applications! In this website, you will find my coursework prepared for this course."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex01/In-Class_Ex01.html",
+    "href": "In-class_Ex/In-class_Ex01/In-Class_Ex01.html",
+    "title": "In-class Exercise 01: Now You See It!",
+    "section": "",
+    "text": "In this hands-on exercise, two R packages will be used. They are:\n\ntidyverse, and\n[haven] (https://www.tidyverse.org/)\n\nThe code chunk used is as follows:\n\npacman::p_load(tidyverse, haven)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex01/In-Class_Ex01.html#loading-r-packages",
+    "href": "In-class_Ex/In-class_Ex01/In-Class_Ex01.html#loading-r-packages",
+    "title": "In-class Exercise 01: Now You See It!",
+    "section": "",
+    "text": "In this hands-on exercise, two R packages will be used. They are:\n\ntidyverse, and\n[haven] (https://www.tidyverse.org/)\n\nThe code chunk used is as follows:\n\npacman::p_load(tidyverse, haven)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex01/In-Class_Ex01.html#importing-pisa-data",
+    "href": "In-class_Ex/In-class_Ex01/In-Class_Ex01.html#importing-pisa-data",
+    "title": "In-class Exercise 01: Now You See It!",
+    "section": "Importing PISA data",
+    "text": "Importing PISA data\nThe code chunk below uses read_sas() of haven to import PISA data into R environment.\n\nstu_qqq &lt;- read_sas(\"data/cy08msp_stu_qqq.sas7bdat\")\n\n\nstu_qqq_SG &lt;- stu_qqq %&gt;%\n  filter(CNT == \"SGP\")\n\n\nwrite_rds(stu_qqq_SG,\n          \"data/stu_qqq_SG.rds\")\n\n\nstu_qqq_SG &lt;- read_rds(\"data/stu_qqq_SG.rds\")"
   }
 ]
