@@ -1,4 +1,71 @@
 ---
 title: "Take-home Exercise 1"
-author: "Rizqi Febriansyah"
+subtitle: "Navigating Educational Disparities: Examining Perceptions Despite Singapore's Pursuit of Excellence"
+date: "January 17,2024"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+editor: visual
 ---
+
+# 1. Overview
+
+## 1.1 Setting the Scene
+
+Andreas Schleicher, the education director of OECD, conveyed in a BBC article that Singapore has achieved excellence without significant disparities between children from affluent and underprivileged families (2016). Additionally, several Ministers for Education in Singapore have adopted the slogan "every school a good school." Despite these efforts, the prevailing public opinion strongly suggests the presence of disparities, particularly between elite and neighbourhood schools, among students from families with varying socioeconomic statuses, and between immigration and non-immigration families.
+
+## 1.2 Our Task
+
+The data that we will be using would be the 2022 Programme for International Student Assessment (PISA), which evaluates education systems globally by testing 15-year-old students in mathematics, reading, and science.
+
+By employing some EDA, we would want to find out:
+
+1.  The distribution of Singaporean students' proficiency in mathematics, reading and science
+
+2.  The correlation between these performance levels and factors such as schools, gender and the socioeconomic status of the students
+
+# 2. Data Preparation
+## 2.1 Loading R packages
+In this take-home exercise, [tidyverse](https://www.tidyverse.org/) and [haven](https://haven.tidyverse.org/) package will be used.
+
+The code chunk used is as follows:
+
+```{r}
+pacman::p_load(tidyverse, haven)
+```
+
+## 2.1 Importing dataset
+One dataset from PISA is provided for this task, specifically the Student questionnaire data file: cy08msp_stu_qqq.sas7bdat
+
+The code chunk below uses [`read_sas()`](https://haven.tidyverse.org/reference/read_sas.html) of [haven](https://haven.tidyverse.org/index.html) to import PISA data into R environment.
+
+```{r}
+#| eval: false
+stu_qqq <- read_sas("data/cy08msp_stu_qqq.sas7bdat")
+```
+
+## 2.1.1 Filtering data from Singapore only
+Since our task is to find out students' performance in various subjects and relationship of performances with regards to other variables in Singapore, we would need to filter data to only include Singapore. Since there is a CNT column, which is a Country column, we will filter it to only include SGP (Singapore).
+```{r}
+#| eval: false
+stu_qqq_SG <- stu_qqq %>%
+  filter(CNT == "SGP")
+```
+Since the original data is huge in file size, we will save the Singapore filtered data as stu_qqq_SG in the data folder. 
+```{r}
+#| eval: false
+write_rds(stu_qqq_SG,
+          "data/stu_qqq_SG.rds")
+```
+Therefore, we will only read the stu_qqq_SG.rds file from now onwards.
+```{r}
+stu_qqq_SG <- read_rds("data/stu_qqq_SG.rds")
+```
+
+## 2.1.2 Summary Statistics of stu_qqq_SG data
+Displaying first 10 rows using head():
+```{r}
+head(stu_qqq_SG,10) 
+```

@@ -84,6 +84,55 @@
     "text": "About this site\n\n1 + 1\n\n[1] 2"
   },
   {
+    "objectID": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html",
+    "href": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html",
+    "title": "Take-home Exercise 1",
+    "section": "",
+    "text": "Andreas Schleicher, the education director of OECD, conveyed in a BBC article that Singapore has achieved excellence without significant disparities between children from affluent and underprivileged families (2016). Additionally, several Ministers for Education in Singapore have adopted the slogan “every school a good school.” Despite these efforts, the prevailing public opinion strongly suggests the presence of disparities, particularly between elite and neighbourhood schools, among students from families with varying socioeconomic statuses, and between immigration and non-immigration families.\n\n\n\nThe data that we will be using would be the 2022 Programme for International Student Assessment (PISA), which evaluates education systems globally by testing 15-year-old students in mathematics, reading, and science.\nBy employing some EDA, we would want to find out:\n\nThe distribution of Singaporean students’ proficiency in mathematics, reading and science\nThe correlation between these performance levels and factors such as schools, gender and the socioeconomic status of the students"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html#setting-the-scene",
+    "href": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html#setting-the-scene",
+    "title": "Take-home Exercise 1",
+    "section": "",
+    "text": "Andreas Schleicher, the education director of OECD, conveyed in a BBC article that Singapore has achieved excellence without significant disparities between children from affluent and underprivileged families (2016). Additionally, several Ministers for Education in Singapore have adopted the slogan “every school a good school.” Despite these efforts, the prevailing public opinion strongly suggests the presence of disparities, particularly between elite and neighbourhood schools, among students from families with varying socioeconomic statuses, and between immigration and non-immigration families."
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html#our-task",
+    "href": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html#our-task",
+    "title": "Take-home Exercise 1",
+    "section": "",
+    "text": "The data that we will be using would be the 2022 Programme for International Student Assessment (PISA), which evaluates education systems globally by testing 15-year-old students in mathematics, reading, and science.\nBy employing some EDA, we would want to find out:\n\nThe distribution of Singaporean students’ proficiency in mathematics, reading and science\nThe correlation between these performance levels and factors such as schools, gender and the socioeconomic status of the students"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html#loading-r-packages",
+    "href": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html#loading-r-packages",
+    "title": "Take-home Exercise 1",
+    "section": "2.1 Loading R packages",
+    "text": "2.1 Loading R packages\nIn this take-home exercise, tidyverse and haven package will be used.\nThe code chunk used is as follows:\n\npacman::p_load(tidyverse, haven)"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html#importing-dataset",
+    "href": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html#importing-dataset",
+    "title": "Take-home Exercise 1",
+    "section": "2.1 Importing dataset",
+    "text": "2.1 Importing dataset\nOne dataset from PISA is provided for this task, specifically the Student questionnaire data file: cy08msp_stu_qqq.sas7bdat\nThe code chunk below uses read_sas() of haven to import PISA data into R environment.\n\nstu_qqq &lt;- read_sas(\"data/cy08msp_stu_qqq.sas7bdat\")"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html#filtering-data-from-singapore-only",
+    "href": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html#filtering-data-from-singapore-only",
+    "title": "Take-home Exercise 1",
+    "section": "2.1.1 Filtering data from Singapore only",
+    "text": "2.1.1 Filtering data from Singapore only\nSince our task is to find out students’ performance in various subjects and relationship of performances with regards to other variables in Singapore, we would need to filter data to only include Singapore. Since there is a CNT column, which is a Country column, we will filter it to only include SGP (Singapore).\n\nstu_qqq_SG &lt;- stu_qqq %&gt;%\n  filter(CNT == \"SGP\")\n\nSince the original data is huge in file size, we will save the Singapore filtered data as stu_qqq_SG in the data folder.\n\nwrite_rds(stu_qqq_SG,\n          \"data/stu_qqq_SG.rds\")\n\nTherefore, we will only read the stu_qqq_SG.rds file from now onwards.\n\nstu_qqq_SG &lt;- read_rds(\"data/stu_qqq_SG.rds\")"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html#summary-statistics-of-stu_qqq_sg-data",
+    "href": "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html#summary-statistics-of-stu_qqq_sg-data",
+    "title": "Take-home Exercise 1",
+    "section": "2.1.2 Summary Statistics of stu_qqq_SG data",
+    "text": "2.1.2 Summary Statistics of stu_qqq_SG data\nDisplaying first 10 rows using head():\n\nhead(stu_qqq_SG,10) \n\n# A tibble: 10 × 1,279\n   CNT   CNTRYID CNTSCHID CNTSTUID CYC   NatCen STRATUM SUBNATIO REGION  OECD\n   &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;\n 1 SGP       702 70200052 70200001 08MS  070200 SGP01   7020000   70200     0\n 2 SGP       702 70200134 70200002 08MS  070200 SGP01   7020000   70200     0\n 3 SGP       702 70200112 70200003 08MS  070200 SGP01   7020000   70200     0\n 4 SGP       702 70200004 70200004 08MS  070200 SGP01   7020000   70200     0\n 5 SGP       702 70200152 70200005 08MS  070200 SGP01   7020000   70200     0\n 6 SGP       702 70200043 70200006 08MS  070200 SGP01   7020000   70200     0\n 7 SGP       702 70200049 70200007 08MS  070200 SGP01   7020000   70200     0\n 8 SGP       702 70200107 70200008 08MS  070200 SGP01   7020000   70200     0\n 9 SGP       702 70200012 70200009 08MS  070200 SGP01   7020000   70200     0\n10 SGP       702 70200061 70200010 08MS  070200 SGP01   7020000   70200     0\n# ℹ 1,269 more variables: ADMINMODE &lt;dbl&gt;, LANGTEST_QQQ &lt;dbl&gt;,\n#   LANGTEST_COG &lt;dbl&gt;, LANGTEST_PAQ &lt;dbl&gt;, Option_CT &lt;dbl&gt;, Option_FL &lt;dbl&gt;,\n#   Option_ICTQ &lt;dbl&gt;, Option_WBQ &lt;dbl&gt;, Option_PQ &lt;dbl&gt;, Option_TQ &lt;dbl&gt;,\n#   Option_UH &lt;dbl&gt;, BOOKID &lt;dbl&gt;, ST001D01T &lt;dbl&gt;, ST003D02T &lt;dbl&gt;,\n#   ST003D03T &lt;dbl&gt;, ST004D01T &lt;dbl&gt;, ST250Q01JA &lt;dbl&gt;, ST250Q02JA &lt;dbl&gt;,\n#   ST250Q03JA &lt;dbl&gt;, ST250Q04JA &lt;dbl&gt;, ST250Q05JA &lt;dbl&gt;, ST250D06JA &lt;chr&gt;,\n#   ST250D07JA &lt;chr&gt;, ST251Q01JA &lt;dbl&gt;, ST251Q02JA &lt;dbl&gt;, ST251Q03JA &lt;dbl&gt;, …"
+  },
+  {
     "objectID": "In-class_Ex/In-class_Ex01/In-Class_Ex01.html",
     "href": "In-class_Ex/In-class_Ex01/In-Class_Ex01.html",
     "title": "In-class Exercise 01: Now You See It!",
