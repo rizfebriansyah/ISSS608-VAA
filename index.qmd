@@ -2,4 +2,11 @@
 title: "ISSS608-VAA"
 ---
 
-Welcome to **ISSS608 Visual Analytics and Applications!** In this website, you will find my coursework prepared for this course.
+Step into the captivating world of **ISSS608 Visual Analytics and Applications**! Brace yourself for an immersive journey as you explore this digital realm, where my coursework for this course comes to life. Get ready to embark on a visual odyssey that goes beyond the ordinary -- a fusion of knowledge and creativity awaits you within these virtual corridors!
+
+[![Picture from: MattD, Former Alteryx, Inc. Support Engineer, Community Data Architect, Data Scientist then Data Engineer](paranormal%20distribution.png)](https://community.alteryx.com/t5/General-Discussions/We-want-to-know-What-s-your-favorite-data-joke/td-p/51357)
+
+::: {.callout-tip collapse="true"}
+## Joke: Why did the scatter plot go to therapy? 
+It couldn't handle the emotional baggage of its outliers!
+:::
