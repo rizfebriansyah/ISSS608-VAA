@@ -1,0 +1,18 @@
+---
+title: "Hands-on Exercise 3"
+author: "Rizqi Febriansyah"
+---
+
+# 3 Programming Interactive Data Visualisation with R
+
+## 3.1 Learning Outcome
+In this hands-on exercise, you will learn how to create interactive data visualisation by using functions provided by ggiraph and plotlyr packages.
+
+## 3.2 Getting Started
+First, write a code chunk to check, install and launch the following R packages:
+
+-[ggiraph](https://davidgohel.github.io/ggiraph/) for making ‘ggplot’ graphics interactive.
+-[plotly](https://plotly.com/r/), R library for plotting interactive statistical graphs.
+-[DT](https://rstudio.github.io/DT/) provides an R interface to the JavaScript library [DataTables](https://datatables.net/) that create interactive table on html page.
+-[tidyverse](https://www.tidyverse.org/), a family of modern R packages specially designed to support data science, analysis and communication task including creating static statistical graphs.
+-[patchwork](https://patchwork.data-imaginist.com/) for combining multiple ggplot2 graphs into one figure.
