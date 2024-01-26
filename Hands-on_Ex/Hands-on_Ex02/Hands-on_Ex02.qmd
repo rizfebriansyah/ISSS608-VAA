@@ -1,11 +1,25 @@
 ---
-title: "Hands-on Exercise 2"
+title: "Hands-on Exercise 2: Beyond ggplot2 Fundamentals"
 author: "Rizqi Febriansyah"
+date: "18 January 2023"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+editor: visual
 ---
 
-# Beyond ggplot2 Fundamentals
+# 2.1 Overview
 
-## Importing the necessary libraries
+Within this section, we will explore various ggplot2 extensions that enhance the creation of refined and impactful statistical visuals. Upon completing this section, we will gain the ability to:
+
+1.  Precisely position annotations on a graph using functions from the ggrepel package.
+2.  Generate polished, publication-quality figures using functions from the ggthemes and hrbrthemes packages.
+3.  Construct composite figures by merging ggplot2 graphs with the patchwork package.
+
+# 2.2 Getting Started
+
+## 2.2.1 Importing the necessary libraries
 
 -   **ggrepel** is an R package that offers geoms for ggplot2, enabling the repulsion of overlapping text labels
 
@@ -21,7 +35,7 @@ pacman::p_load(ggrepel, patchwork,
                tidyverse)
 ```
 
-## Importing data
+## 2.2.2 Importing data
 
 The exam_data tibble data frame comprises seven attributes in total.
 
@@ -47,11 +61,9 @@ The exam_data tibble data frame comprises seven attributes in total.
 exam_data <- read_csv("data/Exam_data.csv")
 ```
 
-## ggrepel
+# 2.3 Beyond ggplot2 Annotation: ggrepel
 
-Plotting statistical graphs can be challenging, particularly when dealing with a large number of data points and the need for effective annotation. **ggrepel** serves as an extension of the ggplot2 package, offering geoms designed to repel overlapping text, as demonstrated in the examples on the right. To implement this functionality, you can seamlessly replace **geom_text()** with **geom_text_repel()** and **geom_label()** with **geom_label_repel**.
-
-### Working with ggrepel
+Plotting statistical graphs can be challenging, particularly when dealing with a large number of data points and the need for effective annotation. [**ggrepel**](https://ggrepel.slowkow.com/) serves as an extension of the ggplot2 package, offering `geoms` designed to repel overlapping text, as demonstrated in the examples on the right. To implement this functionality, you can seamlessly replace `geom_text()` with [**geom_text_repel()**](https://ggrepel.slowkow.com/reference/geom_text_repel.html) and `geom_label()` with [**geom_label_repel**](https://ggrepel.slowkow.com/reference/geom_text_repel.html).
 
 ```{r}
 ggplot(data=exam_data, 
@@ -68,7 +80,24 @@ ggplot(data=exam_data,
   ggtitle("English scores versus Maths scores for Primary 3")
 ```
 
-## Beyond ggplot2 Themes
+## 2.3.1 Working with ggrepel
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, 
+           y=ENGLISH)) +
+  geom_point() +
+  geom_smooth(method=lm, 
+              size=0.5) +  
+  geom_label(aes(label = ID), 
+             hjust = .5, 
+             vjust = -.5) +
+  coord_cartesian(xlim=c(0,100),
+                  ylim=c(0,100)) +
+  ggtitle("English scores versus Maths scores for Primary 3")
+```
+
+# 2.4 Beyond ggplot2 Themes
 
 ggplot2 includes a set of eight [built-in themes](https://ggplot2.tidyverse.org/reference/ggtheme.html), each providing a distinct visual style. These themes are:
 
@@ -88,7 +117,7 @@ ggplot2 includes a set of eight [built-in themes](https://ggplot2.tidyverse.org/
 
 8.  theme_void()
 
-Click on this [link](https://ggplot2.tidyverse.org/reference/#themes) for further information on ggplot2 \[`Themes`\].
+Click on this [link](https://ggplot2.tidyverse.org/reference/#themes) for further information on ggplot2 `Themes`.
 
 ```{r}
 ggplot(data=exam_data, 
@@ -101,7 +130,7 @@ ggplot(data=exam_data,
   ggtitle("Distribution of Maths scores") 
 ```
 
-### Working with ggtheme package
+## 2.4.1 Working with ggtheme package
 
 [ggthemes](https://cran.r-project.org/web/packages/ggthemes/) offers ['ggplot2' themes](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/) that emulate the visual style of plots created by Edward Tufte, Stephen Few, Fivethirtyeight, [The Economist](https://www.economist.com/graphic-detail), 'Stata', 'Excel', [The Wall Street Journal](https://www.pinterest.com/wsjgraphics/wsj-graphics/), and various others.
 
@@ -120,7 +149,7 @@ ggplot(data=exam_data,
 
 Additionally, ggthemes provides supplementary geoms and scales for 'ggplot2'. To delve deeper into these features, refer to the accompanying vignette for more insights.
 
-### Working with hrbthems package
+## 2.4.2 Working with hrbthems package
 
 The [hrbrthemes](https://cinc.rud.is/web/packages/hrbrthemes/) package offers a foundational theme that prioritises typographic elements, determining the placement of labels and specifying the fonts utilised.
 
@@ -150,15 +179,17 @@ ggplot(data=exam_data,
               grid = "Y")
 ```
 
+::: callout-tip
 What can we learn from the code chunk above?
 
--   \[`axis_title_size]` argument is used to increase the font size of the axis title to 18
+-   `axis_title_size` argument is used to increase the font size of the axis title to 18
 
--   \[`base_size]` argument is used to increase the default axis label to 15
+-   `base_size` argument is used to increase the default axis label to 15
 
--   \[`grid`\] argument is used to remove the x-axis grid lines
+-   `grid` argument is used to remove the x-axis grid lines
+:::
 
-## Beyond Single Graph
+# 2.5 Beyond Single Graph
 
 It is common to require multiple graphs to effectively convey a compelling visual narrative. Various ggplot2 extensions offer functions for composing figures with multiple graphs. In this section, we will discover how to generate a composite plot by combining three statistical graphics using the code chunk below:
 
@@ -204,7 +235,7 @@ p3 <- ggplot(data=exam_data,
   ggtitle("English scores versus Maths scores for Primary 3")
 ```
 
-### 2.5.1 Creating Composite Graphics: pathwork methods
+## 2.5.1 Creating Composite Graphics: pathwork methods
 
 Various functions from ggplot2 extensions cater to the requirements of preparing composite figures by combining multiple graphs. Examples include [`grid.arrange()`](https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html) from the `gridExtra` package and [`plot_grid()`](https://wilkelab.org/cowplot/reference/plot_grid.html) from the [`cowplot`](https://wilkelab.org/cowplot/) package. There is a ggplot2 extension called [patchwork](https://patchwork.data-imaginist.com/), specifically designed for merging separate ggplot2 graphs into a unified figure.
 
@@ -216,7 +247,7 @@ The patchwork package features a straightforward syntax, allowing for the easy c
 
 This simplicity in syntax makes patchwork an efficient tool for combining ggplot2 graphs seamlessly.
 
-### 2.5.2 Combining two ggplot2 graphs
+## 2.5.2 Combining two ggplot2 graphs
 
 The figure in the tabset below displays a composite of two histograms, seamlessly created using patchwork. Take note of the simplicity in the syntax employed to generate this plot!
 
@@ -224,7 +255,7 @@ The figure in the tabset below displays a composite of two histograms, seamlessl
 p1 + p2
 ```
 
-### 2.5.3 Combining three ggplot2 graphs
+## 2.5.3 Combining three ggplot2 graphs
 
 More intricate composite figures can be constructed by employing appropriate operators. In the composite figure below, the following operators are utilised:
 
@@ -238,7 +269,8 @@ More intricate composite figures can be constructed by employing appropriate ope
 
 To delve deeper into this topic, please refer to the documentation on [Plot Assembly](https://patchwork.data-imaginist.com/articles/guides/assembly.html).
 
-### 2.5.4 Creating a composite figure with tag
+## 2.5.4 Creating a composite figure with tag
+
 To facilitate the identification of subplots in text, **patchwork** includes auto-tagging capabilities, as illustrated in the figure below.
 
 ```{r}
@@ -246,8 +278,10 @@ To facilitate the identification of subplots in text, **patchwork** includes aut
   plot_annotation(tag_levels = 'I')
 ```
 
-### 2.5.5 Creating figure with insert
+## 2.5.5 Creating figure with insert
+
 In addition to offering functions for arranging plots based on a specified layout, patchwork introduces the [`inset_element()`](https://patchwork.data-imaginist.com/reference/inset_element.html) function. This feature allows the flexible placement of one or multiple plots or graphic elements on top or below another plot.
+
 ```{r}
 p3 + inset_element(p2, 
                    left = 0.02, 
@@ -256,9 +290,20 @@ p3 + inset_element(p2,
                    top = 1)
 ```
 
-### 2.5.6 Creating a composite figure by using patchwork and ggtheme
+## 2.5.6 Creating a composite figure by using patchwork and ggtheme
+
 The figure below is generated by combining patchwork with the `theme_wsj()` from the ggthemes package, which was discussed earlier.
+
 ```{r}
 patchwork <- (p1 / p2) | p3
 patchwork & theme_wsj()
 ```
+
+# 2.6 Reference
+-   Patchwork R package goes nerd viral
+-   ggrepel
+-   ggthemes
+-   hrbrthemes
+-   ggplot tips: Arranging plots
+-   ggplot2 Theme Elements Demonstration
+-   ggplot2 Theme Elements Reference Sheet

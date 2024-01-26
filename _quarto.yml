@@ -4,7 +4,7 @@ project:
 website:
   title: "rizfebriansyah"
   navbar:
-    logo: placeholder.png
+    logo: images/placeholder.png
     tools:
       - icon: linkedin
         href: https://sg.linkedin.com/
