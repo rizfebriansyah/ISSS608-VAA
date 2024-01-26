@@ -1,0 +1,603 @@
+---
+title: "Take-home Exercise 2"
+subtitle: "Navigating Educational Disparities: Examining Perceptions Despite Singapore's Pursuit of Excellence"
+date: "25 January ,2024"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+editor: visual
+---
+
+# 1. Overview
+
+## 1.1 Setting the Scene
+
+Andreas Schleicher, the education director of OECD, conveyed in a BBC article that Singapore has achieved excellence without significant disparities between children from affluent and underprivileged families (2016). Additionally, several Ministers for Education in Singapore have adopted the slogan "every school a good school." Despite these efforts, the prevailing public opinion strongly suggests the presence of disparities, particularly between elite and neighbourhood schools, among students from families with varying socioeconomic statuses, and between immigration and non-immigration families.
+
+## 1.2 Our Task
+
+The data that we will be using would be the 2022 Programme for International Student Assessment (PISA), which evaluates education systems globally by testing 15-year-old students in mathematics, reading, and science.
+
+By employing some EDA, we would want to find out:
+
+1.  The distribution of Singaporean students' proficiency in mathematics, reading and science
+
+2.  The correlation between these performance levels and factors such as schools, gender and the socioeconomic status of the students
+
+# 2. Data Preparation
+
+## 2.1 Loading R packages
+
+In this take-home exercise, [tidyverse](https://www.tidyverse.org/) and [haven](https://haven.tidyverse.org/) packages will be used.
+
+Also, we will be using these packages listed below:
+
+-   **ggrepel** is an R package that offers geoms for ggplot2, enabling the repulsion of overlapping text labels
+
+-   **ggthemes** is an R package that offers additional themes, geoms, and scales for 'ggplot2'
+
+-   **hrbrthemes** is an R package that offers typography-centric themes and theme components for ggplot2
+
+-   **patchwork** is an R package designed for creating composite figures using ggplot2
+
+-   **dplyr** is a data manipulation package in R that offers a consistent set of functions, or verbs, to address common data manipulation tasks. It includes functions such as 'mutate()' for creating new variables, 'select()' for choosing variables by name, 'filter()' for selecting cases based on values, 'summarise()' for reducing multiple values to a single summary, and 'arrange()' for changing the row ordering in a dataset.
+
+[note: The tidyverse package is an "umbrella-package" that installs tidyr, dplyr and several other useful packages for data analysis, such as ggplot2, tibble, etc.]{.underline}
+
+The code chunk used is as follows:
+
+```{r}
+pacman::p_load(ggrepel, patchwork, 
+               ggthemes, hrbrthemes, dplyr, ggdist, ggridges,
+               tidyverse, haven)
+```
+
+## 2.2 Importing the dataset
+
+One dataset from PISA is provided for this task, specifically the Student questionnaire data file: cy08msp_stu_qqq.sas7bdat
+
+The code chunk below uses [`read_sas()`](https://haven.tidyverse.org/reference/read_sas.html) of [haven](https://haven.tidyverse.org/index.html) to import PISA data into R environment.
+
+```{r}
+#| eval: false
+stu_qqq <- read_sas("data/cy08msp_stu_qqq.sas7bdat")
+```
+
+## 2.3 Filtering data from Singapore only
+
+Since our task is to find out students' performance in various subjects and relationship of performances with regards to other variables in Singapore, we would need to filter data to only include Singapore. Since there is a CNT column, which is a Country column, we will filter it to only include SGP (Singapore).
+
+The code chunk to filter SGP only:
+
+```{r}
+#| eval: false
+stu_qqq_SG <- stu_qqq %>%
+  filter(CNT == "SGP")
+```
+
+Since the original data is huge in file size, we will save the Singapore filtered data as stu_qqq_SG in the data folder.
+
+The code chunk to save filtered data as stu_qqq_SG:
+
+```{r}
+#| eval: false
+write_rds(stu_qqq_SG,
+          "data/stu_qqq_SG.rds")
+```
+
+Therefore, we will only read the stu_qqq_SG.rds file from now onwards.
+
+The code chunk to read stu_qqq_SG.rds file:
+
+```{r}
+stu_qqq_SG <- read_rds("data/stu_qqq_SG.rds")
+```
+
+## 2.4 Summary Statistics of stu_qqq_SG data
+
+To check if we have filtered the correct data to include SG only, we will be displaying first 10 rows using head():
+
+::: panel-tabset
+# The output
+
+```{r}
+#| echo: false
+head(stu_qqq_SG,10) 
+```
+
+# The code
+
+```{r}
+#| eval: false
+head(stu_qqq_SG,10) 
+```
+:::
+
+## 2.5 Preparing Subjects Data
+
+In order to assess students' performance in various subjects, including Mathematics, Reading and Science, we must identify the columns that correspond to these specific subjects.
+
+With reference to [PISA website](https://www.oecd.org/pisa/data/httpoecdorgpisadatabase-instructions.htm), we can utilise plausible estimates for assessing student proficiency. PISA evaluates student achievement using plausible values (PVs), derived from Item Response Theory models (refer to Chapter 5 of the PISA Data Analysis Manual: SAS or SPSS, Second Edition, or the accompanying guide "Scaling of Cognitive Data and Use of Students Performance Estimates" for detailed information). These models fundamentally deduce a student's ability from their test performance. In application, plausible values are produced through multiple imputations, considering pupils' responses to the randomly assigned subset of test questions and their input in background questionnaires.
+
+### 2.5.1 Preparing Maths Data
+
+After looking through the dataset, we have determined that the columns denoting Mathematics performance are PV1MATH to PV10MATH.
+
+Consequently, we will compute the average of these plausible values using the rowMeans() function. A new column, called MATHEMATICS, will be generated to store the calculated average plausible values for the Mathematics subject.
+
+The corresponding code snippet is as follows:
+
+```{r}
+# Select the columns containing math plausible values
+math_columns <- stu_qqq_SG[, c("PV1MATH", "PV2MATH", "PV3MATH", "PV4MATH", "PV5MATH", "PV6MATH", "PV7MATH", "PV8MATH", "PV9MATH", "PV10MATH")]
+
+# Calculate the row-wise mean
+math_row_means <- rowMeans(math_columns)
+
+# Add the row means as a new column to the data frame
+stu_qqq_SG$MATHEMATICS <- math_row_means
+```
+
+### 2.5.2 Preparing Reading Data
+
+Similarly, upon close examination of the dataset, we have identified that the columns associated with Reading are PV1READ to PV10READ.
+
+As a result, we will calculate the average of these plausible values using the rowMeans() function. A new column, labeled READING, will be created to store the resulting average plausible values for the Reading subject.
+
+The corresponding code snippet is provided below:
+
+```{r}
+# Select the columns containing read plausible values
+reading_columns <- stu_qqq_SG[, c("PV1READ", "PV2READ", "PV3READ", "PV4READ", "PV5READ", "PV6READ", "PV7READ", "PV8READ", "PV9READ", "PV10READ")]
+
+# Calculate the row-wise mean
+reading_row_means <- rowMeans(reading_columns)
+
+# Add the row means as a new column to the data frame
+stu_qqq_SG$READING <- reading_row_means
+```
+
+### 2.5.3 Preparing Science Data
+
+Lastly, upon a thorough review of the dataset, we have determined that the columns corresponding to Science are PV1SCIE to PV10SCIE.
+
+Consequently, we will use the rowMeans() function to compute the average of these plausible values. A new column, named SCIENCE, will be established to store the resulting average plausible values for the Science subject.
+
+The corresponding code snippet is provided below:
+
+```{r}
+# Select the columns containing science plausible values
+science_columns <- stu_qqq_SG[, c("PV1SCIE", "PV2SCIE", "PV3SCIE", "PV4SCIE", "PV5SCIE", "PV6SCIE", "PV7SCIE", "PV8SCIE", "PV9SCIE", "PV10SCIE")]
+
+# Calculate the row-wise mean
+science_row_means <- rowMeans(science_columns)
+
+# Add the row means as a new column to the data frame
+stu_qqq_SG$SCIENCE <- science_row_means
+```
+
+## 2.6 Preparing Gender Data
+
+Upon examining the dataset, a particular column labeled 'ST004D01T' provides information about gender, using the values 1 and 2. According to the [PISA questionnaire manual](https://www.oecd.org/pisa/data/2022database/CY8_202111_QST_MS_STQ_CBA_NoNotes.pdf), 1 corresponds to female, while 2 corresponds to male.
+
+To facilitate a more straightforward analysis, we intend to recode the values, assigning 1 to represent female and 2 to represent male. This recoding process will be carried out using the [dplyr](https://dplyr.tidyverse.org/), a component of the tidyverse package.
+
+We prefer generating a new column instead of altering the current one. To achieve this, employ the mutate function in conjunction with the assignment operator (=) to establish a fresh column.
+
+This action will introduce a column named 'GENDER' into your 'stu_qqq_SG' dataset, with values redefined according to the 'ST004D01T' column. The original 'ST004D01T' column retains its original state, and now, a newly created 'GENDER' column contains the recoded values."
+
+The following code snippet provides the pertinent information:
+
+```{r}
+# Install and load the dplyr package if we have not done so
+# install.packages("dplyr")
+library(dplyr)
+
+# Create a new column 'GENDER' with recoded values
+stu_qqq_SG <- stu_qqq_SG %>%
+  mutate(GENDER = recode(ST004D01T, "1" = "female", "2" = "male"))
+```
+
+To check if we have recoded the gender data correctly, we will be displaying the first 10 rows of the GENDER column:
+
+::: panel-tabset
+# The output
+
+```{r}
+#| echo: false
+head(stu_qqq_SG[c("GENDER")],10)
+```
+
+# The code
+
+```{r}
+#| eval: false
+head(stu_qqq_SG[c("GENDER")],10)
+```
+:::
+
+## 2.7 Preparing Socioeconomic Status Data
+
+With reference to the [PISA 2022 Technical Report](https://www.oecd.org/pisa/data/pisa2022technicalreport/PISA-2022-Technical-Report-Ch-05-PISA-2022-Context-Questionnaire-Development.pdf), Figure 5.1 in the PISA 2022 Technical Report illustrates the two-dimensional framework taxonomy. The primary dimension categorises proposed constructs into two overarching categories defined by the PISA Governing Board (PGB): domain-specific constructs and general constructs, with the latter encompassing Economic, Social and Cultural Status (ESCS). The secondary dimension further categorises proposed constructs into five categories based on key areas of educational policy setting at different levels of aggregation. These categories include Student Background, Student Beliefs, Attitudes, Feelings. and Behaviours, Teaching Practices and Learning Opportunities, School Practices, Policies, and Infrastructure, and Governance, System-Level Policies, and Practices.
+
+Therefore, it can be inferred that the 'ESCS' column can be utilised for assessing the socioeconomic status of students.
+
+If we view the 'ESCS' column, there are negative and positive ESCS values, it generally implies a relative positioning of students along a spectrum of economic, social and cultural advantages or disadvantages.
+
+-   Positive ESCS value: This typically indicates a higher socioeconomic status, suggesting that the student comes from an environment with more favourable economic conditions, higher social standing, and a richer cultural background. Students with positive ESCS values may have access to more resources, educational support and opportunities.
+
+-   Negative ESCS value: Conversely, a negative ESCS value suggests a lower socioeconomic status. Students with negative ESCS values may face economic challenges, have a lower social standing, and possibly experience a less enriched cultural environment. These students may encounter additional obstacles in their educational journey due to a lack of resources or support.
+
+The first 10 rows of the ESCS column can be seen here:
+
+::: panel-tabset
+# The output
+
+```{r}
+#| echo: false
+head(stu_qqq_SG[c("ESCS")],10)
+```
+
+# The code
+
+```{r}
+#| eval: false
+head(stu_qqq_SG[c("ESCS")],10)
+```
+:::
+
+## 2.8 Preparing School Data
+
+Exploring the dataset reveals a sole column dedicated to schools, labeled 'CNTSCHID.' Regrettably, the dataset lacks details about the nature of CNTSCHID or the specific identity associated with each school ID. Nonetheless, we must work with the available information as is.
+
+The first 10 rows of the CNTSCHID column can be seen here:
+
+::: panel-tabset
+# The output
+
+```{r}
+#| echo: false
+head(stu_qqq_SG[c("CNTSCHID")],10)
+```
+
+# The code
+
+```{r}
+#| eval: false
+head(stu_qqq_SG[c("CNTSCHID")],10)
+```
+:::
+
+# 3. Exploratory Data Analysis (EDA)
+
+## 3.1 Three Subjects - Mathematics, Reading and Science
+
+### 3.1.1 Distribution Across Three Subjects - Mathematics, Reading and Science
+
+We will now do the plot for each respective subject. We will be doing a histogram to show the distribution across three subjects.
+
+The code will be shown below:
+
+::: panel-tabset
+# Mathematics
+
+```{r}
+#| echo: false
+p1 <- ggplot(data=stu_qqq_SG, 
+             aes(x = MATHEMATICS)) +
+  geom_histogram(bins=20, 
+                 boundary = 100,
+                 color="grey25", 
+                 fill="light blue") +
+  theme_gray() +
+  ggtitle("Distribution of Maths scores") +
+  geom_vline(xintercept = mean(stu_qqq_SG$MATHEMATICS), 
+             color = "red", 
+             linetype = "dashed", 
+             size = 1)
+```
+
+```{r}
+#| eval: false
+p1 <- ggplot(data=stu_qqq_SG, 
+             aes(x = MATHEMATICS)) +
+  geom_histogram(bins=20, 
+                 boundary = 100,
+                 color="grey25", 
+                 fill="light blue") +
+  theme_gray() +
+  ggtitle("Distribution of Maths scores") +
+  geom_vline(xintercept = mean(stu_qqq_SG$MATHEMATICS), 
+             color = "red", 
+             linetype = "dashed", 
+             size = 1)
+```
+
+# Reading
+
+```{r}
+#| echo: false
+p2 <- ggplot(data=stu_qqq_SG, 
+             aes(x = READING)) +
+  geom_histogram(bins=20, 
+                 boundary = 100,
+                 color="grey25", 
+                 fill="light blue") +
+  theme_gray() +
+  ggtitle("Distribution of Reading scores") +
+  geom_vline(xintercept = mean(stu_qqq_SG$READING), 
+             color = "red", 
+             linetype = "dashed", 
+             size = 1)
+```
+
+```{r}
+#| eval: false
+p2 <- ggplot(data=stu_qqq_SG, 
+             aes(x = READING)) +
+  geom_histogram(bins=20, 
+                 boundary = 100,
+                 color="grey25", 
+                 fill="light blue") +
+  theme_gray() +
+  ggtitle("Distribution of Reading scores") +
+  geom_vline(xintercept = mean(stu_qqq_SG$READING), 
+             color = "red", 
+             linetype = "dashed", 
+             size = 1)
+```
+
+# Science
+
+```{r}
+#| echo: false
+p3 <- ggplot(data=stu_qqq_SG, 
+             aes(x = SCIENCE)) +
+  geom_histogram(bins=20, 
+                 boundary = 100,
+                 color="grey25", 
+                 fill="light blue") +
+  theme_gray() +
+  ggtitle("Distribution of Science scores") +
+  geom_vline(xintercept = mean(stu_qqq_SG$SCIENCE), 
+             color = "red", 
+             linetype = "dashed", 
+             size = 1)
+```
+
+```{r}
+#| eval: false
+p3 <- ggplot(data=stu_qqq_SG, 
+             aes(x = SCIENCE)) +
+  geom_histogram(bins=20, 
+                 boundary = 100,
+                 color="grey25", 
+                 fill="light blue") +
+  theme_gray() +
+  ggtitle("Distribution of Science scores") +
+  geom_vline(xintercept = mean(stu_qqq_SG$SCIENCE), 
+             color = "red", 
+             linetype = "dashed", 
+             size = 1) 
+```
+:::
+
+The figure in the tabset below displays a composite of three histograms, seamlessly created using [patchwork](https://patchwork.data-imaginist.com/). This is specifically designed for merging separate ggplot2 graphs into a unified figure. The red dotted line indicates the mean.
+
+::: panel-tabset
+# The plot
+
+```{r}
+#| echo: false
+(p1 / p2) | p3
+```
+
+# The code
+
+```{r}
+#| eval: false
+(p1 / p2) | p3
+```
+:::
+
+The histogram presented above offers a visual representation of the distribution of scores across three academic subjects: MATHEMATICS, READING and SCIENCE. The distribution pattern observed for each subject strongly aligns with the characteristics of a normal distribution.
+
+A normal distribution is characterised by a symmetrical bell-shaped curve, with the majority of data points clustering around the mean and gradually tapering off towards the extremes. In the context of academic performance, this implies that a significant proportion of students scored close to the average, while fewer students achieved scores either significantly above or below the mean. In the case of academic assessments, a normal distribution suggests that the difficulty level of the questions was appropriately balanced, allowing for a diverse range of scores among the students.
+
+### 3.1.2 Reading vs Mathematics
+
+::: panel-tabset
+# The plot
+
+```{r}
+#| echo: false
+ggplot(data=stu_qqq_SG, 
+       aes(x= READING, 
+           y=MATHEMATICS)) +
+  geom_point() +
+  geom_smooth(method=lm, 
+              size=0.5) +  
+  coord_cartesian(xlim=c(150,850),
+                  ylim=c(150,850))
+```
+
+# The code
+
+```{r}
+#| eval: false
+ggplot(data=stu_qqq_SG, 
+       aes(x= READING, 
+           y=MATHEMATICS)) +
+  geom_point() +
+  geom_smooth(method=lm, 
+              size=0.5) +  
+  coord_cartesian(xlim=c(150,850),
+                  ylim=c(150,850))
+```
+:::
+
+The scatterplot depicted above illustrates a positive correlation between reading and mathematics values. As the reading values increase, so do the corresponding mathematics values. This relationship is further emphasised by the upward trend observed in the best fit line. The consistent increase in one variable is mirrored by a proportional increase in the other. In light of these findings, it can be confidently asserted that a positive connection exists, suggesting that engaging in reading contributes to enhanced performance in mathematics among students.
+
+## 3.2 "Reading" as our main focus
+
+With reference to this research paper titled ['Reading matters more than mathematics in science learning: an analysis of the relationship between student achievement in reading, mathematics, and science'](https://doi.org/10.1080/09500693.2021.2007552) by Yuanze Zhu, the results revealed that proficiency in reading and mathematics strongly correlated with science achievement, with reading exerting a more substantial influence than mathematics. Consequently, we assert that prioritising reading over mathematics is essential for enhanced performance in science learning.
+
+Henceforth, our focus will be exclusively on reading, considering it as the primary driver for improved achievement in other subjects, including Mathematics and Science.
+
+### 3.2.1 Reading vs Gender
+
+::: panel-tabset
+# The plot
+
+```{r}
+#| echo: false
+ggplot(data=stu_qqq_SG, 
+       aes(y = READING, x= GENDER)) +
+  geom_boxplot() +
+  geom_point(stat="summary",        
+             fun.y="mean",           
+             colour ="red",          
+             size=2)      
+```
+
+# The code
+
+```{r}
+#| eval: false
+ggplot(data=stu_qqq_SG, 
+       aes(y = READING, x= GENDER)) +
+  geom_boxplot() +
+  geom_point(stat="summary",        
+             fun.y="mean",           
+             colour ="red",          
+             size=2)      
+```
+:::
+
+When it comes to the Reading, females exhibit a higher average performance compared to their male counterparts. The visual representation underscores a clear distinction, suggesting that, on average, females outperform males in the domain of Reading. One plausible interpretation for this observed trend could be rooted in the varying learning styles or preferences between genders. [Research](file:///Users/rizfebriansyah/Downloads/40-Article%20Text-988-1-10-20220405.pdf) has suggested that females may, on average, possess certain cognitive strengths or approaches that align more closely with the skills demanded in Reading tasks. Additionally, sociocultural factors and educational environments may play a role in shaping differential outcomes, influencing how males and females engage with and excel in Reading-related activities.
+
+### 3.2.2 Reading vs Socioeconomic Status (ESCS)
+
+::: panel-tabset
+# The plot
+
+```{r}
+#| echo: false
+ggplot(data=stu_qqq_SG, 
+       aes(x= READING, y=ESCS)) +
+  geom_point() +
+  geom_smooth(size=0.5)
+```
+
+# The code
+
+```{r}
+#| eval: false
+ggplot(data=stu_qqq_SG, 
+       aes(x= READING, y=ESCS)) +
+  geom_point() +
+  geom_smooth(size=0.5)
+```
+:::
+
+Examining the scatterplot above, it becomes evident that within the reading value range of 200-400, there is minimal correlation with ESCS. During this range, ESCS values exhibit considerable variability, ranging from -3 to 3. However, as reading values surpass 400, ESCS values predominantly hover around 0 and above, indicating a positive relationship. In other words, higher reading values correspond to higher ESCS values. This positive association is further emphasised by the upward trend observed in the best-fit line.
+
+### 3.2.3 Reading vs School ID
+
+Given the extensive size of the dataset, our strategy is to concentrate on the top 5 schools that exhibit the highest frequency. Achieving this involves tallying the occurrences of School IDs in the CNTSCHID column.
+
+To obtain the counts of each unique CNTSCHID value in descending order, we can use the table() function along with sorting functions.
+
+::: panel-tabset
+# The code
+
+```{r}
+#| eval: false
+# Our dataframe is named stu_qqq_SG and the column is CNTSCHID
+schid_counts <- table(stu_qqq_SG$CNTSCHID)
+
+# Convert the result to a data frame and sort in descending order
+schid_counts_df <- as.data.frame(schid_counts)
+schid_counts_df <- schid_counts_df[order(-schid_counts_df$Freq), ]
+
+# Print or use the schid_counts_df as needed
+print(schid_counts_df)
+```
+
+# The output
+
+```{r}
+#| echo: false
+# Our dataframe is named stu_qqq_SG and the column is CNTSCHID
+schid_counts <- table(stu_qqq_SG$CNTSCHID)
+
+# Convert the result to a data frame and sort in descending order
+schid_counts_df <- as.data.frame(schid_counts)
+schid_counts_df <- schid_counts_df[order(-schid_counts_df$Freq), ]
+
+# Print or use the schid_counts_df as needed
+print(schid_counts_df)
+```
+:::
+
+From the output, we can see that the top 5 School IDs are:
+
+-   70200020
+
+-   70200075
+
+-   70200159
+
+-   70200013
+
+-   70200045
+
+Therefore, we will only focus on the above mentioned School IDs for our analysis.
+
+::: panel-tabset
+# The plot
+
+```{r}
+#| echo: false
+# Filter the data for specific values of CNTSCHID
+filtered_data <- stu_qqq_SG %>%
+  filter(CNTSCHID %in% c(70200020, 70200075, 70200159, 70200013, 70200045))
+
+# Convert CNTSCHID to factor
+filtered_data$CNTSCHID <- as.factor(filtered_data$CNTSCHID)
+
+# Create the plot with the filtered data
+ggplot(data = filtered_data, 
+       aes(y = READING, x = CNTSCHID)) +
+  geom_boxplot() +
+  geom_point(stat = "summary",        
+             fun.y = "mean",           
+             colour = "red",          
+             size = 2)
+```
+
+# The code
+
+```{r}
+#| eval: false
+# Filter the data for specific values of CNTSCHID
+filtered_data <- stu_qqq_SG %>%
+  filter(CNTSCHID %in% c(70200020, 70200075, 70200159, 70200013, 70200045))
+
+# Convert CNTSCHID to factor
+filtered_data$CNTSCHID <- as.factor(filtered_data$CNTSCHID)
+
+# Create the plot with the filtered data
+ggplot(data = filtered_data, 
+       aes(y = READING, x = CNTSCHID)) +
+  geom_boxplot() +
+  geom_point(stat = "summary",        
+             fun.y = "mean",           
+             colour = "red",          
+             size = 2)
+```
+:::
+
+Upon a detailed analysis of the boxplot, which visually encapsulates the distribution of Reading plausible values across multiple schools (identified by CNTSCHID), a distinct trend emerges. Notably, CNTSCHID 70200020, representing a specific school within the dataset, stands out with the highest mean Reading score, hovering around an impressive \~630. This observation sheds light on the academic performance of this particular school, suggesting a noteworthy level of achievement in Reading compared to the other four schools. The boxplot serves as a valuable tool in visually conveying these distributional nuances, highlighting the academic prowess of CNTSCHID 70200020 within the context of Reading achievement among the schools.
