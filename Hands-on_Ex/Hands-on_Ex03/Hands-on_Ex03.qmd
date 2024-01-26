@@ -1,5 +1,5 @@
 ---
-title: "Hands-on Exercise 3: Programming Interactive Data Visualisation with R"
+title: "Hands-on Exercise 3: Programming Interactive Data Visualisation with R and Programming Animated Statistical Graphics with R"
 author: "Rizqi Febriansyah"
 date: "23 January 2023"
 date-modified: "last-modified"
@@ -10,7 +10,7 @@ execute:
 editor: visual
 ---
 
-# Programming Interactive Data Visualisation with R
+# Part One: Programming Interactive Data Visualisation with R
 
 # 3.1 Learning Outcome
 
@@ -767,3 +767,8 @@ This [link](https://davidgohel.github.io/ggiraph/) provides online version of th
 -   Visit this [link](https://rpubs.com/raymondteo/dataviz8) for a very interesting implementation of gganimate by your senior.
 -   [Building an animation step-by-step with gganimate.](https://www.alexcookson.com/post/2020-10-18-building-an-animation-step-by-step-with-gganimate/)
 -   [Creating a composite gif with multiple gganimate panels](https://solarchemist.se/2021/08/02/composite-gif-gganimate/)
+
+# Part Two: Programming Animated Statistical Graphics with R
+
+## 4.1 Overview
+When telling a visually-driven data story, animated graphics tends to attract the interest of the audience and make deeper impression than static graphics. In this hands-on exercise, you will learn how to create animated data visualisation by using gganimate and plotly r packages. At the same time, you will also learn how to (i) reshape data by using tidyr package, and (ii) process, wrangle and transform data by using dplyr package.
