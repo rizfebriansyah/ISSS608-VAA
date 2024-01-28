@@ -389,7 +389,7 @@ To improve the histogram in terms of clarity and aesthetics,
 -   Reposition Legend: Move the legend outside the plot area, such as to the bottom or side, to avoid obscuring the data.
 
 ### Remake - Aesthetics
--   We use a theme with a cleaner aesthetic, such as `theme_minimal()` or `theme_light()`, which provides a white background and less intrusive gridlines.
+-   We use a theme with a cleaner aesthetic, such as `theme_minimal()`, which provides a white background and less intrusive gridlines.
 -   Remove Bar Borders: We need to eliminate the borders or use a softer colour that does not compete with the fill colour.
 -   Add Horizontal Gridlines: We need to include soft horizontal gridlines for easier comparison of heights across the histogram.
 
@@ -425,7 +425,6 @@ A boxplot below is used to reveal the distribution between maths score and Gende
 
 -   Mean Indication: The red dot indicating the mean is a good addition for showing central tendency, but there's no legend explaining what the red dot signifies. Viewers might not realise it represents the mean math score.
 -   Axis Labels: While the y-axis is labeled, it could be more descriptive. Instead of "Maths Score," a label like "Math Score Distribution" might provide more context.
--   Outliers: The plot shows outliers, which is helpful, but there is no information on how these outliers were calculated or the criteria used (e.g., 1.5 times the IQR).
 -   Gender Labeling: The x-axis labels "Female" and "Male" could be more inclusive. The plot does not account for non-binary or other gender identities, which might be relevant depending on the context of the data.
 
 ### Critique - Aesthetics
@@ -439,7 +438,6 @@ To improve the boxplot in terms of clarity and aesthetics,
 ### Remake - Clarity
 -   Legend for Mean: Add a legend or annotation to explain the red dot represents the mean.
 -   Additional Statistics: Add more summary statistics, such as the median (which the boxplot inherently shows), using different point shapes or colours to provide a fuller picture of the distribution.
--   Outlier Explanation: Include a footnote or caption that explains the criteria for outliers.
 
 ### Remake - Aesthetics
 -   Colour for Boxes: Introduce a light colour fill within the boxes to enhance visual differentiation between the quartiles and the overall distribution.
