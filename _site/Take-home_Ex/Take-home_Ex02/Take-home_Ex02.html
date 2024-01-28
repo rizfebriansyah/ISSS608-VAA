@@ -204,39 +204,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">1. Overview</a>
   <ul class="collapse">
-  <li><a href="#setting-the-scene" id="toc-setting-the-scene" class="nav-link" data-scroll-target="#setting-the-scene">1.1 Setting the Scene</a></li>
-  <li><a href="#our-task" id="toc-our-task" class="nav-link" data-scroll-target="#our-task">1.2 Our Task</a></li>
+  <li><a href="#setting-the-scene-for-this-exercise" id="toc-setting-the-scene-for-this-exercise" class="nav-link" data-scroll-target="#setting-the-scene-for-this-exercise">1.1 Setting the Scene for This Exercise</a></li>
   </ul></li>
-  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">2. Data Preparation</a>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">2. Getting Started</a>
   <ul class="collapse">
-  <li><a href="#loading-r-packages" id="toc-loading-r-packages" class="nav-link" data-scroll-target="#loading-r-packages">2.1 Loading R packages</a></li>
-  <li><a href="#importing-the-dataset" id="toc-importing-the-dataset" class="nav-link" data-scroll-target="#importing-the-dataset">2.2 Importing the dataset</a></li>
-  <li><a href="#filtering-data-from-singapore-only" id="toc-filtering-data-from-singapore-only" class="nav-link" data-scroll-target="#filtering-data-from-singapore-only">2.3 Filtering data from Singapore only</a></li>
-  <li><a href="#summary-statistics-of-stu_qqq_sg-data" id="toc-summary-statistics-of-stu_qqq_sg-data" class="nav-link" data-scroll-target="#summary-statistics-of-stu_qqq_sg-data">2.4 Summary Statistics of stu_qqq_SG data</a></li>
-  <li><a href="#preparing-subjects-data" id="toc-preparing-subjects-data" class="nav-link" data-scroll-target="#preparing-subjects-data">2.5 Preparing Subjects Data</a>
+  <li><a href="#loading-necessary-r-packages" id="toc-loading-necessary-r-packages" class="nav-link" data-scroll-target="#loading-necessary-r-packages">2.1 Loading Necessary R packages</a></li>
+  <li><a href="#import-dataset" id="toc-import-dataset" class="nav-link" data-scroll-target="#import-dataset">2.2 Import dataset</a></li>
+  </ul></li>
+  <li><a href="#evaluation-and-redesign-of-visualisations" id="toc-evaluation-and-redesign-of-visualisations" class="nav-link" data-scroll-target="#evaluation-and-redesign-of-visualisations">3. Evaluation and Redesign of Visualisations</a>
   <ul class="collapse">
-  <li><a href="#preparing-maths-data" id="toc-preparing-maths-data" class="nav-link" data-scroll-target="#preparing-maths-data">2.5.1 Preparing Maths Data</a></li>
-  <li><a href="#preparing-reading-data" id="toc-preparing-reading-data" class="nav-link" data-scroll-target="#preparing-reading-data">2.5.2 Preparing Reading Data</a></li>
-  <li><a href="#preparing-science-data" id="toc-preparing-science-data" class="nav-link" data-scroll-target="#preparing-science-data">2.5.3 Preparing Science Data</a></li>
-  </ul></li>
-  <li><a href="#preparing-gender-data" id="toc-preparing-gender-data" class="nav-link" data-scroll-target="#preparing-gender-data">2.6 Preparing Gender Data</a></li>
-  <li><a href="#preparing-socioeconomic-status-data" id="toc-preparing-socioeconomic-status-data" class="nav-link" data-scroll-target="#preparing-socioeconomic-status-data">2.7 Preparing Socioeconomic Status Data</a></li>
-  <li><a href="#preparing-school-data" id="toc-preparing-school-data" class="nav-link" data-scroll-target="#preparing-school-data">2.8 Preparing School Data</a></li>
-  </ul></li>
-  <li><a href="#exploratory-data-analysis-eda" id="toc-exploratory-data-analysis-eda" class="nav-link" data-scroll-target="#exploratory-data-analysis-eda">3. Exploratory Data Analysis (EDA)</a>
+  <li><a href="#distribution-of-subjects-scores" id="toc-distribution-of-subjects-scores" class="nav-link" data-scroll-target="#distribution-of-subjects-scores">3.1 Distribution of Subjects’ Scores</a>
   <ul class="collapse">
-  <li><a href="#three-subjects---mathematics-reading-and-science" id="toc-three-subjects---mathematics-reading-and-science" class="nav-link" data-scroll-target="#three-subjects---mathematics-reading-and-science">3.1 Three Subjects - Mathematics, Reading and Science</a>
+  <li><a href="#original-design" id="toc-original-design" class="nav-link" data-scroll-target="#original-design">3.1.1 Original Design</a></li>
+  <li><a href="#critique" id="toc-critique" class="nav-link" data-scroll-target="#critique">3.1.2 Critique</a></li>
+  <li><a href="#critique---clarity" id="toc-critique---clarity" class="nav-link" data-scroll-target="#critique---clarity">Critique - Clarity</a></li>
+  <li><a href="#critique---aesthetics" id="toc-critique---aesthetics" class="nav-link" data-scroll-target="#critique---aesthetics">Critique - Aesthetics</a></li>
+  <li><a href="#remake" id="toc-remake" class="nav-link" data-scroll-target="#remake">3.1.3 Remake</a></li>
+  <li><a href="#remake---clarity" id="toc-remake---clarity" class="nav-link" data-scroll-target="#remake---clarity">Remake - Clarity:</a></li>
+  <li><a href="#remake---aesthetics" id="toc-remake---aesthetics" class="nav-link" data-scroll-target="#remake---aesthetics">Remake - Aesthetics:</a></li>
+  </ul></li>
+  <li><a href="#scatterplot-of-socioeconomic-status-vs-maths-score" id="toc-scatterplot-of-socioeconomic-status-vs-maths-score" class="nav-link" data-scroll-target="#scatterplot-of-socioeconomic-status-vs-maths-score">3.2 Scatterplot of Socioeconomic Status vs Maths Score</a>
   <ul class="collapse">
-  <li><a href="#distribution-across-three-subjects---mathematics-reading-and-science" id="toc-distribution-across-three-subjects---mathematics-reading-and-science" class="nav-link" data-scroll-target="#distribution-across-three-subjects---mathematics-reading-and-science">3.1.1 Distribution Across Three Subjects - Mathematics, Reading and Science</a></li>
-  <li><a href="#reading-vs-mathematics" id="toc-reading-vs-mathematics" class="nav-link" data-scroll-target="#reading-vs-mathematics">3.1.2 Reading vs Mathematics</a></li>
+  <li><a href="#original-design-1" id="toc-original-design-1" class="nav-link" data-scroll-target="#original-design-1">3.2.1 Original Design</a></li>
+  <li><a href="#critique-1" id="toc-critique-1" class="nav-link" data-scroll-target="#critique-1">3.2.2 Critique</a></li>
+  <li><a href="#critique--clarity" id="toc-critique--clarity" class="nav-link" data-scroll-target="#critique--clarity">Critique- C`larity</a></li>
+  <li><a href="#critique---aesthetics-1" id="toc-critique---aesthetics-1" class="nav-link" data-scroll-target="#critique---aesthetics-1">Critique - Aesthetics</a></li>
+  <li><a href="#remake-1" id="toc-remake-1" class="nav-link" data-scroll-target="#remake-1">3.2.3 Remake</a></li>
+  <li><a href="#remake---aesthetics-1" id="toc-remake---aesthetics-1" class="nav-link" data-scroll-target="#remake---aesthetics-1">Remake - Aesthetics</a></li>
   </ul></li>
-  <li><a href="#reading-as-our-main-focus" id="toc-reading-as-our-main-focus" class="nav-link" data-scroll-target="#reading-as-our-main-focus">3.2 “Reading” as our main focus</a>
+  <li><a href="#distribution-of-socioeconomic-status-by-gender" id="toc-distribution-of-socioeconomic-status-by-gender" class="nav-link" data-scroll-target="#distribution-of-socioeconomic-status-by-gender">3.3 Distribution of Socioeconomic Status (by Gender)</a>
   <ul class="collapse">
-  <li><a href="#reading-vs-gender" id="toc-reading-vs-gender" class="nav-link" data-scroll-target="#reading-vs-gender">3.2.1 Reading vs Gender</a></li>
-  <li><a href="#reading-vs-socioeconomic-status-escs" id="toc-reading-vs-socioeconomic-status-escs" class="nav-link" data-scroll-target="#reading-vs-socioeconomic-status-escs">3.2.2 Reading vs Socioeconomic Status (ESCS)</a></li>
-  <li><a href="#reading-vs-school-id" id="toc-reading-vs-school-id" class="nav-link" data-scroll-target="#reading-vs-school-id">3.2.3 Reading vs School ID</a></li>
+  <li><a href="#original-design-2" id="toc-original-design-2" class="nav-link" data-scroll-target="#original-design-2">3.3.1 Original Design</a></li>
+  <li><a href="#critique-2" id="toc-critique-2" class="nav-link" data-scroll-target="#critique-2">3.3.2 Critique</a></li>
+  <li><a href="#critique---clarity-1" id="toc-critique---clarity-1" class="nav-link" data-scroll-target="#critique---clarity-1">Critique - Clarity</a></li>
+  <li><a href="#critique---aesthetics-2" id="toc-critique---aesthetics-2" class="nav-link" data-scroll-target="#critique---aesthetics-2">Critique - Aesthetics</a></li>
+  <li><a href="#remake-2" id="toc-remake-2" class="nav-link" data-scroll-target="#remake-2">3.3.3 Remake</a></li>
+  <li><a href="#remake---aesthetics-2" id="toc-remake---aesthetics-2" class="nav-link" data-scroll-target="#remake---aesthetics-2">Remake - Aesthetics</a></li>
+  </ul></li>
+  <li><a href="#distribution-of-maths-scores-by-expected-school" id="toc-distribution-of-maths-scores-by-expected-school" class="nav-link" data-scroll-target="#distribution-of-maths-scores-by-expected-school">3.4 Distribution of Maths Scores by Expected School</a>
+  <ul class="collapse">
+  <li><a href="#original-design-3" id="toc-original-design-3" class="nav-link" data-scroll-target="#original-design-3">3.4.1 Original Design</a></li>
+  <li><a href="#critique-3" id="toc-critique-3" class="nav-link" data-scroll-target="#critique-3">3.4.2 Critique</a></li>
+  <li><a href="#critique---clarity-2" id="toc-critique---clarity-2" class="nav-link" data-scroll-target="#critique---clarity-2">Critique - Clarity</a></li>
+  <li><a href="#critique---aesthetics-3" id="toc-critique---aesthetics-3" class="nav-link" data-scroll-target="#critique---aesthetics-3">Critique - Aesthetics</a></li>
+  <li><a href="#remake-3" id="toc-remake-3" class="nav-link" data-scroll-target="#remake-3">3.4.3 Remake</a></li>
+  <li><a href="#remake---aesthetics-3" id="toc-remake---aesthetics-3" class="nav-link" data-scroll-target="#remake---aesthetics-3">Remake - Aesthetics</a></li>
+  </ul></li>
+  <li><a href="#boxplot-between-gender-and-maths-scores" id="toc-boxplot-between-gender-and-maths-scores" class="nav-link" data-scroll-target="#boxplot-between-gender-and-maths-scores">3.5 Boxplot between Gender and Maths Scores</a>
+  <ul class="collapse">
+  <li><a href="#original-design-4" id="toc-original-design-4" class="nav-link" data-scroll-target="#original-design-4">3.5.1 Original Design</a></li>
+  <li><a href="#critique-4" id="toc-critique-4" class="nav-link" data-scroll-target="#critique-4">3.5.2 Critique</a></li>
+  <li><a href="#critique---clarity-3" id="toc-critique---clarity-3" class="nav-link" data-scroll-target="#critique---clarity-3">Critique - Clarity</a></li>
+  <li><a href="#critique---aesthetics-4" id="toc-critique---aesthetics-4" class="nav-link" data-scroll-target="#critique---aesthetics-4">Critique - Aesthetics</a></li>
+  <li><a href="#remake-4" id="toc-remake-4" class="nav-link" data-scroll-target="#remake-4">3.5.3 Remake</a></li>
+  <li><a href="#remake---clarity-1" id="toc-remake---clarity-1" class="nav-link" data-scroll-target="#remake---clarity-1">Remake - Clarity</a></li>
+  <li><a href="#remake---aesthetics-4" id="toc-remake---aesthetics-4" class="nav-link" data-scroll-target="#remake---aesthetics-4">Remake - Aesthetics</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#learning-points" id="toc-learning-points" class="nav-link" data-scroll-target="#learning-points">4. Learning Points</a></li>
   </ul>
 </nav>
     </div>
@@ -246,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Take-home Exercise 2</h1>
-<p class="subtitle lead">Navigating Educational Disparities: Examining Perceptions Despite Singapore’s Pursuit of Excellence</p>
+<p class="subtitle lead">Elevating Data Visualisation to the next level: Peer Evaluation and Redesigning Visualisations from Take-Home Exercise 1.</p>
 </div>
 
 
@@ -264,7 +289,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 26, 2024</p>
+      <p class="date-modified">January 28, 2024</p>
     </div>
   </div>
     
@@ -275,688 +300,579 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="overview" class="level1">
 <h1>1. Overview</h1>
-<section id="setting-the-scene" class="level2">
-<h2 class="anchored" data-anchor-id="setting-the-scene">1.1 Setting the Scene</h2>
-<p>Andreas Schleicher, the education director of OECD, conveyed in a BBC article that Singapore has achieved excellence without significant disparities between children from affluent and underprivileged families (2016). Additionally, several Ministers for Education in Singapore have adopted the slogan “every school a good school.” Despite these efforts, the prevailing public opinion strongly suggests the presence of disparities, particularly between elite and neighbourhood schools, among students from families with varying socioeconomic statuses, and between immigration and non-immigration families.</p>
+<section id="setting-the-scene-for-this-exercise" class="level2">
+<h2 class="anchored" data-anchor-id="setting-the-scene-for-this-exercise">1.1 Setting the Scene for This Exercise</h2>
+<p>The objective of this exercise is to analyse and enhance the charts generated by a peer using R packages in Take-home Exercise 1. The evaluation will focus on aspects of clarity and aesthetics. Subsequently, the original design will be reconstructed by applying data visualiation design principles and best practices, utilising ggplot2, its extensions, and tidyverse packages learnt in lesson 1 and 2.</p>
+<p>The data that we will be using would be the 2022 Programme for International Student Assessment (PISA), which evaluates education systems globally by testing 15-year-old students in mathematics, reading and science. The Student Questionnaire can be downloaded <a href="https://www.oecd.org/pisa/data/2022database/">here</a>.</p>
 </section>
-<section id="our-task" class="level2">
-<h2 class="anchored" data-anchor-id="our-task">1.2 Our Task</h2>
-<p>The data that we will be using would be the 2022 Programme for International Student Assessment (PISA), which evaluates education systems globally by testing 15-year-old students in mathematics, reading, and science.</p>
-<p>By employing some EDA, we would want to find out:</p>
+</section>
+<section id="getting-started" class="level1">
+<h1>2. Getting Started</h1>
+<section id="loading-necessary-r-packages" class="level2">
+<h2 class="anchored" data-anchor-id="loading-necessary-r-packages">2.1 Loading Necessary R packages</h2>
+<p>We will utilise the following packages:</p>
 <ol type="1">
-<li><p>The distribution of Singaporean students’ proficiency in mathematics, reading and science</p></li>
-<li><p>The correlation between these performance levels and factors such as schools, gender and the socioeconomic status of the students</p></li>
+<li><strong>haven</strong>: Facilitates the import and export of ‘SPSS,’ ‘Stata,’ and ‘SAS’ files.</li>
+<li><strong>tidyverse</strong>: A collection of packages for data manipulation and visualization, including dplyr, ggplot2 and others.</li>
+<li><strong>ggrepel</strong>: An R package used with ggplot2 to enhance the positioning of text labels in plots, ensuring they avoid overlapping with data points, for a more readable visualisation.</li>
+<li><strong>Patchwork</strong>: An R package designed for creating composite figures using ggplot2.</li>
+<li><strong>ggthemes</strong>: An R package that offers additional themes, geoms and scales for ggplot2.</li>
+<li><strong>hrbrthemes</strong>: An R package that provides themes and theme components for ggplot2 visualisations, mainly focusing on typography-centric design.</li>
 </ol>
-</section>
-</section>
-<section id="data-preparation" class="level1">
-<h1>2. Data Preparation</h1>
-<section id="loading-r-packages" class="level2">
-<h2 class="anchored" data-anchor-id="loading-r-packages">2.1 Loading R packages</h2>
-<p>In this take-home exercise, <a href="https://www.tidyverse.org/">tidyverse</a> and <a href="https://haven.tidyverse.org/">haven</a> packages will be used.</p>
-<p>Also, we will be using these packages listed below:</p>
-<ul>
-<li><p><strong>ggrepel</strong> is an R package that offers geoms for ggplot2, enabling the repulsion of overlapping text labels</p></li>
-<li><p><strong>ggthemes</strong> is an R package that offers additional themes, geoms, and scales for ‘ggplot2’</p></li>
-<li><p><strong>hrbrthemes</strong> is an R package that offers typography-centric themes and theme components for ggplot2</p></li>
-<li><p><strong>patchwork</strong> is an R package designed for creating composite figures using ggplot2</p></li>
-<li><p><strong>dplyr</strong> is a data manipulation package in R that offers a consistent set of functions, or verbs, to address common data manipulation tasks. It includes functions such as ‘mutate()’ for creating new variables, ‘select()’ for choosing variables by name, ‘filter()’ for selecting cases based on values, ‘summarise()’ for reducing multiple values to a single summary, and ‘arrange()’ for changing the row ordering in a dataset.</p></li>
-</ul>
-<p><u>note: The tidyverse package is an “umbrella-package” that installs tidyr, dplyr and several other useful packages for data analysis, such as ggplot2, tibble, etc.</u></p>
-<p>The code chunk used is as follows:</p>
+<p>The code which loads the R packages:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(ggrepel, patchwork, </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               ggthemes, hrbrthemes, dplyr, ggdist, ggridges,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               tidyverse, haven)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               ggthemes, hrbrthemes,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               tidyverse, haven) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="importing-the-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="importing-the-dataset">2.2 Importing the dataset</h2>
-<p>One dataset from PISA is provided for this task, specifically the Student questionnaire data file: cy08msp_stu_qqq.sas7bdat</p>
-<p>The code chunk below uses <a href="https://haven.tidyverse.org/reference/read_sas.html"><code>read_sas()</code></a> of <a href="https://haven.tidyverse.org/index.html">haven</a> to import PISA data into R environment.</p>
+<section id="import-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="import-dataset">2.2 Import dataset</h2>
+<p>Of course our next step involves importing the dataset. The following code snippet will outline the sequential steps we will undertake.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>stu_qqq <span class="ot">&lt;-</span> <span class="fu">read_sas</span>(<span class="st">"data/cy08msp_stu_qqq.sas7bdat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>stu_qqq <span class="ot">&lt;-</span> <span class="fu">read_sas</span>(<span class="st">'data/cy08msp_stu_qqq.sas7bdat'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="filtering-data-from-singapore-only" class="level2">
-<h2 class="anchored" data-anchor-id="filtering-data-from-singapore-only">2.3 Filtering data from Singapore only</h2>
-<p>Since our task is to find out students’ performance in various subjects and relationship of performances with regards to other variables in Singapore, we would need to filter data to only include Singapore. Since there is a CNT column, which is a Country column, we will filter it to only include SGP (Singapore).</p>
-<p>The code chunk to filter SGP only:</p>
+<p>Since we are focusing only in Singapore context, we will filter to only include Singapore.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>stu_qqq_SG <span class="ot">&lt;-</span> stu_qqq <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(CNT <span class="sc">==</span> <span class="st">"SGP"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Since the original data is huge in file size, we will save the Singapore filtered data as stu_qqq_SG in the data folder.</p>
-<p>The code chunk to save filtered data as stu_qqq_SG:</p>
+<p>Save the filtered dataset as an RDS file to simplify subsequent data imports.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(stu_qqq_SG,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>          <span class="st">"data/stu_qqq_SG.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(stu_qqq_SG, <span class="st">'data/stu_qqq_SG.rds'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Therefore, we will only read the stu_qqq_SG.rds file from now onwards.</p>
-<p>The code chunk to read stu_qqq_SG.rds file:</p>
+<p>Read the RDS file that has been exported.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>stu_qqq_SG <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/stu_qqq_SG.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>stu_qqq_SG <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">'data/stu_qqq_SG.rds'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="summary-statistics-of-stu_qqq_sg-data" class="level2">
-<h2 class="anchored" data-anchor-id="summary-statistics-of-stu_qqq_sg-data">2.4 Summary Statistics of stu_qqq_SG data</h2>
-<p>To check if we have filtered the correct data to include SG only, we will be displaying first 10 rows using head():</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">The output</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">The code</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>This code will undergo pre-processing to select all the required variables in which we need to do further analysis on. A cleaner code have been compiled below.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code Explanation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the R code below, we begin by selecting specific columns of interest from the dataset stu_qqq_SG. Following this, we will calculate the row means for math, science and reading scores, providing a more comprehensive measure of individual performance. The column names are then renamed to enhance clarity. Afterwards, a subset of columns is selected for focused analysis, which includes gender, socioeconomic status (escs), and educational level (school). Gender and school variables are recoded to more interpretable factors, replacing numeric codes with meaningful and easier to understand labels. The cleaned dataset, named stu_qqq_SG_2, is saved in an RDS file for future use. The RDS file is subsequently read back into the script.</p>
+</div>
+</div>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Select relevant columns</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>stu_qqq_SG_1 <span class="ot">&lt;-</span> stu_qqq_SG <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ST004D01T, EXPECEDU, PV1MATH, PV2MATH, PV3MATH, PV4MATH, PV5MATH, PV6MATH, PV7MATH, PV8MATH, PV9MATH, PV10MATH, PV1SCIE, PV2SCIE, PV3SCIE, PV4SCIE, PV5SCIE, PV6SCIE, PV7SCIE, PV8SCIE, PV9SCIE, PV10SCIE, PV1READ, PV2READ, PV3READ, PV4READ, PV5READ, PV6READ, PV7READ, PV8READ, PV9READ, PV10READ, ESCS)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Calculate row means for math, science, and reading</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>stu_qqq_SG_1 <span class="ot">&lt;-</span> stu_qqq_SG_1 <span class="sc">%&gt;%</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">maths =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(PV1MATH, PV2MATH, PV3MATH, PV4MATH, PV5MATH, PV6MATH, PV7MATH, PV8MATH, PV9MATH, PV10MATH))),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">science =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(PV1SCIE, PV2SCIE, PV3SCIE, PV4SCIE, PV5SCIE, PV6SCIE, PV7SCIE, PV8SCIE, PV9SCIE, PV10SCIE))),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">reading =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(PV1READ, PV2READ, PV3READ, PV4READ, PV5READ, PV6READ, PV7READ, PV8READ, PV9READ, PV10READ))))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Rename columns for clarity</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>stu_qqq_SG_1 <span class="ot">&lt;-</span> stu_qqq_SG_1 <span class="sc">%&gt;%</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">gender =</span> ST004D01T, <span class="at">escs =</span> ESCS, <span class="at">school =</span> EXPECEDU)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: Select specific columns for further analysis</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>stu_qqq_SG_2 <span class="ot">&lt;-</span> stu_qqq_SG_1 <span class="sc">%&gt;%</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(gender, escs, school, maths, science, reading)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 5: Recode gender and school columns</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>stu_qqq_SG_2 <span class="ot">&lt;-</span> stu_qqq_SG_2 <span class="sc">%&gt;%</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">ifelse</span>(gender <span class="sc">==</span> <span class="st">"1"</span>, <span class="st">"Female"</span>, <span class="st">"Male"</span>),</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>         <span class="at">school =</span> <span class="fu">case_when</span>(</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>           school <span class="sc">==</span> <span class="st">"2"</span> <span class="sc">~</span> <span class="st">"Lower Sec"</span>,</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>           school <span class="sc">==</span> <span class="st">"3"</span> <span class="sc">~</span> <span class="st">"Upper Sec"</span>,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>           school <span class="sc">==</span> <span class="st">"5"</span> <span class="sc">~</span> <span class="st">"Post Sec"</span>,</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>           school <span class="sc">==</span> <span class="st">"6"</span> <span class="sc">~</span> <span class="st">"Diploma"</span>,</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>           school <span class="sc">==</span> <span class="st">"7"</span> <span class="sc">~</span> <span class="st">"Degree"</span>,</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>           school <span class="sc">==</span> <span class="st">"8"</span> <span class="sc">~</span> <span class="st">"Masters"</span>,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>           school <span class="sc">==</span> <span class="st">"9"</span> <span class="sc">~</span> <span class="st">"PhD"</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>         ))</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 6: Write the cleaned data to an RDS file</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(stu_qqq_SG_2, <span class="st">"data/stu_qqq_SG_2.rds"</span>)</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 7: Read the cleaned data from the RDS file</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>stu_qqq_SG_2 <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/stu_qqq_SG_2.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code Explanation - as.factor() function
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Moving on, the provided code transforms the ‘gender’ and ‘school’ columns in the R data frame stu_qqq_SG_2 into factors using the <code>as.factor()</code> function. This conversion is beneficial when dealing with categorical variables, as factors in R provide a structured representation of such data. The gender factor represents two categories, “Male” and “Female,” while the school factor likely denotes different levels of education, such as “Lower Sec,” “Upper Sec,” and others. Converting these columns to factors ensures that R recognises and treats them appropriately as categorical variables during statistical analysis, allowing for better representation and interpretation of the data. Subsequently, a summary statistics report is generated, offering a quick overview of the of the cleaned dataset.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Converting gender and school into factors (categorical variables)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>stu_qqq_SG_2<span class="sc">$</span>gender <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(stu_qqq_SG_2<span class="sc">$</span>gender)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>stu_qqq_SG_2<span class="sc">$</span>school <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(stu_qqq_SG_2<span class="sc">$</span>school)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Display summary statistics</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(stu_qqq_SG_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 1,279
-   CNT   CNTRYID CNTSCHID CNTSTUID CYC   NatCen STRATUM SUBNATIO REGION  OECD
-   &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;
- 1 SGP       702 70200052 70200001 08MS  070200 SGP01   7020000   70200     0
- 2 SGP       702 70200134 70200002 08MS  070200 SGP01   7020000   70200     0
- 3 SGP       702 70200112 70200003 08MS  070200 SGP01   7020000   70200     0
- 4 SGP       702 70200004 70200004 08MS  070200 SGP01   7020000   70200     0
- 5 SGP       702 70200152 70200005 08MS  070200 SGP01   7020000   70200     0
- 6 SGP       702 70200043 70200006 08MS  070200 SGP01   7020000   70200     0
- 7 SGP       702 70200049 70200007 08MS  070200 SGP01   7020000   70200     0
- 8 SGP       702 70200107 70200008 08MS  070200 SGP01   7020000   70200     0
- 9 SGP       702 70200012 70200009 08MS  070200 SGP01   7020000   70200     0
-10 SGP       702 70200061 70200010 08MS  070200 SGP01   7020000   70200     0
-# ℹ 1,269 more variables: ADMINMODE &lt;dbl&gt;, LANGTEST_QQQ &lt;dbl&gt;,
-#   LANGTEST_COG &lt;dbl&gt;, LANGTEST_PAQ &lt;dbl&gt;, Option_CT &lt;dbl&gt;, Option_FL &lt;dbl&gt;,
-#   Option_ICTQ &lt;dbl&gt;, Option_WBQ &lt;dbl&gt;, Option_PQ &lt;dbl&gt;, Option_TQ &lt;dbl&gt;,
-#   Option_UH &lt;dbl&gt;, BOOKID &lt;dbl&gt;, ST001D01T &lt;dbl&gt;, ST003D02T &lt;dbl&gt;,
-#   ST003D03T &lt;dbl&gt;, ST004D01T &lt;dbl&gt;, ST250Q01JA &lt;dbl&gt;, ST250Q02JA &lt;dbl&gt;,
-#   ST250Q03JA &lt;dbl&gt;, ST250Q04JA &lt;dbl&gt;, ST250Q05JA &lt;dbl&gt;, ST250D06JA &lt;chr&gt;,
-#   ST250D07JA &lt;chr&gt;, ST251Q01JA &lt;dbl&gt;, ST251Q02JA &lt;dbl&gt;, ST251Q03JA &lt;dbl&gt;, …</code></pre>
-</div>
-</div>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stu_qqq_SG,<span class="dv">10</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
+<pre><code>    gender          escs              school         maths      
+ Female:3248   Min.   :-3.5488   Degree  :2062   Min.   :262.6  
+ Male  :3358   1st Qu.:-0.2327   Diploma :1299   1st Qu.:506.2  
+               Median : 0.4817   Masters :1289   Median :582.4  
+               Mean   : 0.2904   PhD     :1045   Mean   :574.0  
+               3rd Qu.: 0.9036   Post Sec: 406   3rd Qu.:648.4  
+               Max.   : 3.2780   (Other) : 296   Max.   :842.7  
+               NA's   :47        NA's    : 209                  
+    science         reading     
+ Min.   :242.0   Min.   :158.6  
+ 1st Qu.:498.9   1st Qu.:477.4  
+ Median :571.2   Median :553.6  
+ Mean   :561.0   Mean   :542.5  
+ 3rd Qu.:629.3   3rd Qu.:616.1  
+ Max.   :801.9   Max.   :797.6  
+                                </code></pre>
 </div>
 </div>
 </section>
-<section id="preparing-subjects-data" class="level2">
-<h2 class="anchored" data-anchor-id="preparing-subjects-data">2.5 Preparing Subjects Data</h2>
-<p>In order to assess students’ performance in various subjects, including Mathematics, Reading and Science, we must identify the columns that correspond to these specific subjects.</p>
-<p>With reference to <a href="https://www.oecd.org/pisa/data/httpoecdorgpisadatabase-instructions.htm">PISA website</a>, we can utilise plausible estimates for assessing student proficiency. PISA evaluates student achievement using plausible values (PVs), derived from Item Response Theory models (refer to Chapter 5 of the PISA Data Analysis Manual: SAS or SPSS, Second Edition, or the accompanying guide “Scaling of Cognitive Data and Use of Students Performance Estimates” for detailed information). These models fundamentally deduce a student’s ability from their test performance. In application, plausible values are produced through multiple imputations, considering pupils’ responses to the randomly assigned subset of test questions and their input in background questionnaires.</p>
-<section id="preparing-maths-data" class="level3">
-<h3 class="anchored" data-anchor-id="preparing-maths-data">2.5.1 Preparing Maths Data</h3>
-<p>After looking through the dataset, we have determined that the columns denoting Mathematics performance are PV1MATH to PV10MATH.</p>
-<p>Consequently, we will compute the average of these plausible values using the rowMeans() function. A new column, called MATHEMATICS, will be generated to store the calculated average plausible values for the Mathematics subject.</p>
-<p>The corresponding code snippet is as follows:</p>
+</section>
+<section id="evaluation-and-redesign-of-visualisations" class="level1">
+<h1>3. Evaluation and Redesign of Visualisations</h1>
+<p>We will be reviewing a total of five visualisation from my peer’s Take-home Exercise 1, which will undergo assessment and redesign for improved clarity and aesthetics.</p>
+<section id="distribution-of-subjects-scores" class="level2">
+<h2 class="anchored" data-anchor-id="distribution-of-subjects-scores">3.1 Distribution of Subjects’ Scores</h2>
+<section id="original-design" class="level3">
+<h3 class="anchored" data-anchor-id="original-design">3.1.1 Original Design</h3>
+<p>A histogram below is used to reveal the distribution of scores for each respective subject, in this particular case, the Maths scores.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the columns containing math plausible values</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>math_columns <span class="ot">&lt;-</span> stu_qqq_SG[, <span class="fu">c</span>(<span class="st">"PV1MATH"</span>, <span class="st">"PV2MATH"</span>, <span class="st">"PV3MATH"</span>, <span class="st">"PV4MATH"</span>, <span class="st">"PV5MATH"</span>, <span class="st">"PV6MATH"</span>, <span class="st">"PV7MATH"</span>, <span class="st">"PV8MATH"</span>, <span class="st">"PV9MATH"</span>, <span class="st">"PV10MATH"</span>)]</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the row-wise mean</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>math_row_means <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(math_columns)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the row means as a new column to the data frame</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>stu_qqq_SG<span class="sc">$</span>MATHEMATICS <span class="ot">&lt;-</span> math_row_means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 </section>
-<section id="preparing-reading-data" class="level3">
-<h3 class="anchored" data-anchor-id="preparing-reading-data">2.5.2 Preparing Reading Data</h3>
-<p>Similarly, upon close examination of the dataset, we have identified that the columns associated with Reading are PV1READ to PV10READ.</p>
-<p>As a result, we will calculate the average of these plausible values using the rowMeans() function. A new column, labeled READING, will be created to store the resulting average plausible values for the Reading subject.</p>
-<p>The corresponding code snippet is provided below:</p>
+<section id="critique" class="level3">
+<h3 class="anchored" data-anchor-id="critique">3.1.2 Critique</h3>
+</section>
+<section id="critique---clarity" class="level3">
+<h3 class="anchored" data-anchor-id="critique---clarity">Critique - Clarity</h3>
+<ul>
+<li>The title of the graph, “Histogram of Maths scores”, clearly states what the data represents, which is good for immediate understanding.</li>
+<li>The data presented appears to be continuous, and the histogram effectively shows the distribution of the math scores. However, there are no markers for the mean or median score, which could provide additional useful information about the dataset.</li>
+</ul>
+</section>
+<section id="critique---aesthetics" class="level3">
+<h3 class="anchored" data-anchor-id="critique---aesthetics">Critique - Aesthetics</h3>
+<ul>
+<li>The colour scheme is simple and the bars are easily distinguishable, which makes the graph aesthetically pleasing and clear to read.</li>
+<li>The grey background is neutral and does not distract from the data, but a white background could be considered for a cleaner look.</li>
+<li>The text is not capitalised, which is fine for informality but could be capitalised for a more formal and professional appearance.</li>
+<li>There’s a consistent use of colour and no extraneous graphical elements, which is good. However, the graph could benefit from a cleaner font and perhaps a grid for easier reading of values.</li>
+</ul>
+</section>
+<section id="remake" class="level3">
+<h3 class="anchored" data-anchor-id="remake">3.1.3 Remake</h3>
+<p>To improve the histogram in terms of clarity and aesthetics,</p>
+</section>
+<section id="remake---clarity" class="level3">
+<h3 class="anchored" data-anchor-id="remake---clarity">Remake - Clarity:</h3>
+<ul>
+<li>Include annotations for key statistics such as the mean or median to give viewers a better understanding of the central tendency of the data.</li>
+</ul>
+</section>
+<section id="remake---aesthetics" class="level3">
+<h3 class="anchored" data-anchor-id="remake---aesthetics">Remake - Aesthetics:</h3>
+<ul>
+<li>Change the background to white for a more professional look.</li>
+<li>Capitalise the first letter of each label for a more formal presentation.</li>
+<li>Add a light grid to make it easier to read values from the graph.</li>
+<li>Choose a cleaner, more professional font for all text elements.</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the columns containing read plausible values</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>reading_columns <span class="ot">&lt;-</span> stu_qqq_SG[, <span class="fu">c</span>(<span class="st">"PV1READ"</span>, <span class="st">"PV2READ"</span>, <span class="st">"PV3READ"</span>, <span class="st">"PV4READ"</span>, <span class="st">"PV5READ"</span>, <span class="st">"PV6READ"</span>, <span class="st">"PV7READ"</span>, <span class="st">"PV8READ"</span>, <span class="st">"PV9READ"</span>, <span class="st">"PV10READ"</span>)]</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean math score for annotation</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mean_score <span class="ot">&lt;-</span> <span class="fu">mean</span>(stu_qqq_SG_2<span class="sc">$</span>maths)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the row-wise mean</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>reading_row_means <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(reading_columns)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the row means as a new column to the data frame</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>stu_qqq_SG<span class="sc">$</span>READING <span class="ot">&lt;-</span> reading_row_means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> stu_qqq_SG_2, <span class="fu">aes</span>(<span class="at">x =</span> maths)) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>, </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">boundary =</span> <span class="dv">100</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">"black"</span>,      </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">"light blue"</span>) <span class="sc">+</span> </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> mean_score), </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mean_score, <span class="at">y =</span> <span class="cn">Inf</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Mean:"</span>, <span class="fu">round</span>(mean_score, <span class="dv">2</span>)), </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">vjust =</span> <span class="fl">0.95</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Maths Scores"</span>,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Math Score"</span>,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Number of Students"</span>) <span class="sc">+</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey80"</span>, <span class="at">size =</span> <span class="fl">0.5</span>),</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>),</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 </section>
-<section id="preparing-science-data" class="level3">
-<h3 class="anchored" data-anchor-id="preparing-science-data">2.5.3 Preparing Science Data</h3>
-<p>Lastly, upon a thorough review of the dataset, we have determined that the columns corresponding to Science are PV1SCIE to PV10SCIE.</p>
-<p>Consequently, we will use the rowMeans() function to compute the average of these plausible values. A new column, named SCIENCE, will be established to store the resulting average plausible values for the Science subject.</p>
-<p>The corresponding code snippet is provided below:</p>
+</section>
+<section id="scatterplot-of-socioeconomic-status-vs-maths-score" class="level2">
+<h2 class="anchored" data-anchor-id="scatterplot-of-socioeconomic-status-vs-maths-score">3.2 Scatterplot of Socioeconomic Status vs Maths Score</h2>
+<section id="original-design-1" class="level3">
+<h3 class="anchored" data-anchor-id="original-design-1">3.2.1 Original Design</h3>
+<p>A scatterplot below is used to reveal the relationship between the Socioeconmic status against the scores for each respective subject, in this particular case, the Maths scores.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the columns containing science plausible values</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>science_columns <span class="ot">&lt;-</span> stu_qqq_SG[, <span class="fu">c</span>(<span class="st">"PV1SCIE"</span>, <span class="st">"PV2SCIE"</span>, <span class="st">"PV3SCIE"</span>, <span class="st">"PV4SCIE"</span>, <span class="st">"PV5SCIE"</span>, <span class="st">"PV6SCIE"</span>, <span class="st">"PV7SCIE"</span>, <span class="st">"PV8SCIE"</span>, <span class="st">"PV9SCIE"</span>, <span class="st">"PV10SCIE"</span>)]</span>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="critique-1" class="level3">
+<h3 class="anchored" data-anchor-id="critique-1">3.2.2 Critique</h3>
+</section>
+<section id="critique--clarity" class="level3">
+<h3 class="anchored" data-anchor-id="critique--clarity">Critique- C`larity</h3>
+<ul>
+<li>The title is descriptive, but it could be improved to concisely convey the key focus of the analysis, which is the relationship between socioeconomic status and math scores.</li>
+<li>Without a regression line, it’s difficult for the viewer to immediately grasp the nature of the relationship between the two variables.</li>
+<li>The scatterplot does not indicate the correlation coefficient, which quantitatively summarises the strength and direction of the linear relationship.</li>
+<li>Overplotting may be obscuring the density of points in certain areas, making it difficult to assess the distribution of data accurately.</li>
+</ul>
+</section>
+<section id="critique---aesthetics-1" class="level3">
+<h3 class="anchored" data-anchor-id="critique---aesthetics-1">Critique - Aesthetics</h3>
+<ul>
+<li>The plot uses a basic colour scheme, which is clear but does not make use of colour to convey additional information or to improve visual appeal.</li>
+<li>All points are of the same size and colour, which could be varied to show density.</li>
+<li>The grey background is neutral but does nott enhance the data visualisation; a lighter background with subtle gridlines could improve readability.</li>
+</ul>
+</section>
+<section id="remake-1" class="level3">
+<h3 class="anchored" data-anchor-id="remake-1">3.2.3 Remake</h3>
+<p>To improve the scatterplot in terms of clarity and aesthetics, ### Remake - Clarity - Add a regression line to visually represent the relationship between math scores and socioeconomic status. This would not only clarify the direction and steepness of the relationship but also help in identifying patterns or deviations. - Calculate and display the correlation coefficient on the plot to provide a clear, numerical summary of the relationship’s strength. - Implement techniques to mitigate overplotting, such as adjusting the alpha transparency of points.</p>
+</section>
+<section id="remake---aesthetics-1" class="level3">
+<h3 class="anchored" data-anchor-id="remake---aesthetics-1">Remake - Aesthetics</h3>
+<ul>
+<li>Introduce a colour gradient to reflect the density of overlapping points, which could enhance visual appeal and clarity.</li>
+<li>Apply a more sophisticated theme, like theme_bw(), which provides a clean and professional look with white background and gridlines.</li>
+<li>Increase the size and change the colour of the regression line, in this case brigh red, to make it stand out against the points.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the Pearson correlation coefficient, handling NA values appropriately</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(stu_qqq_SG_2<span class="sc">$</span>maths, stu_qqq_SG_2<span class="sc">$</span>escs, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the row-wise mean</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>science_row_means <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(science_columns)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the row means as a new column to the data frame</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>stu_qqq_SG<span class="sc">$</span>SCIENCE <span class="ot">&lt;-</span> science_row_means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-</section>
-<section id="preparing-gender-data" class="level2">
-<h2 class="anchored" data-anchor-id="preparing-gender-data">2.6 Preparing Gender Data</h2>
-<p>Upon examining the dataset, a particular column labeled ‘ST004D01T’ provides information about gender, using the values 1 and 2. According to the <a href="https://www.oecd.org/pisa/data/2022database/CY8_202111_QST_MS_STQ_CBA_NoNotes.pdf">PISA questionnaire manual</a>, 1 corresponds to female, while 2 corresponds to male.</p>
-<p>To facilitate a more straightforward analysis, we intend to recode the values, assigning 1 to represent female and 2 to represent male. This recoding process will be carried out using the <a href="https://dplyr.tidyverse.org/">dplyr</a>, a component of the tidyverse package.</p>
-<p>We prefer generating a new column instead of altering the current one. To achieve this, employ the mutate function in conjunction with the assignment operator (=) to establish a fresh column.</p>
-<p>This action will introduce a column named ‘GENDER’ into your ‘stu_qqq_SG’ dataset, with values redefined according to the ‘ST004D01T’ column. The original ‘ST004D01T’ column retains its original state, and now, a newly created ‘GENDER’ column contains the recoded values.”</p>
-<p>The following code snippet provides the pertinent information:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install and load the dplyr package if we have not done so</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("dplyr")</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new column 'GENDER' with recoded values</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>stu_qqq_SG <span class="ot">&lt;-</span> stu_qqq_SG <span class="sc">%&gt;%</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">GENDER =</span> <span class="fu">recode</span>(ST004D01T, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"female"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"male"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>To check if we have recoded the gender data correctly, we will be displaying the first 10 rows of the GENDER column:</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">The output</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">The code</a></li></ul>
-<div class="tab-content">
-<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 1
-   GENDER
-   &lt;chr&gt; 
- 1 female
- 2 male  
- 3 male  
- 4 male  
- 5 female
- 6 female
- 7 male  
- 8 male  
- 9 female
-10 male  </code></pre>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the scatterplot with improvements mentioned above</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> stu_qqq_SG_2, <span class="fu">aes</span>(<span class="at">x =</span> maths, <span class="at">y =</span> escs)) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span>  <span class="co"># Adjust alpha for overplotting</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># Add regression line</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Relationship Between Socioeconomic Status and Math Scores"</span>) <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Math Score"</span>, <span class="at">y =</span> <span class="st">"Socioeconomic Status (PISA Index)"</span>) <span class="sc">+</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span>  <span class="co"># Use a theme with white background</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co"># If correlation is not NA, add it to the plot</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(correlation)) {</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="cn">Inf</span>, <span class="at">y =</span> <span class="cn">Inf</span>, <span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"r = %.2f"</span>, correlation),</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">hjust =</span> <span class="fl">1.1</span>, <span class="at">vjust =</span> <span class="fl">1.1</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">5</span>)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the plot</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stu_qqq_SG[<span class="fu">c</span>(<span class="st">"GENDER"</span>)],<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-title-container flex-fill">
+Note
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<p>In this code, <code>geom_point()</code> is used with an alpha value to handle overplotting, <code>geom_smooth()</code> adds the regression line, and <code>annotate()</code> adds the correlation coefficient.</p>
 </div>
 </div>
 </section>
-<section id="preparing-socioeconomic-status-data" class="level2">
-<h2 class="anchored" data-anchor-id="preparing-socioeconomic-status-data">2.7 Preparing Socioeconomic Status Data</h2>
-<p>With reference to the <a href="https://www.oecd.org/pisa/data/pisa2022technicalreport/PISA-2022-Technical-Report-Ch-05-PISA-2022-Context-Questionnaire-Development.pdf">PISA 2022 Technical Report</a>, Figure 5.1 in the PISA 2022 Technical Report illustrates the two-dimensional framework taxonomy. The primary dimension categorises proposed constructs into two overarching categories defined by the PISA Governing Board (PGB): domain-specific constructs and general constructs, with the latter encompassing Economic, Social and Cultural Status (ESCS). The secondary dimension further categorises proposed constructs into five categories based on key areas of educational policy setting at different levels of aggregation. These categories include Student Background, Student Beliefs, Attitudes, Feelings. and Behaviours, Teaching Practices and Learning Opportunities, School Practices, Policies, and Infrastructure, and Governance, System-Level Policies, and Practices.</p>
-<p>Therefore, it can be inferred that the ‘ESCS’ column can be utilised for assessing the socioeconomic status of students.</p>
-<p>If we view the ‘ESCS’ column, there are negative and positive ESCS values, it generally implies a relative positioning of students along a spectrum of economic, social and cultural advantages or disadvantages.</p>
+</section>
+<section id="distribution-of-socioeconomic-status-by-gender" class="level2">
+<h2 class="anchored" data-anchor-id="distribution-of-socioeconomic-status-by-gender">3.3 Distribution of Socioeconomic Status (by Gender)</h2>
+<section id="original-design-2" class="level3">
+<h3 class="anchored" data-anchor-id="original-design-2">3.3.1 Original Design</h3>
+<p>A geom_density plot below is used to reveal the distribution between the Socioeconmic status by Gender.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>stu_qqq_SG_2, </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> escs, </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> gender)) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()<span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Socioeconomic Status (by Gender)"</span>)<span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Socioeconomic Status - PISA Index"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="critique-2" class="level3">
+<h3 class="anchored" data-anchor-id="critique-2">3.3.2 Critique</h3>
+</section>
+<section id="critique---clarity-1" class="level3">
+<h3 class="anchored" data-anchor-id="critique---clarity-1">Critique - Clarity</h3>
 <ul>
-<li><p>Positive ESCS value: This typically indicates a higher socioeconomic status, suggesting that the student comes from an environment with more favourable economic conditions, higher social standing, and a richer cultural background. Students with positive ESCS values may have access to more resources, educational support and opportunities.</p></li>
-<li><p>Negative ESCS value: Conversely, a negative ESCS value suggests a lower socioeconomic status. Students with negative ESCS values may face economic challenges, have a lower social standing, and possibly experience a less enriched cultural environment. These students may encounter additional obstacles in their educational journey due to a lack of resources or support.</p></li>
+<li>Rhe legend is clear and distinguishes between genders, which is good. However, more neutral colours could be used.</li>
+<li>The plot indicates skewness, but without the actual data points or additional statistical annotations, it is difficult to validate the findings stated about the skewness or the comparative peaks of the distribution.</li>
+<li>The x-axis is well labeled, but the y-axis is not labeled at all, which could lead to confusion about what the density values represent.</li>
 </ul>
-<p>The first 10 rows of the ESCS column can be seen here:</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">The output</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">The code</a></li></ul>
-<div class="tab-content">
-<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 1
-      ESCS
-     &lt;dbl&gt;
- 1  0.184 
- 2  0.826 
- 3 -1.04  
- 4 -0.961 
- 5  0.0856
- 6  0.127 
- 7 -0.0154
- 8  1.16  
- 9  1.47  
-10  0.520 </code></pre>
-</div>
-</div>
-</div>
-<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stu_qqq_SG[<span class="fu">c</span>(<span class="st">"ESCS"</span>)],<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
 </section>
-<section id="preparing-school-data" class="level2">
-<h2 class="anchored" data-anchor-id="preparing-school-data">2.8 Preparing School Data</h2>
-<p>Exploring the dataset reveals a sole column dedicated to schools, labeled ‘CNTSCHID.’ Regrettably, the dataset lacks details about the nature of CNTSCHID or the specific identity associated with each school ID. Nonetheless, we must work with the available information as is.</p>
-<p>The first 10 rows of the CNTSCHID column can be seen here:</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">The output</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">The code</a></li></ul>
-<div class="tab-content">
-<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 1
-   CNTSCHID
-      &lt;dbl&gt;
- 1 70200052
- 2 70200134
- 3 70200112
- 4 70200004
- 5 70200152
- 6 70200043
- 7 70200049
- 8 70200107
- 9 70200012
-10 70200061</code></pre>
-</div>
-</div>
-</div>
-<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stu_qqq_SG[<span class="fu">c</span>(<span class="st">"CNTSCHID"</span>)],<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="exploratory-data-analysis-eda" class="level1">
-<h1>3. Exploratory Data Analysis (EDA)</h1>
-<section id="three-subjects---mathematics-reading-and-science" class="level2">
-<h2 class="anchored" data-anchor-id="three-subjects---mathematics-reading-and-science">3.1 Three Subjects - Mathematics, Reading and Science</h2>
-<section id="distribution-across-three-subjects---mathematics-reading-and-science" class="level3">
-<h3 class="anchored" data-anchor-id="distribution-across-three-subjects---mathematics-reading-and-science">3.1.1 Distribution Across Three Subjects - Mathematics, Reading and Science</h3>
-<p>We will now do the plot for each respective subject. We will be doing a histogram to show the distribution across three subjects.</p>
-<p>The code will be shown below:</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">Mathematics</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">Reading</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-3" role="tab" aria-controls="tabset-5-3" aria-selected="false">Science</a></li></ul>
-<div class="tab-content">
-<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>stu_qqq_SG, </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> MATHEMATICS)) <span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">boundary =</span> <span class="dv">100</span>,</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"grey25"</span>, </span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>) <span class="sc">+</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>() <span class="sc">+</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Maths scores"</span>) <span class="sc">+</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(stu_qqq_SG<span class="sc">$</span>MATHEMATICS), </span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"red"</span>, </span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>, </span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>stu_qqq_SG, </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> READING)) <span class="sc">+</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">boundary =</span> <span class="dv">100</span>,</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"grey25"</span>, </span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>) <span class="sc">+</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>() <span class="sc">+</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Reading scores"</span>) <span class="sc">+</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(stu_qqq_SG<span class="sc">$</span>READING), </span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"red"</span>, </span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>, </span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div id="tabset-5-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-3-tab">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>stu_qqq_SG, </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> SCIENCE)) <span class="sc">+</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">boundary =</span> <span class="dv">100</span>,</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"grey25"</span>, </span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>) <span class="sc">+</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>() <span class="sc">+</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Science scores"</span>) <span class="sc">+</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(stu_qqq_SG<span class="sc">$</span>SCIENCE), </span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"red"</span>, </span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>, </span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-<p>The figure in the tabset below displays a composite of three histograms, seamlessly created using <a href="https://patchwork.data-imaginist.com/">patchwork</a>. This is specifically designed for merging separate ggplot2 graphs into a unified figure. The red dotted line indicates the mean.</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true">The plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false">The code</a></li></ul>
-<div class="tab-content">
-<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</div>
-<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>(p1 <span class="sc">/</span> p2) <span class="sc">|</span> p3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-<p>The histogram presented above offers a visual representation of the distribution of scores across three academic subjects: MATHEMATICS, READING and SCIENCE. The distribution pattern observed for each subject strongly aligns with the characteristics of a normal distribution.</p>
-<p>A normal distribution is characterised by a symmetrical bell-shaped curve, with the majority of data points clustering around the mean and gradually tapering off towards the extremes. In the context of academic performance, this implies that a significant proportion of students scored close to the average, while fewer students achieved scores either significantly above or below the mean. In the case of academic assessments, a normal distribution suggests that the difficulty level of the questions was appropriately balanced, allowing for a diverse range of scores among the students.</p>
-</section>
-<section id="reading-vs-mathematics" class="level3">
-<h3 class="anchored" data-anchor-id="reading-vs-mathematics">3.1.2 Reading vs Mathematics</h3>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true">The plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false">The code</a></li></ul>
-<div class="tab-content">
-<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</div>
-<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>stu_qqq_SG, </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span> READING, </span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y=</span>MATHEMATICS)) <span class="sc">+</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, </span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">size=</span><span class="fl">0.5</span>) <span class="sc">+</span>  </span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">850</span>),</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">850</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-<p>The scatterplot depicted above illustrates a positive correlation between reading and mathematics values. As the reading values increase, so do the corresponding mathematics values. This relationship is further emphasised by the upward trend observed in the best fit line. The consistent increase in one variable is mirrored by a proportional increase in the other. In light of these findings, it can be confidently asserted that a positive connection exists, suggesting that engaging in reading contributes to enhanced performance in mathematics among students.</p>
-</section>
-</section>
-<section id="reading-as-our-main-focus" class="level2">
-<h2 class="anchored" data-anchor-id="reading-as-our-main-focus">3.2 “Reading” as our main focus</h2>
-<p>With reference to this research paper titled <a href="https://doi.org/10.1080/09500693.2021.2007552">‘Reading matters more than mathematics in science learning: an analysis of the relationship between student achievement in reading, mathematics, and science’</a> by Yuanze Zhu, the results revealed that proficiency in reading and mathematics strongly correlated with science achievement, with reading exerting a more substantial influence than mathematics. Consequently, we assert that prioritising reading over mathematics is essential for enhanced performance in science learning.</p>
-<p>Henceforth, our focus will be exclusively on reading, considering it as the primary driver for improved achievement in other subjects, including Mathematics and Science.</p>
-<section id="reading-vs-gender" class="level3">
-<h3 class="anchored" data-anchor-id="reading-vs-gender">3.2.1 Reading vs Gender</h3>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true">The plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false">The code</a></li></ul>
-<div class="tab-content">
-<div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</div>
-<div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>stu_qqq_SG, </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> READING, <span class="at">x=</span> GENDER)) <span class="sc">+</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">stat=</span><span class="st">"summary"</span>,        </span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">fun.y=</span><span class="st">"mean"</span>,           </span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span><span class="st">"red"</span>,          </span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">size=</span><span class="dv">2</span>)      </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-<p>When it comes to the Reading, females exhibit a higher average performance compared to their male counterparts. The visual representation underscores a clear distinction, suggesting that, on average, females outperform males in the domain of Reading. One plausible interpretation for this observed trend could be rooted in the varying learning styles or preferences between genders. <a href="file:///Users/rizfebriansyah/Downloads/40-Article%20Text-988-1-10-20220405.pdf">Research</a> has suggested that females may, on average, possess certain cognitive strengths or approaches that align more closely with the skills demanded in Reading tasks. Additionally, sociocultural factors and educational environments may play a role in shaping differential outcomes, influencing how males and females engage with and excel in Reading-related activities.</p>
-</section>
-<section id="reading-vs-socioeconomic-status-escs" class="level3">
-<h3 class="anchored" data-anchor-id="reading-vs-socioeconomic-status-escs">3.2.2 Reading vs Socioeconomic Status (ESCS)</h3>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true">The plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false">The code</a></li></ul>
-<div class="tab-content">
-<div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</div>
-<div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>stu_qqq_SG, </span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span> READING, <span class="at">y=</span>ESCS)) <span class="sc">+</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">size=</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-<p>Examining the scatterplot above, it becomes evident that within the reading value range of 200-400, there is minimal correlation with ESCS. During this range, ESCS values exhibit considerable variability, ranging from -3 to 3. However, as reading values surpass 400, ESCS values predominantly hover around 0 and above, indicating a positive relationship. In other words, higher reading values correspond to higher ESCS values. This positive association is further emphasised by the upward trend observed in the best-fit line.</p>
-</section>
-<section id="reading-vs-school-id" class="level3">
-<h3 class="anchored" data-anchor-id="reading-vs-school-id">3.2.3 Reading vs School ID</h3>
-<p>Given the extensive size of the dataset, our strategy is to concentrate on the top 5 schools that exhibit the highest frequency. Achieving this involves tallying the occurrences of School IDs in the CNTSCHID column.</p>
-<p>To obtain the counts of each unique CNTSCHID value in descending order, we can use the table() function along with sorting functions.</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true">The code</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false">The output</a></li></ul>
-<div class="tab-content">
-<div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Our dataframe is named stu_qqq_SG and the column is CNTSCHID</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>schid_counts <span class="ot">&lt;-</span> <span class="fu">table</span>(stu_qqq_SG<span class="sc">$</span>CNTSCHID)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the result to a data frame and sort in descending order</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>schid_counts_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(schid_counts)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>schid_counts_df <span class="ot">&lt;-</span> schid_counts_df[<span class="fu">order</span>(<span class="sc">-</span>schid_counts_df<span class="sc">$</span>Freq), ]</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Print or use the schid_counts_df as needed</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(schid_counts_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>        Var1 Freq
-20  70200020   60
-75  70200075   60
-158 70200159   59
-13  70200013   58
-45  70200045   58
-66  70200066   58
-141 70200141   58
-12  70200012   57
-40  70200040   57
-62  70200062   57
-105 70200105   57
-110 70200110   57
-118 70200118   57
-132 70200132   57
-4   70200004   56
-11  70200011   56
-26  70200026   56
-31  70200031   56
-35  70200035   56
-49  70200049   56
-67  70200067   56
-71  70200071   56
-82  70200082   56
-94  70200094   56
-130 70200130   56
-1   70200001   55
-44  70200044   55
-52  70200052   55
-111 70200111   55
-142 70200142   55
-145 70200145   55
-154 70200155   55
-27  70200027   54
-43  70200043   54
-119 70200119   54
-139 70200139   54
-18  70200018   52
-114 70200114   51
-38  70200038   40
-90  70200090   40
-112 70200112   40
-128 70200128   40
-150 70200151   40
-161 70200162   40
-17  70200017   39
-19  70200019   39
-29  70200029   39
-53  70200053   39
-59  70200059   39
-61  70200061   39
-63  70200063   39
-65  70200065   39
-68  70200068   39
-84  70200084   39
-104 70200104   39
-106 70200106   39
-131 70200131   39
-137 70200137   39
-164 70200165   39
-2   70200002   38
-5   70200005   38
-7   70200007   38
-8   70200008   38
-25  70200025   38
-36  70200036   38
-64  70200064   38
-73  70200073   38
-92  70200092   38
-93  70200093   38
-116 70200116   38
-126 70200126   38
-134 70200134   38
-140 70200140   38
-146 70200146   38
-151 70200152   38
-16  70200016   37
-21  70200021   37
-22  70200022   37
-32  70200032   37
-39  70200039   37
-42  70200042   37
-46  70200046   37
-47  70200047   37
-74  70200074   37
-76  70200076   37
-80  70200080   37
-85  70200085   37
-86  70200086   37
-87  70200087   37
-108 70200108   37
-117 70200117   37
-120 70200120   37
-121 70200121   37
-127 70200127   37
-135 70200135   37
-136 70200136   37
-144 70200144   37
-152 70200153   37
-155 70200156   37
-162 70200163   37
-163 70200164   37
-3   70200003   36
-6   70200006   36
-9   70200009   36
-10  70200010   36
-14  70200014   36
-24  70200024   36
-34  70200034   36
-37  70200037   36
-48  70200048   36
-51  70200051   36
-54  70200054   36
-58  70200058   36
-70  70200070   36
-81  70200081   36
-83  70200083   36
-88  70200088   36
-89  70200089   36
-96  70200096   36
-99  70200099   36
-102 70200102   36
-103 70200103   36
-109 70200109   36
-122 70200122   36
-125 70200125   36
-129 70200129   36
-143 70200143   36
-159 70200160   36
-160 70200161   36
-23  70200023   35
-55  70200055   35
-77  70200077   35
-91  70200091   35
-97  70200097   35
-101 70200101   35
-107 70200107   35
-133 70200133   35
-153 70200154   35
-15  70200015   34
-72  70200072   34
-98  70200098   34
-100 70200100   34
-113 70200113   34
-156 70200157   34
-33  70200033   33
-56  70200056   33
-69  70200069   33
-115 70200115   33
-123 70200123   32
-124 70200124   32
-79  70200079   31
-148 70200148   31
-30  70200030   30
-50  70200050   30
-147 70200147   30
-60  70200060   29
-157 70200158   29
-57  70200057   28
-95  70200095   28
-149 70200149   28
-28  70200028   22
-78  70200078   22
-138 70200138   15
-41  70200041    5</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p>From the output, we can see that the top 5 School IDs are:</p>
+<section id="critique---aesthetics-2" class="level3">
+<h3 class="anchored" data-anchor-id="critique---aesthetics-2">Critique - Aesthetics</h3>
 <ul>
-<li><p>70200020</p></li>
-<li><p>70200075</p></li>
-<li><p>70200159</p></li>
-<li><p>70200013</p></li>
-<li><p>70200045</p></li>
+<li>The colours are easily distinguishable but as mentioned earlier, may not be the best choice due to potential gender stereotyping.</li>
+<li>The default grey background and grid might not be the most aesthetically pleasing. A cleaner look might be achieved with a white background and less prominent grid lines.</li>
+<li>The density lines are quite thin. Increasing their thickness could make them stand out more clearly against the background.</li>
 </ul>
-<p>Therefore, we will only focus on the above mentioned School IDs for our analysis.</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true">The plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false">The code</a></li></ul>
-<div class="tab-content">
-<div id="tabset-11-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-11-1-tab">
+</section>
+<section id="remake-2" class="level3">
+<h3 class="anchored" data-anchor-id="remake-2">3.3.3 Remake</h3>
+<p>To improve the density plot in terms of clarity and aesthetics, ### Remake - Clarity - Adding annotations for mean, median, or mode for each gender could provide more context. - If the lines are overlapping significantly, consider using fill with alpha to differentiate the distributions while showing overlap.</p>
+</section>
+<section id="remake---aesthetics-2" class="level3">
+<h3 class="anchored" data-anchor-id="remake---aesthetics-2">Remake - Aesthetics</h3>
+<ul>
+<li>In terms ot theme, we are using theme_minimal() for a more modern, clean aesthetic.</li>
+<li>For colour palettemm we will opt for a colourblind-friendly palette or more neutral tones.</li>
+<li>We will also increase the line thickness for better visibility.</li>
+</ul>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate mean for each gender</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> stu_qqq_SG_2 <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(escs, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the density plot with annotations for mean </span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> stu_qqq_SG_2, <span class="fu">aes</span>(<span class="at">x =</span> escs, <span class="at">fill =</span> gender)) <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span> <span class="co"># Use fill with transparency instead of color for lines</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#1f77b4"</span>, <span class="st">"#ff7f0e"</span>)) <span class="sc">+</span> <span class="co"># Example of a colourblind-friendly palette</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">data =</span> stats, <span class="fu">aes</span>(<span class="at">xintercept =</span> mean, <span class="at">color =</span> gender), <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Socioeconomic Status by Gender"</span>) <span class="sc">+</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Socioeconomic Status - PISA Index"</span>, <span class="at">y =</span> <span class="st">"Density"</span>) <span class="sc">+</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span> <span class="co"># A cleaner theme</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>, <span class="co"># Position the legend on top</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span> <span class="co"># Remove the legend title</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#1f77b4"</span>, <span class="st">"#ff7f0e"</span>))  <span class="co"># Match line colours to the fill colours</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div id="tabset-11-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-11-2-tab">
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In density plots, the y-axis represents the density of the data, which is a function of the number of observations and the bin width used in the kernel density estimation. Therefore, it may not always start at 0, especially if there are no values in the data near 0.</p>
+<p>For the x-axis, which represents the actual data points, it is often a good practice to start at 0 if it makes sense for the data. However, in our case, for socioeconomic status or indices like PISA, which can have negative values and often do not start at 0, it may be more appropriate to start at the minimum value of the data or a meaningful reference point that provides context.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="distribution-of-maths-scores-by-expected-school" class="level2">
+<h2 class="anchored" data-anchor-id="distribution-of-maths-scores-by-expected-school">3.4 Distribution of Maths Scores by Expected School</h2>
+<section id="original-design-3" class="level3">
+<h3 class="anchored" data-anchor-id="original-design-3">3.4.1 Original Design</h3>
+<p>A histogram below is used to reveal the distribution between the expected school against the scores for each respective subject, in this particular case, the Maths scores.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data for specific values of CNTSCHID</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>filtered_data <span class="ot">&lt;-</span> stu_qqq_SG <span class="sc">%&gt;%</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(CNTSCHID <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">70200020</span>, <span class="dv">70200075</span>, <span class="dv">70200159</span>, <span class="dv">70200013</span>, <span class="dv">70200045</span>))</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert CNTSCHID to factor</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>filtered_data<span class="sc">$</span>CNTSCHID <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(filtered_data<span class="sc">$</span>CNTSCHID)</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot with the filtered data</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> filtered_data, </span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> READING, <span class="at">x =</span> CNTSCHID)) <span class="sc">+</span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">stat =</span> <span class="st">"summary"</span>,        </span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">fun.y =</span> <span class="st">"mean"</span>,           </span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> <span class="st">"red"</span>,          </span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>stu_qqq_SG_2, </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span> maths, </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> school)) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"grey30"</span>)<span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Maths scores (by Expected School)"</span>)<span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Math Score"</span>)<span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span> <span class="st">"Number of students"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+<section id="critique-3" class="level3">
+<h3 class="anchored" data-anchor-id="critique-3">3.4.2 Critique</h3>
+</section>
+<section id="critique---clarity-2" class="level3">
+<h3 class="anchored" data-anchor-id="critique---clarity-2">Critique - Clarity</h3>
+<ul>
+<li>Overlapping Bars: The histogram uses stacked bars to represent different schools, which makes it difficult to compare the distributions of math scores between schools, especially for those not at the bottom of the stack.</li>
+<li>Colour Choice: The colours are distinct, but there are so many that it becomes hard to differentiate and track across the histogram. This is particularly challenging for individuals with colour vision deficiencies.</li>
+<li>Legend Positioning: The legend is positioned inside the plot area, which can potentially cover some of the data and reduce readability.</li>
+<li>Bins: With a bin width set to produce 20 bins, some detail in the distribution may be lost, especially if the range of math scores is broad.</li>
+</ul>
+</section>
+<section id="critique---aesthetics-3" class="level3">
+<h3 class="anchored" data-anchor-id="critique---aesthetics-3">Critique - Aesthetics</h3>
+<ul>
+<li>Colour Saturation: The colours are very saturated, which can be visually overwhelming and make it harder to focus on the data.</li>
+<li>Gridlines: The absence of horizontal gridlines can make it hard to estimate the number of students for a given bin.</li>
+<li>Bar Borders: The grey borders on the bars add visual clutter, especially where colours are similar.</li>
+</ul>
+</section>
+<section id="remake-3" class="level3">
+<h3 class="anchored" data-anchor-id="remake-3">3.4.3 Remake</h3>
+<p>To improve the histogram in terms of clarity and aesthetics, ### Remake - Clarity - Switch to Faceted Plot: Instead of stacking, use faceted histograms or side-by-side histograms to compare distributions between schools without overlap. - Simplify Colour Palette: Use a simpler colour palette with fewer colours or shades to help distinguish between schools, or use patterns instead of colours for differentiation. - Reposition Legend: Move the legend outside the plot area, such as to the bottom or side, to avoid obscuring the data.</p>
+</section>
+<section id="remake---aesthetics-3" class="level3">
+<h3 class="anchored" data-anchor-id="remake---aesthetics-3">Remake - Aesthetics</h3>
+<ul>
+<li>We use a theme with a cleaner aesthetic, such as <code>theme_minimal()</code> or <code>theme_light()</code>, which provides a white background and less intrusive gridlines.</li>
+<li>Remove Bar Borders: We need to eliminate the borders or use a softer colour that does not compete with the fill colour.</li>
+<li>Add Horizontal Gridlines: We need to include soft horizontal gridlines for easier comparison of heights across the histogram.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the histogram with improvements mentioned above</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> stu_qqq_SG_2, <span class="fu">aes</span>(<span class="at">x =</span> maths, <span class="at">fill =</span> school)) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">bins =</span> <span class="dv">20</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span>  <span class="co"># Use 'position = dodge' to place bars side by side</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Pastel1"</span>) <span class="sc">+</span>  <span class="co"># Use a pastel colour palette for better distinction</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Maths Scores by Expected School"</span>) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Math Score"</span>, <span class="at">y =</span> <span class="st">"Number of Students"</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span>  <span class="co"># Cleaner theme</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,  <span class="co"># Move legend to the bottom</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey80"</span>, <span class="at">size =</span> <span class="fl">0.5</span>),</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.box.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">"white"</span>))  <span class="co"># Add a background to the legend box</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Upon a detailed analysis of the boxplot, which visually encapsulates the distribution of Reading plausible values across multiple schools (identified by CNTSCHID), a distinct trend emerges. Notably, CNTSCHID 70200020, representing a specific school within the dataset, stands out with the highest mean Reading score, hovering around an impressive ~630. This observation sheds light on the academic performance of this particular school, suggesting a noteworthy level of achievement in Reading compared to the other four schools. The boxplot serves as a valuable tool in visually conveying these distributional nuances, highlighting the academic prowess of CNTSCHID 70200020 within the context of Reading achievement among the schools.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In this code, <code>position = "dodge"</code> is used to place the bars side by side instead of stacking them, which greatly improves clarity when comparing between schools. A pastel colour palette from <code>scale_fill_brewer()</code> is used to distinguish the schools while being less visually overwhelming. The legend is moved to the bottom of the plot to avoid obscuring any data.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="boxplot-between-gender-and-maths-scores" class="level2">
+<h2 class="anchored" data-anchor-id="boxplot-between-gender-and-maths-scores">3.5 Boxplot between Gender and Maths Scores</h2>
+<section id="original-design-4" class="level3">
+<h3 class="anchored" data-anchor-id="original-design-4">3.5.1 Original Design</h3>
+<p>A boxplot below is used to reveal the distribution between maths score and Gender.</p>
+</section>
+<section id="critique-4" class="level3">
+<h3 class="anchored" data-anchor-id="critique-4">3.5.2 Critique</h3>
+</section>
+<section id="critique---clarity-3" class="level3">
+<h3 class="anchored" data-anchor-id="critique---clarity-3">Critique - Clarity</h3>
+<ul>
+<li>Mean Indication: The red dot indicating the mean is a good addition for showing central tendency, but there’s no legend explaining what the red dot signifies. Viewers might not realise it represents the mean math score.</li>
+<li>Axis Labels: While the y-axis is labeled, it could be more descriptive. Instead of “Maths Score,” a label like “Math Score Distribution” might provide more context.</li>
+<li>Outliers: The plot shows outliers, which is helpful, but there is no information on how these outliers were calculated or the criteria used (e.g., 1.5 times the IQR).</li>
+<li>Gender Labeling: The x-axis labels “Female” and “Male” could be more inclusive. The plot does not account for non-binary or other gender identities, which might be relevant depending on the context of the data.</li>
+</ul>
+</section>
+<section id="critique---aesthetics-4" class="level3">
+<h3 class="anchored" data-anchor-id="critique---aesthetics-4">Critique - Aesthetics</h3>
+<ul>
+<li>Colour Scheme: The use of red for the mean is visually effective, but the rest of the plot is quite monochrome. Utilising a subtle colour for the boxes could improve visual appeal.</li>
+<li>Plot Spacing: The spacing between the two boxplots is quite large, which may not be an efficient use of space.</li>
+<li>Gridlines: There are no horizontal gridlines, which can help viewers better estimate the values of the quartiles and the mean.</li>
+</ul>
+</section>
+<section id="remake-4" class="level3">
+<h3 class="anchored" data-anchor-id="remake-4">3.5.3 Remake</h3>
+<p>To improve the boxplot in terms of clarity and aesthetics,</p>
+</section>
+<section id="remake---clarity-1" class="level3">
+<h3 class="anchored" data-anchor-id="remake---clarity-1">Remake - Clarity</h3>
+<ul>
+<li>Legend for Mean: Add a legend or annotation to explain the red dot represents the mean.</li>
+<li>Additional Statistics: Add more summary statistics, such as the median (which the boxplot inherently shows), using different point shapes or colours to provide a fuller picture of the distribution.</li>
+<li>Outlier Explanation: Include a footnote or caption that explains the criteria for outliers.</li>
+</ul>
+</section>
+<section id="remake---aesthetics-4" class="level3">
+<h3 class="anchored" data-anchor-id="remake---aesthetics-4">Remake - Aesthetics</h3>
+<ul>
+<li>Colour for Boxes: Introduce a light colour fill within the boxes to enhance visual differentiation between the quartiles and the overall distribution.</li>
+<li>Reduce Width: Decrease the width of the individual boxplots to bring them closer together and use space more efficiently.</li>
+<li>Gridlines: Add horizontal gridlines for better readability of values.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Enhanced boxplot with additional statistics and legends</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> stu_qqq_SG_2, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">y =</span> maths)) <span class="sc">+</span>    </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> gender)) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#EBF5FB"</span>, <span class="st">"#FEF9E7"</span>)) <span class="sc">+</span> <span class="co"># Subtle colours for the boxes</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">stat =</span> <span class="st">"summary"</span>, <span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"Mean"</span>), <span class="at">fun.y =</span> <span class="st">"mean"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">stat =</span> <span class="st">"summary"</span>, <span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"Median"</span>), <span class="at">fun.y =</span> <span class="st">"median"</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">shape =</span> <span class="dv">18</span>) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Boxplot of Math Score by Gender"</span>) <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Math Score Distribution"</span>, <span class="at">x =</span> <span class="st">""</span>, <span class="at">color =</span> <span class="st">"Summary Statistics"</span>) <span class="sc">+</span> <span class="co"># More descriptive y-axis label, remove x-axis label</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Mean"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"Median"</span> <span class="ot">=</span> <span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title.align =</span> <span class="fl">0.5</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey80"</span>, <span class="at">size =</span> <span class="fl">0.5</span>), <span class="co"># Add y gridlines</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="co"># Flip the coordinates into horizontal position</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This code adds subtle colours to the boxplot fills, differentiates between the mean and median with different colours and shapes, and adds y-axis gridlines for better readability. The <code>coord_flip()</code> is included as to flip the boxplots to a horizontal orientation, which is sometimes preferred for readability.</p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="learning-points" class="level1">
+<h1>4. Learning Points</h1>
+<ol type="1">
+<li><p><strong>Flexibility in Visualisation</strong>: The exercises underscored that data visualisation is not a one-size-fits-all endeavour. Effective visualisations require a balance between clarity, information density and aesthetics. This balance can shift depending on the audience, the context and the data itself. There are multiple ways to visualise the same data, and each method can bring out different insights.</p></li>
+<li><p><strong>Importance of Context and Audience</strong>: It became evident that understanding the audience and the context in which the visualisation will be consumed is crucial. A plot that works well in an academic paper might not be suitable for a business presentation. Tailoring visualisations to the specific needs and expectations of the audience can greatly enhance communication.</p></li>
+<li><p><strong>Iterative Process</strong>: Data visualisation is an iterative process. Initial drafts can be refined by incorporating feedback, exploring different visual forms, and considering alternative data representations. The exercise of critiquing and improving visualisations reinforces the idea that a good chart or plot is often the product of several iterations.</p></li>
+<li><p><strong>Technical Proficiency with Tools</strong>: The exercise provided practical experience with R and ggplot2, illustrating the “grammar of graphics” approach to building visualisations. This approach emphasises the compositional nature of graphics, where layers and aesthetic mappings come together to create a complete image. Proficiency with such tools is vital for crafting effective visualisations.</p></li>
+<li><p><strong>Sensitivity to Details</strong>: Small details can have a large impact on the effectiveness of a visualisation. For instance, the choice of starting axes at zero or the decision to include a legend can significantly affect the interpretation of the data. These exercises have sharpened an eye for such details.</p></li>
+</ol>
+<p>To sum up, it is crucial to engage in ongoing learning, remain receptive to feedback, keep updated of the latest visualisation techniques, and possess a blend of creative and analytical abilities.</p>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
