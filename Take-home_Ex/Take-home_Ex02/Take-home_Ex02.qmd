@@ -25,7 +25,7 @@ The data that we will be using would be the 2022 Programme for International Stu
 We will utilise the following packages:
 
 1.  **haven**: Facilitates the import and export of 'SPSS,' 'Stata,' and 'SAS' files.
-2.  **tidyverse**: A collection of packages for data manipulation and visualization, including dplyr, ggplot2 and others.
+2.  **tidyverse**: A collection of packages for data manipulation and visualisation, including dplyr, ggplot2 and others.
 3.  **ggrepel**: An R package used with ggplot2 to enhance the positioning of text labels in plots, ensuring they avoid overlapping with data points, for a more readable visualisation.
 4.  **Patchwork**: An R package designed for creating composite figures using ggplot2.
 5.  **ggthemes**: An R package that offers additional themes, geoms and scales for ggplot2.
@@ -166,7 +166,7 @@ ggplot(data= stu_qqq_SG_2,
 -   The colour scheme is simple and the bars are easily distinguishable, which makes the graph aesthetically pleasing and clear to read.
 -   The grey background is neutral and does not distract from the data, but a white background could be considered for a cleaner look.
 -   The text is not capitalised, which is fine for informality but could be capitalised for a more formal and professional appearance.
--   There's a consistent use of colour and no extraneous graphical elements, which is good. However, the graph could benefit from a cleaner font and perhaps a grid for easier reading of values.
+-   There is a consistent use of colour and no extraneous graphical elements, which is good. However, the graph could benefit from a cleaner font and perhaps a grid for easier reading of values.
 
 ### 3.1.3 Remake
 
@@ -229,10 +229,10 @@ ggplot(data=stu_qqq_SG_2,
 
 ### 3.2.2 Critique
 
-### Critique- C`larity
+### Critique - Clarity
 
 -   The title is descriptive, but it could be improved to concisely convey the key focus of the analysis, which is the relationship between socioeconomic status and math scores.
--   Without a regression line, it's difficult for the viewer to immediately grasp the nature of the relationship between the two variables.
+-   Without a regression line, it is difficult for the viewer to immediately grasp the nature of the relationship between the two variables.
 -   The scatterplot does not indicate the correlation coefficient, which quantitatively summarises the strength and direction of the linear relationship.
 -   Overplotting may be obscuring the density of points in certain areas, making it difficult to assess the distribution of data accurately.
 
@@ -243,6 +243,7 @@ ggplot(data=stu_qqq_SG_2,
 
 ### 3.2.3 Remake
 To improve the scatterplot in terms of clarity and aesthetics,
+
 ### Remake - Clarity
 -   Add a regression line to visually represent the relationship between math scores and socioeconomic status. This would not only clarify the direction and steepness of the relationship but also help in identifying patterns or deviations.
 -   Calculate and display the correlation coefficient on the plot to provide a clear, numerical summary of the relationship's strength.
@@ -250,7 +251,7 @@ To improve the scatterplot in terms of clarity and aesthetics,
 
 ### Remake - Aesthetics
 -   Introduce a colour gradient to reflect the density of overlapping points, which could enhance visual appeal and clarity.
--   Apply a more sophisticated theme, like theme_bw(), which provides a clean and professional look with white background and gridlines.
+-   Apply a more sophisticated theme, like `theme_bw()`, which provides a clean and professional look with white background and gridlines.
 -   Increase the size and change the colour of the regression line, in this case brigh red, to make it stand out against the points.
 
 ```{r}
@@ -314,13 +315,14 @@ ggplot(data=stu_qqq_SG_2,
 
 ### 3.3.3 Remake
 To improve the density plot in terms of clarity and aesthetics,
+
 ### Remake - Clarity
--   Adding annotations for mean, median, or mode for each gender could provide more context.
+-   Adding annotations for mean, median or mode for each gender could provide more context.
 -   If the lines are overlapping significantly, consider using fill with alpha to differentiate the distributions while showing overlap.
 
 ### Remake - Aesthetics
--   In terms ot theme, we are using theme_minimal() for a more modern, clean aesthetic.
--   For colour palettemm we will opt for a colourblind-friendly palette or more neutral tones.
+-   In terms ot theme, we are using `theme_minimal()` for a more modern, clean aesthetic.
+-   For colour palette, we will opt for a colourblind-friendly palette or more neutral tones.
 -   We will also increase the line thickness for better visibility.
 
 ```{r}
@@ -383,6 +385,7 @@ ggplot(data=stu_qqq_SG_2,
 
 ### 3.4.3 Remake
 To improve the histogram in terms of clarity and aesthetics,
+
 ### Remake - Clarity
 -   Switch to Faceted Plot: Instead of stacking, use faceted histograms or side-by-side histograms to compare distributions between schools without overlap.
 -   Simplify Colour Palette: Use a simpler colour palette with fewer colours or shades to help distinguish between schools, or use patterns instead of colours for differentiation.
@@ -423,7 +426,7 @@ A boxplot below is used to reveal the distribution between maths score and Gende
 
 ### Critique - Clarity
 
--   Mean Indication: The red dot indicating the mean is a good addition for showing central tendency, but there's no legend explaining what the red dot signifies. Viewers might not realise it represents the mean math score.
+-   Mean Indication: The red dot indicating the mean is a good addition for showing central tendency, but there is no legend explaining what the red dot signifies. Viewers might not realise it represents the mean math score.
 -   Axis Labels: While the y-axis is labeled, it could be more descriptive. Instead of "Maths Score," a label like "Math Score Distribution" might provide more context.
 -   Gender Labeling: The x-axis labels "Female" and "Male" could be more inclusive. The plot does not account for non-binary or other gender identities, which might be relevant depending on the context of the data.
 
