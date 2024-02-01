@@ -670,5 +670,61 @@
     "title": "In-class Exercise 01: Now You See It!",
     "section": "Importing PISA data",
     "text": "Importing PISA data\nThe code chunk below uses read_sas() of haven to import PISA data into R environment.\n\nstu_qqq &lt;- read_sas(\"data/cy08msp_stu_qqq.sas7bdat\")\n\n\nstu_qqq_SG &lt;- stu_qqq %&gt;%\n  filter(CNT == \"SGP\")\n\n\nwrite_rds(stu_qqq_SG,\n          \"data/stu_qqq_SG.rds\")\n\n\nstu_qqq_SG &lt;- read_rds(\"data/stu_qqq_SG.rds\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html#significant-test-of-association-depedence-ggbarstats-methods",
+    "href": "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html#significant-test-of-association-depedence-ggbarstats-methods",
+    "title": "Hands-on Exercise 4: Fundamentals of Visual Analytics",
+    "section": "5.3.8 Significant Test of Association (Depedence) : ggbarstats() methods",
+    "text": "5.3.8 Significant Test of Association (Depedence) : ggbarstats() methods\nIn the code chunk below, the Maths scores is binned into a 4-class variable by using cut().\n\nexam1 &lt;- exam %&gt;% \n  mutate(MATHS_bins = \n           cut(MATHS, \n               breaks = c(0,60,75,85,100))\n)\n\nIn this code chunk below ggbarstats() is used to build a visual for Significant Test of Association\n\nggbarstats(exam1, \n           x = MATHS_bins, \n           y = GENDER)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html#installing-and-launching-r-packages",
+    "href": "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html#installing-and-launching-r-packages",
+    "title": "Hands-on Exercise 4: Fundamentals of Visual Analytics",
+    "section": "5.3.1 Installing and launching R packages",
+    "text": "5.3.1 Installing and launching R packages\nIn this exercise, ggstatsplot and tidyverse will be used.\n\npacman::p_load(ggstatsplot, tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html#one-sample-test-gghistostats-method",
+    "href": "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html#one-sample-test-gghistostats-method",
+    "title": "Hands-on Exercise 4: Fundamentals of Visual Analytics",
+    "section": "5.3.2 One-sample test: gghistostats() method",
+    "text": "5.3.2 One-sample test: gghistostats() method\nIn the code chunk below, gghistostats() is used to to build an visual of one-sample test on English scores.\n\nlibrary(psych)\nlibrary(dplyr)\n\nset.seed(1234)\n\ngghistostats(\n  data = exam,\n  x = ENGLISH,\n  type = \"bayes\",\n  test.value = 60,\n  xlab = \"English scores\"\n)\n\n\n\n\nDefault information: - statistical details - Bayes Factor - sample sizes - distribution summary"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html#unpacking-the-bayes-factor",
+    "href": "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html#unpacking-the-bayes-factor",
+    "title": "Hands-on Exercise 4: Fundamentals of Visual Analytics",
+    "section": "5.3.3 Unpacking the Bayes Factor",
+    "text": "5.3.3 Unpacking the Bayes Factor\n\nA Bayes factor is the ratio of the likelihood of one particular hypothesis to the likelihood of another. It can be interpreted as a measure of the strength of evidence in favor of one theory among two competing theories.\nThat’s because the Bayes factor gives us a way to evaluate the data in favor of a null hypothesis, and to use external information to do so. It tells us what the weight of the evidence is in favor of a given hypothesis.\nWhen we are comparing two hypotheses, H1 (the alternate hypothesis) and H0 (the null hypothesis), the Bayes Factor is often written as B10.\nThe Schwarz criterion is one of the easiest ways to calculate rough approximation of the Bayes Factor."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html#how-to-interpret-bayes-factor",
+    "href": "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html#how-to-interpret-bayes-factor",
+    "title": "Hands-on Exercise 4: Fundamentals of Visual Analytics",
+    "section": "5.3.4 How to Interpret Bayes Factor",
+    "text": "5.3.4 How to Interpret Bayes Factor\nA Bayes Factor can be any positive number. One of the most common interpretations is this one—first proposed by Harold Jeffereys (1961) and slightly modified by Lee and Wagenmakers in 2013"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html#two-sample-mean-test-ggbetweenstats",
+    "href": "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html#two-sample-mean-test-ggbetweenstats",
+    "title": "Hands-on Exercise 4: Fundamentals of Visual Analytics",
+    "section": "5.3.5 Two-sample mean test: ggbetweenstats()",
+    "text": "5.3.5 Two-sample mean test: ggbetweenstats()\nIn the code chunk below, ggbetweenstats() is used to build a visual for two-sample mean test of Maths scores by gender.\n\nggbetweenstats(\n  data = exam,\n  x = GENDER, \n  y = MATHS,\n  type = \"np\",\n  messages = FALSE\n)\n\n\n\n\nDefault information: - statistical details - Bayes Factor - sample sizes - distribution summary"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html#oneway-anova-test-ggbetweenstats-method",
+    "href": "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html#oneway-anova-test-ggbetweenstats-method",
+    "title": "Hands-on Exercise 4: Fundamentals of Visual Analytics",
+    "section": "5.3.6 Oneway ANOVA Test: ggbetweenstats() method",
+    "text": "5.3.6 Oneway ANOVA Test: ggbetweenstats() method\nIn the code chunk below, ggbetweenstats() is used to build a visual for One-way ANOVA test on English score by race.\n\nggbetweenstats(\n  data = exam,\n  x = RACE, \n  y = ENGLISH,\n  type = \"p\",\n  mean.ci = TRUE, \n  pairwise.comparisons = TRUE, \n  pairwise.display = \"s\",\n  p.adjust.method = \"fdr\",\n  messages = FALSE\n)\n\n\n\n\n\n“ns” → only non-significant\n“s” → only significant\n“all” → everything"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html#significant-test-of-correlation-ggscatterstats",
+    "href": "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html#significant-test-of-correlation-ggscatterstats",
+    "title": "Hands-on Exercise 4: Fundamentals of Visual Analytics",
+    "section": "5.3.7 Significant Test of Correlation: ggscatterstats()",
+    "text": "5.3.7 Significant Test of Correlation: ggscatterstats()\nIn the code chunk below, ggscatterstats() is used to build a visual for Significant Test of Correlation between Maths scores and English scores.\n\nggscatterstats(\n  data = exam,\n  x = MATHS,\n  y = ENGLISH,\n  marginal = FALSE,\n  )"
   }
 ]

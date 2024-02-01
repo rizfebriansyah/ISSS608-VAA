@@ -228,13 +228,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#part-two-visual-statistical-analysis" id="toc-part-two-visual-statistical-analysis" class="nav-link" data-scroll-target="#part-two-visual-statistical-analysis">Part Two: Visual Statistical Analysis</a></li>
   <li><a href="#learning-outcome-1" id="toc-learning-outcome-1" class="nav-link" data-scroll-target="#learning-outcome-1">5.1 Learning Outcome</a></li>
   <li><a href="#visual-statistical-analysis-with-ggstatsplot" id="toc-visual-statistical-analysis-with-ggstatsplot" class="nav-link" data-scroll-target="#visual-statistical-analysis-with-ggstatsplot">5.2 Visual Statistical Analysis with ggstatsplot</a></li>
-  <li><a href="#getting-started-1" id="toc-getting-started-1" class="nav-link" data-scroll-target="#getting-started-1">5.3 Getting Started</a></li>
+  <li><a href="#getting-started-1" id="toc-getting-started-1" class="nav-link" data-scroll-target="#getting-started-1">5.3 Getting Started</a>
+  <ul class="collapse">
   <li><a href="#installing-and-launching-r-packages" id="toc-installing-and-launching-r-packages" class="nav-link" data-scroll-target="#installing-and-launching-r-packages">5.3.1 Installing and launching R packages</a></li>
   <li><a href="#one-sample-test-gghistostats-method" id="toc-one-sample-test-gghistostats-method" class="nav-link" data-scroll-target="#one-sample-test-gghistostats-method">5.3.2 One-sample test: gghistostats() method</a></li>
   <li><a href="#unpacking-the-bayes-factor" id="toc-unpacking-the-bayes-factor" class="nav-link" data-scroll-target="#unpacking-the-bayes-factor">5.3.3 Unpacking the Bayes Factor</a></li>
   <li><a href="#how-to-interpret-bayes-factor" id="toc-how-to-interpret-bayes-factor" class="nav-link" data-scroll-target="#how-to-interpret-bayes-factor">5.3.4 How to Interpret Bayes Factor</a></li>
   <li><a href="#two-sample-mean-test-ggbetweenstats" id="toc-two-sample-mean-test-ggbetweenstats" class="nav-link" data-scroll-target="#two-sample-mean-test-ggbetweenstats">5.3.5 Two-sample mean test: ggbetweenstats()</a></li>
   <li><a href="#oneway-anova-test-ggbetweenstats-method" id="toc-oneway-anova-test-ggbetweenstats-method" class="nav-link" data-scroll-target="#oneway-anova-test-ggbetweenstats-method">5.3.6 Oneway ANOVA Test: ggbetweenstats() method</a></li>
+  <li><a href="#significant-test-of-correlation-ggscatterstats" id="toc-significant-test-of-correlation-ggscatterstats" class="nav-link" data-scroll-target="#significant-test-of-correlation-ggscatterstats">5.3.7 Significant Test of Correlation: ggscatterstats()</a></li>
+  <li><a href="#significant-test-of-association-depedence-ggbarstats-methods" id="toc-significant-test-of-association-depedence-ggbarstats-methods" class="nav-link" data-scroll-target="#significant-test-of-association-depedence-ggbarstats-methods">5.3.8 Significant Test of Association (Depedence) : ggbarstats() methods</a></li>
+  </ul></li>
+  <li><a href="#visualising-models" id="toc-visualising-models" class="nav-link" data-scroll-target="#visualising-models">5.4 Visualising Models</a></li>
   </ul>
 </nav>
     </div>
@@ -672,16 +677,15 @@ Things to learn from the code chunk above
 </section>
 <section id="getting-started-1" class="level1">
 <h1>5.3 Getting Started</h1>
-</section>
-<section id="installing-and-launching-r-packages" class="level1">
-<h1>5.3.1 Installing and launching R packages</h1>
+<section id="installing-and-launching-r-packages" class="level2">
+<h2 class="anchored" data-anchor-id="installing-and-launching-r-packages">5.3.1 Installing and launching R packages</h2>
 <p>In this exercise, ggstatsplot and tidyverse will be used.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(ggstatsplot, tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="one-sample-test-gghistostats-method" class="level1">
-<h1>5.3.2 One-sample test: gghistostats() method</h1>
+<section id="one-sample-test-gghistostats-method" class="level2">
+<h2 class="anchored" data-anchor-id="one-sample-test-gghistostats-method">5.3.2 One-sample test: gghistostats() method</h2>
 <p>In the code chunk below, <a href="https://indrajeetpatil.github.io/ggstatsplot/reference/gghistostats.html">gghistostats()</a> is used to to build an visual of one-sample test on English scores.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
@@ -702,8 +706,8 @@ Things to learn from the code chunk above
 </div>
 <p>Default information: - statistical details - Bayes Factor - sample sizes - distribution summary</p>
 </section>
-<section id="unpacking-the-bayes-factor" class="level1">
-<h1>5.3.3 Unpacking the Bayes Factor</h1>
+<section id="unpacking-the-bayes-factor" class="level2">
+<h2 class="anchored" data-anchor-id="unpacking-the-bayes-factor">5.3.3 Unpacking the Bayes Factor</h2>
 <ul>
 <li><p>A Bayes factor is the ratio of the likelihood of one particular hypothesis to the likelihood of another. It can be interpreted as a measure of the strength of evidence in favor of one theory among two competing theories.</p></li>
 <li><p>That’s because the Bayes factor gives us a way to evaluate the data in favor of a null hypothesis, and to use external information to do so. It tells us what the weight of the evidence is in favor of a given hypothesis.</p></li>
@@ -711,12 +715,12 @@ Things to learn from the code chunk above
 <li><p>The <a href="https://www.statisticshowto.com/bayesian-information-criterion/">Schwarz criterion</a> is one of the easiest ways to calculate rough approximation of the Bayes Factor.</p></li>
 </ul>
 </section>
-<section id="how-to-interpret-bayes-factor" class="level1">
-<h1>5.3.4 How to Interpret Bayes Factor</h1>
+<section id="how-to-interpret-bayes-factor" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-interpret-bayes-factor">5.3.4 How to Interpret Bayes Factor</h2>
 <p>A Bayes Factor can be any positive number. One of the most common interpretations is this one—first proposed by Harold Jeffereys (1961) and slightly modified by <a href="https://www-tandfonline-com.libproxy.smu.edu.sg/doi/pdf/10.1080/00031305.1999.10474443?needAccess=true">Lee and Wagenmakers</a> in 2013</p>
 </section>
-<section id="two-sample-mean-test-ggbetweenstats" class="level1">
-<h1>5.3.5 Two-sample mean test: ggbetweenstats()</h1>
+<section id="two-sample-mean-test-ggbetweenstats" class="level2">
+<h2 class="anchored" data-anchor-id="two-sample-mean-test-ggbetweenstats">5.3.5 Two-sample mean test: ggbetweenstats()</h2>
 <p>In the code chunk below, <a href="https://indrajeetpatil.github.io/ggstatsplot/reference/ggbetweenstats.html">ggbetweenstats()</a> is used to build a visual for two-sample mean test of Maths scores by gender.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
@@ -732,8 +736,8 @@ Things to learn from the code chunk above
 </div>
 <p>Default information: - statistical details - Bayes Factor - sample sizes - distribution summary</p>
 </section>
-<section id="oneway-anova-test-ggbetweenstats-method" class="level1">
-<h1>5.3.6 Oneway ANOVA Test: ggbetweenstats() method</h1>
+<section id="oneway-anova-test-ggbetweenstats-method" class="level2">
+<h2 class="anchored" data-anchor-id="oneway-anova-test-ggbetweenstats-method">5.3.6 Oneway ANOVA Test: ggbetweenstats() method</h2>
 <p>In the code chunk below, <a href="https://indrajeetpatil.github.io/ggstatsplot/reference/ggbetweenstats.html">ggbetweenstats()</a> is used to build a visual for One-way ANOVA test on English score by race.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
@@ -756,6 +760,47 @@ Things to learn from the code chunk above
 <li>“s” → only significant</li>
 <li>“all” → everything</li>
 </ul>
+</section>
+<section id="significant-test-of-correlation-ggscatterstats" class="level2">
+<h2 class="anchored" data-anchor-id="significant-test-of-correlation-ggscatterstats">5.3.7 Significant Test of Correlation: ggscatterstats()</h2>
+<p>In the code chunk below, <a href="https://indrajeetpatil.github.io/ggstatsplot/reference/ggscatterstats.html">ggscatterstats()</a> is used to build a visual for Significant Test of Correlation between Maths scores and English scores.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggscatterstats</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> exam,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> MATHS,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> ENGLISH,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">marginal =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Hands-on_Ex04_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="significant-test-of-association-depedence-ggbarstats-methods" class="level2">
+<h2 class="anchored" data-anchor-id="significant-test-of-association-depedence-ggbarstats-methods">5.3.8 Significant Test of Association (Depedence) : ggbarstats() methods</h2>
+<p>In the code chunk below, the Maths scores is binned into a 4-class variable by using <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/cut">cut()</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>exam1 <span class="ot">&lt;-</span> exam <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">MATHS_bins =</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">cut</span>(MATHS, </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">60</span>,<span class="dv">75</span>,<span class="dv">85</span>,<span class="dv">100</span>))</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In this code chunk below <a href="https://indrajeetpatil.github.io/ggstatsplot/reference/ggbarstats.html">ggbarstats()</a> is used to build a visual for Significant Test of Association</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbarstats</span>(exam1, </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> MATHS_bins, </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> GENDER)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Hands-on_Ex04_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="visualising-models" class="level1">
+<h1>5.4 Visualising Models</h1>
+<p>In this section, we will learn how to visualise model diagnostic and model parameters by using parameters package.</p>
+<p>Toyota Corolla case study will be used. The purpose of study is to build a model to discover factors affecting prices of used-cars by taking into consideration a set of explanatory variables.</p>
 
 
 </section>

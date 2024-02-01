@@ -469,14 +469,14 @@ In this hands-on exercise, we will gain hands-on experience on using:
 
 # 5.3 Getting Started
 
-# 5.3.1 Installing and launching R packages
+## 5.3.1 Installing and launching R packages
 In this exercise, ggstatsplot and tidyverse will be used.
 
 ```{r}
 pacman::p_load(ggstatsplot, tidyverse)
 ```
 
-# 5.3.2 One-sample test: gghistostats() method
+## 5.3.2 One-sample test: gghistostats() method
 
 In the code chunk below, [gghistostats()](https://indrajeetpatil.github.io/ggstatsplot/reference/gghistostats.html) is used to to build an visual of one-sample test on English scores.
 
@@ -497,7 +497,7 @@ gghistostats(
 
 Default information: - statistical details - Bayes Factor - sample sizes - distribution summary
 
-# 5.3.3 Unpacking the Bayes Factor
+## 5.3.3 Unpacking the Bayes Factor
 -   A Bayes factor is the ratio of the likelihood of one particular hypothesis to the likelihood of another. It can be interpreted as a measure of the strength of evidence in favor of one theory among two competing theories.
 
 -   That’s because the Bayes factor gives us a way to evaluate the data in favor of a null hypothesis, and to use external information to do so. It tells us what the weight of the evidence is in favor of a given hypothesis.
@@ -506,10 +506,10 @@ Default information: - statistical details - Bayes Factor - sample sizes - distr
 
 -   The [Schwarz criterion](https://www.statisticshowto.com/bayesian-information-criterion/) is one of the easiest ways to calculate rough approximation of the Bayes Factor.
 
-# 5.3.4 How to Interpret Bayes Factor
+## 5.3.4 How to Interpret Bayes Factor
 A Bayes Factor can be any positive number. One of the most common interpretations is this one—first proposed by Harold Jeffereys (1961) and slightly modified by [Lee and Wagenmakers](https://www-tandfonline-com.libproxy.smu.edu.sg/doi/pdf/10.1080/00031305.1999.10474443?needAccess=true) in 2013
 
-# 5.3.5 Two-sample mean test: ggbetweenstats()
+## 5.3.5 Two-sample mean test: ggbetweenstats()
 In the code chunk below, [ggbetweenstats()](https://indrajeetpatil.github.io/ggstatsplot/reference/ggbetweenstats.html) is used to build a visual for two-sample mean test of Maths scores by gender.
 
 ```{r}
@@ -524,7 +524,7 @@ ggbetweenstats(
 
 Default information: - statistical details - Bayes Factor - sample sizes - distribution summary
 
-# 5.3.6 Oneway ANOVA Test: ggbetweenstats() method
+## 5.3.6 Oneway ANOVA Test: ggbetweenstats() method
 In the code chunk below, [ggbetweenstats()](https://indrajeetpatil.github.io/ggstatsplot/reference/ggbetweenstats.html) is used to build a visual for One-way ANOVA test on English score by race.
 
 ```{r}
@@ -544,3 +544,37 @@ ggbetweenstats(
 -   “ns” → only non-significant
 -   “s” → only significant
 -   “all” → everything
+
+## 5.3.7 Significant Test of Correlation: ggscatterstats()
+In the code chunk below, [ggscatterstats()](https://indrajeetpatil.github.io/ggstatsplot/reference/ggscatterstats.html) is used to build a visual for Significant Test of Correlation between Maths scores and English scores.
+```{r}
+ggscatterstats(
+  data = exam,
+  x = MATHS,
+  y = ENGLISH,
+  marginal = FALSE,
+  )
+```
+
+## 5.3.8 Significant Test of Association (Depedence) : ggbarstats() methods
+In the code chunk below, the Maths scores is binned into a 4-class variable by using [cut()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/cut).
+
+```{r}
+exam1 <- exam %>% 
+  mutate(MATHS_bins = 
+           cut(MATHS, 
+               breaks = c(0,60,75,85,100))
+)
+```
+
+In this code chunk below [ggbarstats()](https://indrajeetpatil.github.io/ggstatsplot/reference/ggbarstats.html) is used to build a visual for Significant Test of Association
+```{r}
+ggbarstats(exam1, 
+           x = MATHS_bins, 
+           y = GENDER)
+```
+
+# 5.4 Visualising Models
+In this section, we will learn how to visualise model diagnostic and model parameters by using parameters package.
+
+Toyota Corolla case study will be used. The purpose of study is to build a model to discover factors affecting prices of used-cars by taking into consideration a set of explanatory variables.
