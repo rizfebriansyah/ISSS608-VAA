@@ -1,0 +1,881 @@
+---
+title: "Hands-on Exercise 5: Visual Multivariate Analysis"
+author: "Rizqi Febriansyah"
+date: "3 February 2023"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+editor: visual
+---
+
+# Part One: **Creating Ternary Plot with R**
+
+# 5.1 Learning Outcome
+
+Ternary plots offer a method to visualise and understand the distribution and variation of data comprising three components. For instance, they can represent the percentages of an aging, economically active and youthful population, or the composition of sand, silt and clay in soil. The visualisation takes the form of a triangle, with its sides ranging from 0 to 1, where each side corresponds to one of the three elements. By plotting a point and drawing perpendicular lines from it to the triangle's sides, the intersection points reveal the component values.
+
+In this practical session, we'll learn to create ternary plots using R, focusing on the population structure of Singapore.
+
+The exercise includes four key steps:
+
+1.  Installation and initiation of the **tidyverse** and \***ggtern** packages.
+2.  Creation of three new variables using the mutate() function from the **dplyr** package.
+3.  Construction of a static ternary plot with the ggtern() function from the **ggtern** package.
+4.  Development of an interactive ternary plot using the plot_ly() function from the **Plotly R** package.
+
+# 5.2 Getting Started
+
+In this hands-on session, we'll be utilising two primary R packages:
+
+-   [**ggtern**](http://www.ggtern.com/): This is an extension of ggplot, specifically designed for creating ternary diagrams. It allows for the plotting of static ternary plots.
+-   [**Plotly R**](https://plot.ly/r/): This package facilitates the creation of interactive web-based charts using plotly's JavaScript library, plotly.js. Within the Plotly R package, the `ggplotly` function is notable for its ability to transform ggplot2 figures into interactive Plotly objects.
+
+Additionally, it's important to install and load select packages from the tidyverse suite, including `readr`, `dplyr`, and `tidyr`.
+
+Please note that for this exercise, we will install version 3.2.1 of ggplot2 instead of its latest version. This specific version is required as the current iteration of the ggtern package does not support the newest version of ggplot2.
+
+The following code snippet will accomplish the task:
+
+```{r}
+pacman::p_load(plotly, ggtern, tidyverse)
+```
+
+# 5.3 Data Prep
+
+## 5.3.1 Our dataset
+
+In this practical exercise, we will utilise the dataset titled ["Singapore Residents by Planning Area/Subzone, Age Group, Sex, and Type of Dwelling, June 2000-2018.](https://www.singstat.gov.sg/find-data/search-by-theme/population/geographic-distribution/latest-data)" This dataset has already been downloaded and is stored in the 'data' sub-folder within the exercise folder. The file is named `respopagsex2000to2018_tidy.csv` and is available in CSV format.
+
+## 5.3.2 Importing Data
+
+To import 'respopagsex2000to2018_tidy.csv' into R, `read_csv()` function of **readr** package will be used.
+
+```{r}
+#Reading the data into R environment
+pop_data <- read_csv("data/respopagsex2000to2018_tidy.csv") 
+```
+
+## 5.3.3 Preparing the Data
+
+Next, use the `mutate()` function of **dplyr** package to derive three new measures, namely: young, active, and old.
+
+```{r}
+#Deriving the young, economy active and old measures
+agpop_mutated <- pop_data %>%
+  mutate(`Year` = as.character(Year))%>%
+  spread(AG, Population) %>%
+  mutate(YOUNG = rowSums(.[4:8]))%>%
+  mutate(ACTIVE = rowSums(.[9:16]))  %>%
+  mutate(OLD = rowSums(.[17:21])) %>%
+  mutate(TOTAL = rowSums(.[22:24])) %>%
+  filter(Year == 2018)%>%
+  filter(TOTAL > 0)
+```
+
+# 5.4 Plotting Ternary Diagram with R
+
+## 5.4.1 Plotting a static ternary diagram
+
+Use ggtern() function of ggtern package to create a simple ternary plot.
+
+```{r}
+#Building the static ternary plot
+ggtern(data=agpop_mutated,aes(x=YOUNG,y=ACTIVE, z=OLD)) +
+  geom_point()
+```
+
+```{r}
+#Building the static ternary plot
+ggtern(data=agpop_mutated, aes(x=YOUNG,y=ACTIVE, z=OLD)) +
+  geom_point() +
+  labs(title="Population structure, 2015") +
+  theme_rgbw()
+```
+
+## 5.4.2 Plotting an interactive ternary diagram
+
+The code below create an interactive ternary plot using `plot_ly()` function of Plotly R.
+
+```{r}
+# reusable function for creating annotation object
+label <- function(txt) {
+  list(
+    text = txt, 
+    x = 0.1, y = 1,
+    ax = 0, ay = 0,
+    xref = "paper", yref = "paper", 
+    align = "center",
+    font = list(family = "serif", size = 15, color = "white"),
+    bgcolor = "#b3b3b3", bordercolor = "black", borderwidth = 2
+  )
+}
+
+# reusable function for axis formatting
+axis <- function(txt) {
+  list(
+    title = txt, tickformat = ".0%", tickfont = list(size = 10)
+  )
+}
+
+ternaryAxes <- list(
+  aaxis = axis("Young"), 
+  baxis = axis("Active"), 
+  caxis = axis("Old")
+)
+
+# Initiating a plotly visualization 
+plot_ly(
+  agpop_mutated, 
+  a = ~YOUNG, 
+  b = ~ACTIVE, 
+  c = ~OLD, 
+  color = I("black"), 
+  type = "scatterternary"
+) %>%
+  layout(
+    annotations = label("Ternary Markers"), 
+    ternary = ternaryAxes
+  )
+```
+
+# Part Two: **Visual Correlation Analysis**
+
+# 6.1 Overview
+
+The correlation coefficient is a widely used statistic for quantifying the nature and strength of the relationship between two variables. It ranges from -1.0 to 1.0, where 1 indicates a perfect positive linear relationship, -1 indicates a perfect negative linear relationship, and 0 indicates no linear relationship at all.
+
+In the context of multivariate data, correlation coefficients for pairwise comparisons are typically presented in a format known as a correlation matrix or scatterplot matrix. Calculating a correlation matrix serves three primary purposes:
+
+1.  To systematically uncover relationships between pairs of high-dimensional variables.
+2.  To provide a basis for further analysis, such as exploratory factor analysis, confirmatory factor analysis, structural equation modeling, and linear regression, especially for handling missing values on a pairwise basis.
+3.  To serve as a diagnostic tool in assessing the reliability of other analyses. For instance, in linear regression, a high correlation among variables may indicate that the estimates of the regression model could be unreliable.
+
+For large datasets, both in terms of the number of observations and variables, a visual tool called a [Corrgram](http://www.datavis.ca/papers/corrgram.pdf) is often employed to explore and analyse the structure and patterns of relationships among variables. This tool is designed with two key strategies in mind: visualising the magnitude and direction of correlations, and rearranging variables in the correlation matrix to group similar variables together, which enhances the visual interpretation.
+
+In this practical session, you will learn how to visualise a correlation matrix using R. The tutorial is divided into three main parts: first, creating a correlation matrix with the [pairs()](https://www.rdocumentation.org/packages/graphics/versions/3.6.0/topics/pairs) function from R Graphics; second, plotting a Corrgram using the `corrplot` package in R; and finally, creating an interactive correlation matrix using Plotly R.
+
+# 6.2 Installing and Launching R Packages
+
+Before beginning, we will need to create a new Quarto document, making sure to stick with the default HTML authoring format.
+
+Following that, utilise the code snippet provided below to install and initiate the `corrplot`, `ggpubr`, `plotly`, and `tidyverse` packages in RStudio.
+
+```{r}
+pacman::p_load(corrplot, ggstatsplot, tidyverse)
+```
+
+# 6.3 Importing and Preparing The Data Set
+
+During this practical session, we will employ the [Wine Quality Data Set](https://archive.ics.uci.edu/ml/datasets/wine+quality) from the UCI Machine Learning Repository. This dataset contains 13 variables and spans 6497 observations. Specifically for this exercise, the data for red and white wines has been amalgamated into a single file, named `wine_quality`, which is available in CSV format.
+
+## 6.3.1 Importing Data
+
+First, let us import the data into R by using read_csv() of readr package.
+
+```{r}
+wine <- read_csv("data/wine_quality.csv")
+```
+
+Notice that beside quality and type, the rest of the variables are numerical and continuous data type.
+
+# 6.4 Building Correlation Matrix: pairs() method
+
+There are more than one way to build scatterplot matrix with R. In this section, you will learn how to create a scatterplot matrix by using the pairs function of R Graphics.
+
+Before you continue to the next step, you should read the syntax description of [pairs](https://stat.ethz.ch/R-manual/R-devel/library/graphics/html/pairs.html) function.
+
+## 6.4.1 Building a basic correlation matrix
+
+Figure below shows the scatter plot matrix of Wine Quality Data. It is a 11 by 11 matrix.
+
+```{r}
+pairs(wine[,1:11])
+```
+
+The required input of pairs() can be a matrix or data frame. The code chunk used to create the scatterplot matrix is relatively simple. It uses the default pairs function. Columns 2 to 12 of wine dataframe is used to build the scatterplot matrix. The variables are: fixed acidity, volatile acidity, citric acid, residual sugar, chlorides, free sulfur dioxide, total sulfur dioxide, density, pH, sulphates and alcohol.
+
+```{r}
+pairs(wine[,2:12])
+```
+
+## 6.4.2 Drawing the lower corner
+
+pairs function of R Graphics provided many customisation arguments. For example, it is a common practice to show either the upper half or lower half of the correlation matrix instead of both. This is because a correlation matrix is symmetric.
+
+To show the lower half of the correlation matrix, the upper.panel argument will be used as shown in the code chunk below.
+
+```{r}
+pairs(wine[,2:12], upper.panel = NULL)
+```
+
+Similarly, you can display the upper half of the correlation matrix by using the code chun below.
+
+```{r}
+pairs(wine[,2:12], lower.panel = NULL)
+```
+
+## 6.4.3 Including with correlation coefficients
+
+To show the correlation coefficient of each pair of variables instead of a scatter plot, [panel.cor](https://www.rdocumentation.org/packages/xcms/versions/1.48.0/topics/panel.cor) function will be used. This will also show higher correlations in a larger font.
+
+Don't worry about the details for now-just type this code into your R session or script. Let's have more fun way to display the correlation matrix.
+
+```{r}
+panel.cor <- function(x, y, digits=2, prefix="", cex.cor, ...) {
+usr <- par("usr")
+on.exit(par(usr))
+par(usr = c(0, 1, 0, 1))
+r <- abs(cor(x, y, use="complete.obs"))
+txt <- format(c(r, 0.123456789), digits=digits)[1]
+txt <- paste(prefix, txt, sep="")
+if(missing(cex.cor)) cex.cor <- 0.8/strwidth(txt)
+text(0.5, 0.5, txt, cex = cex.cor * (1 + r) / 2)
+}
+
+pairs(wine[,2:12], 
+      upper.panel = panel.cor)
+```
+
+# 6.5 Visualising Correlation Matrix: ggcormat()
+
+One of the major limitation of the correlation matrix is that the scatter plots appear very cluttered when the number of observations is relatively large (i.e. more than 500 observations). To over come this problem, **Corrgram** data visualisation technique suggested by D. J. Murdoch and E. D. Chow (1996) and Friendly, M (2002) and will be used.
+
+The are at least three R packages provide function to plot corrgram, they are:
+
+-   [corrgram](https://cran.r-project.org/web/packages/corrgram/)
+-   [ellipse](https://cran.r-project.org/web/packages/ellipse/)
+-   [corrplot](https://cran.r-project.org/web/packages/corrplot/)
+
+On top that, some R package like ggstatsplot package also provides functions for building corrgram.
+
+In this section, you will learn how to visualising correlation matrix by using [ggcorrmat()](https://indrajeetpatil.github.io/ggstatsplot/reference/ggcorrmat.html) of [ggstatsplot](https://indrajeetpatil.github.io/ggstatsplot/) package.
+
+## 6.5.1 The basic plot
+
+On of the advantage of using ggcorrmat() over many other methods to visualise a correlation matrix is it's ability to provide a comprehensive and yet professional statistical report as shown in the figure below.
+
+```{r}
+ggstatsplot::ggcorrmat(
+  data = wine, 
+  cor.vars = 1:11)
+```
+
+```{r}
+ggstatsplot::ggcorrmat(
+  data = wine, 
+  cor.vars = 1:11,
+  ggcorrplot.args = list(outline.color = "black", 
+                         hc.order = TRUE,
+                         tl.cex = 10),
+  title    = "Correlogram for wine dataset",
+  subtitle = "Four pairs are no significant at p < 0.05"
+)
+```
+
+Things to learn from the code chunk above:
+
+-   `cor.vars` argument is used to compute the correlation matrix needed to build the corrgram.
+-   `ggcorrplot.args` argument provide additional (mostly aesthetic) arguments that will be passed to [ggcorrplot::ggcorrplot](http://www.sthda.com/english/wiki/ggcorrplot-visualization-of-a-correlation-matrix-using-ggplot2) function. The list should avoid any of the following arguments since they are already internally being used: `corr`, `method`, `p.mat`, `sig.level`, `ggtheme`, `colors`, `lab`, `pch`, `legend.title`, `digits`.
+
+The sample sub-code chunk can be used to control specific component of the plot such as the font size of the x-axis, y-axis, and the statistical report.
+
+```{r}
+ggplot.component = list(
+    theme(text=element_text(size=5),
+      axis.text.x = element_text(size = 8),
+      axis.text.y = element_text(size = 8)))
+```
+
+# 6.6 Building multiple plots
+
+Since ggstasplot is an extension of ggplot2, it also supports faceting. However the feature is not available in ggcorrmat() but in the [grouped_ggcorrmat()](https://indrajeetpatil.github.io/ggstatsplot/reference/grouped_ggcorrmat.html) of **ggstatsplot**.
+
+```{r}
+grouped_ggcorrmat(
+  data = wine,
+  cor.vars = 1:11,
+  grouping.var = type,
+  type = "robust",
+  p.adjust.method = "holm",
+  plotgrid.args = list(ncol = 2),
+  ggcorrplot.args = list(outline.color = "black", 
+                         hc.order = TRUE,
+                         tl.cex = 10),
+  annotation.args = list(
+    tag_levels = "a",
+    title = "Correlogram for wine dataset",
+    subtitle = "The measures are: alcohol, sulphates, fixed acidity, citric acid, chlorides, residual sugar, density, free sulfur dioxide and volatile acidity",
+    caption = "Dataset: UCI Machine Learning Repository"
+  )
+)
+```
+
+Things to learn from the code chunk above:
+
+-   to build a facet plot, the only argument needed is `grouping.var`.
+-   Behind group_ggcorrmat(), patchwork package is used to create the multiplot. `plotgrid.args` argument provides a list of additional arguments passed to [patchwork::wrap_plots](https://patchwork.data-imaginist.com/reference/wrap_plots.html), except for guides argument which is already separately specified earlier.
+-   Likewise, `annotation.args` argument is calling [plot annotation arguments](https://patchwork.data-imaginist.com/reference/wrap_plots.html) of patchwork package.
+
+# 6.7 Visualising Correlation Matrix using corrplot Package
+
+In this hands-on exercise, we will focus on corrplot. However, you are encouraged to explore the other two packages too.
+
+Before getting started, you are required to read [An Introduction to corrplot Package](https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html) in order to gain basic understanding of corrplot package.
+
+## 6.7.1 Getting started with corrplot
+
+Before we can plot a corrgram using corrplot(), we need to compute the correlation matrix of wine data frame.
+
+In the code chunk below, [cor()](https://www.rdocumentation.org/packages/stats/versions/3.6.0/topics/cor) of R Stats is used to compute the correlation matrix of wine data frame.
+
+```{r}
+wine.cor <- cor(wine[, 1:11])
+```
+
+Next, [corrplot()](https://www.rdocumentation.org/packages/corrplot/versions/0.2-0/topics/corrplot) is used to plot the corrgram by using all the default setting as shown in the code chunk below.
+
+```{r}
+corrplot(wine.cor)
+```
+
+Notice that the default visual object used to plot the corrgram is circle. The default layout of the corrgram is a symmetric matrix. The default colour scheme is diverging blue-red. Blue colours are used to represent pair variables with positive correlation coefficients and red colours are used to represent pair variables with negative correlation coefficients. The intensity of the colour or also know as saturation is used to represent the strength of the correlation coefficient. Darker colours indicate relatively stronger linear relationship between the paired variables. On the other hand, lighter colours indicates relatively weaker linear relationship.
+
+## 6.7.2 Working with visual geometrics
+
+In corrplot package, there are seven visual geometrics (parameter method) can be used to encode the attribute values. They are: circle, square, ellipse, number, shade, color and pie. The default is circle. As shown in the previous section, the default visual geometric of corrplot matrix is circle. However, this default setting can be changed by using the method argument as shown in the code chunk below.
+
+```{r}
+corrplot(wine.cor, 
+         method = "ellipse") 
+```
+
+Feel free to change the method argument to other supported visual geometrics.
+
+## 6.7.3 Working with layout
+
+corrplor() supports three layout types, namely: "full", "upper" or "lower". The default is "full" which display full matrix. The default setting can be changed by using the type argument of corrplot().
+
+```{r}
+corrplot(wine.cor, 
+         method = "ellipse", 
+         type="lower")
+```
+
+The default layout of the corrgram can be further customised. For example, arguments diag and tl.col are used to turn off the diagonal cells and to change the axis text label colour to black colour respectively as shown in the code chunk and figure below.
+
+```{r}
+corrplot(wine.cor, 
+         method = "ellipse", 
+         type="lower",
+         diag = FALSE,
+         tl.col = "black")
+```
+
+Please feel free to experiment with other layout design argument such as tl.pos, tl.cex, tl.offset, cl.pos, cl.cex and cl.offset, just to mention a few of them.
+
+## 6.7.4 Working with mixed layout
+
+With corrplot package, it is possible to design corrgram with mixed visual matrix of one half and numerical matrix on the other half. In order to create a coorgram with mixed layout, the [corrplot.mixed()](https://www.rdocumentation.org/packages/corrplot/versions/0.84/topics/corrplot.mixed), a wrapped function for mixed visualisation style will be used.
+
+Figure below shows a mixed layout corrgram plotted using wine quality data.
+
+```{r}
+corrplot.mixed(wine.cor, 
+               lower = "ellipse", 
+               upper = "number",
+               tl.pos = "lt",
+               diag = "l",
+               tl.col = "black")
+```
+
+The code chunk used to plot the corrgram are shown below.
+
+```{r}
+corrplot.mixed(wine.cor, 
+               lower = "ellipse", 
+               upper = "number",
+               tl.pos = "lt",
+               diag = "l",
+               tl.col = "black")
+```
+
+Notice that argument lower and upper are used to define the visualisation method used. In this case ellipse is used to map the lower half of the corrgram and numerical matrix (i.e. number) is used to map the upper half of the corrgram. The argument tl.pos, on the other, is used to specify the placement of the axis label. Lastly, the diag argument is used to specify the glyph on the principal diagonal of the corrgram.
+
+## 6.7.5 Combining corrgram with the significant test
+
+In statistical analysis, we are also interested to know which pair of variables their correlation coefficients are statistically significant.
+
+Figure below shows a corrgram combined with the significant test. The corrgram reveals that not all correlation pairs are statistically significant. For example the correlation between total sulfur dioxide and free surfur dioxide is statistically significant at significant level of 0.1 but not the pair between total sulfur dioxide and citric acid.
+
+![](images/corr.png)
+
+With corrplot package, we can use the cor.mtest() to compute the p-values and confidence interval for each pair of variables.
+
+```{r}
+wine.sig = cor.mtest(wine.cor, conf.level= .95)
+```
+
+We can then use the p.mat argument of corrplot function as shown in the code chunk below.
+
+```{r}
+corrplot(wine.cor,
+         method = "number",
+         type = "lower",
+         diag = FALSE,
+         tl.col = "black",
+         tl.srt = 45,
+         p.mat = wine.sig$p,
+         sig.level = .05)
+```
+
+
+## 6.7.6 Reorder a corrgram
+Matrix reorder is very important for mining the hiden structure and pattern in a corrgram. By default, the order of attributes of a corrgram is sorted according to the correlation matrix (i.e. “original”). The default setting can be over-write by using the order argument of corrplot(). Currently, corrplot package support four sorting methods, they are:
+
+-   “AOE” is for the angular order of the eigenvectors. See Michael Friendly (2002) for details.
+-   “FPC” for the first principal component order.
+-   “hclust” for hierarchical clustering order, and “hclust.method” for the agglomeration method to be used.
+-   “hclust.method” should be one of “ward”, “single”, “complete”, “average”, “mcquitty”, “median” or “centroid”.
+-   “alphabet” for alphabetical order.
+
+“AOE”, “FPC”, “hclust”, “alphabet”. More algorithms can be found in seriation package.
+
+```{r}
+corrplot.mixed(wine.cor, 
+               lower = "ellipse", 
+               upper = "number",
+               tl.pos = "lt",
+               diag = "l",
+               order="AOE",
+               tl.col = "black")
+```
+
+## 6.7.7 Reordering a correlation matrix using hclust
+If using hclust, corrplot() can draw rectangles around the corrgram based on the results of hierarchical clustering.
+
+```{r}
+corrplot(wine.cor, 
+         method = "ellipse", 
+         tl.pos = "lt",
+         tl.col = "black",
+         order="hclust",
+         hclust.method = "ward.D",
+         addrect = 3)
+```
+
+# Part Two References
+Michael Friendly (2002). “Corrgrams: Exploratory displays for correlation matrices”. ***The American Statistician***, 56, 316–324.
+
+D.J. Murdoch, E.D. Chow (1996). “A graphical display of large correlation matrices”. ***The American Statistician***, 50, 178–180.
+
+# Part Three: **Visual Multivariate Analysis with Heatmap**
+
+# 7.1 Overview
+Heatmaps visualise data through variations in colouring. When applied to a tabular format, heatmaps are useful for cross-examining multivariate data, through placing variables in the columns and observation (or records) in rowa and colouring the cells within the table. Heatmaps are good for showing variance across multiple variables, revealing any patterns, displaying whether any variables are similar to each other, and for detecting if any correlations exist in-between them.
+
+In this hands-on exercise, you will gain hands-on experience on using R to plot static and interactive heatmap for visualising and analysing multivariate data.
+
+# 7.2 Installing and Launching R Packages
+Before you get started, you are required to open a new Quarto document. Keep the default html as the authoring format.
+
+Next, you will use the code chunk below to install and launch seriation, heatmaply, dendextend and tidyverse in RStudio.
+
+```{r}
+pacman::p_load(seriation, dendextend, heatmaply, tidyverse)
+```
+
+# 7.3 Importing and Preparing The Data Set
+In this hands-on exercise, the data of [World Happines 2018](https://worldhappiness.report/ed/2018/) report will be used. The data set is downloaded from [here](https://s3.amazonaws.com/happiness-report/2018/WHR2018Chapter2OnlineData.xls). The original data set is in Microsoft Excel format. It has been extracted and saved in csv file called WHData-2018.csv.
+
+## 7.3.1 Importing the data set
+In the code chunk below, read_csv() of readr is used to import WHData-2018.csv into R and parsed it into tibble R data frame format.
+
+```{r}
+wh <- read_csv("data/WHData-2018.csv")
+```
+
+The output tibbled data frame is called wh.
+
+## 7.3.2 Preparing the data
+Next, we need to change the rows by country name instead of row number by using the code chunk below
+```{r}
+row.names(wh) <- wh$Country
+```
+Notice that the row number has been replaced into the country name.
+
+## 7.3.3 Transforming the data frame into a matrix
+The data was loaded into a data frame, but it has to be a data matrix to make your heatmap.
+
+The code chunk below will be used to transform wh data frame into a data matrix.
+```{r}
+wh1 <- dplyr::select(wh, c(3, 7:12))
+wh_matrix <- data.matrix(wh)
+```
+Notice that wh_matrix is in R matrix format.
+
+# 7.4 Static Heatmap
+There are many R packages and functions can be used to drawing static heatmaps, they are:
+
+-   [heatmap()](https://www.rdocumentation.org/packages/stats/versions/3.6.0/topics/heatmap) of R stats package. It draws a simple heatmap.
+-   [heatmap.2()](https://www.rdocumentation.org/packages/gplots/versions/3.0.1.1/topics/heatmap.2) of gplots R package. It draws an enhanced heatmap compared to the R base function.
+-   [pheatmap()](https://www.rdocumentation.org/packages/pheatmap/versions/1.0.12/topics/pheatmap) of [pheatmap](https://www.rdocumentation.org/packages/pheatmap/versions/1.0.12) R package. pheatmap package also known as Pretty Heatmap. The package provides functions to draws pretty heatmaps and provides more control to change the appearance of heatmaps.
+-   [ComplexHeatmap](https://bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html) package of R/Bioconductor package. The package draws, annotates and arranges complex heatmaps (very useful for genomic data analysis). The full reference guide of the package is available [here](https://jokergoo.github.io/ComplexHeatmap-reference/book/).
+-   [superheat](https://cran.r-project.org/web/packages/superheat/) package: A Graphical Tool for Exploring Complex Datasets Using Heatmaps. A system for generating extendable and customizable heatmaps for exploring complex datasets, including big data and data with multiple data types. The full reference guide of the package is available here.
+In this section, you will learn how to plot static heatmaps by using heatmap() of R Stats package.
+
+## 7.4.1 heatmap() of R Stats
+In this sub-section, we will plot a heatmap by using heatmap() of Base Stats. The code chunk is given below.
+```{r}
+wh_heatmap <- heatmap(wh_matrix,
+                      Rowv=NA, Colv=NA)
+```
+
+Note:
+By default, heatmap() plots a cluster heatmap. The arguments Rowv=NA and Colv=NA are used to switch off the option of plotting the row and column dendrograms.
+
+To plot a cluster heatmap, we just have to use the default as shown in the code chunk below.
+```{r}
+wh_heatmap <- heatmap(wh_matrix)
+```
+
+Note:
+The order of both rows and columns is different compare to the native wh_matrix. This is because heatmap do a reordering using clusterisation: it calculates the distance between each pair of rows and columns and try to order them by similarity. Moreover, the corresponding dendrogram are provided beside the heatmap.
+
+Here, red cells denotes small values, and red small ones. This heatmap is not really informative. Indeed, the Happiness Score variable have relatively higher values, what makes that the other variables with small values all look the same. Thus, we need to normalize this matrix. This is done using the scale argument. It can be applied to rows or to columns following your needs.
+
+The code chunk below normalises the matrix column wise.
+```{r}
+wh_heatmap <- heatmap(wh_matrix,
+                      scale="column",
+                      cexRow = 0.6, 
+                      cexCol = 0.8,
+                      margins = c(10, 4))
+```
+
+Notice that the values are scaled now. Also note that margins argument is used to ensure that the entire x-axis labels are displayed completely and, cexRow and cexCol arguments are used to define the font size used for y-axis and x-axis labels respectively.
+
+# 7.5 Creating Interactive Heatmap
+[heatmaply](http://talgalili.github.io/heatmaply/) is an R package for building interactive cluster heatmap that can be shared online as a stand-alone HTML file. It is designed and maintained by Tal Galili.
+
+Before we get started, you should review the [Introduction to Heatmaply](https://cran.r-project.org/web/packages/heatmaply/vignettes/heatmaply.html) to have an overall understanding of the features and functions of Heatmaply package. You are also required to have the [user manual](https://cran.r-project.org/web/packages/heatmaply/heatmaply.pdf) of the package handy with you for reference purposes.
+
+In this section, you will gain hands-on experience on using heatmaply to design an interactive cluster heatmap. We will still use the wh_matrix as the input data.
+
+## 7.5.1 Working with heatmaply
+```{r}
+heatmaply(mtcars)
+```
+
+The code chunk below shows the basic syntax needed to create n interactive heatmap by using heatmaply package.
+
+```{r}
+heatmaply(wh_matrix[, -c(1, 2, 4, 5)])
+```
+
+Note that:
+
+-   Different from heatmap(), for heatmaply() the default horizontal dendrogram is placed on the left hand side of the heatmap.
+-   The text label of each raw, on the other hand, is placed on the right hand side of the heat map.
+-   When the x-axis marker labels are too long, they will be rotated by 135 degree from the north.
+
+## 7.5.2 Data trasformation
+When analysing multivariate data set, it is very common that the variables in the data sets includes values that reflect different types of measurement. In general, these variables’ values have their own range. In order to ensure that all the variables have comparable values, data transformation are commonly used before clustering.
+
+Three main data transformation methods are supported by heatmaply(), namely: scale, normalise and percentilse.
+
+### 7.5.2.1 Scaling method
+-   When all variables are came from or assumed to come from some normal distribution, then scaling (i.e.: subtract the mean and divide by the standard deviation) would bring them all close to the standard normal distribution.
+-   In such a case, each value would reflect the distance from the mean in units of standard deviation.
+-   The scale argument in heatmaply() supports column and row scaling.
+
+The code chunk below is used to scale variable values columnwise.
+
+```{r}
+heatmaply(wh_matrix[, -c(1, 2, 4, 5)],
+          scale = "column")
+```
+
+### 7.5.2.2 Normalising method
+-   When variables in the data comes from possibly different (and non-normal) distributions, the normalize function can be used to bring data to the 0 to 1 scale by subtracting the minimum and dividing by the maximum of all observations.
+-   This preserves the shape of each variable’s distribution while making them easily comparable on the same “scale”.
+
+Different from Scaling, the normalise method is performed on the input data set i.e. wh_matrix as shown in the code chunk below.
+
+```{r}
+heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]))
+```
+
+### 7.5.2.3 Percentising method
+-   This is similar to ranking the variables, but instead of keeping the rank values, divide them by the maximal rank.
+-   This is done by using the ecdf of the variables on their own values, bringing each value to its empirical percentile.
+-   The benefit of the percentize function is that each value has a relatively clear interpretation, it is the percent of observations that got that value or below it.
+
+Similar to Normalize method, the Percentize method is also performed on the input data set i.e. wh_matrix as shown in the code chunk below.
+```{r}
+heatmaply(percentize(wh_matrix[, -c(1, 2, 4, 5)]))
+```
+
+## 7.5.3 Clustering algorithm
+heatmaply supports a variety of hierarchical clustering algorithm. The main arguments provided are:
+
+-   distfun: function used to compute the distance (dissimilarity) between both rows and columns. Defaults to dist. The options “pearson”, “spearman” and “kendall” can be used to use correlation-based clustering, which uses as.dist(1 - cor(t(x))) as the distance metric (using the specified correlation method).
+-   hclustfun: function used to compute the hierarchical clustering when Rowv or Colv are not dendrograms. Defaults to hclust.
+-   dist_method default is NULL, which results in “euclidean” to be used. It can accept alternative character strings indicating the method to be passed to distfun. By default distfun is “dist”” hence this can be one of “euclidean”, “maximum”, “manhattan”, “canberra”, “binary” or “minkowski”.
+-   hclust_method default is NULL, which results in “complete” method to be used. It can accept alternative character strings indicating the method to be passed to hclustfun. By default hclustfun is hclust hence this can be one of “ward.D”, “ward.D2”, “single”, “complete”, “average” (= UPGMA), “mcquitty” (= WPGMA), “median” (= WPGMC) or “centroid” (= UPGMC).
+
+In general, a clustering model can be calibrated either manually or statistically.
+
+## 7.5.4 Manual approach
+In the code chunk below, the heatmap is plotted by using hierachical clustering algorithm with “Euclidean distance” and “ward.D” method.
+```{r}
+heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
+          dist_method = "euclidean",
+          hclust_method = "ward.D")
+```
+
+## 7.5.5 Statistical approach
+In order to determine the best clustering method and number of cluster the dend_expend() and find_k() functions of dendextend package will be used.
+
+First, the dend_expend() will be used to determine the recommended clustering method to be used.
+```{r}
+wh_d <- dist(normalize(wh_matrix[, -c(1, 2, 4, 5)]), method = "euclidean")
+dend_expend(wh_d)[[3]]
+```
+
+The output table shows that “average” method should be used because it gave the high optimum value.
+
+Next, find_k() is used to determine the optimal number of cluster.
+```{r}
+wh_clust <- hclust(wh_d, method = "average")
+num_k <- find_k(wh_clust)
+plot(num_k)
+```
+
+Figure above shows that k=3 would be good.
+
+With reference to the statistical analysis results, we can prepare the code chunk as shown below.
+```{r}
+heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
+          dist_method = "euclidean",
+          hclust_method = "average",
+          k_row = 3)
+```
+
+## 7.5.6 Seriation
+One of the problems with hierarchical clustering is that it doesn’t actually place the rows in a definite order, it merely constrains the space of possible orderings. Take three items A, B and C. If you ignore reflections, there are three possible orderings: ABC, ACB, BAC. If clustering them gives you ((A+B)+C) as a tree, you know that C can’t end up between A and B, but it doesn’t tell you which way to flip the A+B cluster. It doesn’t tell you if the ABC ordering will lead to a clearer-looking heatmap than the BAC ordering.
+
+heatmaply uses the seriation package to find an optimal ordering of rows and columns. Optimal means to optimize the Hamiltonian path length that is restricted by the dendrogram structure. This, in other words, means to rotate the branches so that the sum of distances between each adjacent leaf (label) will be minimized. This is related to a restricted version of the travelling salesman problem.
+
+Here we meet our first seriation algorithm: Optimal Leaf Ordering (OLO). This algorithm starts with the output of an agglomerative clustering algorithm and produces a unique ordering, one that flips the various branches of the dendrogram around so as to minimize the sum of dissimilarities between adjacent leaves. Here is the result of applying Optimal Leaf Ordering to the same clustering result as the heatmap above.
+
+```{r}
+heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
+          seriate = "OLO")
+```
+
+The default options is “OLO” (Optimal leaf ordering) which optimizes the above criterion (in O(n^4)). Another option is “GW” (Gruvaeus and Wainer) which aims for the same goal but uses a potentially faster heuristic.
+
+```{r}
+heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
+          seriate = "GW")
+```
+
+The option “mean” gives the output we would get by default from heatmap functions in other packages such as gplots::heatmap.2.
+```{r}
+heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
+          seriate = "mean")
+```
+
+The option “none” gives us the dendrograms without any rotation that is based on the data matrix.
+```{r}
+heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
+          seriate = "none")
+```
+
+## 7.5.7 Working with colour palettes
+The default colour palette uses by heatmaply is viridis. heatmaply users, however, can use other colour palettes in order to improve the aestheticness and visual friendliness of the heatmap.
+
+In the code chunk below, the Blues colour palette of rColorBrewer is used
+```{r}
+heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
+          seriate = "none",
+          colors = Blues)
+```
+
+## 7.5.8 The finishing touch
+Beside providing a wide collection of arguments for meeting the statistical analysis needs, heatmaply also provides many plotting features to ensure cartographic quality heatmap can be produced.
+
+In the code chunk below the following arguments are used:
+
+-   k_row is used to produce 5 groups.
+-   margins is used to change the top margin to 60 and row margin to 200.
+-   fontsize_row and fontsize_col are used to change the font size for row and column labels to 4.
+-   main is used to write the main title of the plot.
+-   xlab and ylab are used to write the x-axis and y-axis labels respectively.
+
+```{r}
+heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
+          Colv=NA,
+          seriate = "none",
+          colors = Blues,
+          k_row = 5,
+          margins = c(NA,200,60,NA),
+          fontsize_row = 4,
+          fontsize_col = 5,
+          main="World Happiness Score and Variables by Country, 2018 \nDataTransformation using Normalise Method",
+          xlab = "World Happiness Indicators",
+          ylab = "World Countries"
+          )
+```
+
+# Part Four: **Visual Multivariate Analysis with Parallel Coordinates Plot**
+
+# 8.1 Overview
+Parallel coordinates plot is a data visualisation specially designed for visualising and analysing multivariate, numerical data. It is ideal for comparing multiple variables together and seeing the relationships between them. For example, the variables contribute to Happiness Index. Parallel coordinates was invented by [Alfred Inselberg](http://www.math.tau.ac.il/~aiisreal/) in the 1970s as a way to visualize high-dimensional data. This data visualisation technique is more often found in academic and scientific communities than in business and consumer data visualizations. As pointed out by [Stephen Few](https://www.perceptualedge.com/articles/b-eye/parallel_coordinates.pdf)(2006), “This certainly isn’t a chart that you would present to the board of directors or place on your Web site for the general public. In fact, the strength of parallel coordinates isn’t in their ability to communicate some truth in the data to others, but rather in their ability to bring meaningful multivariate patterns and comparisons to light when used interactively for analysis.” For example, parallel coordinates plot can be used to characterise clusters detected during customer segmentation.
+
+By the end of this hands-on exercise, you will gain hands-on experience on:
+
+-   plotting statistic parallel coordinates plots by using ggparcoord() of GGally package,
+-   plotting interactive parallel coordinates plots by using parcoords package, and
+-   plotting interactive parallel coordinates plots by using parallelPlot package.
+
+# 8.2 Installing and Launching R Packages
+For this exercise, the GGally, parcoords, parallelPlot and tidyverse packages will be used.
+
+The code chunks below are used to install and load the packages in R.
+```{r}
+pacman::p_load(GGally, parallelPlot, tidyverse)
+```
+
+# 8.3 Data Preparation
+In this hands-on exercise, the World Happinees 2018 (http://worldhappiness.report/ed/2018/) data will be used. The data set is download at https://s3.amazonaws.com/happiness-report/2018/WHR2018Chapter2OnlineData.xls. The original data set is in Microsoft Excel format. It has been extracted and saved in csv file called WHData-2018.csv.
+
+In the code chunk below, `read_csv()` of readr package is used to import WHData-2018.csv into R and save it into a tibble data frame object called wh.
+
+```{r}
+wh <- read_csv("data/WHData-2018.csv")
+```
+
+# 8.4 Plotting Static Parallel Coordinates Plot
+In this section, you will learn how to plot static parallel coordinates plot by using [ggparcoord()](https://ggobi.github.io/ggally/reference/ggparcoord.html) of GGally package. Before getting started, it is a good practice to read the function description in detail.
+
+## 8.4.1 Plotting a simple parallel coordinates
+Code chunk below shows a typical syntax used to plot a basic static parallel coordinates plot by using `ggparcoord()`.
+```{r}
+ggparcoord(data = wh, 
+           columns = c(7:12))
+```
+
+Notice that only two argument namely `data` and `columns` is used. `Data` argument is used to map the data object (i.e. wh) and `columns` is used to select the columns for preparing the parallel coordinates plot.
+
+## 8.4.2 Plotting a parallel coordinates with boxplot
+The basic parallel coordinates failed to reveal any meaning understanding of the World Happiness measures. In this section, you will learn how to makeover the plot by using a collection of arguments provided by `ggparcoord()`.
+```{r}
+ggparcoord(data = wh, 
+           columns = c(7:12), 
+           groupColumn = 2,
+           scale = "uniminmax",
+           alphaLines = 0.2,
+           boxplot = TRUE, 
+           title = "Parallel Coordinates Plot of World Happines Variables")
+```
+
+Things to learn from the code chunk above.
+
+-   `groupColumn` argument is used to group the observations (i.e. parallel lines) by using a single variable (i.e. Region) and colour the parallel coordinates lines by region name.
+-   scale argument is used to scale the variables in the parallel coordinate plot by using `uniminmax` method. The method univariately scale each variable so the minimum of the variable is zero and the maximum is one.
+-   `alphaLines` argument is used to reduce the intensity of the line colour to 0.2. The permissible value range is between 0 to 1.
+-   `boxplot` argument is used to turn on the boxplot by using logical `TRUE`. The default is `FALSE`.
+-   `title` argument is used to provide the parallel coordinates plot a title.
+
+## 8.4.3 Parallel coordinates with facet
+Since `ggparcoord()` is developed by extending ggplot2 package, we can combination use some of the ggplot2 function when plotting a parallel coordinates plot.
+
+In the code chunk below, `facet_wrap()` of ggplot2 is used to plot 10 small multiple parallel coordinates plots. Each plot represent one geographical region such as East Asia.
+
+```{r}
+ggparcoord(data = wh, 
+           columns = c(7:12), 
+           groupColumn = 2,
+           scale = "uniminmax",
+           alphaLines = 0.2,
+           boxplot = TRUE, 
+           title = "Multiple Parallel Coordinates Plots of World Happines Variables by Region") +
+  facet_wrap(~ Region)
+```
+
+One of the aesthetic defect of the current design is that some of the variable names overlap on x-axis.
+
+## 8.4.4 Rotating x-axis text label
+To make the x-axis text label easy to read, let us rotate the labels by 30 degrees. We can rotate axis text labels using `theme()` function in ggplot2 as shown in the code chunk below:
+```{r}
+ggparcoord(data = wh, 
+           columns = c(7:12), 
+           groupColumn = 2,
+           scale = "uniminmax",
+           alphaLines = 0.2,
+           boxplot = TRUE, 
+           title = "Multiple Parallel Coordinates Plots of World Happines Variables by Region") +
+  facet_wrap(~ Region) + 
+  theme(axis.text.x = element_text(angle = 30))
+```
+
+Thing to learn from the code chunk above:
+
+-   To rotate x-axis text labels, we use `axis.text.x` as argument to `theme()` function. And we specify `element_text(angle = 30)` to rotate the x-axis text by an angle 30 degree.
+
+## 8.4.5 Adjusting the rotated x-axis text label
+Rotating x-axis text labels to 30 degrees makes the label overlap with the plot and we can avoid this by adjusting the text location using `hjust` argument to theme’s text element with `element_text()`. We use `axis.text.x` as we want to change the look of x-axis text.
+
+```{r}
+ggparcoord(data = wh, 
+           columns = c(7:12), 
+           groupColumn = 2,
+           scale = "uniminmax",
+           alphaLines = 0.2,
+           boxplot = TRUE, 
+           title = "Multiple Parallel Coordinates Plots of World Happines Variables by Region") +
+  facet_wrap(~ Region) + 
+  theme(axis.text.x = element_text(angle = 30, hjust=1))
+```
+
+# 8.5 Plotting Interactive Parallel Coordinates Plot: parallelPlot methods
+[parallelPlot](https://cran.r-project.org/web/packages/parallelPlot/) is an R package specially designed to plot a parallel coordinates plot by using ‘htmlwidgets’ package and [d3.js](https://d3js.org/). In this section, you will learn how to use functions provided in parallelPlot package to build interactive parallel coordinates plot.
+
+## 8.5.1 The basic plot
+The code chunk below plot an interactive parallel coordinates plot by using parallelPlot().
+```{r}
+wh <- wh %>%
+  select("Happiness score", c(7:12))
+parallelPlot(wh,
+             width = 320,
+             height = 250)
+```
+
+Notice that some of the axis labels are too long. You will learn how to overcome this problem in the next step.
+
+## 8.5.2 Rotate axis label
+In the code chunk below, `rotateTitle` argument is used to avoid overlapping axis labels.
+```{r}
+parallelPlot(wh,
+             rotateTitle = TRUE)
+```
+One of the useful interactive feature of parallelPlot is we can click on a variable of interest, for example Happiness score, the monotonous blue colour (default) will change a blues with different intensity colour scheme will be used.
+
+## 8.5.3 Changing the colour scheme
+We can change the default blue colour scheme by using continousCS argument as shown in the code chunk below.
+```{r}
+parallelPlot(wh,
+             continuousCS = "YlOrRd",
+             rotateTitle = TRUE)
+```
+## 8.5.4 Parallel coordinates plot with histogram
+In the code chunk below, histoVisibility argument is used to plot histogram along the axis of each variables.
+```{r}
+histoVisibility <- rep(TRUE, ncol(wh))
+parallelPlot(wh,
+             rotateTitle = TRUE,
+             histoVisibility = histoVisibility)
+```
