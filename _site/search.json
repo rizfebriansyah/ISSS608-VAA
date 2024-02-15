@@ -182,277 +182,39 @@
     "text": "Step into the captivating world of ISSS608 Visual Analytics and Applications! Brace yourself for an immersive journey as you explore this digital realm, where my coursework for this course comes to life. Get ready to embark on a visual odyssey that goes beyond the ordinary – a fusion of knowledge and creativity awaits you within these virtual corridors!\n\n\n\nPicture from: MattD, Former Alteryx, Inc. Support Engineer, Community Data Architect, Data Scientist then Data Engineer\n\n\n\n\n\n\n\n\nJoke: Why did the scatter plot go to therapy?\n\n\n\n\n\nIt couldn’t handle the emotional baggage of its outliers!"
   },
   {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#plotting-ridgeline-graph-ggridges-method",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#plotting-ridgeline-graph-ggridges-method",
+    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#our-dataset",
+    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#our-dataset",
     "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "4.4.1 Plotting ridgeline graph: ggridges method",
-    "text": "4.4.1 Plotting ridgeline graph: ggridges method\nThere are several ways to plot ridgeline plot with R. In this section, you will learn how to plot ridgeline plot by using ggridges package.\nggridges package provides two main geom to plot gridgeline plots, they are: geom_ridgeline() and geom_density_ridges(). The former takes height values directly to draw the ridgelines, and the latter first estimates data densities and then draws those using ridgelines.\nThe ridgeline plot below is plotted by using geom_density_ridges().\n\nThe plotThe code\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam, \n       aes(x = ENGLISH, \n           y = CLASS)) +\n  geom_density_ridges(\n    scale = 3,\n    rel_min_height = 0.01,\n    bandwidth = 3.4,\n    fill = lighten(\"#7097BB\", .3),\n    color = \"white\"\n  ) +\n  scale_x_continuous(\n    name = \"English grades\",\n    expand = c(0, 0)\n    ) +\n  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +\n  theme_ridges()"
+    "section": "5.3.1 Our dataset",
+    "text": "5.3.1 Our dataset\nIn this practical exercise, we will utilise the dataset titled “Singapore Residents by Planning Area/Subzone, Age Group, Sex, and Type of Dwelling, June 2000-2018.” This dataset has already been downloaded and is stored in the ‘data’ sub-folder within the exercise folder. The file is named respopagsex2000to2018_tidy.csv and is available in CSV format."
   },
   {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#varying-fill-colours-along-the-x-axis",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#varying-fill-colours-along-the-x-axis",
+    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#importing-data",
+    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#importing-data",
     "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "4.4.2 Varying fill colours along the x axis",
-    "text": "4.4.2 Varying fill colours along the x axis\nSometimes we would like to have the area under a ridgeline not filled with a single solid color but rather with colors that vary in some form along the x axis. This effect can be achieved by using either geom_ridgeline_gradient() or geom_density_ridges_gradient(). Both geoms work just like geom_ridgeline() and geom_density_ridges(), except that they allow for varying fill colors. However, they do not allow for alpha transparency in the fill. For technical reasons, we can have changing fill colours or transparency but not both.\n\nThe plotThe code\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam, \n       aes(x = ENGLISH, \n           y = CLASS,\n           fill = stat(x))) +\n  geom_density_ridges_gradient(\n    scale = 3,\n    rel_min_height = 0.01) +\n  scale_fill_viridis_c(name = \"Temp. [F]\",\n                       option = \"C\") +\n  scale_x_continuous(\n    name = \"English grades\",\n    expand = c(0, 0)\n  ) +\n  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +\n  theme_ridges()"
+    "section": "5.3.2 Importing Data",
+    "text": "5.3.2 Importing Data\nTo import ‘respopagsex2000to2018_tidy.csv’ into R, read_csv() function of readr package will be used.\n\n#Reading the data into R environment\npop_data &lt;- read_csv(\"data/respopagsex2000to2018_tidy.csv\")"
   },
   {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#mapping-the-probabilities-directly-onto-colour",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#mapping-the-probabilities-directly-onto-colour",
+    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#preparing-the-data",
+    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#preparing-the-data",
     "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "4.4.3 Mapping the probabilities directly onto colour",
-    "text": "4.4.3 Mapping the probabilities directly onto colour\nBeside providing additional geom objects to support the need to plot ridgeline plot, ggridges package also provides a stat function called stat_density_ridges() that replaces stat_density() of ggplot2.\nFigure below is plotted by mapping the probabilities calculated by using stat(ecdf) which represent the empirical cumulative density function for the distribution of English score.\n\nThe plotThe code\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam,\n       aes(x = ENGLISH, \n           y = CLASS, \n           fill = 0.5 - abs(0.5-stat(ecdf)))) +\n  stat_density_ridges(geom = \"density_ridges_gradient\", \n                      calc_ecdf = TRUE) +\n  scale_fill_viridis_c(name = \"Tail probability\",\n                       direction = -1) +\n  theme_ridges()\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nIt is important include the argument calc_ecdf = TRUE in stat_density_ridges()."
+    "section": "5.3.3 Preparing the Data",
+    "text": "5.3.3 Preparing the Data\nNext, use the mutate() function of dplyr package to derive three new measures, namely: young, active, and old.\n\n#Deriving the young, economy active and old measures\nagpop_mutated &lt;- pop_data %&gt;%\n  mutate(`Year` = as.character(Year))%&gt;%\n  spread(AG, Population) %&gt;%\n  mutate(YOUNG = rowSums(.[4:8]))%&gt;%\n  mutate(ACTIVE = rowSums(.[9:16]))  %&gt;%\n  mutate(OLD = rowSums(.[17:21])) %&gt;%\n  mutate(TOTAL = rowSums(.[22:24])) %&gt;%\n  filter(Year == 2018)%&gt;%\n  filter(TOTAL &gt; 0)"
   },
   {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#ridgeline-plots-with-quantile-lines",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#ridgeline-plots-with-quantile-lines",
+    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#plotting-a-static-ternary-diagram",
+    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#plotting-a-static-ternary-diagram",
     "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "4.4 Ridgeline plots with quantile lines",
-    "text": "4.4 Ridgeline plots with quantile lines\nBy using geom_density_ridges_gradient(), we can colour the ridgeline plot by quantile, via the calculated stat(quantile) aesthetic as shown in the figure below.\n\nThe plotThe code\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam,\n       aes(x = ENGLISH, \n           y = CLASS, \n           fill = factor(stat(quantile))\n           )) +\n  stat_density_ridges(\n    geom = \"density_ridges_gradient\",\n    calc_ecdf = TRUE, \n    quantiles = 4,\n    quantile_lines = TRUE) +\n  scale_fill_viridis_d(name = \"Quartiles\") +\n  theme_ridges()\n\n\n\n\nInstead of using number to define the quantiles, we can also specify quantiles by cut points such as 2.5% and 97.5% tails to colour the ridgeline plot as shown in the figure below.\n\nThe plotThe code\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam,\n       aes(x = ENGLISH, \n           y = CLASS, \n           fill = factor(stat(quantile))\n           )) +\n  stat_density_ridges(\n    geom = \"density_ridges_gradient\",\n    calc_ecdf = TRUE, \n    quantiles = c(0.025, 0.975)\n    ) +\n  scale_fill_manual(\n    name = \"Probability\",\n    values = c(\"#FF0000A0\", \"#A0A0A0A0\", \"#0000FFA0\"),\n    labels = c(\"(0, 0.025]\", \"(0.025, 0.975]\", \"(0.975, 1]\")\n  ) +\n  theme_ridges()"
+    "section": "5.4.1 Plotting a static ternary diagram",
+    "text": "5.4.1 Plotting a static ternary diagram\nUse ggtern() function of ggtern package to create a simple ternary plot.\n\n#Building the static ternary plot\nggtern(data=agpop_mutated,aes(x=YOUNG,y=ACTIVE, z=OLD)) +\n  geom_point()\n\n\n\n\n\n\n\n\n\n#Building the static ternary plot\nggtern(data=agpop_mutated, aes(x=YOUNG,y=ACTIVE, z=OLD)) +\n  geom_point() +\n  labs(title=\"Population structure, 2015\") +\n  theme_rgbw()"
   },
   {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#plotting-a-half-eye-graph",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#plotting-a-half-eye-graph",
+    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#plotting-an-interactive-ternary-diagram",
+    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#plotting-an-interactive-ternary-diagram",
     "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "4.5.1 Plotting a Half Eye graph",
-    "text": "4.5.1 Plotting a Half Eye graph\nFirst, we will plot a Half-Eye graph by using stat_halfeye() of ggdist package.\nThis produces a Half Eye visualisation, which is contains a half-density and a slab-interval.\n\nThe plotThe code\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam, \n       aes(x = RACE, \n           y = ENGLISH)) +\n  stat_halfeye(adjust = 0.5,\n               justification = -0.2,\n               .width = 0,\n               point_colour = NA)\n\n\n\n\n\n\n\nThings to learn from the code chunk above\n\n\n\nWe remove the slab interval by setting .width = 0 and point_colour = NA."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#adding-the-boxplot-with-geom_boxplot",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#adding-the-boxplot-with-geom_boxplot",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "4.5.2 Adding the boxplot with geom_boxplot()",
-    "text": "4.5.2 Adding the boxplot with geom_boxplot()\nNext, we will add the second geometry layer using geom_boxplot() of ggplot2. This produces a narrow boxplot. We reduce the width and adjust the opacity.\n\nThe plotThe code\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam, \n       aes(x = RACE, \n           y = ENGLISH)) +\n  stat_halfeye(adjust = 0.5,\n               justification = -0.2,\n               .width = 0,\n               point_colour = NA) +\n  geom_boxplot(width = .20,\n               outlier.shape = NA)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#adding-the-dot-plots-with-stat_dots",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#adding-the-dot-plots-with-stat_dots",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "4.5.3 Adding the Dot Plots with stat_dots()",
-    "text": "4.5.3 Adding the Dot Plots with stat_dots()\nNext, we will add the third geometry layer using stat_dots() of ggdist package. This produces a half-dotplot, which is similar to a histogram that indicates the number of samples (number of dots) in each bin. We select side = “left” to indicate we want it on the left-hand side.\n\nThe plotThe code\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam, \n       aes(x = RACE, \n           y = ENGLISH)) +\n  stat_halfeye(adjust = 0.5,\n               justification = -0.2,\n               .width = 0,\n               point_colour = NA) +\n  geom_boxplot(width = .20,\n               outlier.shape = NA) +\n  stat_dots(side = \"left\", \n            justification = 1.2, \n            binwidth = .5,\n            dotsize = 2)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#finishing-touch",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#finishing-touch",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "4.5.4 Finishing touch",
-    "text": "4.5.4 Finishing touch\nLastly, coord_flip() of ggplot2 package will be used to flip the raincloud chart horizontally to give it the raincloud appearance. At the same time, theme_economist() of ggthemes package is used to give the raincloud chart a professional publishing standard look.\n\nThe plotThe code\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(exam, \n       aes(x = RACE, \n           y = ENGLISH)) +\n  stat_halfeye(adjust = 0.5,\n               justification = -0.2,\n               .width = 0,\n               point_colour = NA) +\n  geom_boxplot(width = .20,\n               outlier.shape = NA) +\n  stat_dots(side = \"left\", \n            justification = 1.2, \n            binwidth = .5,\n            dotsize = 1.5) +\n  coord_flip() +\n  theme_economist()"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#installing-and-launching-r-packages",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#installing-and-launching-r-packages",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "5.3.1 Installing and launching R packages",
-    "text": "5.3.1 Installing and launching R packages\nIn this exercise, ggstatsplot and tidyverse will be used.\n\npacman::p_load(ggstatsplot, tidyverse)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#one-sample-test-gghistostats-method",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#one-sample-test-gghistostats-method",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "5.3.2 One-sample test: gghistostats() method",
-    "text": "5.3.2 One-sample test: gghistostats() method\nIn the code chunk below, gghistostats() is used to to build an visual of one-sample test on English scores.\n\nlibrary(psych)\nlibrary(dplyr)\n\nset.seed(1234)\n\ngghistostats(\n  data = exam,\n  x = ENGLISH,\n  type = \"bayes\",\n  test.value = 60,\n  xlab = \"English scores\"\n)\n\n\n\n\n\n\n\n\nDefault information: - statistical details - Bayes Factor - sample sizes - distribution summary"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#unpacking-the-bayes-factor",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#unpacking-the-bayes-factor",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "5.3.3 Unpacking the Bayes Factor",
-    "text": "5.3.3 Unpacking the Bayes Factor\n\nA Bayes factor is the ratio of the likelihood of one particular hypothesis to the likelihood of another. It can be interpreted as a measure of the strength of evidence in favor of one theory among two competing theories.\nThat’s because the Bayes factor gives us a way to evaluate the data in favor of a null hypothesis, and to use external information to do so. It tells us what the weight of the evidence is in favor of a given hypothesis.\nWhen we are comparing two hypotheses, H1 (the alternate hypothesis) and H0 (the null hypothesis), the Bayes Factor is often written as B10.\nThe Schwarz criterion is one of the easiest ways to calculate rough approximation of the Bayes Factor."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#how-to-interpret-bayes-factor",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#how-to-interpret-bayes-factor",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "5.3.4 How to Interpret Bayes Factor",
-    "text": "5.3.4 How to Interpret Bayes Factor\nA Bayes Factor can be any positive number. One of the most common interpretations is this one—first proposed by Harold Jeffereys (1961) and slightly modified by Lee and Wagenmakers in 2013"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#two-sample-mean-test-ggbetweenstats",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#two-sample-mean-test-ggbetweenstats",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "5.3.5 Two-sample mean test: ggbetweenstats()",
-    "text": "5.3.5 Two-sample mean test: ggbetweenstats()\nIn the code chunk below, ggbetweenstats() is used to build a visual for two-sample mean test of Maths scores by gender.\n\nggbetweenstats(\n  data = exam,\n  x = GENDER, \n  y = MATHS,\n  type = \"np\",\n  messages = FALSE\n)\n\n\n\n\n\n\n\n\nDefault information: - statistical details - Bayes Factor - sample sizes - distribution summary"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#oneway-anova-test-ggbetweenstats-method",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#oneway-anova-test-ggbetweenstats-method",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "5.3.6 Oneway ANOVA Test: ggbetweenstats() method",
-    "text": "5.3.6 Oneway ANOVA Test: ggbetweenstats() method\nIn the code chunk below, ggbetweenstats() is used to build a visual for One-way ANOVA test on English score by race.\n\nggbetweenstats(\n  data = exam,\n  x = RACE, \n  y = ENGLISH,\n  type = \"p\",\n  mean.ci = TRUE, \n  pairwise.comparisons = TRUE, \n  pairwise.display = \"s\",\n  p.adjust.method = \"fdr\",\n  messages = FALSE\n)\n\n\n\n\n\n\n\n\n\n“ns” → only non-significant\n“s” → only significant\n“all” → everything"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#significant-test-of-correlation-ggscatterstats",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#significant-test-of-correlation-ggscatterstats",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "5.3.7 Significant Test of Correlation: ggscatterstats()",
-    "text": "5.3.7 Significant Test of Correlation: ggscatterstats()\nIn the code chunk below, ggscatterstats() is used to build a visual for Significant Test of Correlation between Maths scores and English scores.\n\nggscatterstats(\n  data = exam,\n  x = MATHS,\n  y = ENGLISH,\n  marginal = FALSE,\n  )"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#significant-test-of-association-depedence-ggbarstats-methods",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#significant-test-of-association-depedence-ggbarstats-methods",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "5.3.8 Significant Test of Association (Depedence) : ggbarstats() methods",
-    "text": "5.3.8 Significant Test of Association (Depedence) : ggbarstats() methods\nIn the code chunk below, the Maths scores is binned into a 4-class variable by using cut().\n\nexam1 &lt;- exam %&gt;% \n  mutate(MATHS_bins = \n           cut(MATHS, \n               breaks = c(0,60,75,85,100))\n)\n\nIn this code chunk below ggbarstats() is used to build a visual for Significant Test of Association\n\nggbarstats(exam1, \n           x = MATHS_bins, \n           y = GENDER)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#importing-excel-file-readxl-methods",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#importing-excel-file-readxl-methods",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "5.5.1 Importing Excel file: readxl methods",
-    "text": "5.5.1 Importing Excel file: readxl methods\nIn the code chunk below, read_xls() of readxl package is used to import the data worksheet of ToyotaCorolla.xls workbook into R.\n\ncar_resale &lt;- read_xls(\"data/ToyotaCorolla.xls\", \n                       \"data\")\ncar_resale\n\n# A tibble: 1,436 × 38\n      Id Model    Price Age_08_04 Mfg_Month Mfg_Year     KM Quarterly_Tax Weight\n   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;\n 1    81 TOYOTA … 18950        25         8     2002  20019           100   1180\n 2     1 TOYOTA … 13500        23        10     2002  46986           210   1165\n 3     2 TOYOTA … 13750        23        10     2002  72937           210   1165\n 4     3  TOYOTA… 13950        24         9     2002  41711           210   1165\n 5     4 TOYOTA … 14950        26         7     2002  48000           210   1165\n 6     5 TOYOTA … 13750        30         3     2002  38500           210   1170\n 7     6 TOYOTA … 12950        32         1     2002  61000           210   1170\n 8     7  TOYOTA… 16900        27         6     2002  94612           210   1245\n 9     8 TOYOTA … 18600        30         3     2002  75889           210   1245\n10    44 TOYOTA … 16950        27         6     2002 110404           234   1255\n# ℹ 1,426 more rows\n# ℹ 29 more variables: Guarantee_Period &lt;dbl&gt;, HP_Bin &lt;chr&gt;, CC_bin &lt;chr&gt;,\n#   Doors &lt;dbl&gt;, Gears &lt;dbl&gt;, Cylinders &lt;dbl&gt;, Fuel_Type &lt;chr&gt;, Color &lt;chr&gt;,\n#   Met_Color &lt;dbl&gt;, Automatic &lt;dbl&gt;, Mfr_Guarantee &lt;dbl&gt;,\n#   BOVAG_Guarantee &lt;dbl&gt;, ABS &lt;dbl&gt;, Airbag_1 &lt;dbl&gt;, Airbag_2 &lt;dbl&gt;,\n#   Airco &lt;dbl&gt;, Automatic_airco &lt;dbl&gt;, Boardcomputer &lt;dbl&gt;, CD_Player &lt;dbl&gt;,\n#   Central_Lock &lt;dbl&gt;, Powered_Windows &lt;dbl&gt;, Power_Steering &lt;dbl&gt;, …\n\n\nNotice that the output object car_resale is a tibble data frame."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#multiple-regression-model-using-lm",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#multiple-regression-model-using-lm",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "5.5.2 Multiple Regression Model using lm()",
-    "text": "5.5.2 Multiple Regression Model using lm()\nThe code chunk below is used to calibrate a multiple linear regression model by using lm() of Base Stats of R.\n\nmodel &lt;- lm(Price ~ Age_08_04 + Mfg_Year + KM + \n              Weight + Guarantee_Period, data = car_resale)\nmodel\n\n\nCall:\nlm(formula = Price ~ Age_08_04 + Mfg_Year + KM + Weight + Guarantee_Period, \n    data = car_resale)\n\nCoefficients:\n     (Intercept)         Age_08_04          Mfg_Year                KM  \n      -2.637e+06        -1.409e+01         1.315e+03        -2.323e-02  \n          Weight  Guarantee_Period  \n       1.903e+01         2.770e+01"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#model-diagnostic-checking-for-multicolinearity",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#model-diagnostic-checking-for-multicolinearity",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "5.5.3 Model Diagnostic: checking for multicolinearity:",
-    "text": "5.5.3 Model Diagnostic: checking for multicolinearity:\nIn the code chunk, check_collinearity() of performance package.\n\ncheck_collinearity(model)\n\n# Check for Multicollinearity\n\nLow Correlation\n\n             Term  VIF     VIF 95% CI Increased SE Tolerance Tolerance 95% CI\n               KM 1.46 [ 1.37,  1.57]         1.21      0.68     [0.64, 0.73]\n           Weight 1.41 [ 1.32,  1.51]         1.19      0.71     [0.66, 0.76]\n Guarantee_Period 1.04 [ 1.01,  1.17]         1.02      0.97     [0.86, 0.99]\n\nHigh Correlation\n\n      Term   VIF     VIF 95% CI Increased SE Tolerance Tolerance 95% CI\n Age_08_04 31.07 [28.08, 34.38]         5.57      0.03     [0.03, 0.04]\n  Mfg_Year 31.16 [28.16, 34.48]         5.58      0.03     [0.03, 0.04]\n\n\n\ncheck_c &lt;- check_collinearity(model)\nplot(check_c)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#model-diagnostic-checking-normality-assumption",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#model-diagnostic-checking-normality-assumption",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "5.5.4 Model Diagnostic: checking normality assumption",
-    "text": "5.5.4 Model Diagnostic: checking normality assumption\nIn the code chunk, check_normality() of performance package.\n\nmodel1 &lt;- lm(Price ~ Age_08_04 + KM + \n              Weight + Guarantee_Period, data = car_resale)\n\n\ncheck_n &lt;- check_normality(model1)\n\n\nplot(check_n)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#model-diagnostic-check-model-for-homogeneity-of-variances",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#model-diagnostic-check-model-for-homogeneity-of-variances",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "5.5.5 Model Diagnostic: Check model for homogeneity of variances",
-    "text": "5.5.5 Model Diagnostic: Check model for homogeneity of variances\nIn the code chunk, check_heteroscedasticity() of performance package.\n\ncheck_h &lt;- check_heteroscedasticity(model1)\n\n\nplot(check_h)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#model-diagnostic-complete-check",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#model-diagnostic-complete-check",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "5.5.6 Model Diagnostic: Complete check",
-    "text": "5.5.6 Model Diagnostic: Complete check\nWe can also perform the complete by using check_model().\n\ncheck_model(model1)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#visualising-regression-parameters-see-methods",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#visualising-regression-parameters-see-methods",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "5.5.7 Visualising Regression Parameters: see methods",
-    "text": "5.5.7 Visualising Regression Parameters: see methods\nIn the code below, plot() of see package and parameters() of parameters package is used to visualise the parameters of a regression model.\n\nplot(parameters(model1))"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#visualising-regression-parameters-ggcoefstats-methods",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#visualising-regression-parameters-ggcoefstats-methods",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "5.5.8 Visualising Regression Parameters: ggcoefstats() methods",
-    "text": "5.5.8 Visualising Regression Parameters: ggcoefstats() methods\nIn the code below, ggcoefstats() of ggstatsplot package to visualise the parameters of a regression model.\n\nggcoefstats(model1, \n            output = \"plot\")"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#installing-and-loading-the-packages",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#installing-and-loading-the-packages",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "6.2.1 Installing and loading the packages",
-    "text": "6.2.1 Installing and loading the packages\nFor the purpose of this exercise, the following R packages will be used, they are:\n\ntidyverse, a family of R packages for data science process,\nplotly for creating interactive plot,\ngganimate for creating animation plot,\nDT for displaying interactive html table,\ncrosstalk for for implementing cross-widget interactions (currently, linked brushing and filtering), and\nggdist for visualising distribution and uncertainty.\n\n\ndevtools::install_github(\"wilkelab/ungeviz\")\n\n\npacman::p_load(ungeviz, plotly, crosstalk,\n               DT, ggdist, ggridges,\n               colorspace, gganimate, tidyverse)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#data-import",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#data-import",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "6.2.2 Data import",
-    "text": "6.2.2 Data import\nFor the purpose of this exercise, Exam_data.csv will be used.\n\nexam &lt;- read_csv(\"data/Exam_data.csv\")"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#plotting-standard-error-bars-of-point-estimates",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#plotting-standard-error-bars-of-point-estimates",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "6.3.1 Plotting standard error bars of point estimates",
-    "text": "6.3.1 Plotting standard error bars of point estimates\nNow we are ready to plot the standard error bars of mean maths score by race as shown below.\n\nThe plotThe code\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(my_sum) +\n  geom_errorbar(\n    aes(x=RACE, \n        ymin=mean-se, \n        ymax=mean+se), \n    width=0.2, \n    colour=\"black\", \n    alpha=0.9, \n    size=0.5) +\n  geom_point(aes\n           (x=RACE, \n            y=mean), \n           stat=\"identity\", \n           color=\"red\",\n           size = 1.5,\n           alpha=1) +\n  ggtitle(\"Standard error of mean maths score by race\")\n\n\n\n\n\n\n\nThings to learn from the code chunk above\n\n\n\n\nThe error bars are computed by using the formula mean+/-se.\nFor geom_point(), it is important to indicate stat=“identity”."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#plotting-confidence-interval-of-point-estimates",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#plotting-confidence-interval-of-point-estimates",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "6.3.2 Plotting confidence interval of point estimates",
-    "text": "6.3.2 Plotting confidence interval of point estimates\nInstead of plotting the standard error bar of point estimates, we can also plot the confidence intervals of mean maths score by race.\n\nThe plotThe code\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(my_sum) +\n  geom_errorbar(\n    aes(x=reorder(RACE, -mean), \n        ymin=mean-1.96*se, \n        ymax=mean+1.96*se), \n    width=0.2, \n    colour=\"black\", \n    alpha=0.9, \n    size=0.5) +\n  geom_point(aes\n           (x=RACE, \n            y=mean), \n           stat=\"identity\", \n           color=\"red\",\n           size = 1.5,\n           alpha=1) +\n  labs(x = \"Maths score\",\n       title = \"95% confidence interval of mean maths score by race\")\n\n\n\n\n\n\n\nThings to learn from the code chunk above\n\n\n\n\nThe confidence intervals are computed by using the formula mean+/-1.96*se.\nThe error bars is sorted by using the average maths scores.\nlabs() argument of ggplot2 is used to change the x-axis label."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#visualising-the-uncertainty-of-point-estimates-with-interactive-error-bars",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#visualising-the-uncertainty-of-point-estimates-with-interactive-error-bars",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "6.3.3 Visualising the uncertainty of point estimates with interactive error bars",
-    "text": "6.3.3 Visualising the uncertainty of point estimates with interactive error bars\nIn this section, you will learn how to plot interactive error bars for the 99% confidence interval of mean maths score by race as shown in the figure below.\n\nThe plotThe code\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nshared_df = SharedData$new(my_sum)\n\nbscols(widths = c(4,8),\n       ggplotly((ggplot(shared_df) +\n                   geom_errorbar(aes(\n                     x=reorder(RACE, -mean),\n                     ymin=mean-2.58*se, \n                     ymax=mean+2.58*se), \n                     width=0.2, \n                     colour=\"black\", \n                     alpha=0.9, \n                     size=0.5) +\n                   geom_point(aes(\n                     x=RACE, \n                     y=mean, \n                     text = paste(\"Race:\", `RACE`, \n                                  \"&lt;br&gt;N:\", `n`,\n                                  \"&lt;br&gt;Avg. Scores:\", round(mean, digits = 2),\n                                  \"&lt;br&gt;95% CI:[\", \n                                  round((mean-2.58*se), digits = 2), \",\",\n                                  round((mean+2.58*se), digits = 2),\"]\")),\n                     stat=\"identity\", \n                     color=\"red\", \n                     size = 1.5, \n                     alpha=1) + \n                   xlab(\"Race\") + \n                   ylab(\"Average Scores\") + \n                   theme_minimal() + \n                   theme(axis.text.x = element_text(\n                     angle = 45, vjust = 0.5, hjust=1)) +\n                   ggtitle(\"99% Confidence interval of average /&lt;br&gt;maths scores by race\")), \n                tooltip = \"text\"), \n       DT::datatable(shared_df, \n                     rownames = FALSE, \n                     class=\"compact\", \n                     width=\"100%\", \n                     options = list(pageLength = 10,\n                                    scrollX=T), \n                     colnames = c(\"No. of pupils\", \n                                  \"Avg Scores\",\n                                  \"Std Dev\",\n                                  \"Std Error\")) %&gt;%\n         formatRound(columns=c('mean', 'sd', 'se'),\n                     digits=2))"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#visualizing-the-uncertainty-of-point-estimates-ggdist-methods",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#visualizing-the-uncertainty-of-point-estimates-ggdist-methods",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "6.4.1 Visualizing the uncertainty of point estimates: ggdist methods",
-    "text": "6.4.1 Visualizing the uncertainty of point estimates: ggdist methods\nIn the code chunk below, stat_pointinterval() of ggdist is used to build a visual for displaying distribution of maths scores by race.\n\nexam %&gt;%\n  ggplot(aes(x = RACE, \n             y = MATHS)) +\n  stat_pointinterval() +\n  labs(\n    title = \"Visualising confidence intervals of mean math score\",\n    subtitle = \"Mean Point + Multiple-interval plot\")\n\n\n\n\n\n\n\n\n\nThis function comes with many arguments, students are advised to read the syntax reference for more detail.\n\nFor example, in the code chunk below the following arguments are used: - width = 0.95 - point = median - interval = qi\n\nexam %&gt;%\n  ggplot(aes(x = RACE, y = MATHS)) +\n  stat_pointinterval(.width = 0.95,\n  .point = median,\n  .interval = qi) +\n  labs(\n    title = \"Visualising confidence intervals of median math score\",\n    subtitle = \"Median Point + Multiple-interval plot\")"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#visualising-the-uncertainty-of-point-estimates-ggdist-methods",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#visualising-the-uncertainty-of-point-estimates-ggdist-methods",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "6.4.2 Visualising the uncertainty of point estimates: ggdist methods",
-    "text": "6.4.2 Visualising the uncertainty of point estimates: ggdist methods\n\n\n\n\n\n\nYour turn\n\n\n\nMakeover the plot on previous slide by showing 95% and 99% confidence intervals.\n\n\n\nexam %&gt;%\n  ggplot(aes(x = RACE, \n             y = MATHS)) +\n  stat_pointinterval(\n    show.legend = FALSE) +   \n  labs(\n    title = \"Visualising confidence intervals of mean math score\",\n    subtitle = \"Mean Point + Multiple-interval plot\")\n\n\n\n\n\n\n\n\nGentle advice: This function comes with many arguments, students are advised to read the syntax reference for more detail."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#visualising-the-uncertainty-of-point-estimates-ggdist-methods-1",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#visualising-the-uncertainty-of-point-estimates-ggdist-methods-1",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "6.4.3 Visualising the uncertainty of point estimates: ggdist methods",
-    "text": "6.4.3 Visualising the uncertainty of point estimates: ggdist methods\nIn the code chunk below, stat_gradientinterval() of ggdist is used to build a visual for displaying distribution of maths scores by race.\n\nexam %&gt;%\n  ggplot(aes(x = RACE, \n             y = MATHS)) +\n  stat_gradientinterval(   \n    fill = \"skyblue\",      \n    show.legend = TRUE     \n  ) +                        \n  labs(\n    title = \"Visualising confidence intervals of mean math score\",\n    subtitle = \"Gradient + interval plot\")\n\n\n\n\n\n\n\n\nGentle advice: This function comes with many arguments, students are advised to read the syntax reference for more detail."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#funnelplotr-methods-the-basic-plot",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#funnelplotr-methods-the-basic-plot",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "7.4.1 FunnelPlotR methods: The basic plot",
-    "text": "7.4.1 FunnelPlotR methods: The basic plot\nThe code chunk below plots a funnel plot.\n\nfunnel_plot(\n  numerator = covid19$Positive,\n  denominator = covid19$Death,\n  group = covid19$`Sub-district`\n)\n\n\n\n\n\n\n\n\nA funnel plot object with 267 points of which 0 are outliers. \nPlot is adjusted for overdispersion. \n\n\nThings to learn from the code chunk above.\n\ngroup in this function is different from the scatterplot. Here, it defines the level of the points to be plotted i.e. Sub-district, District or City. If Cityc is chosen, there are only six data points.\nBy default, data_type argument is “SR”.\nlimit: Plot limits, accepted values are: 95 or 99, corresponding to 95% or 99.8% quantiles of the distribution."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#funnelplotr-methods-makeover-1",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#funnelplotr-methods-makeover-1",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "7.4.2 FunnelPlotR methods: Makeover 1",
-    "text": "7.4.2 FunnelPlotR methods: Makeover 1\nThe code chunk below plots a funnel plot.\n\nfunnel_plot(\n  numerator = covid19$Death,\n  denominator = covid19$Positive,\n  group = covid19$`Sub-district`,\n  data_type = \"PR\",     #&lt;&lt;\n  xrange = c(0, 6500),  #&lt;&lt;\n  yrange = c(0, 0.05)   #&lt;&lt;\n)\n\n\n\n\n\n\n\n\nA funnel plot object with 267 points of which 7 are outliers. \nPlot is adjusted for overdispersion. \n\n\nThings to learn from the code chunk above. + data_type argument is used to change from default “SR” to “PR” (i.e. proportions). + xrange and yrange are used to set the range of x-axis and y-axis"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#funnelplotr-methods-makeover-2",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#funnelplotr-methods-makeover-2",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "7.4.3 FunnelPlotR methods: Makeover 2",
-    "text": "7.4.3 FunnelPlotR methods: Makeover 2\nThe code chunk below plots a funnel plot.\n\nfunnel_plot(\n  numerator = covid19$Death,\n  denominator = covid19$Positive,\n  group = covid19$`Sub-district`,\n  data_type = \"PR\",   \n  xrange = c(0, 6500),  \n  yrange = c(0, 0.05),\n  label = NA,\n  title = \"Cumulative COVID-19 Fatality Rate by Cumulative Total Number of COVID-19 Positive Cases\", #&lt;&lt;           \n  x_label = \"Cumulative COVID-19 Positive Cases\", #&lt;&lt;\n  y_label = \"Cumulative Fatality Rate\"  #&lt;&lt;\n)\n\n\n\n\n\n\n\n\nA funnel plot object with 267 points of which 7 are outliers. \nPlot is adjusted for overdispersion. \n\n\nThings to learn from the code chunk above.\n\nlabel = NA argument is to removed the default label outliers feature.\ntitle argument is used to add plot title.\nx_label and y_label arguments are used to add/edit x-axis and y-axis titles."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#computing-the-basic-derived-fields",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#computing-the-basic-derived-fields",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "7.5.1 Computing the basic derived fields",
-    "text": "7.5.1 Computing the basic derived fields\nTo plot the funnel plot from scratch, we need to derive cumulative death rate and standard error of cumulative death rate.\n\ndf &lt;- covid19 %&gt;%\n  mutate(rate = Death / Positive) %&gt;%\n  mutate(rate.se = sqrt((rate*(1-rate)) / (Positive))) %&gt;%\n  filter(rate &gt; 0)\n\nNext, the fit.mean is computed by using the code chunk below.\n\nfit.mean &lt;- weighted.mean(df$rate, 1/df$rate.se^2)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#calculate-lower-and-upper-limits-for-95-and-99.9-ci",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#calculate-lower-and-upper-limits-for-95-and-99.9-ci",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "7.5.2 Calculate lower and upper limits for 95% and 99.9% CI",
-    "text": "7.5.2 Calculate lower and upper limits for 95% and 99.9% CI\nThe code chunk below is used to compute the lower and upper limits for 95% confidence interval.\n\nnumber.seq &lt;- seq(1, max(df$Positive), 1)\nnumber.ll95 &lt;- fit.mean - 1.96 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \nnumber.ul95 &lt;- fit.mean + 1.96 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \nnumber.ll999 &lt;- fit.mean - 3.29 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \nnumber.ul999 &lt;- fit.mean + 3.29 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) \ndfCI &lt;- data.frame(number.ll95, number.ul95, number.ll999, \n                   number.ul999, number.seq, fit.mean)"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#plotting-a-static-funnel-plot",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#plotting-a-static-funnel-plot",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "7.5.3 Plotting a static funnel plot",
-    "text": "7.5.3 Plotting a static funnel plot\nIn the code chunk below, ggplot2 functions are used to plot a static funnel plot.\n\np &lt;- ggplot(df, aes(x = Positive, y = rate)) +\n  geom_point(aes(label=`Sub-district`), \n             alpha=0.4) +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ll95), \n            size = 0.4, \n            colour = \"grey40\", \n            linetype = \"dashed\") +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ul95), \n            size = 0.4, \n            colour = \"grey40\", \n            linetype = \"dashed\") +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ll999), \n            size = 0.4, \n            colour = \"grey40\") +\n  geom_line(data = dfCI, \n            aes(x = number.seq, \n                y = number.ul999), \n            size = 0.4, \n            colour = \"grey40\") +\n  geom_hline(data = dfCI, \n             aes(yintercept = fit.mean), \n             size = 0.4, \n             colour = \"grey40\") +\n  coord_cartesian(ylim=c(0,0.05)) +\n  annotate(\"text\", x = 1, y = -0.13, label = \"95%\", size = 3, colour = \"grey40\") + \n  annotate(\"text\", x = 4.5, y = -0.18, label = \"99%\", size = 3, colour = \"grey40\") + \n  ggtitle(\"Cumulative Fatality Rate by Cumulative Number of COVID-19 Cases\") +\n  xlab(\"Cumulative Number of COVID-19 Cases\") + \n  ylab(\"Cumulative Fatality Rate\") +\n  theme_light() +\n  theme(plot.title = element_text(size=12),\n        legend.position = c(0.91,0.85), \n        legend.title = element_text(size=7),\n        legend.text = element_text(size=7),\n        legend.background = element_rect(colour = \"grey60\", linetype = \"dotted\"),\n        legend.key.height = unit(0.3, \"cm\"))\np"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#interactive-funnel-plot-plotly-ggplot2",
-    "href": "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html#interactive-funnel-plot-plotly-ggplot2",
-    "title": "Hands-on Exercise 5: Visual Multivariate Analysis",
-    "section": "7.5.4 Interactive Funnel Plot: plotly + ggplot2",
-    "text": "7.5.4 Interactive Funnel Plot: plotly + ggplot2\nThe funnel plot created using ggplot2 functions can be made interactive with ggplotly() of plotly r package.\n\nfp_ggplotly &lt;- ggplotly(p,\n  tooltip = c(\"label\", \n              \"x\", \n              \"y\"))\nfp_ggplotly"
+    "section": "5.4.2 Plotting an interactive ternary diagram",
+    "text": "5.4.2 Plotting an interactive ternary diagram\nThe code below create an interactive ternary plot using plot_ly() function of Plotly R.\n\n# reusable function for creating annotation object\nlabel &lt;- function(txt) {\n  list(\n    text = txt, \n    x = 0.1, y = 1,\n    ax = 0, ay = 0,\n    xref = \"paper\", yref = \"paper\", \n    align = \"center\",\n    font = list(family = \"serif\", size = 15, color = \"white\"),\n    bgcolor = \"#b3b3b3\", bordercolor = \"black\", borderwidth = 2\n  )\n}\n\n# reusable function for axis formatting\naxis &lt;- function(txt) {\n  list(\n    title = txt, tickformat = \".0%\", tickfont = list(size = 10)\n  )\n}\n\nternaryAxes &lt;- list(\n  aaxis = axis(\"Young\"), \n  baxis = axis(\"Active\"), \n  caxis = axis(\"Old\")\n)\n\n# Initiating a plotly visualization \nplot_ly(\n  agpop_mutated, \n  a = ~YOUNG, \n  b = ~ACTIVE, \n  c = ~OLD, \n  color = I(\"black\"), \n  type = \"scatterternary\"\n) %&gt;%\n  layout(\n    annotations = label(\"Ternary Markers\"), \n    ternary = ternaryAxes\n  )"
   },
   {
     "objectID": "Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03.html#tooltip-effect-with-tooltip-aesthetic",
