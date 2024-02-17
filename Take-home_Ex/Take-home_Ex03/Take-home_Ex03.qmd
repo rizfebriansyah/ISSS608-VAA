@@ -1,7 +1,7 @@
 ---
-title: "Take-home Exercise 2"
-subtitle: "Elevating Data Visualisation to the next level: Peer Evaluation and Redesigning Visualisations from Take-Home Exercise 1."
-date: "25 January, 2024"
+title: "Take-home Exercise 3"
+subtitle: "Be Weatherwise or Otherwise"
+date: "12 February, 2024"
 date-modified: "last-modified"
 execute: 
   eval: true
@@ -163,6 +163,7 @@ ggplot(data= stu_qqq_SG_2,
 -   The data presented appears to be continuous, and the histogram effectively shows the distribution of the math scores. However, there are no markers for the mean or median score, which could provide additional useful information about the dataset.
 
 ### Critique - Aesthetics
+
 -   The colour scheme is simple and the bars are easily distinguishable, which makes the graph aesthetically pleasing and clear to read.
 -   The grey background is neutral and does not distract from the data, but a white background could be considered for a cleaner look.
 -   The text is not capitalised, which is fine for informality but could be capitalised for a more formal and professional appearance.
@@ -209,12 +210,11 @@ ggplot(data = stu_qqq_SG_2, aes(x = maths)) +
   )
 ```
 
-
 ## 3.2 Scatterplot of Socioeconomic Status vs Maths Score
 
 ### 3.2.1 Original Design
-A scatterplot below is used to reveal the relationship between the Socioeconmic status against the scores for each respective subject, in this particular case, the Maths scores.
 
+A scatterplot below is used to reveal the relationship between the Socioeconmic status against the scores for each respective subject, in this particular case, the Maths scores.
 
 ```{r}
 #| echo: false
@@ -237,19 +237,23 @@ ggplot(data=stu_qqq_SG_2,
 -   Overplotting may be obscuring the density of points in certain areas, making it difficult to assess the distribution of data accurately.
 
 ### Critique - Aesthetics
+
 -   The plot uses a basic colour scheme, which is clear but does not make use of colour to convey additional information or to improve visual appeal.
 -   All points are of the same size and colour, which could be varied to show density.
 -   The grey background is neutral but does nott enhance the data visualisation; a lighter background with subtle gridlines could improve readability.
 
 ### 3.2.3 Remake
+
 To improve the scatterplot in terms of clarity and aesthetics,
 
 ### Remake - Clarity
+
 -   Add a regression line to visually represent the relationship between math scores and socioeconomic status. This would not only clarify the direction and steepness of the relationship but also help in identifying patterns or deviations.
 -   Calculate and display the correlation coefficient on the plot to provide a clear, numerical summary of the relationship's strength.
 -   Implement techniques to mitigate overplotting, such as adjusting the alpha transparency of points.
 
 ### Remake - Aesthetics
+
 -   Introduce a colour gradient to reflect the density of overlapping points, which could enhance visual appeal and clarity.
 -   Apply a more sophisticated theme, like `theme_bw()`, which provides a clean and professional look with white background and gridlines.
 -   Increase the size and change the colour of the regression line, in this case brigh red, to make it stand out against the points.
@@ -281,14 +285,14 @@ print(p)
 ```
 
 ::: callout-note
-In this code, `geom_point()` is used with an alpha value to handle overplotting, `geom_smooth()` adds the regression line, and `annotate()` adds the correlation coefficient. 
+In this code, `geom_point()` is used with an alpha value to handle overplotting, `geom_smooth()` adds the regression line, and `annotate()` adds the correlation coefficient.
 :::
 
 ## 3.3 Distribution of Socioeconomic Status (by Gender)
 
 ### 3.3.1 Original Design
-A geom_density plot below is used to reveal the distribution between the Socioeconmic status by Gender.
 
+A geom_density plot below is used to reveal the distribution between the Socioeconmic status by Gender.
 
 ```{r}
 ggplot(data=stu_qqq_SG_2, 
@@ -307,20 +311,23 @@ ggplot(data=stu_qqq_SG_2,
 -   The plot indicates skewness, but without the actual data points or additional statistical annotations, it is difficult to validate the findings stated about the skewness or the comparative peaks of the distribution.
 -   The x-axis is well labeled, but the y-axis is not labeled at all, which could lead to confusion about what the density values represent.
 
-
 ### Critique - Aesthetics
+
 -   The colours are easily distinguishable but as mentioned earlier, may not be the best choice due to potential gender stereotyping.
 -   The default grey background and grid might not be the most aesthetically pleasing. A cleaner look might be achieved with a white background and less prominent grid lines.
 -   The density lines are quite thin. Increasing their thickness could make them stand out more clearly against the background.
 
 ### 3.3.3 Remake
+
 To improve the density plot in terms of clarity and aesthetics,
 
 ### Remake - Clarity
+
 -   Adding annotations for mean, median or mode for each gender could provide more context.
 -   If the lines are overlapping significantly, consider using fill with alpha to differentiate the distributions while showing overlap.
 
 ### Remake - Aesthetics
+
 -   In terms ot theme, we are using `theme_minimal()` for a more modern, clean aesthetic.
 -   For colour palette, we will opt for a colourblind-friendly palette or more neutral tones.
 -   We will also increase the line thickness for better visibility.
@@ -356,6 +363,7 @@ For the x-axis, which represents the actual data points, it is often a good prac
 ## 3.4 Distribution of Maths Scores by Expected School
 
 ### 3.4.1 Original Design
+
 A histogram below is used to reveal the distribution between the expected school against the scores for each respective subject, in this particular case, the Maths scores.
 
 ```{r}
@@ -379,19 +387,23 @@ ggplot(data=stu_qqq_SG_2,
 -   Bins: With a bin width set to produce 20 bins, some detail in the distribution may be lost, especially if the range of math scores is broad.
 
 ### Critique - Aesthetics
+
 -   Colour Saturation: The colours are very saturated, which can be visually overwhelming and make it harder to focus on the data.
 -   Gridlines: The absence of horizontal gridlines can make it hard to estimate the number of students for a given bin.
 -   Bar Borders: The grey borders on the bars add visual clutter, especially where colours are similar.
 
 ### 3.4.3 Remake
+
 To improve the histogram in terms of clarity and aesthetics,
 
 ### Remake - Clarity
+
 -   Switch to Faceted Plot: Instead of stacking, use faceted histograms or side-by-side histograms to compare distributions between schools without overlap.
 -   Simplify Colour Palette: Use a simpler colour palette with fewer colours or shades to help distinguish between schools, or use patterns instead of colours for differentiation.
 -   Reposition Legend: Move the legend outside the plot area, such as to the bottom or side, to avoid obscuring the data.
 
 ### Remake - Aesthetics
+
 -   We use a theme with a cleaner aesthetic, such as `theme_minimal()`, which provides a white background and less intrusive gridlines.
 -   Remove Bar Borders: We need to eliminate the borders or use a softer colour that does not compete with the fill colour.
 -   Add Horizontal Gridlines: We need to include soft horizontal gridlines for easier comparison of heights across the histogram.
@@ -420,6 +432,7 @@ In this code, `position = "dodge"` is used to place the bars side by side instea
 ## 3.5 Boxplot between Gender and Maths Scores
 
 ### 3.5.1 Original Design
+
 A boxplot below is used to reveal the distribution between maths score and Gender.
 
 ### 3.5.2 Critique
@@ -431,18 +444,22 @@ A boxplot below is used to reveal the distribution between maths score and Gende
 -   Gender Labeling: The x-axis labels "Female" and "Male" could be more inclusive. The plot does not account for non-binary or other gender identities, which might be relevant depending on the context of the data.
 
 ### Critique - Aesthetics
+
 -   Colour Scheme: The use of red for the mean is visually effective, but the rest of the plot is quite monochrome. Utilising a subtle colour for the boxes could improve visual appeal.
 -   Plot Spacing: The spacing between the two boxplots is quite large, which may not be an efficient use of space.
 -   Gridlines: There are no horizontal gridlines, which can help viewers better estimate the values of the quartiles and the mean.
 
 ### 3.5.3 Remake
+
 To improve the boxplot in terms of clarity and aesthetics,
 
 ### Remake - Clarity
+
 -   Legend for Mean: Add a legend or annotation to explain the red dot represents the mean.
 -   Additional Statistics: Add more summary statistics, such as the median (which the boxplot inherently shows), using different point shapes or colours to provide a fuller picture of the distribution.
 
 ### Remake - Aesthetics
+
 -   Colour for Boxes: Introduce a light colour fill within the boxes to enhance visual differentiation between the quartiles and the overall distribution.
 -   Reduce Width: Decrease the width of the individual boxplots to bring them closer together and use space more efficiently.
 -   Gridlines: Add horizontal gridlines for better readability of values.
@@ -469,21 +486,20 @@ ggplot(data = stu_qqq_SG_2, aes(x = gender, y = maths)) +
   coord_flip() # Flip the coordinates into horizontal position
 ```
 
-
 ::: callout-note
 This code adds subtle colours to the boxplot fills, differentiates between the mean and median with different colours and shapes, and adds y-axis gridlines for better readability. The `coord_flip()` is included as to flip the boxplots to a horizontal orientation, which is sometimes preferred for readability.
 :::
 
 # 4. Learning Points
 
-1. **Flexibility in Visualisation**: The exercises underscored that data visualisation is not a one-size-fits-all endeavour. Effective visualisations require a balance between clarity, information density and aesthetics. This balance can shift depending on the audience, the context and the data itself. There are multiple ways to visualise the same data, and each method can bring out different insights.
+1.  **Flexibility in Visualisation**: The exercises underscored that data visualisation is not a one-size-fits-all endeavour. Effective visualisations require a balance between clarity, information density and aesthetics. This balance can shift depending on the audience, the context and the data itself. There are multiple ways to visualise the same data, and each method can bring out different insights.
 
-2. **Importance of Context and Audience**: It became evident that understanding the audience and the context in which the visualisation will be consumed is crucial. A plot that works well in an academic paper might not be suitable for a business presentation. Tailoring visualisations to the specific needs and expectations of the audience can greatly enhance communication.
+2.  **Importance of Context and Audience**: It became evident that understanding the audience and the context in which the visualisation will be consumed is crucial. A plot that works well in an academic paper might not be suitable for a business presentation. Tailoring visualisations to the specific needs and expectations of the audience can greatly enhance communication.
 
-3. **Iterative Process**: Data visualisation is an iterative process. Initial drafts can be refined by incorporating feedback, exploring different visual forms, and considering alternative data representations. The exercise of critiquing and improving visualisations reinforces the idea that a good chart or plot is often the product of several iterations.
+3.  **Iterative Process**: Data visualisation is an iterative process. Initial drafts can be refined by incorporating feedback, exploring different visual forms, and considering alternative data representations. The exercise of critiquing and improving visualisations reinforces the idea that a good chart or plot is often the product of several iterations.
 
-4. **Technical Proficiency with Tools**: The exercise provided practical experience with R and ggplot2, illustrating the "grammar of graphics" approach to building visualisations. This approach emphasises the compositional nature of graphics, where layers and aesthetic mappings come together to create a complete image. Proficiency with such tools is vital for crafting effective visualisations.
+4.  **Technical Proficiency with Tools**: The exercise provided practical experience with R and ggplot2, illustrating the "grammar of graphics" approach to building visualisations. This approach emphasises the compositional nature of graphics, where layers and aesthetic mappings come together to create a complete image. Proficiency with such tools is vital for crafting effective visualisations.
 
-5. **Sensitivity to Details**: Small details can have a large impact on the effectiveness of a visualisation. For instance, the choice of starting axes at zero or the decision to include a legend can significantly affect the interpretation of the data. These exercises have sharpened an eye for such details.
+5.  **Sensitivity to Details**: Small details can have a large impact on the effectiveness of a visualisation. For instance, the choice of starting axes at zero or the decision to include a legend can significantly affect the interpretation of the data. These exercises have sharpened an eye for such details.
 
 To sum up, it is crucial to engage in ongoing learning, remain receptive to feedback, keep updated of the latest visualisation techniques, and possess a blend of creative and analytical abilities.
