@@ -321,13 +321,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="import-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="import-dataset">2.2 Import dataset</h2>
 <p>Of course our next step involves importing the dataset. As mentioned earlier, we will be analysing data from the Changi weather stations for the year 1983, 1993, 2003, 2013 and 2023. The following code snippet will outline the sequential steps we will undertake.</p>
-<p>Firstly, we need to import the 5 csv files using <code>read_csv</code>.</p>
+<p>Firstly, we need to import the 5 csv files using <code>read_csv</code>. I want to read and combine all the files as <strong>feb_combined</strong> since they all the files have the common column names and same number of columns.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data83 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/CHANGI_FEB1983"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data93 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/CHANGI_FEB1993"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data03 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/CHANGI_FEB2003"</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>data13 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/CHANGI_FEB2013"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>data23 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/CHANGI_FEB2023"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read and combine in one step</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>feb_combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="st">"data/CHANGI_FEB1983"</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="st">"data/CHANGI_FEB1993"</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="st">"data/CHANGI_FEB2003"</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="st">"data/CHANGI_FEB2013"</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="st">"data/CHANGI_FEB2023"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Save the filtered dataset as an RDS file to simplify subsequent data imports.</p>
 <p>Read the RDS file that has been exported.</p>

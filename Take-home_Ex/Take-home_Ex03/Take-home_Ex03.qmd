@@ -60,14 +60,17 @@ pacman::p_load(ggiraph, plotly,
 
 Of course our next step involves importing the dataset. As mentioned earlier, we will be analysing data from the Changi weather stations for the year 1983, 1993, 2003, 2013 and 2023. The following code snippet will outline the sequential steps we will undertake.
 
-Firstly, we need to import the 5 csv files using `read_csv`.
+Firstly, we need to import the 5 csv files using `read_csv`. I want to read and combine all the files as **feb_combined** since they all the files have the common column names and same number of columns.
 ```{r}
 #| eval: false
-data83 <- read_csv("data/CHANGI_FEB1983")
-data93 <- read_csv("data/CHANGI_FEB1993")
-data03 <- read_csv("data/CHANGI_FEB2003")
-data13 <- read_csv("data/CHANGI_FEB2013")
-data23 <- read_csv("data/CHANGI_FEB2023")
+# Read and combine in one step
+feb_combined <- bind_rows(
+  read.csv("data/CHANGI_FEB1983"),
+  read.csv("data/CHANGI_FEB1993"),
+  read.csv("data/CHANGI_FEB2003"),
+  read.csv("data/CHANGI_FEB2013"),
+  read.csv("data/CHANGI_FEB2023")
+)
 ```
 
 
