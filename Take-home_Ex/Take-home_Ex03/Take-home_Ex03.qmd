@@ -136,60 +136,8 @@ DT::datatable(feb_combined, class= "compact")
 # Visualisation
 
 ```{r}
-# Using ggplot2 to create the plot
-p1 <- ggplot(feb_combined, aes(x = as.Date(paste(Year, Month, Day, sep="-")), y = meantemp, group = 1)) +
-  geom_line() +
-  geom_point(aes(text = paste("Temp:", meantemp, "°C")), size = 2) +
-  labs(title = "Daily Mean Temperature Over Years",
-       x = "Date",
-       y = "Mean Temperature (°C)") +
-  theme_minimal()
-
-# Convert to interactive plotly plot
-interactive_p1 <- ggplotly(p1, tooltip = "text")
-
-# Display the plot
-interactive_p1
-```
-
-```{r}
-# Adjusting the first plot to include the day in the hover text
-p1 <- ggplot(feb_combined, aes(x = as.Date(paste(Year, Month, Day, sep="-")), y = meantemp)) +
-  geom_line() +
-  geom_point(aes(text = paste("Date:", paste(Year, Month, Day, sep="-"), "\nTemp:", meantemp, "°C")), size = 2) +
-  labs(title = "Daily Mean Temperature Over Years",
-       x = "Date",
-       y = "Mean Temperature (°C)") +
-  theme_minimal()
-
-# Convert to interactive plotly plot
-interactive_p1 <- ggplotly(p1, tooltip = "text")
-
-# Display the plot
-interactive_p1
-```
-
-```{r}
-# Adjusting the plot to remove the line connecting years
-p1 <- ggplot(feb_combined, aes(x = as.Date(paste(Year, Month, Day, sep="-")), y = meantemp, group = Year)) +
-  geom_line() +
-  geom_point(aes(text = paste("Date:", paste(Year, Month, Day, sep="-"), "\nTemp:", meantemp, "°C")), size = 2) +
-  labs(title = "Daily Mean Temperature Over Years",
-       x = "Date",
-       y = "Mean Temperature (°C)") +
-  theme_minimal()
-
-# Convert to interactive plotly plot
-interactive_p1 <- ggplotly(p1, tooltip = "text")
-
-# Display the plot
-interactive_p1
-```
-
-```{r}
 # Adjusting the plot with specified x-axis breaks for the years
 p1 <- ggplot(feb_combined, aes(x = as.Date(paste(Year, Month, Day, sep="-")), y = meantemp, group = Year)) +
-  geom_line() +
   geom_point(aes(text = paste("Date:", paste(Year, Month, Day, sep="-"), "\nTemp:", meantemp, "°C")), size = 2) +
   scale_x_date(breaks = as.Date(c("1983-02-01", "1993-02-01", "2003-02-01", "2013-02-01", "2023-02-01")),
                labels = c("1983", "1993", "2003", "2013", "2023"),
@@ -206,12 +154,13 @@ interactive_p1 <- ggplotly(p1, tooltip = "text")
 interactive_p1
 ```
 
+
 ```{r}
-# Adjusting the plot to add a red line for yearly average temperatures
+# Adjusting the plot: Remove the initial geom_line that connects daily temperatures
 p1 <- ggplot(feb_combined, aes(x = as.Date(paste(Year, Month, Day, sep="-")), y = meantemp)) +
-  geom_line(aes(group = Year)) +
-  geom_point(aes(text = paste("Date:", paste(Year, Month, Day, sep="-"), "\nTemp:", meantemp, "°C")), size = 2) +
-  geom_line(data = feb_combined, aes(x = as.Date(paste(Year, Month, Day, sep="-")), y = yearly_avg_temp, group = 1), color = "red", size = 1) +
+  # Removed the geom_line that connects each day's temperature
+  geom_point(aes(text = paste("Date:", paste(Year, Month, Day, sep="-"), "\nTemp:", meantemp, "°C")), size = 2, color = "blue") + # Keep points for daily temperatures
+  geom_line(data = feb_combined, aes(x = as.Date(paste(Year, Month, Day, sep="-")), y = yearly_avg_temp, group = 1), color = "red", size = 0.5) + # Keep the red line for yearly average temperatures
   scale_x_date(breaks = as.Date(c("1983-02-01", "1993-02-01", "2003-02-01", "2013-02-01", "2023-02-01")),
                labels = c("1983", "1993", "2003", "2013", "2023"),
                date_labels = "%Y") +
@@ -227,46 +176,21 @@ interactive_p1 <- ggplotly(p1, tooltip = "text")
 interactive_p1
 ```
 
-```{r}
-# Assuming yearly_avg_temp is already calculated correctly
-# Aggregating yearly mean temperature if needed
-yearly_avg <- feb_combined %>%
-  group_by(Year) %>%
-  summarise(yearly_avg_temp = mean(yearly_avg_temp, na.rm = TRUE))
 
-# Using ggplot2 for visualization
-p2 <- ggplot(yearly_avg, aes(x = Year, y = yearly_avg_temp)) +
-  geom_line() +
-  geom_point(aes(text = paste("Yearly Avg Temp:", yearly_avg_temp, "°C")), size = 3) +
-  labs(title = "Annual Mean Temperature Rise",
-       x = "Year",
-       y = "Annual Mean Temperature (°C)") +
-  theme_minimal()
-
-# Convert to interactive plotly plot
-interactive_p2 <- ggplotly(p2, tooltip = "text")
-
-# Display the plot
-interactive_p2
-```
 
 ```{r}
-# Assuming 'feb_combined' contains your full dataset
-# Calculate yearly average temperatures if not already done
-yearly_avgs <- feb_combined %>%
-  group_by(Year) %>%
-  summarise(yearly_avg_temp = mean(meantemp, na.rm = TRUE)) %>%
-  ungroup()
-
-# Create the interactive line plot
-p <- plot_ly(data = yearly_avgs, x = ~Year, y = ~yearly_avg_temp, type = 'scatter', mode = 'lines+markers',
-             marker = list(size = 10), line = list(color = 'royalblue')) %>%
+# Create the interactive line plot with customized hover text and x-axis ticks
+p <- plot_ly(data = feb_combined, x = ~Year, y = ~yearly_avg_temp, type = 'scatter', mode = 'lines+markers',
+             marker = list(size = 10, color = 'red'), line = list(color = 'red'),
+             hovertemplate = paste("Year: %{x}<br>Temperature: %{y} °C<extra></extra>")) %>%
   layout(title = "Yearly Average Temperatures (1983, 1993, 2003, 2013, 2023)",
-         xaxis = list(title = "Year"),
+         xaxis = list(title = "Year", 
+                      tickvals = c("1983", "1993", "2003", "2013", "2023"), # Specify which ticks to show
+                      ticktext = c("1983", "1993", "2003", "2013", "2023")), # Specify labels for the ticks
          yaxis = list(title = "Yearly Average Temperature (°C)"),
          hovermode = "closest")
 
-# Render the plot
+# Render the plot with specified x-axis ticks
 p
 ```
 
@@ -317,20 +241,8 @@ p
 
 
 
-```{r}
-# Create the interactive line plot with customized hover text and x-axis ticks
-p <- plot_ly(data = yearly_avgs, x = ~Year, y = ~yearly_avg_temp, type = 'scatter', mode = 'lines+markers',
-             marker = list(size = 10), line = list(color = 'royalblue'),
-             hovertemplate = paste("Year: %{x}<br>Temperature: %{y} °C<extra></extra>")) %>%
-  layout(title = "Yearly Average Temperatures (1983, 1993, 2003, 2013, 2023)",
-         xaxis = list(title = "Year", 
-                      tickvals = c("1983", "1993", "2003", "2013", "2023"), # Specify which ticks to show
-                      ticktext = c("1983", "1993", "2003", "2013", "2023")), # Specify labels for the ticks
-         yaxis = list(title = "Yearly Average Temperature (°C)"),
-         hovermode = "closest")
 
-# Render the plot with specified x-axis ticks
-p
-```
+
+
 
 
