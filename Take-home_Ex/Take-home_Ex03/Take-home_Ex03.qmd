@@ -31,7 +31,7 @@ For this take-home assignment, we are tasked to:
 
 -   Incorporate suitable interactive features to improve the experience of users in exploring data and/or in visual storytelling.
 
-For my take home exercise 3, I have chosen the Changi weather station and decided to focus on the daily temperature data for the month of February across the years 1983, 1993, 2003, 2013, and 2023 to examine the hypothesis suggesting an increase in daily average temperatures between 1.4 to 4.6 degrees Celsius.
+For this take home exercise 3, we have chosen the Changi weather station and decided to focus on the daily temperature data for the month of February across the years 1983, 1993, 2003, 2013, and 2023 to examine the hypothesis suggesting an increase in daily average temperatures between 1.4 to 4.6 degrees Celsius.
 
 # 2. Getting Started
 
@@ -49,11 +49,13 @@ We will utilise the following packages:
 
 -   patchwork for combining multiple ggplot2 graphs into one figure.
 
+-   ggthemes is an R package that offers additional themes, geoms, and scales for 'ggplot2'
+
 The code which loads the R packages:
 
 ```{r}
 pacman::p_load(ggiraph, plotly, 
-               patchwork, DT, tidyverse, dplyr, ggplot, ggthemes) 
+               patchwork, DT, tidyverse, dplyr, ggthemes) 
 ```
 
 ## 2.2 Import dataset
@@ -69,7 +71,11 @@ Also, we have found out that the 2023 dataset, latin characters are present on s
 -   "Maximum.Temperature..Â.C."
 -   "Minimum.Temperature..Â.C."
 
-Since we are only focusing on temperature data, we will discard the columns related to rainfall and windspeed. Also, I will rename these columns below accordingly. Mean Temperature (°C) -\> meantemp Maximum Temperature (°C) -\> maxtemp Minimum Temperature (°C) -\> mintemp
+Since we are only focusing on temperature data, we will discard the columns related to rainfall and windspeed. Also, I will rename these columns below accordingly. 
+
+-   Mean Temperature (°C) -\> meantemp 
+-   Maximum Temperature (°C) -\> maxtemp 
+-   Minimum Temperature (°C) -\> mintemp
 
 Then I also will create a new column to find out the difference between the maxtemp and mintemp on a daily basis.
 
@@ -113,9 +119,6 @@ feb_combined <- bind_rows(
 Afterwards, we want to find out the average temperature across the years. We will name this column yearly_avg_temp.
 
 ```{r}
-library(dplyr)
-
-# Assuming feb_combined is your combined data frame from previous steps
 # Add a new column with the mean temperature for each year
 feb_combined <- feb_combined %>%
   group_by(Year) %>%
@@ -125,14 +128,20 @@ feb_combined <- feb_combined %>%
 
 ::: callout-note
 The code below is to display the combined file:
+```{r}
+#| eval: false
+DT::datatable(feb_combined, class= "compact")
+```
 :::
 
 ```{r}
+#| echo: false
 DT::datatable(feb_combined, class= "compact")
 ```
 
-# Visualisation
+# 3 Visualisation
 
+## 3.1 Scatterplot
 ::: panel-tabset
 # The plot
 
@@ -179,6 +188,24 @@ interactive_p1
 ```
 :::
 
+This scatter plot visualises two types of temperature data over a span of several years, from before 1983 to 2023:
+
+1. **Daily Mean Temperature (Blue Dots)**: Each blue dot represents the mean temperature recorded on a specific day. The vertical axis shows the temperature in degrees Celsius (°C), while the horizontal axis represents the years. The exact date and temperature are displayed when you hover over a blue dot, as shown in the tooltip for the date 2003-2-23 with a mean temperature of 27.5 °C.
+
+2. **Average Annual Temperature (Red Line)**: The red line indicates the trend of the average annual temperature over the years. It appears to have a fluctuating pattern, with some years being warmer on average than others.
+
+The scatter plot also suggests a wide range of daily temperatures within any given year, as seen by the vertical spread of blue dots for each year. The red line helps to identify whether there is an overall trend of increasing or decreasing average temperatures, which could be an indicator of climate patterns or changes. The plot is a useful way to visually compare daily temperatures to the average trend over a long time period.
+
+:::callout-note
+# Why is interactivity beneficial here?
+-   Detailed Information on Demand: The ability to hover over individual data points to obtain specific information (such as the exact date and temperature) allows us users to explore the data in depth without overwhelming the visual presentation. In the provided scatter plot above, this means we can see the exact temperature on a given day, which is crucial for detailed analysis or for identifying outliers and anomalies.
+
+-   Clarity in a Dense Plot: With many data points, a static scatter plot can become cluttered and difficult to read. Interactivity allows us users to focus on individual points of interest without being distracted by the sheer volume of data.
+
+-   Trend Identification: By interacting with the data points along the trend line, we can observe how the annual average temperature changes over time, making it easier to spot patterns such as warming or cooling trends.
+:::
+
+## 3.2 Lineplot
 ::: panel-tabset
 # The plot
 
@@ -219,7 +246,23 @@ p
 ```
 :::
 
-# Heatmap
+:::callout-note
+# Key Findings:
+
+-   **Initial Point (1983):** The graph starts at a peak with the average annual temperature recorded at 28.06 °C in 1983. This represents the highest recorded temperature over the 40-year span depicted.
+
+-   **First Decade Drop (1993):** There is a sharp decline over the next decade to 26.71 °C in 1993. This decrease of approximately 1.35 °C is quite significant, suggesting a notable cooling period during these ten years.
+
+-   **Recovery Phase (2003):** The year 2003 shows a rebound with the temperature rising to 27.09 °C. Although this is an increase of about 0.38 °C from 1993, it’s still below the starting temperature in 1983 by nearly 1 °C.
+
+-   **Lowest Point (2013):** The year 2013 marks the lowest temperature on the plot at 26.53 °C. This further decrease suggests a continuation of the cooling trend, with temperatures dropping by approximately 0.56 °C from 2003 and 1.53 °C from 1983.
+
+-   **Partial Recovery (2023):** By 2023, the temperature rises again to 26.95 °C. This increase of 0.42 °C from 2013 indicates a slight warming trend. However, the temperature in 2023 is still below the initial 1983 temperature by 1.11 °C.
+:::
+
+The overall trend appears to be a downward trajectory from 1983 to 2013 with a slight increase in 2023. However, the graph does not show a simple linear decrease; rather, it fluctuates, suggesting variability in average temperatures over time. This could be due to a variety of natural climatic cycles or other environmental factors influencing average temperatures.
+
+## 3.3 Heatmap
 
 ::: panel-tabset
 # The plot
@@ -314,7 +357,7 @@ Interactivity functionality in a heatmap, such as the ability to hover over cell
 **Accessibility**: For those with colour vision deficiencies, distinguishing between colours might be challenging. Interactive elements that display numerical data can make the information accessible to a wider audience.
 :::
 
-# Box Plot across 5 years
+## 3.4 Box Plot across 5 years
 
 ::: panel-tabset
 # The plot
@@ -354,10 +397,11 @@ p
 ```
 :::
 
-::: callout-note
-# Key Findings
-
 The box plot illustrates the distribution of daily mean temperatures for the month of February over five distinct years: 1983, 1993, 2003, 2013, and 2023. For each year, the data is summarised as follows:
+
+::: callout-note
+
+# Key Findings
 
 **1983**:
 
@@ -414,6 +458,37 @@ The box plot illustrates the distribution of daily mean temperatures for the mon
 -   The median temperature was 27.05°C, suggesting a slight uptick from 2013. - The first quartile was at 26.7°C.
 
 -   The minimum temperature saw a slight increase from the previous decade at 24.9°C, with a noticeable outlier just below the lower fence of 25.6°C.
-
-From 1983 to 2023, there's a noticeable fluctuation in temperatures with both the median and the interquartile range varying from year to year. The median temperature appears to show slight variations, without a clear upward or downward trend. However, there is evidence of increasing variability in temperatures, as seen in the wider interquartile ranges in the later years, particularly in 2023.
 :::
+From 1983 to 2023, there's a noticeable fluctuation in temperatures with both the median and the interquartile range varying from year to year. The median temperature appears to show slight variations, without a clear upward or downward trend. However, there is evidence of increasing variability in temperatures, as seen in the wider interquartile ranges in the later years, particularly in 2023.
+
+# 4. Conclusion
+**Scatterplot Analysis**
+
+The scatterplot shows both daily mean temperatures and average annual temperatures, indicating fluctuating patterns rather than a clear trend of increasing temperatures. The vertical spread of blue dots (daily mean temperatures) shows variability within years, and the red line (average annual temperature) suggests fluctuating patterns. This plot alone does not confirm the hypothesis of a steady increase in temperatures.
+
+**Lineplot Analysis**
+
+The lineplot reveals a fluctuating temperature trend over the specified decades:
+
+-   A significant drop from 1983 to 1993.
+-   A slight recovery in 2003.
+-   The lowest point in 2013.
+-   A partial recovery in 2023.
+
+These fluctuations show a general downward trend until 2013, with a slight increase by 2023, contradicting the hypothesis of a consistent increase in average temperatures.
+
+**Heatmap Analysis**
+
+The heatmap provides a visual comparison of daily mean temperatures for February across the five selected years, showing variations in temperature with lighter shades indicating cooler temperatures and darker shades for warmer temperatures. This visual representation highlights variability but does not directly support the hypothesis of a continuous increase in temperatures.
+
+**Box Plot Analysis**
+
+The box plot data across the five years show fluctuations in temperatures, with noticeable variability and some years experiencing cooler temperatures than others. The median temperatures and interquartile ranges vary, indicating fluctuations rather than a clear upward trend. For example, the minimum temperatures show a slight decrease in 2013 compared to previous years but a slight increase in 2023.
+
+In conclusion, based on our analyses, the hypothesis of a consistent increase in daily average temperatures between 1.4 to 4.6 degrees Celsius is not clearly supported. Instead, the temperature data for February from 1983 to 2023 at the Changi weather station shows fluctuations with periods of cooling and slight warming. While there is evidence of variability and slight increases in temperatures in certain years, the overall data do not confirm a steady or significant increase within the hypothesized range. Instead, the data suggest a more complex pattern of temperature changes, including periods of cooling and modest warming, which could be influenced by a variety of natural and anthropogenic factors.
+
+
+
+
+
+
