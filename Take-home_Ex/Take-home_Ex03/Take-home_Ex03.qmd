@@ -53,51 +53,284 @@ The code which loads the R packages:
 
 ```{r}
 pacman::p_load(ggiraph, plotly, 
-               patchwork, DT, tidyverse) 
+               patchwork, DT, tidyverse, dplyr, ggplot) 
 ```
 
 ## 2.2 Import dataset
 
-Of course our next step involves importing the dataset. As mentioned earlier, we will be analysing data from the Changi weather stations for the year 1983, 1993, 2003, 2013 and 2023. The following code snippet will outline the sequential steps we will undertake.
+Of course our next step involves importing the dataset. As mentioned earlier, we will be analysing data from the Changi weather stations for the year 1983, 1993, 2003, 2013 and 2023. 
 
-Firstly, we need to import the 5 csv files using `read_csv`. I want to read and combine all the files as **feb_combined** since they all the files have the common column names and same number of columns.
+Firstly, we need to import the 5 csv files using `read_csv`. We want to read and combine all the files as **feb_combined** since they all the files have the common column names and same number of columns.
+
+Also, we have found out that the 2023 dataset, latin characters are present on some of the columns.
+
+-   ï..Station
+-   "Mean.Temperature..Â.C."
+-   "Maximum.Temperature..Â.C."
+-   "Minimum.Temperature..Â.C."  
+
+Since we are only focusing on temperature data, we will discard the columns related to rainfall and windspeed. Also, I will rename these columns below accordingly.
+Mean Temperature (°C) -> meantemp
+Maximum Temperature (°C) -> maxtemp
+Minimum Temperature (°C) -> mintemp
+
+Then I also will create a new column to find out the difference between the maxtemp and mintemp on a daily basis.
+
+The following code snippet will outline the sequential steps we will undertake:
 ```{r}
-#| eval: false
-# Read and combine in one step
+library(dplyr)
+
+# Function to read and preprocess each file
+read_and_preprocess <- function(file_path, encoding = "latin1", is_2023 = FALSE) {
+  data <- read.csv(file_path, fileEncoding = encoding)
+  
+  # If the file is for the year 2023, rename columns with encoding issues
+  if(is_2023) {
+    data <- rename(data, 
+                   Station = `ï..Station`, 
+                   `Mean.Temperature...C.` = `Mean.Temperature..Â.C.`,
+                   `Maximum.Temperature...C.` = `Maximum.Temperature..Â.C.`,
+                   `Minimum.Temperature...C.` = `Minimum.Temperature..Â.C.`)
+  }
+  
+  # Select and rename columns for consistency
+  data %>%
+    select(Station, Year, Month, Day, `Mean.Temperature...C.`, `Maximum.Temperature...C.`, `Minimum.Temperature...C.`) %>%
+    rename(meantemp = `Mean.Temperature...C.`, 
+           maxtemp = `Maximum.Temperature...C.`, 
+           mintemp = `Minimum.Temperature...C.`) %>%
+    mutate(difftemp = maxtemp - mintemp)
+}
+
+# Read and preprocess each file, with special handling for the 2023 file
 feb_combined <- bind_rows(
-  read.csv("data/CHANGI_FEB1983"),
-  read.csv("data/CHANGI_FEB1993"),
-  read.csv("data/CHANGI_FEB2003"),
-  read.csv("data/CHANGI_FEB2013"),
-  read.csv("data/CHANGI_FEB2023")
+  read_and_preprocess("data/CHANGI_FEB1983.csv"),
+  read_and_preprocess("data/CHANGI_FEB1993.csv"),
+  read_and_preprocess("data/CHANGI_FEB2003.csv"),
+  read_and_preprocess("data/CHANGI_FEB2013.csv"),
+  read_and_preprocess("data/CHANGI_FEB2023.csv", is_2023 = TRUE)
 )
 ```
 
-
-Save the filtered dataset as an RDS file to simplify subsequent data imports.
-
-
-
-Read the RDS file that has been exported.
-
-
-This code will undergo pre-processing to select all the required variables in which we need to do further analysis on. A cleaner code have been compiled below.
-
-::: callout-note
-# Code Explanation
-
-In the R code below, we begin by selecting specific columns of interest from the dataset stu_qqq_SG. Following this, we will calculate the row means for math, science and reading scores, providing a more comprehensive measure of individual performance. The column names are then renamed to enhance clarity. Afterwards, a subset of columns is selected for focused analysis, which includes gender, socioeconomic status (escs), and educational level (school). Gender and school variables are recoded to more interpretable factors, replacing numeric codes with meaningful and easier to understand labels. The cleaned dataset, named stu_qqq_SG_2, is saved in an RDS file for future use. The RDS file is subsequently read back into the script.
-:::
+Afterwards, we want to find out the average temperature across the years. We will name this column yearly_avg_temp.
 
 ```{r}
-# Step 1: Select relevant columns
+library(dplyr)
 
+# Assuming feb_combined is your combined data frame from previous steps
+# Add a new column with the mean temperature for each year
+feb_combined <- feb_combined %>%
+  group_by(Year) %>%
+  mutate(yearly_avg_temp = mean(meantemp, na.rm = TRUE)) %>%
+  ungroup()
 ```
 
 ::: callout-note
-# Code Explanation - as.factor() function
-
-Moving on, the provided code transforms the 'gender' and 'school' columns in the R data frame stu_qqq_SG_2 into factors using the `as.factor()` function. This conversion is beneficial when dealing with categorical variables, as factors in R provide a structured representation of such data. The gender factor represents two categories, "Male" and "Female," while the school factor likely denotes different levels of education, such as "Lower Sec," "Upper Sec," and others. Converting these columns to factors ensures that R recognises and treats them appropriately as categorical variables during statistical analysis, allowing for better representation and interpretation of the data. Subsequently, a summary statistics report is generated, offering a quick overview of the of the cleaned dataset.
+The code below is to display the combined file:
 :::
+```{r}
+DT::datatable(feb_combined, class= "compact")
+```
+
+
+# Visualisation
+
+```{r}
+# Using ggplot2 to create the plot
+p1 <- ggplot(feb_combined, aes(x = as.Date(paste(Year, Month, Day, sep="-")), y = meantemp, group = 1)) +
+  geom_line() +
+  geom_point(aes(text = paste("Temp:", meantemp, "°C")), size = 2) +
+  labs(title = "Daily Mean Temperature Over Years",
+       x = "Date",
+       y = "Mean Temperature (°C)") +
+  theme_minimal()
+
+# Convert to interactive plotly plot
+interactive_p1 <- ggplotly(p1, tooltip = "text")
+
+# Display the plot
+interactive_p1
+```
+
+```{r}
+# Adjusting the first plot to include the day in the hover text
+p1 <- ggplot(feb_combined, aes(x = as.Date(paste(Year, Month, Day, sep="-")), y = meantemp)) +
+  geom_line() +
+  geom_point(aes(text = paste("Date:", paste(Year, Month, Day, sep="-"), "\nTemp:", meantemp, "°C")), size = 2) +
+  labs(title = "Daily Mean Temperature Over Years",
+       x = "Date",
+       y = "Mean Temperature (°C)") +
+  theme_minimal()
+
+# Convert to interactive plotly plot
+interactive_p1 <- ggplotly(p1, tooltip = "text")
+
+# Display the plot
+interactive_p1
+```
+
+```{r}
+# Adjusting the plot to remove the line connecting years
+p1 <- ggplot(feb_combined, aes(x = as.Date(paste(Year, Month, Day, sep="-")), y = meantemp, group = Year)) +
+  geom_line() +
+  geom_point(aes(text = paste("Date:", paste(Year, Month, Day, sep="-"), "\nTemp:", meantemp, "°C")), size = 2) +
+  labs(title = "Daily Mean Temperature Over Years",
+       x = "Date",
+       y = "Mean Temperature (°C)") +
+  theme_minimal()
+
+# Convert to interactive plotly plot
+interactive_p1 <- ggplotly(p1, tooltip = "text")
+
+# Display the plot
+interactive_p1
+```
+
+```{r}
+# Adjusting the plot with specified x-axis breaks for the years
+p1 <- ggplot(feb_combined, aes(x = as.Date(paste(Year, Month, Day, sep="-")), y = meantemp, group = Year)) +
+  geom_line() +
+  geom_point(aes(text = paste("Date:", paste(Year, Month, Day, sep="-"), "\nTemp:", meantemp, "°C")), size = 2) +
+  scale_x_date(breaks = as.Date(c("1983-02-01", "1993-02-01", "2003-02-01", "2013-02-01", "2023-02-01")),
+               labels = c("1983", "1993", "2003", "2013", "2023"),
+               date_labels = "%Y") +
+  labs(title = "Daily Mean Temperature Over Years",
+       x = "Year",
+       y = "Mean Temperature (°C)") +
+  theme_minimal()
+
+# Convert to interactive plotly plot
+interactive_p1 <- ggplotly(p1, tooltip = "text")
+
+# Display the plot
+interactive_p1
+```
+
+```{r}
+# Adjusting the plot to add a red line for yearly average temperatures
+p1 <- ggplot(feb_combined, aes(x = as.Date(paste(Year, Month, Day, sep="-")), y = meantemp)) +
+  geom_line(aes(group = Year)) +
+  geom_point(aes(text = paste("Date:", paste(Year, Month, Day, sep="-"), "\nTemp:", meantemp, "°C")), size = 2) +
+  geom_line(data = feb_combined, aes(x = as.Date(paste(Year, Month, Day, sep="-")), y = yearly_avg_temp, group = 1), color = "red", size = 1) +
+  scale_x_date(breaks = as.Date(c("1983-02-01", "1993-02-01", "2003-02-01", "2013-02-01", "2023-02-01")),
+               labels = c("1983", "1993", "2003", "2013", "2023"),
+               date_labels = "%Y") +
+  labs(title = "Daily and Yearly Mean Temperature Over Years",
+       x = "Year",
+       y = "Temperature (°C)") +
+  theme_minimal()
+
+# Convert to interactive plotly plot
+interactive_p1 <- ggplotly(p1, tooltip = "text")
+
+# Display the plot
+interactive_p1
+```
+
+```{r}
+# Assuming yearly_avg_temp is already calculated correctly
+# Aggregating yearly mean temperature if needed
+yearly_avg <- feb_combined %>%
+  group_by(Year) %>%
+  summarise(yearly_avg_temp = mean(yearly_avg_temp, na.rm = TRUE))
+
+# Using ggplot2 for visualization
+p2 <- ggplot(yearly_avg, aes(x = Year, y = yearly_avg_temp)) +
+  geom_line() +
+  geom_point(aes(text = paste("Yearly Avg Temp:", yearly_avg_temp, "°C")), size = 3) +
+  labs(title = "Annual Mean Temperature Rise",
+       x = "Year",
+       y = "Annual Mean Temperature (°C)") +
+  theme_minimal()
+
+# Convert to interactive plotly plot
+interactive_p2 <- ggplotly(p2, tooltip = "text")
+
+# Display the plot
+interactive_p2
+```
+
+```{r}
+# Assuming 'feb_combined' contains your full dataset
+# Calculate yearly average temperatures if not already done
+yearly_avgs <- feb_combined %>%
+  group_by(Year) %>%
+  summarise(yearly_avg_temp = mean(meantemp, na.rm = TRUE)) %>%
+  ungroup()
+
+# Create the interactive line plot
+p <- plot_ly(data = yearly_avgs, x = ~Year, y = ~yearly_avg_temp, type = 'scatter', mode = 'lines+markers',
+             marker = list(size = 10), line = list(color = 'royalblue')) %>%
+  layout(title = "Yearly Average Temperatures (1983, 1993, 2003, 2013, 2023)",
+         xaxis = list(title = "Year"),
+         yaxis = list(title = "Yearly Average Temperature (°C)"),
+         hovermode = "closest")
+
+# Render the plot
+p
+```
+
+```{r}
+library(ggplot2)
+library(plotly)
+library(ggthemes) # For theme_tufte
+
+# Ensure 'Year' is treated as a factor with only the levels you want to display
+feb_combined$Year <- factor(feb_combined$Year, levels = c("1983", "1993", "2003", "2013", "2023"))
+
+# Create the heat map with ggplot, specifying y-axis breaks
+p <- ggplot(feb_combined, aes(x = Day, y = Year, fill = meantemp)) + 
+  geom_tile(color = "white", size = 0.1) + 
+  theme_tufte(base_family = "Helvetica") + # Using Tufte theme for a clean look
+  scale_fill_gradient(name = "°C", low = "lightyellow", high = "red") + # Adjust color gradient
+  scale_y_discrete(limits = c("1983", "1993", "2003", "2013", "2023")) + # Specify y-axis to show only these years
+  labs(x = NULL, 
+       y = NULL, 
+       title = "Daily Mean Temperature in Changi for February") +
+  theme(axis.ticks = element_blank(),
+        plot.title = element_text(hjust = 0.5),
+        legend.title = element_text(size = 10),
+        legend.text = element_text(size = 8))
+
+# Convert the ggplot object to an interactive plotly object
+interactive_p <- ggplotly(p)
+
+# Display the interactive plot
+interactive_p
+```
+
+
+```{r}
+feb_combined$Year <- as.factor(feb_combined$Year)
+
+# Create the Plotly Box Plot
+p <- plot_ly(feb_combined, y = ~`meantemp`, x = ~Year, type = 'box',
+             color = ~Year, 
+             hoverinfo = 'y+x') %>%
+  layout(title = "Box Plot of Daily Mean Temperatures for June Over Decades",
+         xaxis = list(title = "Year"),
+         yaxis = list(title = "Mean Temperature (°C)"))
+
+# Display the plot
+p
+```
+
+
+
+```{r}
+# Create the interactive line plot with customized hover text and x-axis ticks
+p <- plot_ly(data = yearly_avgs, x = ~Year, y = ~yearly_avg_temp, type = 'scatter', mode = 'lines+markers',
+             marker = list(size = 10), line = list(color = 'royalblue'),
+             hovertemplate = paste("Year: %{x}<br>Temperature: %{y} °C<extra></extra>")) %>%
+  layout(title = "Yearly Average Temperatures (1983, 1993, 2003, 2013, 2023)",
+         xaxis = list(title = "Year", 
+                      tickvals = c("1983", "1993", "2003", "2013", "2023"), # Specify which ticks to show
+                      ticktext = c("1983", "1993", "2003", "2013", "2023")), # Specify labels for the ticks
+         yaxis = list(title = "Yearly Average Temperature (°C)"),
+         hovermode = "closest")
+
+# Render the plot with specified x-axis ticks
+p
+```
 
 
