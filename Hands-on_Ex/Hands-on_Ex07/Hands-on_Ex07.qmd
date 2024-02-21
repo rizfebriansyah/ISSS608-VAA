@@ -16,7 +16,7 @@ editor: visual
 
 Choropleth mapping is a technique that uses patterns or colors to symbolize different areas, such as countries, provinces, states, counties, or census units. For instance, to illustrate the geographical distribution of Singapore's elderly population according to the Master Plan 2014 Subzone Boundary, a social scientist might employ a choropleth map. This chapter will guide you through the process of creating accurate and effective choropleth maps with the help of a tool known as the [tmap](https://cran.r-project.org/web/packages/tmap/) package in R.
 
-:::callout-note
+::: callout-note
 It is advisable for you to read the functional description of each function before using them.
 :::
 
@@ -32,11 +32,12 @@ In this hands-on exercise, the primary R package we'll be utilising is the [tmap
 It's worth noting that readr, tidyr, and dplyr are all components of the tidyverse package.
 
 Below, you'll find the code snippet that will help you install and load these packages in RStudio.
+
 ```{r}
 pacman::p_load(sf, tmap, tidyverse)
 ```
 
-:::callout-note
+::: callout-note
 Notice that, we only need to install **tidyverse** instead of readr, tidyr and dplyr individually.
 :::
 
@@ -46,9 +47,9 @@ Notice that, we only need to install **tidyverse** instead of readr, tidyr and d
 
 To create the choropleth map, we will use two datasets:
 
-1. The "Master Plan 2014 Subzone Boundary (Web)" (abbreviated as `MP14_SUBZONE_WEB_PL`), available in ESRI shapefile format. This geospatial dataset outlines the geographical boundaries of Singapore at the planning subzone level, based on the Urban Redevelopment Authority's Master Plan 2014. It is accessible for download from [data.gov.sg](https://data.gov.sg/).
+1.  The "Master Plan 2014 Subzone Boundary (Web)" (abbreviated as `MP14_SUBZONE_WEB_PL`), available in ESRI shapefile format. This geospatial dataset outlines the geographical boundaries of Singapore at the planning subzone level, based on the Urban Redevelopment Authority's Master Plan 2014. It is accessible for download from [data.gov.sg](https://data.gov.sg/).
 
-2. "Singapore Residents by Planning Area/Subzone, Age Group, Sex, and Type of Dwelling, June 2011-2020" in CSV format (file name: respopagesextod2011to2020.csv). This dataset, which can be downloaded from the [Department of Statistics, Singapore](https://www.singstat.gov.sg/), is considered aspatial, meaning it lacks coordinate values. However, its PA and SZ fields serve as unique identifiers that allow for geocoding to the `MP14_SUBZONE_WEB_PL` shapefile.
+2.  "Singapore Residents by Planning Area/Subzone, Age Group, Sex, and Type of Dwelling, June 2011-2020" in CSV format (file name: respopagesextod2011to2020.csv). This dataset, which can be downloaded from the [Department of Statistics, Singapore](https://www.singstat.gov.sg/), is considered aspatial, meaning it lacks coordinate values. However, its PA and SZ fields serve as unique identifiers that allow for geocoding to the `MP14_SUBZONE_WEB_PL` shapefile.
 
 ## 7.3.2 Importing the data
 
@@ -81,19 +82,18 @@ popdata <- read_csv("data/aspatial/respopagesextod2011to2020.csv")
 
 Before creating a thematic map, it is necessary to compile a data table focusing on the year 2020. This table needs to encompass several variables: PA, SZ, YOUNG, ECONOMY ACTIVE, AGED, TOTAL, and DEPENDENCY.
 
-- YOUNG refers to the population in the age groups from 0-4 up to 20-24.
-- ECONOMY ACTIVE encompasses individuals in the age groups from 25-29 to 60-64.
-- AGED includes those aged 65 and above.
-- TOTAL represents the sum of all age groups.
-- DEPENDENCY calculates the ratio of the sum of YOUNG and AGED populations to the ECONOMY ACTIVE population.
+-   YOUNG refers to the population in the age groups from 0-4 up to 20-24.
+-   ECONOMY ACTIVE encompasses individuals in the age groups from 25-29 to 60-64.
+-   AGED includes those aged 65 and above.
+-   TOTAL represents the sum of all age groups.
+-   DEPENDENCY calculates the ratio of the sum of YOUNG and AGED populations to the ECONOMY ACTIVE population.
 
 ### 7.3.4.1 Data Wrangling
 
 The data manipulation and transformation tasks will involve the use of the following functions:
 
-- `pivot_wider()` from the tidyr package, and
-- `mutate()`, `filter()`, `group_by()`, and `select()` from the dplyr package.
-
+-   `pivot_wider()` from the tidyr package, and
+-   `mutate()`, `filter()`, `group_by()`, and `select()` from the dplyr package.
 
 ```{r}
 popdata2020 <- popdata %>%
@@ -117,6 +117,7 @@ mutate(`DEPENDENCY` = (`YOUNG` + `AGED`)
 ```
 
 ### 7.3.4.2 Joining the attribute data and geospatial data
+
 Before proceeding with the georelational join, we must undertake an additional step of converting the values in the PA and SZ fields to uppercase. This step is necessary due to the mixed use of upper- and lowercase letters in the PA and SZ fields, whereas the SUBZONE_N and PLN_AREA_N fields are consistently in uppercase.
 
 ```{r}
@@ -142,10 +143,11 @@ write_rds(mpsz_pop2020, "data/rds/mpszpop2020.rds")
 ```
 
 # 7.4 Choropleth Mapping Geospatial Data Using tmap
+
 There are two methods for creating thematic maps with tmap:
 
-1. Generating a thematic map swiftly using the `qtm()` function.
-2. Creating a highly customizable thematic map by employing various tmap elements.
+1.  Generating a thematic map swiftly using the `qtm()` function.
+2.  Creating a highly customizable thematic map by employing various tmap elements.
 
 ## 7.4.1 Plotting a choropleth map quickly by using qtm()
 
@@ -164,7 +166,8 @@ Key insights from the provided code snippet include:
 -   The function `tmap_mode()` is utilised with the option "plot" to generate a static map. To create an interactive map, the "view" option would be selected.
 -   The `fill` parameter is employed to visually represent a specific attribute, in this case, "DEPENDENCY".
 
-## 7.4.2 Creating a choropleth map by using tmap’s elements
+## 7.4.2 Creating a choropleth map by using tmap's elements
+
 While `qtm()` offers a convenient and quick way to produce a choropleth map, its drawback lies in the limited control over the aesthetics of individual layers. For creating a high-quality cartographic choropleth map, as illustrated in the figure below, it's recommended to utilise the drawing elements provided by tmap.
 
 ```{r}
@@ -211,12 +214,9 @@ tm_shape(mpsz_pop2020)+
 
 Things to learn from tm_polygons():
 
-The default interval binning used to draw the choropleth map is called “pretty”. A detailed discussion of the data classification methods supported by tmap will be provided in sub-section 4.3.
-The default colour scheme used is YlOrRd of ColorBrewer. You will learn more about the color scheme in sub-section 4.4.
-By default, Missing value will be shaded in grey.
+The default interval binning used to draw the choropleth map is called "pretty". A detailed discussion of the data classification methods supported by tmap will be provided in sub-section 4.3. The default colour scheme used is YlOrRd of ColorBrewer. You will learn more about the color scheme in sub-section 4.4. By default, Missing value will be shaded in grey.
 
-
-## 7.4.2.3 Drawing a choropleth map using tm_fill() and *tm_border()**
+## 7.4.2.3 Drawing a choropleth map using tm_fill() and \*tm_border()\*\*
 
 Actually, tm_polygons() is a wraper of tm_fill() and tm_border(). tm_fill() shades the polygons by using the default colour scheme and tm_borders() adds the borders of the shapefile onto the choropleth map.
 
@@ -243,9 +243,7 @@ The alpha argument is used to define transparency number between 0 (totally tran
 
 Beside alpha argument, there are three other arguments for tm_borders(), they are:
 
-col = border colour,
-lwd = border line width. The default is 1, and
-lty = border line type. The default is “solid”.
+col = border colour, lwd = border line width. The default is 1, and lty = border line type. The default is "solid".
 
 # 7.4.3 Data classification methods of tmap
 
@@ -279,8 +277,8 @@ tm_shape(mpsz_pop2020)+
 
 Notice that the distribution of quantile data classification method are more evenly distributed then equal data classification method.
 
-
 ### 7.4.3.2 Plotting choropleth map with custome break
+
 For all the built-in styles, the category breaks are computed internally. In order to override these defaults, the breakpoints can be set explicitly by means of the breaks argument to the tm_fill(). It is important to note that, in tmap the breaks include a minimum and maximum. As a result, in order to end up with n categories, n+1 elements must be specified in the breaks option (the values must be in increasing order).
 
 Before we get started, it is always a good practice to get some descriptive statistics on the variable before setting the break points. Code chunk below will be used to compute and display the descriptive statistics of DEPENDENCY field.
@@ -301,9 +299,11 @@ tm_shape(mpsz_pop2020)+
 ```
 
 ## 7.4.4 Colour Scheme
+
 tmap supports colour ramps either defined by the user or a set of predefined colour ramps from the RColorBrewer package.
 
 ### 7.4.4.1 Using ColourBrewer palette
+
 To change the colour, we assign the preferred colour to palette argument of tm_fill() as shown in the code chunk below.
 
 ```{r}
@@ -317,7 +317,7 @@ tm_shape(mpsz_pop2020)+
 
 Notice that the choropleth map is shaded in green.
 
-To reverse the colour shading, add a “-” prefix.
+To reverse the colour shading, add a "-" prefix.
 
 ```{r}
 tm_shape(mpsz_pop2020)+
@@ -330,9 +330,11 @@ tm_shape(mpsz_pop2020)+
 Notice that the colour scheme has been reversed.
 
 ## 7.4.5 Map Layouts
+
 Map layout refers to the combination of all map elements into a cohensive map. Map elements include among others the objects to be mapped, the title, the scale bar, the compass, margins and aspects ratios. Colour settings and data classification methods covered in the previous section relate to the palette and break-points are used to affect how the map looks.
 
 ### 7.4.5.1 Map Legend
+
 In tmap, several legend options are provided to change the placement, format and appearance of the legend.
 
 ```{r}
@@ -355,6 +357,7 @@ tm_shape(mpsz_pop2020)+
 ```
 
 ### 7.4.5.2 Map style
+
 tmap allows a wide variety of layout settings to be changed. They can be called by using tmap_style().
 
 The code chunk below shows the classic style is used.
@@ -369,6 +372,7 @@ tm_shape(mpsz_pop2020)+
 ```
 
 ### 7.4.5.3 Cartographic Furniture
+
 Beside map style, tmap also also provides arguments to draw other map furniture such as compass, scale bar and grid lines.
 
 In the code chunk below, tm_compass(), tm_scale_bar() and tm_grid() are used to add compass, scale bar and grid lines onto the choropleth map.
@@ -400,6 +404,7 @@ tmap_style("white")
 ```
 
 ## 7.4.6 Drawing Small Multiple Choropleth Maps
+
 Small multiple maps, also referred to as facet maps, are composed of many maps arrange side-by-side, and sometimes stacked vertically. Small multiple maps enable the visualisation of how spatial relationships change with respect to another variable, such as time.
 
 In tmap, small multiple maps can be plotted in three ways:
@@ -409,6 +414,7 @@ In tmap, small multiple maps can be plotted in three ways:
 -   by creating multiple stand-alone maps with tmap_arrange().
 
 ### 7.4.6.1 By assigning multiple values to at least one of the aesthetic arguments
+
 In this example, small multiple choropleth maps are created by defining ncols in tm_fill()
 
 ```{r}
@@ -432,6 +438,7 @@ tm_shape(mpsz_pop2020)+
 ```
 
 ### 7.4.6.2 By defining a group-by variable in tm_facets()
+
 In this example, multiple small choropleth maps are created by using tm_facets().
 
 ```{r}
@@ -450,6 +457,7 @@ tm_shape(mpsz_pop2020) +
 ```
 
 ### 7.4.6.3 By creating multiple stand-alone maps with tmap_arrange()
+
 In this example, multiple small choropleth maps are created by creating multiple stand-alone maps with tmap_arrange().
 
 ```{r}
@@ -464,4 +472,148 @@ agedmap <- tm_shape(mpsz_pop2020)+
               palette = "Blues")
 
 tmap_arrange(youngmap, agedmap, asp=1, ncol=2)
+```
+
+# Part Two: Visualising Geospatial Point Data
+
+# Overview
+
+Proportional symbol maps, also referred to as graduated symbol maps, are a type of map that utilises the size of symbols to depict variations in the magnitude of a distinct, rapidly changing phenomenon, such as population counts. Similar to choropleth maps, these can be crafted in both classed and unclassed formats. The classed versions, known as range-graded or graduated symbols, organize data into categories, while unclassed versions, referred to as proportional symbols, directly relate the symbol's area to the attribute values being represented. In this practical exercise, you'll discover how to construct a proportional symbol map that illustrates the distribution of wins across Singapore Pools' outlets, using the tmap package in R.
+
+# 8.1 Learning Outcome
+
+Upon completing this practical exercise, you will have gained the following competencies through the use of suitable R packages:
+
+-   Importing an aspatial data file into R.
+-   Transforming the imported data into a simple point feature data frame, while also applying a suitable projection reference to this newly created data frame.
+-   Creating interactive proportional symbol maps.
+
+## Geting Started
+
+Before we get started, we need to ensure that tmap package of R and other related R packages have been installed and loaded into R.
+
+```{r}
+pacman::p_load(sf, tmap, tidyverse)
+```
+
+# 8.2 Geospatial Data Wrangling
+
+## 8.2.1 The data
+
+The data set use for this hands-on exercise is called SGPools_svy21. The data is in csv file format.
+
+Figure below shows the first 15 records of SGPools_svy21.csv. It consists of seven columns. The XCOORD and YCOORD columns are the x-coordinates and y-coordinates of SingPools outlets and branches. They are in [Singapore SVY21 Projected Coordinates System](https://www.sla.gov.sg/sirent/CoordinateSystems.aspx).
+
+![](images/sgpools.jpeg)
+
+## 8.2.2 Data Import and Preparation
+
+The code chunk below uses read_csv() function of readr package to import SGPools_svy21.csv into R as a tibble data frame called sgpools.
+
+```{r}
+sgpools <- read_csv("data/aspatial/SGPools_svy21.csv")
+```
+
+After importing the data file into R, it is important for us to examine if the data file has been imported correctly.
+
+The code chunk below shows list() is used to do the job.
+
+```{r}
+list(sgpools) 
+```
+
+Notice that the ***sgpools*** data in tibble data frame and not the common R data frame.
+
+# 8.3 Creating a sf data frame from an aspatial data frame
+
+The code chunk below converts sgpools data frame into a simple feature data frame by using st_as_sf() of sf packages
+
+```{r}
+sgpools_sf <- st_as_sf(sgpools, 
+                       coords = c("XCOORD", "YCOORD"),
+                       crs= 3414)
+```
+
+Things to learn from the arguments above:
+
+-   The coords argument requires you to provide the column name of the x-coordinates first then followed by the column name of the y-coordinates.
+-   The crs argument required you to provide the coordinates system in epsg format. [EPSG: 3414](https://epsg.io/3414) is Singapore SVY21 Projected Coordinate System. You can search for other country's epsg code by refering to [epsg.io](https://epsg.io/).
+
+Figure below shows the data table of sgpools_sf. Notice that a new column called geometry has been added into the data frame.
+
+![](images/sgpools2.jpeg)
+
+You can display the basic information of the newly created sgpools_sf by using the code chunk below.
+
+```{r}
+list(sgpools_sf)
+```
+
+The output shows that sgppols_sf is in point feature class. It's epsg ID is 3414. The bbox provides information of the extend of the geospatial data.
+
+# 8.4 Drawing Proportional Symbol Map
+
+To create an interactive proportional symbol map in R, the view mode of tmap will be used.
+
+The code churn below will turn on the interactive mode of tmap.
+
+```{r}
+tmap_mode("view")
+```
+
+## 8.4.1 It all started with an interactive point symbol map
+
+The code chunks below are used to create an interactive point symbol map.
+
+```{r}
+tm_shape(sgpools_sf)+
+tm_bubbles(col = "red",
+           size = 1,
+           border.col = "black",
+           border.lwd = 1)
+```
+
+## 8.4.2 Lets make it proportional
+
+To draw a proportional symbol map, we need to assign a numerical variable to the size visual attribute. The code chunks below show that the variable Gp1Gp2Winnings is assigned to size visual attribute.
+
+```{r}
+tm_shape(sgpools_sf)+
+tm_bubbles(col = "red",
+           size = "Gp1Gp2 Winnings",
+           border.col = "black",
+           border.lwd = 1)
+```
+
+## 8.4.3 Lets give it a different colour
+
+The proportional symbol map can be further improved by using the colour visual attribute. In the code chunks below, OUTLET_TYPE variable is used as the colour attribute variable.
+
+```{r}
+tm_shape(sgpools_sf)+
+tm_bubbles(col = "OUTLET TYPE", 
+          size = "Gp1Gp2 Winnings",
+          border.col = "black",
+          border.lwd = 1)
+```
+
+# 8.5 Twin Brothers
+
+An impressive and little-know feature of tmap's view mode is that it also works with faceted plots. The argument sync in tm_facets() can be used in this case to produce multiple maps with synchronised zoom and pan settings.
+
+```{r}
+tm_shape(sgpools_sf) +
+  tm_bubbles(col = "OUTLET TYPE", 
+          size = "Gp1Gp2 Winnings",
+          border.col = "black",
+          border.lwd = 1) +
+  tm_facets(by= "OUTLET TYPE",
+            nrow = 1,
+            sync = TRUE)
+```
+
+Before you end the session, it is wiser to switch tmap's Viewer back to plot mode by using the code chunk below.
+
+```{r}
+tmap_mode("plot")
 ```
