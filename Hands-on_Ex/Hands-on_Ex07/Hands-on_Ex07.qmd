@@ -255,7 +255,7 @@ tmap provides a total ten data classification methods, namely: fixed, sd, equal,
 
 To define a data classification method, the style argument of tm_fill() or tm_polygons() will be used.
 
-### 21.4.3.1 Plotting choropleth maps with built-in classification methods
+### 7.4.3.1 Plotting choropleth maps with built-in classification methods
 
 The code chunk below shows a quantile data classification that used 5 classes.
 
@@ -280,7 +280,7 @@ tm_shape(mpsz_pop2020)+
 Notice that the distribution of quantile data classification method are more evenly distributed then equal data classification method.
 
 
-### 21.4.3.2 Plotting choropleth map with custome break
+### 7.4.3.2 Plotting choropleth map with custome break
 For all the built-in styles, the category breaks are computed internally. In order to override these defaults, the breakpoints can be set explicitly by means of the breaks argument to the tm_fill(). It is important to note that, in tmap the breaks include a minimum and maximum. As a result, in order to end up with n categories, n+1 elements must be specified in the breaks option (the values must be in increasing order).
 
 Before we get started, it is always a good practice to get some descriptive statistics on the variable before setting the break points. Code chunk below will be used to compute and display the descriptive statistics of DEPENDENCY field.
@@ -303,7 +303,7 @@ tm_shape(mpsz_pop2020)+
 ## 7.4.4 Colour Scheme
 tmap supports colour ramps either defined by the user or a set of predefined colour ramps from the RColorBrewer package.
 
-### 21.4.4.1 Using ColourBrewer palette
+### 7.4.4.1 Using ColourBrewer palette
 To change the colour, we assign the preferred colour to palette argument of tm_fill() as shown in the code chunk below.
 
 ```{r}
@@ -354,7 +354,7 @@ tm_shape(mpsz_pop2020)+
   tm_borders(alpha = 0.5)
 ```
 
-### 21.4.5.2 Map style
+### 7.4.5.2 Map style
 tmap allows a wide variety of layout settings to be changed. They can be called by using tmap_style().
 
 The code chunk below shows the classic style is used.
@@ -368,7 +368,7 @@ tm_shape(mpsz_pop2020)+
   tmap_style("classic")
 ```
 
-### 21.4.5.3 Cartographic Furniture
+### 7.4.5.3 Cartographic Furniture
 Beside map style, tmap also also provides arguments to draw other map furniture such as compass, scale bar and grid lines.
 
 In the code chunk below, tm_compass(), tm_scale_bar() and tm_grid() are used to add compass, scale bar and grid lines onto the choropleth map.
