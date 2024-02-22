@@ -216,7 +216,7 @@ Things to learn from tm_polygons():
 
 The default interval binning used to draw the choropleth map is called "pretty". A detailed discussion of the data classification methods supported by tmap will be provided in sub-section 4.3. The default colour scheme used is YlOrRd of ColorBrewer. You will learn more about the color scheme in sub-section 4.4. By default, Missing value will be shaded in grey.
 
-## 7.4.2.3 Drawing a choropleth map using tm_fill() and \*tm_border()\*\*
+## 7.4.2.3 Drawing a choropleth map using tm_fill() and tm_border()
 
 Actually, tm_polygons() is a wraper of tm_fill() and tm_border(). tm_fill() shades the polygons by using the default colour scheme and tm_borders() adds the borders of the shapefile onto the choropleth map.
 
@@ -277,7 +277,33 @@ tm_shape(mpsz_pop2020)+
 
 Notice that the distribution of quantile data classification method are more evenly distributed then equal data classification method.
 
-### 7.4.3.2 Plotting choropleth map with custome break
+### DIY
+
+1. DIY: Using what you had learned, prepare choropleth maps by using different classification methods supported by tmap and compare their differences.
+
+```{r}
+tm_shape(mpsz_pop2020)+
+  tm_fill("DEPENDENCY",
+          n = 5,
+          style = "kmeans") +
+  tm_borders(alpha = 0.5)
+```
+
+Observation: Different classification methods gives different values for the DEPENDENCY. 
+
+2. DIY: Preparing choropleth maps by using similar classification method but with different numbers of classes (i.e. 2, 6, 10, 20). Compare the output maps, what observation can you draw?
+
+```{r}
+tm_shape(mpsz_pop2020)+
+  tm_fill("DEPENDENCY",
+          n = 10,
+          style = "kmeans") +
+  tm_borders(alpha = 0.5)
+```
+
+Observation: Different number of classes means more bins. Therefore, it offers a more granular breakdown of the DEPENDENCY and it shows a more distinct breakdown of different DEPENDENCY in the map.
+
+### 7.4.3.2 Plotting choropleth map with custom break
 
 For all the built-in styles, the category breaks are computed internally. In order to override these defaults, the breakpoints can be set explicitly by means of the breaks argument to the tm_fill(). It is important to note that, in tmap the breaks include a minimum and maximum. As a result, in order to end up with n categories, n+1 elements must be specified in the breaks option (the values must be in increasing order).
 
@@ -910,5 +936,4 @@ boxmap <- function(vnam, df,
 ```{r}
 tmap_mode("plot")
 boxmap("wp_nonfunctional", NGA_wp)
-```
 ```
