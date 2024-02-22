@@ -1,0 +1,17 @@
+---
+title: "Hands-on Exercise 8: Network Data Visualisation and Analysis"
+author: "Rizqi Febriansyah"
+date: "22 February 2023"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+editor: visual
+---
+
+# Part One: Introduction to Graph Data Visualisation
+
+# 8.1 Overview
+
+
