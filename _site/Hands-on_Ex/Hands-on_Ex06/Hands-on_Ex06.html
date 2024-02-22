@@ -245,11 +245,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#examining-the-data-structure" id="toc-examining-the-data-structure" class="nav-link" data-scroll-target="#examining-the-data-structure">6.3.3 Examining the data structure</a></li>
   <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">6.3.4 Data Preparation</a></li>
   <li><a href="#building-the-calendar-heatmaps" id="toc-building-the-calendar-heatmaps" class="nav-link" data-scroll-target="#building-the-calendar-heatmaps">6.3.5 Building the Calendar Heatmaps</a></li>
-  </ul></li>
-  <li><a href="#things-to-learn-from-the-code-chunk" id="toc-things-to-learn-from-the-code-chunk" class="nav-link" data-scroll-target="#things-to-learn-from-the-code-chunk">Things to learn from the code chunk</a></li>
   <li><a href="#building-multiple-calendar-heatmaps" id="toc-building-multiple-calendar-heatmaps" class="nav-link" data-scroll-target="#building-multiple-calendar-heatmaps">6.3.6 Building Multiple Calendar Heatmaps</a></li>
   <li><a href="#plotting-multiple-calendar-heatmaps" id="toc-plotting-multiple-calendar-heatmaps" class="nav-link" data-scroll-target="#plotting-multiple-calendar-heatmaps">6.3.7 Plotting Multiple Calendar Heatmaps</a></li>
   <li><a href="#plotting-multiple-calendar-heatmaps-1" id="toc-plotting-multiple-calendar-heatmaps-1" class="nav-link" data-scroll-target="#plotting-multiple-calendar-heatmaps-1">6.3.8 Plotting Multiple Calendar Heatmaps</a></li>
+  </ul></li>
   <li><a href="#plotting-cycle-plot" id="toc-plotting-cycle-plot" class="nav-link" data-scroll-target="#plotting-cycle-plot">6.4 Plotting Cycle Plot</a>
   <ul class="collapse">
   <li><a href="#step-1-data-import" id="toc-step-1-data-import" class="nav-link" data-scroll-target="#step-1-data-import">6.4.1 Step 1: Data Import</a></li>
@@ -258,9 +257,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#step-5-computing-year-average-arrivals-by-month" id="toc-step-5-computing-year-average-arrivals-by-month" class="nav-link" data-scroll-target="#step-5-computing-year-average-arrivals-by-month">6.4.4 Step 5: Computing year average arrivals by month</a></li>
   <li><a href="#srep-6-plotting-the-cycle-plot" id="toc-srep-6-plotting-the-cycle-plot" class="nav-link" data-scroll-target="#srep-6-plotting-the-cycle-plot">6.4.5 Srep 6: Plotting the cycle plot</a></li>
   </ul></li>
-  <li><a href="#plotting-slopegraph" id="toc-plotting-slopegraph" class="nav-link" data-scroll-target="#plotting-slopegraph">6.5 Plotting Slopegraph</a></li>
-  <li><a href="#step-1-data-import-1" id="toc-step-1-data-import-1" class="nav-link" data-scroll-target="#step-1-data-import-1">6.5.1 Step 1: Data Import</a>
+  <li><a href="#plotting-slopegraph" id="toc-plotting-slopegraph" class="nav-link" data-scroll-target="#plotting-slopegraph">6.5 Plotting Slopegraph</a>
   <ul class="collapse">
+  <li><a href="#step-1-data-import-1" id="toc-step-1-data-import-1" class="nav-link" data-scroll-target="#step-1-data-import-1">6.5.1 Step 1: Data Import</a></li>
   <li><a href="#step-2-plotting-the-slopegraph" id="toc-step-2-plotting-the-slopegraph" class="nav-link" data-scroll-target="#step-2-plotting-the-slopegraph">6.5.2 Step 2: Plotting the slopegraph</a></li>
   </ul></li>
   </ul>
@@ -295,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 15, 2024</p>
+      <p class="date-modified">February 22, 2024</p>
     </div>
   </div>
     
@@ -546,10 +545,16 @@ Note
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="things-to-learn-from-the-code-chunk" class="level1 callount-important">
-<h1>Things to learn from the code chunk</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Things to learn from the code chunk
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
 <li>a tibble data table called grouped is derived by aggregating the attack by wkday and hour fields.</li>
 <li>a new field called n is derived by using <code>group_by()</code> and <code>count()</code> functions.</li>
@@ -559,7 +564,8 @@ Note
 <li><code>coord_equal()</code> is used to ensure the plot will have an aspect ratio of 1:1.</li>
 <li><code>scale_fill_gradient()</code> function is used to creates a two colour gradient (low-high).</li>
 </ul>
-</section>
+</div>
+</div>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -570,6 +576,7 @@ Note
 </div>
 </div>
 <p>Then we can simply group the count by hour and wkday and plot it, since we know that we have values for every combination there’s no need to further preprocess the data.</p>
+</section>
 <section id="building-multiple-calendar-heatmaps" class="level2">
 <h2 class="anchored" data-anchor-id="building-multiple-calendar-heatmaps">6.3.6 Building Multiple Calendar Heatmaps</h2>
 <p>Challenge: Building multiple heatmaps for the top four countries with the highest number of attacks.</p>
@@ -634,6 +641,7 @@ Note
 </div>
 </div>
 </div>
+</section>
 </section>
 <section id="plotting-cycle-plot" class="level1">
 <h1>6.4 Plotting Cycle Plot</h1>
@@ -713,13 +721,13 @@ Note
 <h1>6.5 Plotting Slopegraph</h1>
 <p>In this section you will learn how to plot a <a href="https://www.storytellingwithdata.com/blog/2020/7/27/what-is-a-slopegraph">slopegraph</a> by using R.</p>
 <p>Before getting start, make sure that CGPfunctions has been installed and loaded onto R environment. Then, refer to <a href="https://cran.r-project.org/web/packages/CGPfunctions/vignettes/Using-newggslopegraph.html">Using newggslopegraph</a> to learn more about the function. Lastly, read more about <code>newggslopegraph()</code> and its arguments by referring to this <a href="https://www.rdocumentation.org/packages/CGPfunctions/versions/0.6.3/topics/newggslopegraph">link</a>.</p>
-</section>
-<section id="step-1-data-import-1" class="level1">
-<h1>6.5.1 Step 1: Data Import</h1>
+<section id="step-1-data-import-1" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-data-import-1">6.5.1 Step 1: Data Import</h2>
 <p>Import the rice data set into R environment by using the code chunk below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>rice <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/rice.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
 <section id="step-2-plotting-the-slopegraph" class="level2">
 <h2 class="anchored" data-anchor-id="step-2-plotting-the-slopegraph">6.5.2 Step 2: Plotting the slopegraph</h2>
 <p>Next, code chunk below will be used to plot a basic slopegraph as shown below.</p>

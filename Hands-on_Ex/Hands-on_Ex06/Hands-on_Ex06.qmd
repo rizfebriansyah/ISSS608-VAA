@@ -151,7 +151,7 @@ theme(axis.ticks = element_blank(),
       legend.text = element_text(size = 6) )
 ```
 
-::: callount-important
+::: callout-note
 # Things to learn from the code chunk
 
 -   a tibble data table called grouped is derived by aggregating the attack by wkday and hour fields.
@@ -273,7 +273,9 @@ air <- read_excel("data/arrivals_by_air.xlsx")
 ```
 
 ## 6.4.2 Step 2: Deriving month and year fields
+
 Next, two new fields called month and year are derived from Month-Year field.
+
 ```{r}
 air$month <- factor(month(air$`Month-Year`), 
                     levels=1:12, 
@@ -283,7 +285,9 @@ air$year <- year(ymd(air$`Month-Year`))
 ```
 
 ## 6.4.3 Step 4: Extracting the target country
+
 Next, the code chunk below is use to extract data for the target country (i.e. Vietnam)
+
 ```{r}
 Vietnam <- air %>% 
   select(`Vietnam`, 
@@ -291,8 +295,11 @@ Vietnam <- air %>%
          year) %>%
   filter(year >= 2010)
 ```
+
 ## 6.4.4 Step 5: Computing year average arrivals by month
+
 The code chunk below uses `group_by()` and `summarise()` of dplyr to compute year average arrivals by month.
+
 ```{r}
 hline.data <- Vietnam %>% 
   group_by(month) %>%
@@ -300,7 +307,9 @@ hline.data <- Vietnam %>%
 ```
 
 ## 6.4.5 Srep 6: Plotting the cycle plot
+
 The code chunk below is used to plot the cycle plot as shown in Slide 12/23.
+
 ```{r}
 ggplot() + 
   geom_line(data=Vietnam,
@@ -322,18 +331,23 @@ ggplot() +
 ```
 
 # 6.5 Plotting Slopegraph
+
 In this section you will learn how to plot a [slopegraph](https://www.storytellingwithdata.com/blog/2020/7/27/what-is-a-slopegraph) by using R.
 
 Before getting start, make sure that CGPfunctions has been installed and loaded onto R environment. Then, refer to [Using newggslopegraph](https://cran.r-project.org/web/packages/CGPfunctions/vignettes/Using-newggslopegraph.html) to learn more about the function. Lastly, read more about `newggslopegraph()` and its arguments by referring to this [link](https://www.rdocumentation.org/packages/CGPfunctions/versions/0.6.3/topics/newggslopegraph).
 
-# 6.5.1 Step 1: Data Import
+## 6.5.1 Step 1: Data Import
+
 Import the rice data set into R environment by using the code chunk below.
+
 ```{r}
 rice <- read_csv("data/rice.csv")
 ```
 
 ## 6.5.2 Step 2: Plotting the slopegraph
+
 Next, code chunk below will be used to plot a basic slopegraph as shown below.
+
 ```{r}
 rice %>% 
   mutate(Year = factor(Year)) %>%
@@ -344,7 +358,8 @@ rice %>%
                 )
 ```
 
-:::callout-important
+::: callout-important
 # Thing to learn from the code chunk above
+
 For effective data visualisation design, `factor()` is used convert the value type of Year field from numeric to factor.
 :::
