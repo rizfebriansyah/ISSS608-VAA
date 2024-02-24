@@ -1,0 +1,17 @@
+{
+  "hash": "b474a648a1388647261794c7fcb60f9a",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"In-class Exercise 2: Horizon Plot\"\nauthor: \"Rizqi Febriansyah\"\ndate: \"February 24, 2024\"\ndate-modified: \"last-modified\"\nexecute: \n  eval: true\n  echo: false\n  freeze: true\n  message: false\n  warning: false\n---\n\n# Load Packages\nCode chunk below loads the packages:\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_load(ggHoriPlot, ggthemes, tidyverse)\n```\n:::\n\n\n# Import dataset\nCode chunk below imports the dataset:\n\n::: {.cell}\n\n```{.r .cell-code}\naverp <- read_csv(\"data/AVERP.csv\") %>%\n  mutate(`Date` = dmy(`Date`))\n```\n:::\n\n\n# Plotting Horizon Plot\n\n::: {.cell}\n::: {.cell-output-display}\n![](In-Class_Ex02_files/figure-html/unnamed-chunk-3-1.png){width=1152}\n:::\n:::",
+    "supporting": [
+      "In-Class_Ex02_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
