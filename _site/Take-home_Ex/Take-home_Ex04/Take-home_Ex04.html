@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-02-28">
+
+<title>rizfebriansyah - Take-home Exercise 4</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="../../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="../../site_libs/datatables-binding-0.30/datatables.js"></script>
+<script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="../../site_libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="../../site_libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="../../site_libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
+<link href="../../site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="../../site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<script src="../../site_libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="../../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="../../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/placeholder.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">rizfebriansyah</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Hands-on Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html">
+ <span class="dropdown-text">Hands-on Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html">
+ <span class="dropdown-text">Hands-on Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03.html">
+ <span class="dropdown-text">Hands-on Exercise 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html">
+ <span class="dropdown-text">Hands-on Exercise 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html">
+ <span class="dropdown-text">Hands-on Exercise 5 Part One</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05p2.html">
+ <span class="dropdown-text">Hands-on Exercise 5 Part Two</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex06/Hands-on_Ex06.html">
+ <span class="dropdown-text">Hands-on Exercise 6</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html">
+ <span class="dropdown-text">Hands-on Exercise 7</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08.html">
+ <span class="dropdown-text">Hands-on Exercise 8</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09.html">
+ <span class="dropdown-text">Hands-on Exercise 9</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex10/Hands-on_Ex10.html">
+ <span class="dropdown-text">Hands-on Exercise 10</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">In-class Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex01/In-Class_Ex01.html">
+ <span class="dropdown-text">In-class Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex02/In-Class_Ex02.html">
+ <span class="dropdown-text">In-class Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex03/In-Class_Ex03.html">
+ <span class="dropdown-text">In-class Exercise 3</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html">
+ <span class="dropdown-text">Take-home Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex03/Take-home_Ex03.html">
+ <span class="dropdown-text">Take-home Exercise 3</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools tools-wide">
+    <a href="https://sg.linkedin.com/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
+    <a href="https://github.com/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">1. Overview</a>
+  <ul class="collapse">
+  <li><a href="#setting-the-scene-for-this-take-home-exercise" id="toc-setting-the-scene-for-this-take-home-exercise" class="nav-link" data-scroll-target="#setting-the-scene-for-this-take-home-exercise">1.1 Setting the Scene for This Take Home Exercise</a></li>
+  <li><a href="#the-task" id="toc-the-task" class="nav-link" data-scroll-target="#the-task">1.2 The Task</a></li>
+  </ul></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">2. Getting Started</a>
+  <ul class="collapse">
+  <li><a href="#loading-necessary-r-packages" id="toc-loading-necessary-r-packages" class="nav-link" data-scroll-target="#loading-necessary-r-packages">2.1 Loading Necessary R packages</a></li>
+  <li><a href="#import-dataset" id="toc-import-dataset" class="nav-link" data-scroll-target="#import-dataset">2.2 Import dataset</a></li>
+  </ul></li>
+  <li><a href="#visualisation" id="toc-visualisation" class="nav-link" data-scroll-target="#visualisation">3 Visualisation</a>
+  <ul class="collapse">
+  <li><a href="#scatterplot" id="toc-scatterplot" class="nav-link" data-scroll-target="#scatterplot">3.1 Scatterplot</a></li>
+  <li><a href="#lineplot" id="toc-lineplot" class="nav-link" data-scroll-target="#lineplot">3.2 Lineplot</a></li>
+  <li><a href="#heatmap" id="toc-heatmap" class="nav-link" data-scroll-target="#heatmap">3.3 Heatmap</a></li>
+  <li><a href="#box-plot-across-5-years" id="toc-box-plot-across-5-years" class="nav-link" data-scroll-target="#box-plot-across-5-years">3.4 Box Plot across 5 years</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">4. Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Take-home Exercise 4</h1>
+<p class="subtitle lead">EcoWatt Prototype</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 28, 2024</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">March 3, 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level1">
+<h1>1. Overview</h1>
+<section id="setting-the-scene-for-this-take-home-exercise" class="level2">
+<h2 class="anchored" data-anchor-id="setting-the-scene-for-this-take-home-exercise">1.1 Setting the Scene for This Take Home Exercise</h2>
+<p>As indicated by the office report and the accompanying infographic:</p>
+<ul>
+<li>The average daily temperatures are expected to rise by 1.4 to 4.6 degrees, and</li>
+<li>The difference in precipitation between the wet season (November to January) and the dry season (February and June to September) is anticipated to become more distinct.</li>
+</ul>
+<p><img src="images/Climate_change.jpg" class="img-fluid"></p>
+</section>
+<section id="the-task" class="level2">
+<h2 class="anchored" data-anchor-id="the-task">1.2 The Task</h2>
+<p>For this take-home assignment, we are tasked to:</p>
+<ul>
+<li><p>Select a weather station and retrieve historical daily data on temperature or rainfall from the website of the Meteorological Service Singapore.</p></li>
+<li><p>Choose records of daily temperature or rainfall for a month from the years 1983, 1993, 2003, 2013, and 2023, and then craft a data visualisation driven by analytics.</p></li>
+<li><p>Incorporate suitable interactive features to improve the experience of users in exploring data and/or in visual storytelling.</p></li>
+</ul>
+<p>For this take home exercise 3, we have chosen the Changi weather station and decided to focus on the daily temperature data for the month of February across the years 1983, 1993, 2003, 2013, and 2023 to examine the hypothesis suggesting an increase in daily average temperatures between 1.4 to 4.6 degrees Celsius.</p>
+</section>
+</section>
+<section id="getting-started" class="level1">
+<h1>2. Getting Started</h1>
+<section id="loading-necessary-r-packages" class="level2">
+<h2 class="anchored" data-anchor-id="loading-necessary-r-packages">2.1 Loading Necessary R packages</h2>
+<p>We will utilise the following packages:</p>
+<ul>
+<li><p>ggiraph for making ‘ggplot’ graphics interactive.</p></li>
+<li><p>plotly, R library for plotting interactive statistical graphs.</p></li>
+<li><p>DT provides an R interface to the JavaScript library DataTables that create interactive table on html page.</p></li>
+<li><p>tidyverse, a family of modern R packages specially designed to support data science, analysis and communication task including creating static statistical graphs.</p></li>
+<li><p>patchwork for combining multiple ggplot2 graphs into one figure.</p></li>
+<li><p>ggthemes is an R package that offers additional themes, geoms, and scales for ‘ggplot2’</p></li>
+</ul>
+<p>The code which loads the R packages:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(ggiraph, plotly, </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               patchwork, DT, tidyverse, dplyr, ggthemes) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="import-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="import-dataset">2.2 Import dataset</h2>
+<p>Of course our next step involves importing the dataset. As mentioned earlier, we will be analysing data from the Changi weather stations for the year 1983, 1993, 2003, 2013 and 2023.</p>
+<p>Firstly, we need to import the 5 csv files using <code>read_csv</code>. We want to read and combine all the files as <strong>feb_combined</strong> since they all the files have the common column names and same number of columns.</p>
+<p>Also, we have found out that the 2023 dataset, latin characters are present on some of the columns.</p>
+<ul>
+<li>ï..Station</li>
+<li>“Mean.Temperature..Â.C.”</li>
+<li>“Maximum.Temperature..Â.C.”</li>
+<li>“Minimum.Temperature..Â.C.”</li>
+</ul>
+<p>Since we are only focusing on temperature data, we will discard the columns related to rainfall and windspeed. Also, I will rename these columns below accordingly.</p>
+<ul>
+<li>Mean Temperature (°C) -&gt; meantemp</li>
+<li>Maximum Temperature (°C) -&gt; maxtemp</li>
+<li>Minimum Temperature (°C) -&gt; mintemp</li>
+</ul>
+<p>Then I also will create a new column to find out the difference between the maxtemp and mintemp on a daily basis.</p>
+<p>The following code snippet will outline the sequential steps we will undertake:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to read and preprocess each file</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>read_and_preprocess <span class="ot">&lt;-</span> <span class="cf">function</span>(file_path, <span class="at">encoding =</span> <span class="st">"latin1"</span>, <span class="at">is_2023 =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(file_path, <span class="at">fileEncoding =</span> encoding)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># If the file is for the year 2023, rename columns with encoding issues</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(is_2023) {</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">rename</span>(data, </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Station =</span> <span class="st">`</span><span class="at">ï..Station</span><span class="st">`</span>, </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                   <span class="st">`</span><span class="at">Mean.Temperature...C.</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Mean.Temperature..Â.C.</span><span class="st">`</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                   <span class="st">`</span><span class="at">Maximum.Temperature...C.</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Maximum.Temperature..Â.C.</span><span class="st">`</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                   <span class="st">`</span><span class="at">Minimum.Temperature...C.</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Minimum.Temperature..Â.C.</span><span class="st">`</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select and rename columns for consistency</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">%&gt;%</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Station, Year, Month, Day, <span class="st">`</span><span class="at">Mean.Temperature...C.</span><span class="st">`</span>, <span class="st">`</span><span class="at">Maximum.Temperature...C.</span><span class="st">`</span>, <span class="st">`</span><span class="at">Minimum.Temperature...C.</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">meantemp =</span> <span class="st">`</span><span class="at">Mean.Temperature...C.</span><span class="st">`</span>, </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>           <span class="at">maxtemp =</span> <span class="st">`</span><span class="at">Maximum.Temperature...C.</span><span class="st">`</span>, </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>           <span class="at">mintemp =</span> <span class="st">`</span><span class="at">Minimum.Temperature...C.</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">difftemp =</span> maxtemp <span class="sc">-</span> mintemp)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Read and preprocess each file, with special handling for the 2023 file</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>feb_combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_and_preprocess</span>(<span class="st">"data/CHANGI_FEB1983.csv"</span>),</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_and_preprocess</span>(<span class="st">"data/CHANGI_FEB1993.csv"</span>),</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_and_preprocess</span>(<span class="st">"data/CHANGI_FEB2003.csv"</span>),</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_and_preprocess</span>(<span class="st">"data/CHANGI_FEB2013.csv"</span>),</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_and_preprocess</span>(<span class="st">"data/CHANGI_FEB2023.csv"</span>, <span class="at">is_2023 =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Afterwards, we want to find out the average temperature across the years. We will name this column yearly_avg_temp.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a new column with the mean temperature for each year</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>feb_combined <span class="ot">&lt;-</span> feb_combined <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">yearly_avg_temp =</span> <span class="fu">mean</span>(meantemp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The code below is to display the combined file:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(feb_combined, <span class="at">class=</span> <span class="st">"compact"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-0d8ab21d13d8cd1a6dd6" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-0d8ab21d13d8cd1a6dd6">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140"],["Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi","Changi"],[1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023],[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],[27.6,27.8,27.9,26.9,26.9,26.8,27.6,27.9,27.4,27.8,28,28.1,28.7,28.4,28.5,28.4,28.7,28.1,28.8,28.8,28.3,27.8,28.3,27.7,28.6,28.5,28.8,28.6,26.4,26.2,26.5,26.5,26.5,26.5,26.4,26.9,27.1,26.9,27.5,27.5,26.8,27,27,26.2,26.9,27.1,27.3,26.7,26.4,26.6,26.6,26.8,26.4,27,26.8,25.5,26.5,26.1,26.2,26.8,25.3,25.8,26.4,26.8,27.8,27.4,28.2,28.2,27.8,27.6,27,25.3,26.3,26.9,26.9,27.6,27.3,27.7,27.5,27.7,28,28.1,27.7,27.7,28,28.3,26.2,26.7,26.5,25.7,27.2,26,26.7,24.6,25.3,25.6,26.9,24.8,26,26.4,24.8,26.5,26.1,27.2,26.6,27.4,28,27.4,26.7,26.7,27.1,27.5,26.7,27,26.8,24.9,26.4,27,27,27.5,27.5,27.5,27.5,25.6,26.7,26.8,26,26.8,27.1,27.8,28,27.2,27.5,27.5,27.6,27.9,27.3,27.3,26.7,24.9],[31.9,33.7,32.4,31.8,32.2,32.8,32.8,33,31.3,32.5,32.9,33.3,33.5,32.8,33.4,33.4,34.6,31.6,33.8,34.2,33.9,32.7,33.6,34.6,34,33.9,33.9,33.9,31.1,30,30.3,31,31,31.8,31.2,31.7,31.8,32,32.4,32.4,31.6,31.9,32.1,31.9,31.5,31.4,31.7,32,30.9,31.9,32,32,30.5,31.5,32.7,28.1,30.4,28.7,28.5,31,28.3,28.5,30.1,30.8,32.1,30.5,32.5,31.8,31.2,31.3,30.7,27.3,32,30.8,30.6,31,30.7,31.9,31.8,32.5,32.4,32.1,30.1,32.6,31.6,32.1,28.6,29.6,30.1,28.9,31.2,30.9,31.3,25.9,30.2,28.8,30.7,27.7,30.1,30.3,25.8,30.8,28.2,31,29.8,31.3,32.5,30.8,30.8,31.9,30.4,32.2,30.7,31.4,31.1,28.3,31.6,31.9,31.4,31.1,31,31.8,31,30.5,31.7,32,29.4,30.6,30.9,31.8,31.9,31.4,31.3,30.9,31.5,31.1,31,31.2,30.6,28.4],[24.7,24.6,24.8,23.5,23.5,23.1,23.5,25,25,24.8,24.6,24.4,25.6,25.7,25.7,25.3,25.8,25.8,25.7,25.5,24.8,24.4,24.2,24.5,25.4,24.7,26,25.1,23.9,23.6,24.3,23.8,23.3,23.7,23.1,24,24,23.4,25,25.1,24,23.9,24.1,23.5,23.3,24.1,24.4,23.2,23.9,23,22.7,23.5,23.5,24.5,24,23.4,23.6,23.8,23.7,24.6,23,24.5,23.4,23.9,24.8,25,25.2,26.1,25.7,25.4,24.7,23.4,22.8,24.6,23.4,25.1,24.7,24.6,24.4,24.2,24.4,25,25.4,24.4,25.9,25.8,24.7,24,24,24,24.7,24.3,24.3,21.5,23.7,23.8,24.4,22.6,23.4,24.7,24.1,24.5,25,25,24.6,24.7,24.8,24.5,23,24.8,24.5,25.2,24.1,24.1,23.6,23.9,24.6,24.6,24.3,25.1,25.6,25.3,25.7,22.8,24.1,24.6,21.7,23.8,24.1,25.2,25.8,25.5,25,25.5,25.8,25.8,24.8,24.1,24.5,22],[7.199999999999999,9.100000000000001,7.599999999999998,8.300000000000001,8.700000000000003,9.699999999999996,9.299999999999997,8,6.300000000000001,7.699999999999999,8.299999999999997,8.899999999999999,7.899999999999999,7.099999999999998,7.699999999999999,8.099999999999998,8.800000000000001,5.800000000000001,8.099999999999998,8.700000000000003,9.099999999999998,8.300000000000004,9.400000000000002,10.1,8.600000000000001,9.199999999999999,7.899999999999999,8.799999999999997,7.200000000000003,6.399999999999999,6,7.199999999999999,7.699999999999999,8.100000000000001,8.099999999999998,7.699999999999999,7.800000000000001,8.600000000000001,7.399999999999999,7.299999999999997,7.600000000000001,8,8,8.399999999999999,8.199999999999999,7.299999999999997,7.300000000000001,8.800000000000001,7,8.899999999999999,9.300000000000001,8.5,7,7,8.700000000000003,4.700000000000003,6.799999999999997,4.899999999999999,4.800000000000001,6.399999999999999,5.300000000000001,4,6.700000000000003,6.900000000000002,7.300000000000001,5.5,7.300000000000001,5.699999999999999,5.5,5.900000000000002,6,3.900000000000002,9.199999999999999,6.199999999999999,7.200000000000003,5.899999999999999,6,7.299999999999997,7.400000000000002,8.300000000000001,8,7.100000000000001,4.700000000000003,8.200000000000003,5.700000000000003,6.300000000000001,3.900000000000002,5.600000000000001,6.100000000000001,4.899999999999999,6.5,6.599999999999998,7,4.399999999999999,6.5,5,6.300000000000001,5.099999999999998,6.700000000000003,5.600000000000001,1.699999999999999,6.300000000000001,3.199999999999999,6,5.199999999999999,6.600000000000001,7.699999999999999,6.300000000000001,7.800000000000001,7.099999999999998,5.899999999999999,7.000000000000004,6.599999999999998,7.299999999999997,7.5,4.400000000000002,7,7.299999999999997,7.099999999999998,6,5.399999999999999,6.5,5.300000000000001,7.699999999999999,7.599999999999998,7.399999999999999,7.699999999999999,6.800000000000001,6.799999999999997,6.600000000000001,6.099999999999998,5.899999999999999,6.300000000000001,5.399999999999999,5.699999999999999,5.300000000000001,6.199999999999999,7.099999999999998,6.100000000000001,6.399999999999999],[28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,28.06071428571429,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,26.71428571428572,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,27.09285714285714,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.53214285714286,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857,26.94642857142857]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Station<\/th>\n      <th>Year<\/th>\n      <th>Month<\/th>\n      <th>Day<\/th>\n      <th>meantemp<\/th>\n      <th>maxtemp<\/th>\n      <th>mintemp<\/th>\n      <th>difftemp<\/th>\n      <th>yearly_avg_temp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7,8,9]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+</section>
+<section id="visualisation" class="level1">
+<h1>3 Visualisation</h1>
+<section id="scatterplot" class="level2">
+<h2 class="anchored" data-anchor-id="scatterplot">3.1 Scatterplot</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">The plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">The code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-413f1f5b88fb1c6e6602" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-413f1f5b88fb1c6e6602">{"x":{"data":[{"x":[4779,4780,4781,4782,4783,4784,4785,4786,4787,4788,4789,4790,4791,4792,4793,4794,4795,4796,4797,4798,4799,4800,4801,4802,4803,4804,4805,4806,8432,8433,8434,8435,8436,8437,8438,8439,8440,8441,8442,8443,8444,8445,8446,8447,8448,8449,8450,8451,8452,8453,8454,8455,8456,8457,8458,8459,12084,12085,12086,12087,12088,12089,12090,12091,12092,12093,12094,12095,12096,12097,12098,12099,12100,12101,12102,12103,12104,12105,12106,12107,12108,12109,12110,12111,15737,15738,15739,15740,15741,15742,15743,15744,15745,15746,15747,15748,15749,15750,15751,15752,15753,15754,15755,15756,15757,15758,15759,15760,15761,15762,15763,15764,19389,19390,19391,19392,19393,19394,19395,19396,19397,19398,19399,19400,19401,19402,19403,19404,19405,19406,19407,19408,19409,19410,19411,19412,19413,19414,19415,19416],"y":[27.600000000000001,27.800000000000001,27.899999999999999,26.899999999999999,26.899999999999999,26.800000000000001,27.600000000000001,27.899999999999999,27.399999999999999,27.800000000000001,28,28.100000000000001,28.699999999999999,28.399999999999999,28.5,28.399999999999999,28.699999999999999,28.100000000000001,28.800000000000001,28.800000000000001,28.300000000000001,27.800000000000001,28.300000000000001,27.699999999999999,28.600000000000001,28.5,28.800000000000001,28.600000000000001,26.399999999999999,26.199999999999999,26.5,26.5,26.5,26.5,26.399999999999999,26.899999999999999,27.100000000000001,26.899999999999999,27.5,27.5,26.800000000000001,27,27,26.199999999999999,26.899999999999999,27.100000000000001,27.300000000000001,26.699999999999999,26.399999999999999,26.600000000000001,26.600000000000001,26.800000000000001,26.399999999999999,27,26.800000000000001,25.5,26.5,26.100000000000001,26.199999999999999,26.800000000000001,25.300000000000001,25.800000000000001,26.399999999999999,26.800000000000001,27.800000000000001,27.399999999999999,28.199999999999999,28.199999999999999,27.800000000000001,27.600000000000001,27,25.300000000000001,26.300000000000001,26.899999999999999,26.899999999999999,27.600000000000001,27.300000000000001,27.699999999999999,27.5,27.699999999999999,28,28.100000000000001,27.699999999999999,27.699999999999999,28,28.300000000000001,26.199999999999999,26.699999999999999,26.5,25.699999999999999,27.199999999999999,26,26.699999999999999,24.600000000000001,25.300000000000001,25.600000000000001,26.899999999999999,24.800000000000001,26,26.399999999999999,24.800000000000001,26.5,26.100000000000001,27.199999999999999,26.600000000000001,27.399999999999999,28,27.399999999999999,26.699999999999999,26.699999999999999,27.100000000000001,27.5,26.699999999999999,27,26.800000000000001,24.899999999999999,26.399999999999999,27,27,27.5,27.5,27.5,27.5,25.600000000000001,26.699999999999999,26.800000000000001,26,26.800000000000001,27.100000000000001,27.800000000000001,28,27.199999999999999,27.5,27.5,27.600000000000001,27.899999999999999,27.300000000000001,27.300000000000001,26.699999999999999,24.899999999999999],"text":["Date: 1983-2-1 <br />Temp: 27.6 °C","Date: 1983-2-2 <br />Temp: 27.8 °C","Date: 1983-2-3 <br />Temp: 27.9 °C","Date: 1983-2-4 <br />Temp: 26.9 °C","Date: 1983-2-5 <br />Temp: 26.9 °C","Date: 1983-2-6 <br />Temp: 26.8 °C","Date: 1983-2-7 <br />Temp: 27.6 °C","Date: 1983-2-8 <br />Temp: 27.9 °C","Date: 1983-2-9 <br />Temp: 27.4 °C","Date: 1983-2-10 <br />Temp: 27.8 °C","Date: 1983-2-11 <br />Temp: 28 °C","Date: 1983-2-12 <br />Temp: 28.1 °C","Date: 1983-2-13 <br />Temp: 28.7 °C","Date: 1983-2-14 <br />Temp: 28.4 °C","Date: 1983-2-15 <br />Temp: 28.5 °C","Date: 1983-2-16 <br />Temp: 28.4 °C","Date: 1983-2-17 <br />Temp: 28.7 °C","Date: 1983-2-18 <br />Temp: 28.1 °C","Date: 1983-2-19 <br />Temp: 28.8 °C","Date: 1983-2-20 <br />Temp: 28.8 °C","Date: 1983-2-21 <br />Temp: 28.3 °C","Date: 1983-2-22 <br />Temp: 27.8 °C","Date: 1983-2-23 <br />Temp: 28.3 °C","Date: 1983-2-24 <br />Temp: 27.7 °C","Date: 1983-2-25 <br />Temp: 28.6 °C","Date: 1983-2-26 <br />Temp: 28.5 °C","Date: 1983-2-27 <br />Temp: 28.8 °C","Date: 1983-2-28 <br />Temp: 28.6 °C","Date: 1993-2-1 <br />Temp: 26.4 °C","Date: 1993-2-2 <br />Temp: 26.2 °C","Date: 1993-2-3 <br />Temp: 26.5 °C","Date: 1993-2-4 <br />Temp: 26.5 °C","Date: 1993-2-5 <br />Temp: 26.5 °C","Date: 1993-2-6 <br />Temp: 26.5 °C","Date: 1993-2-7 <br />Temp: 26.4 °C","Date: 1993-2-8 <br />Temp: 26.9 °C","Date: 1993-2-9 <br />Temp: 27.1 °C","Date: 1993-2-10 <br />Temp: 26.9 °C","Date: 1993-2-11 <br />Temp: 27.5 °C","Date: 1993-2-12 <br />Temp: 27.5 °C","Date: 1993-2-13 <br />Temp: 26.8 °C","Date: 1993-2-14 <br />Temp: 27 °C","Date: 1993-2-15 <br />Temp: 27 °C","Date: 1993-2-16 <br />Temp: 26.2 °C","Date: 1993-2-17 <br />Temp: 26.9 °C","Date: 1993-2-18 <br />Temp: 27.1 °C","Date: 1993-2-19 <br />Temp: 27.3 °C","Date: 1993-2-20 <br />Temp: 26.7 °C","Date: 1993-2-21 <br />Temp: 26.4 °C","Date: 1993-2-22 <br />Temp: 26.6 °C","Date: 1993-2-23 <br />Temp: 26.6 °C","Date: 1993-2-24 <br />Temp: 26.8 °C","Date: 1993-2-25 <br />Temp: 26.4 °C","Date: 1993-2-26 <br />Temp: 27 °C","Date: 1993-2-27 <br />Temp: 26.8 °C","Date: 1993-2-28 <br />Temp: 25.5 °C","Date: 2003-2-1 <br />Temp: 26.5 °C","Date: 2003-2-2 <br />Temp: 26.1 °C","Date: 2003-2-3 <br />Temp: 26.2 °C","Date: 2003-2-4 <br />Temp: 26.8 °C","Date: 2003-2-5 <br />Temp: 25.3 °C","Date: 2003-2-6 <br />Temp: 25.8 °C","Date: 2003-2-7 <br />Temp: 26.4 °C","Date: 2003-2-8 <br />Temp: 26.8 °C","Date: 2003-2-9 <br />Temp: 27.8 °C","Date: 2003-2-10 <br />Temp: 27.4 °C","Date: 2003-2-11 <br />Temp: 28.2 °C","Date: 2003-2-12 <br />Temp: 28.2 °C","Date: 2003-2-13 <br />Temp: 27.8 °C","Date: 2003-2-14 <br />Temp: 27.6 °C","Date: 2003-2-15 <br />Temp: 27 °C","Date: 2003-2-16 <br />Temp: 25.3 °C","Date: 2003-2-17 <br />Temp: 26.3 °C","Date: 2003-2-18 <br />Temp: 26.9 °C","Date: 2003-2-19 <br />Temp: 26.9 °C","Date: 2003-2-20 <br />Temp: 27.6 °C","Date: 2003-2-21 <br />Temp: 27.3 °C","Date: 2003-2-22 <br />Temp: 27.7 °C","Date: 2003-2-23 <br />Temp: 27.5 °C","Date: 2003-2-24 <br />Temp: 27.7 °C","Date: 2003-2-25 <br />Temp: 28 °C","Date: 2003-2-26 <br />Temp: 28.1 °C","Date: 2003-2-27 <br />Temp: 27.7 °C","Date: 2003-2-28 <br />Temp: 27.7 °C","Date: 2013-2-1 <br />Temp: 28 °C","Date: 2013-2-2 <br />Temp: 28.3 °C","Date: 2013-2-3 <br />Temp: 26.2 °C","Date: 2013-2-4 <br />Temp: 26.7 °C","Date: 2013-2-5 <br />Temp: 26.5 °C","Date: 2013-2-6 <br />Temp: 25.7 °C","Date: 2013-2-7 <br />Temp: 27.2 °C","Date: 2013-2-8 <br />Temp: 26 °C","Date: 2013-2-9 <br />Temp: 26.7 °C","Date: 2013-2-10 <br />Temp: 24.6 °C","Date: 2013-2-11 <br />Temp: 25.3 °C","Date: 2013-2-12 <br />Temp: 25.6 °C","Date: 2013-2-13 <br />Temp: 26.9 °C","Date: 2013-2-14 <br />Temp: 24.8 °C","Date: 2013-2-15 <br />Temp: 26 °C","Date: 2013-2-16 <br />Temp: 26.4 °C","Date: 2013-2-17 <br />Temp: 24.8 °C","Date: 2013-2-18 <br />Temp: 26.5 °C","Date: 2013-2-19 <br />Temp: 26.1 °C","Date: 2013-2-20 <br />Temp: 27.2 °C","Date: 2013-2-21 <br />Temp: 26.6 °C","Date: 2013-2-22 <br />Temp: 27.4 °C","Date: 2013-2-23 <br />Temp: 28 °C","Date: 2013-2-24 <br />Temp: 27.4 °C","Date: 2013-2-25 <br />Temp: 26.7 °C","Date: 2013-2-26 <br />Temp: 26.7 °C","Date: 2013-2-27 <br />Temp: 27.1 °C","Date: 2013-2-28 <br />Temp: 27.5 °C","Date: 2023-2-1 <br />Temp: 26.7 °C","Date: 2023-2-2 <br />Temp: 27 °C","Date: 2023-2-3 <br />Temp: 26.8 °C","Date: 2023-2-4 <br />Temp: 24.9 °C","Date: 2023-2-5 <br />Temp: 26.4 °C","Date: 2023-2-6 <br />Temp: 27 °C","Date: 2023-2-7 <br />Temp: 27 °C","Date: 2023-2-8 <br />Temp: 27.5 °C","Date: 2023-2-9 <br />Temp: 27.5 °C","Date: 2023-2-10 <br />Temp: 27.5 °C","Date: 2023-2-11 <br />Temp: 27.5 °C","Date: 2023-2-12 <br />Temp: 25.6 °C","Date: 2023-2-13 <br />Temp: 26.7 °C","Date: 2023-2-14 <br />Temp: 26.8 °C","Date: 2023-2-15 <br />Temp: 26 °C","Date: 2023-2-16 <br />Temp: 26.8 °C","Date: 2023-2-17 <br />Temp: 27.1 °C","Date: 2023-2-18 <br />Temp: 27.8 °C","Date: 2023-2-19 <br />Temp: 28 °C","Date: 2023-2-20 <br />Temp: 27.2 °C","Date: 2023-2-21 <br />Temp: 27.5 °C","Date: 2023-2-22 <br />Temp: 27.5 °C","Date: 2023-2-23 <br />Temp: 27.6 °C","Date: 2023-2-24 <br />Temp: 27.9 °C","Date: 2023-2-25 <br />Temp: 27.3 °C","Date: 2023-2-26 <br />Temp: 27.3 °C","Date: 2023-2-27 <br />Temp: 26.7 °C","Date: 2023-2-28 <br />Temp: 24.9 °C"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,255,1)","opacity":1,"size":7.559055118110237,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,0,255,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[4779,4780,4781,4782,4783,4784,4785,4786,4787,4788,4789,4790,4791,4792,4793,4794,4795,4796,4797,4798,4799,4800,4801,4802,4803,4804,4805,4806,8432,8433,8434,8435,8436,8437,8438,8439,8440,8441,8442,8443,8444,8445,8446,8447,8448,8449,8450,8451,8452,8453,8454,8455,8456,8457,8458,8459,12084,12085,12086,12087,12088,12089,12090,12091,12092,12093,12094,12095,12096,12097,12098,12099,12100,12101,12102,12103,12104,12105,12106,12107,12108,12109,12110,12111,15737,15738,15739,15740,15741,15742,15743,15744,15745,15746,15747,15748,15749,15750,15751,15752,15753,15754,15755,15756,15757,15758,15759,15760,15761,15762,15763,15764,19389,19390,19391,19392,19393,19394,19395,19396,19397,19398,19399,19400,19401,19402,19403,19404,19405,19406,19407,19408,19409,19410,19411,19412,19413,19414,19415,19416],"y":[28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573],"text":"","type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(255,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.762557077625573,"r":7.3059360730593621,"b":40.182648401826498,"l":37.260273972602747},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Daily and Yearly Mean Temperature Over Years","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[4047.1500000000001,20147.849999999999],"tickmode":"array","ticktext":["1983","1993","2003","2013","2023"],"tickvals":[4779,8432,12084,15737,19389],"categoryorder":"array","categoryarray":["1983","1993","2003","2013","2023"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"Year","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[24.390000000000001,29.010000000000002],"tickmode":"array","ticktext":["25","26","27","28","29"],"tickvals":[25,26,27,28,29],"categoryorder":"array","categoryarray":["25","26","27","28","29"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Temperature (°C)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"1be03e5db4b2":{"x":{},"y":{},"text":{},"type":"scatter"},"1be07a02321a":{"x":{},"y":{}}},"cur_data":"1be03e5db4b2","visdat":{"1be03e5db4b2":["function (y) ","x"],"1be07a02321a":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(feb_combined, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.Date</span>(<span class="fu">paste</span>(Year, Month, Day, <span class="at">sep=</span><span class="st">"-"</span>)), <span class="at">y =</span> meantemp)) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">text =</span> <span class="fu">paste</span>(<span class="st">"Date:"</span>, <span class="fu">paste</span>(Year, Month, Day, <span class="at">sep=</span><span class="st">"-"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">Temp:"</span>, meantemp, <span class="st">"°C"</span>)), <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> <span class="co"># Keep points for daily temperatures</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> feb_combined, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.Date</span>(<span class="fu">paste</span>(Year, Month, Day, <span class="at">sep=</span><span class="st">"-"</span>)), <span class="at">y =</span> yearly_avg_temp, <span class="at">group =</span> <span class="dv">1</span>), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span> <span class="co"># Keep the red line for yearly average temperatures</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">breaks =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">"1983-02-01"</span>, <span class="st">"1993-02-01"</span>, <span class="st">"2003-02-01"</span>, <span class="st">"2013-02-01"</span>, <span class="st">"2023-02-01"</span>)),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"1983"</span>, <span class="st">"1993"</span>, <span class="st">"2003"</span>, <span class="st">"2013"</span>, <span class="st">"2023"</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">date_labels =</span> <span class="st">"%Y"</span>) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Daily and Yearly Mean Temperature Over Years"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Temperature (°C)"</span>) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to interactive plotly plot</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>interactive_p1 <span class="ot">&lt;-</span> <span class="fu">ggplotly</span>(p1, <span class="at">tooltip =</span> <span class="st">"text"</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>interactive_p1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p>This scatter plot visualises two types of temperature data over a span of several years, from before 1983 to 2023:</p>
+<ol type="1">
+<li><p><strong>Daily Mean Temperature (Blue Dots)</strong>: Each blue dot represents the mean temperature recorded on a specific day. The vertical axis shows the temperature in degrees Celsius (°C), while the horizontal axis represents the years. The exact date and temperature are displayed when you hover over a blue dot, as shown in the tooltip for the date 2003-2-23 with a mean temperature of 27.5 °C.</p></li>
+<li><p><strong>Average Annual Temperature (Red Line)</strong>: The red line indicates the trend of the average annual temperature over the years. It appears to have a fluctuating pattern, with some years being warmer on average than others.</p></li>
+</ol>
+<p>The scatter plot also suggests a wide range of daily temperatures within any given year, as seen by the vertical spread of blue dots for each year. The red line helps to identify whether there is an overall trend of increasing or decreasing average temperatures, which could be an indicator of climate patterns or changes. The plot is a useful way to visually compare daily temperatures to the average trend over a long time period.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why is interactivity beneficial here?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>Detailed Information on Demand: The ability to hover over individual data points to obtain specific information (such as the exact date and temperature) allows us users to explore the data in depth without overwhelming the visual presentation. In the provided scatter plot above, this means we can see the exact temperature on a given day, which is crucial for detailed analysis or for identifying outliers and anomalies.</p></li>
+<li><p>Clarity in a Dense Plot: With many data points, a static scatter plot can become cluttered and difficult to read. Interactivity allows us users to focus on individual points of interest without being distracted by the sheer volume of data.</p></li>
+<li><p>Trend Identification: By interacting with the data points along the trend line, we can observe how the annual average temperature changes over time, making it easier to spot patterns such as warming or cooling trends.</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="lineplot" class="level2">
+<h2 class="anchored" data-anchor-id="lineplot">3.2 Lineplot</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">The plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">The code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-26a8c6400996c7f3bc2f" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-26a8c6400996c7f3bc2f">{"x":{"visdat":{"1be0524ca983":["function () ","plotlyVisDat"]},"cur_data":"1be0524ca983","attrs":{"1be0524ca983":{"x":{},"y":{},"mode":"lines+markers","marker":{"size":10,"color":"red"},"line":{"color":"red"},"hovertemplate":"Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Yearly Average Temperatures (1983, 1993, 2003, 2013, 2023)","xaxis":{"domain":[0,1],"automargin":true,"title":"Year","tickvals":["1983","1993","2003","2013","2023"],"ticktext":["1983","1993","2003","2013","2023"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Yearly MEan Temperature (°C)"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1983,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,1993,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023,2023],"y":[28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,28.060714285714287,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,26.714285714285715,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,27.092857142857142,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.532142857142858,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573,26.946428571428573],"mode":"lines+markers","marker":{"color":"red","size":10,"line":{"color":"rgba(31,119,180,1)"}},"line":{"color":"red"},"hovertemplate":["Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>","Year: %{x}<br>Temperature: %{y} °C<extra><\/extra>"],"type":"scatter","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the interactive line plot with customised hover text and x-axis ticks</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(<span class="at">data =</span> feb_combined, <span class="at">x =</span> <span class="sc">~</span>Year, <span class="at">y =</span> <span class="sc">~</span>yearly_avg_temp, <span class="at">type =</span> <span class="st">'scatter'</span>, <span class="at">mode =</span> <span class="st">'lines+markers'</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">marker =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">color =</span> <span class="st">'red'</span>), <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">'red'</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">hovertemplate =</span> <span class="fu">paste</span>(<span class="st">"Year: %{x}&lt;br&gt;Temperature: %{y} °C&lt;extra&gt;&lt;/extra&gt;"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(<span class="at">title =</span> <span class="st">"Yearly Average Temperatures (1983, 1993, 2003, 2013, 2023)"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Year"</span>, </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">tickvals =</span> <span class="fu">c</span>(<span class="st">"1983"</span>, <span class="st">"1993"</span>, <span class="st">"2003"</span>, <span class="st">"2013"</span>, <span class="st">"2023"</span>), <span class="co"># Specify which ticks to show</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">ticktext =</span> <span class="fu">c</span>(<span class="st">"1983"</span>, <span class="st">"1993"</span>, <span class="st">"2003"</span>, <span class="st">"2013"</span>, <span class="st">"2023"</span>)), <span class="co"># Specify labels for the ticks</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Yearly Average Temperature (°C)"</span>),</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">hovermode =</span> <span class="st">"closest"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Render the plot with specified x-axis ticks</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Key Findings:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><strong>Initial Point (1983):</strong> The graph starts at a peak with the average annual temperature recorded at 28.06 °C in 1983. This represents the highest recorded temperature over the 40-year span depicted.</p></li>
+<li><p><strong>First Decade Drop (1993):</strong> There is a sharp decline over the next decade to 26.71 °C in 1993. This decrease of approximately 1.35 °C is quite significant, suggesting a notable cooling period during these ten years.</p></li>
+<li><p><strong>Recovery Phase (2003):</strong> The year 2003 shows a rebound with the temperature rising to 27.09 °C. Although this is an increase of about 0.38 °C from 1993, it’s still below the starting temperature in 1983 by nearly 1 °C.</p></li>
+<li><p><strong>Lowest Point (2013):</strong> The year 2013 marks the lowest temperature on the plot at 26.53 °C. This further decrease suggests a continuation of the cooling trend, with temperatures dropping by approximately 0.56 °C from 2003 and 1.53 °C from 1983.</p></li>
+<li><p><strong>Partial Recovery (2023):</strong> By 2023, the temperature rises again to 26.95 °C. This increase of 0.42 °C from 2013 indicates a slight warming trend. However, the temperature in 2023 is still below the initial 1983 temperature by 1.11 °C.</p></li>
+</ul>
+</div>
+</div>
+<p>The overall trend appears to be a downward trajectory from 1983 to 2013 with a slight increase in 2023. However, the graph does not show a simple linear decrease; rather, it fluctuates, suggesting variability in average temperatures over time. This could be due to a variety of natural climatic cycles or other environmental factors influencing average temperatures.</p>
+</section>
+<section id="heatmap" class="level2">
+<h2 class="anchored" data-anchor-id="heatmap">3.3 Heatmap</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">The plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">The code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-d6d120b7197eaf1a312a" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-d6d120b7197eaf1a312a">{"x":{"data":[{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],"y":[1,2,3,4,5],"z":[[0.71428571428571441,0.76190476190476186,0.78571428571428514,0.54761904761904701,0.54761904761904701,0.52380952380952372,0.71428571428571441,0.78571428571428514,0.66666666666666607,0.76190476190476186,0.80952380952380931,0.83333333333333348,0.97619047619047583,0.90476190476190421,0.92857142857142838,0.90476190476190421,0.97619047619047583,0.83333333333333348,1,1,0.88095238095238093,0.76190476190476186,0.88095238095238093,0.73809523809523769,0.95238095238095255,0.92857142857142838,1,0.95238095238095255],[0.42857142857142799,0.38095238095238049,0.45238095238095211,0.45238095238095211,0.45238095238095211,0.45238095238095211,0.42857142857142799,0.54761904761904701,0.59523809523809534,0.54761904761904701,0.69047619047619024,0.69047619047619024,0.52380952380952372,0.57142857142857117,0.57142857142857117,0.38095238095238049,0.54761904761904701,0.59523809523809534,0.64285714285714279,0.49999999999999956,0.42857142857142799,0.47619047619047628,0.47619047619047628,0.52380952380952372,0.42857142857142799,0.57142857142857117,0.52380952380952372,0.214285714285714],[0.45238095238095211,0.35714285714285721,0.38095238095238049,0.52380952380952372,0.16666666666666652,0.28571428571428559,0.42857142857142799,0.52380952380952372,0.76190476190476186,0.66666666666666607,0.85714285714285676,0.85714285714285676,0.76190476190476186,0.71428571428571441,0.57142857142857117,0.16666666666666652,0.40476190476190466,0.54761904761904701,0.54761904761904701,0.71428571428571441,0.64285714285714279,0.73809523809523769,0.69047619047619024,0.73809523809523769,0.80952380952380931,0.83333333333333348,0.73809523809523769,0.73809523809523769],[0.80952380952380931,0.88095238095238093,0.38095238095238049,0.49999999999999956,0.45238095238095211,0.26190476190476142,0.61904761904761862,0.33333333333333304,0.49999999999999956,0,0.16666666666666652,0.23809523809523814,0.54761904761904701,0.047619047619047457,0.33333333333333304,0.42857142857142799,0.047619047619047457,0.45238095238095211,0.35714285714285721,0.61904761904761862,0.47619047619047628,0.66666666666666607,0.80952380952380931,0.66666666666666607,0.49999999999999956,0.49999999999999956,0.59523809523809534,0.69047619047619024],[0.49999999999999956,0.57142857142857117,0.52380952380952372,0.071428571428570758,0.42857142857142799,0.57142857142857117,0.57142857142857117,0.69047619047619024,0.69047619047619024,0.69047619047619024,0.69047619047619024,0.23809523809523814,0.49999999999999956,0.52380952380952372,0.33333333333333304,0.52380952380952372,0.59523809523809534,0.76190476190476186,0.80952380952380931,0.61904761904761862,0.69047619047619024,0.69047619047619024,0.71428571428571441,0.78571428571428514,0.64285714285714279,0.64285714285714279,0.49999999999999956,0.071428571428570758]],"text":[["Day:  1<br />Year: 1983<br />meantemp: 27.6","Day:  2<br />Year: 1983<br />meantemp: 27.8","Day:  3<br />Year: 1983<br />meantemp: 27.9","Day:  4<br />Year: 1983<br />meantemp: 26.9","Day:  5<br />Year: 1983<br />meantemp: 26.9","Day:  6<br />Year: 1983<br />meantemp: 26.8","Day:  7<br />Year: 1983<br />meantemp: 27.6","Day:  8<br />Year: 1983<br />meantemp: 27.9","Day:  9<br />Year: 1983<br />meantemp: 27.4","Day: 10<br />Year: 1983<br />meantemp: 27.8","Day: 11<br />Year: 1983<br />meantemp: 28.0","Day: 12<br />Year: 1983<br />meantemp: 28.1","Day: 13<br />Year: 1983<br />meantemp: 28.7","Day: 14<br />Year: 1983<br />meantemp: 28.4","Day: 15<br />Year: 1983<br />meantemp: 28.5","Day: 16<br />Year: 1983<br />meantemp: 28.4","Day: 17<br />Year: 1983<br />meantemp: 28.7","Day: 18<br />Year: 1983<br />meantemp: 28.1","Day: 19<br />Year: 1983<br />meantemp: 28.8","Day: 20<br />Year: 1983<br />meantemp: 28.8","Day: 21<br />Year: 1983<br />meantemp: 28.3","Day: 22<br />Year: 1983<br />meantemp: 27.8","Day: 23<br />Year: 1983<br />meantemp: 28.3","Day: 24<br />Year: 1983<br />meantemp: 27.7","Day: 25<br />Year: 1983<br />meantemp: 28.6","Day: 26<br />Year: 1983<br />meantemp: 28.5","Day: 27<br />Year: 1983<br />meantemp: 28.8","Day: 28<br />Year: 1983<br />meantemp: 28.6"],["Day:  1<br />Year: 1993<br />meantemp: 26.4","Day:  2<br />Year: 1993<br />meantemp: 26.2","Day:  3<br />Year: 1993<br />meantemp: 26.5","Day:  4<br />Year: 1993<br />meantemp: 26.5","Day:  5<br />Year: 1993<br />meantemp: 26.5","Day:  6<br />Year: 1993<br />meantemp: 26.5","Day:  7<br />Year: 1993<br />meantemp: 26.4","Day:  8<br />Year: 1993<br />meantemp: 26.9","Day:  9<br />Year: 1993<br />meantemp: 27.1","Day: 10<br />Year: 1993<br />meantemp: 26.9","Day: 11<br />Year: 1993<br />meantemp: 27.5","Day: 12<br />Year: 1993<br />meantemp: 27.5","Day: 13<br />Year: 1993<br />meantemp: 26.8","Day: 14<br />Year: 1993<br />meantemp: 27.0","Day: 15<br />Year: 1993<br />meantemp: 27.0","Day: 16<br />Year: 1993<br />meantemp: 26.2","Day: 17<br />Year: 1993<br />meantemp: 26.9","Day: 18<br />Year: 1993<br />meantemp: 27.1","Day: 19<br />Year: 1993<br />meantemp: 27.3","Day: 20<br />Year: 1993<br />meantemp: 26.7","Day: 21<br />Year: 1993<br />meantemp: 26.4","Day: 22<br />Year: 1993<br />meantemp: 26.6","Day: 23<br />Year: 1993<br />meantemp: 26.6","Day: 24<br />Year: 1993<br />meantemp: 26.8","Day: 25<br />Year: 1993<br />meantemp: 26.4","Day: 26<br />Year: 1993<br />meantemp: 27.0","Day: 27<br />Year: 1993<br />meantemp: 26.8","Day: 28<br />Year: 1993<br />meantemp: 25.5"],["Day:  1<br />Year: 2003<br />meantemp: 26.5","Day:  2<br />Year: 2003<br />meantemp: 26.1","Day:  3<br />Year: 2003<br />meantemp: 26.2","Day:  4<br />Year: 2003<br />meantemp: 26.8","Day:  5<br />Year: 2003<br />meantemp: 25.3","Day:  6<br />Year: 2003<br />meantemp: 25.8","Day:  7<br />Year: 2003<br />meantemp: 26.4","Day:  8<br />Year: 2003<br />meantemp: 26.8","Day:  9<br />Year: 2003<br />meantemp: 27.8","Day: 10<br />Year: 2003<br />meantemp: 27.4","Day: 11<br />Year: 2003<br />meantemp: 28.2","Day: 12<br />Year: 2003<br />meantemp: 28.2","Day: 13<br />Year: 2003<br />meantemp: 27.8","Day: 14<br />Year: 2003<br />meantemp: 27.6","Day: 15<br />Year: 2003<br />meantemp: 27.0","Day: 16<br />Year: 2003<br />meantemp: 25.3","Day: 17<br />Year: 2003<br />meantemp: 26.3","Day: 18<br />Year: 2003<br />meantemp: 26.9","Day: 19<br />Year: 2003<br />meantemp: 26.9","Day: 20<br />Year: 2003<br />meantemp: 27.6","Day: 21<br />Year: 2003<br />meantemp: 27.3","Day: 22<br />Year: 2003<br />meantemp: 27.7","Day: 23<br />Year: 2003<br />meantemp: 27.5","Day: 24<br />Year: 2003<br />meantemp: 27.7","Day: 25<br />Year: 2003<br />meantemp: 28.0","Day: 26<br />Year: 2003<br />meantemp: 28.1","Day: 27<br />Year: 2003<br />meantemp: 27.7","Day: 28<br />Year: 2003<br />meantemp: 27.7"],["Day:  1<br />Year: 2013<br />meantemp: 28.0","Day:  2<br />Year: 2013<br />meantemp: 28.3","Day:  3<br />Year: 2013<br />meantemp: 26.2","Day:  4<br />Year: 2013<br />meantemp: 26.7","Day:  5<br />Year: 2013<br />meantemp: 26.5","Day:  6<br />Year: 2013<br />meantemp: 25.7","Day:  7<br />Year: 2013<br />meantemp: 27.2","Day:  8<br />Year: 2013<br />meantemp: 26.0","Day:  9<br />Year: 2013<br />meantemp: 26.7","Day: 10<br />Year: 2013<br />meantemp: 24.6","Day: 11<br />Year: 2013<br />meantemp: 25.3","Day: 12<br />Year: 2013<br />meantemp: 25.6","Day: 13<br />Year: 2013<br />meantemp: 26.9","Day: 14<br />Year: 2013<br />meantemp: 24.8","Day: 15<br />Year: 2013<br />meantemp: 26.0","Day: 16<br />Year: 2013<br />meantemp: 26.4","Day: 17<br />Year: 2013<br />meantemp: 24.8","Day: 18<br />Year: 2013<br />meantemp: 26.5","Day: 19<br />Year: 2013<br />meantemp: 26.1","Day: 20<br />Year: 2013<br />meantemp: 27.2","Day: 21<br />Year: 2013<br />meantemp: 26.6","Day: 22<br />Year: 2013<br />meantemp: 27.4","Day: 23<br />Year: 2013<br />meantemp: 28.0","Day: 24<br />Year: 2013<br />meantemp: 27.4","Day: 25<br />Year: 2013<br />meantemp: 26.7","Day: 26<br />Year: 2013<br />meantemp: 26.7","Day: 27<br />Year: 2013<br />meantemp: 27.1","Day: 28<br />Year: 2013<br />meantemp: 27.5"],["Day:  1<br />Year: 2023<br />meantemp: 26.7","Day:  2<br />Year: 2023<br />meantemp: 27.0","Day:  3<br />Year: 2023<br />meantemp: 26.8","Day:  4<br />Year: 2023<br />meantemp: 24.9","Day:  5<br />Year: 2023<br />meantemp: 26.4","Day:  6<br />Year: 2023<br />meantemp: 27.0","Day:  7<br />Year: 2023<br />meantemp: 27.0","Day:  8<br />Year: 2023<br />meantemp: 27.5","Day:  9<br />Year: 2023<br />meantemp: 27.5","Day: 10<br />Year: 2023<br />meantemp: 27.5","Day: 11<br />Year: 2023<br />meantemp: 27.5","Day: 12<br />Year: 2023<br />meantemp: 25.6","Day: 13<br />Year: 2023<br />meantemp: 26.7","Day: 14<br />Year: 2023<br />meantemp: 26.8","Day: 15<br />Year: 2023<br />meantemp: 26.0","Day: 16<br />Year: 2023<br />meantemp: 26.8","Day: 17<br />Year: 2023<br />meantemp: 27.1","Day: 18<br />Year: 2023<br />meantemp: 27.8","Day: 19<br />Year: 2023<br />meantemp: 28.0","Day: 20<br />Year: 2023<br />meantemp: 27.2","Day: 21<br />Year: 2023<br />meantemp: 27.5","Day: 22<br />Year: 2023<br />meantemp: 27.5","Day: 23<br />Year: 2023<br />meantemp: 27.6","Day: 24<br />Year: 2023<br />meantemp: 27.9","Day: 25<br />Year: 2023<br />meantemp: 27.3","Day: 26<br />Year: 2023<br />meantemp: 27.3","Day: 27<br />Year: 2023<br />meantemp: 26.7","Day: 28<br />Year: 2023<br />meantemp: 24.9"]],"colorscale":[[0,"#FFFFE0"],[0.047619047619047457,"#FFF6D5"],[0.071428571428570758,"#FFF2D0"],[0.16666666666666652,"#FFE0BA"],[0.214285714285714,"#FFD7B0"],[0.23809523809523814,"#FFD2AB"],[0.26190476190476142,"#FFCDA5"],[0.28571428571428559,"#FFC9A0"],[0.33333333333333304,"#FFC096"],[0.35714285714285721,"#FFBB91"],[0.38095238095238049,"#FFB68C"],[0.40476190476190466,"#FFB286"],[0.42857142857142799,"#FFAD81"],[0.45238095238095211,"#FFA87C"],[0.47619047619047628,"#FFA477"],[0.49999999999999956,"#FF9F72"],[0.52380952380952372,"#FF9A6D"],[0.54761904761904701,"#FF9568"],[0.57142857142857117,"#FF9063"],[0.59523809523809534,"#FF8B5E"],[0.61904761904761862,"#FF8659"],[0.64285714285714279,"#FF8154"],[0.66666666666666607,"#FF7C4F"],[0.69047619047619024,"#FF764B"],[0.71428571428571441,"#FF7146"],[0.73809523809523769,"#FF6B41"],[0.76190476190476186,"#FF663C"],[0.78571428571428514,"#FF6037"],[0.80952380952380931,"#FF5A32"],[0.83333333333333348,"#FF532D"],[0.85714285714285676,"#FF4C27"],[0.88095238095238093,"#FF4522"],[0.90476190476190421,"#FF3D1C"],[0.92857142857142838,"#FF3416"],[0.95238095238095255,"#FF2910"],[0.97619047619047583,"#FF1B08"],[1,"#FF0000"]],"type":"heatmap","showscale":false,"autocolorscale":false,"showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0],"y":[1],"name":"a5a0fcd4741ccb45a4ab175821202a1b","type":"scatter","mode":"markers","opacity":0,"hoverinfo":"skip","showlegend":false,"marker":{"color":[0,1],"colorscale":[[0,"#FFFFE0"],[0.0033444816053513063,"#FFFEDF"],[0.0066889632107026125,"#FFFEDE"],[0.01003344481605392,"#FFFDDE"],[0.01337792642140438,"#FFFCDD"],[0.016722408026755686,"#FFFCDC"],[0.020066889632106993,"#FFFBDB"],[0.0234113712374583,"#FFFBDB"],[0.026755852842809603,"#FFFADA"],[0.030100334448160911,"#FFF9D9"],[0.033444816053511371,"#FFF9D8"],[0.036789297658862678,"#FFF8D8"],[0.040133779264213985,"#FFF7D7"],[0.043478260869565293,"#FFF7D6"],[0.0468227424749166,"#FFF6D5"],[0.050167224080267907,"#FFF6D5"],[0.053511705685618367,"#FFF5D4"],[0.056856187290969668,"#FFF4D3"],[0.060200668896320975,"#FFF4D2"],[0.063545150501672282,"#FFF3D2"],[0.066889632107023589,"#FFF2D1"],[0.070234113712374896,"#FFF2D0"],[0.073578595317725357,"#FFF1CF"],[0.076923076923076664,"#FFF1CF"],[0.080267558528427971,"#FFF0CE"],[0.083612040133779278,"#FFEFCD"],[0.086956521739130585,"#FFEFCC"],[0.090301003344481892,"#FFEECB"],[0.093645484949833199,"#FFEDCB"],[0.09698996655518366,"#FFEDCA"],[0.10033444816053497,"#FFECC9"],[0.10367892976588627,"#FFEBC8"],[0.10702341137123757,"#FFEBC8"],[0.11036789297658887,"#FFEAC7"],[0.11371237458194018,"#FFEAC6"],[0.11705685618729064,"#FFE9C5"],[0.12040133779264195,"#FFE8C5"],[0.12374581939799326,"#FFE8C4"],[0.12709030100334456,"#FFE7C3"],[0.13043478260869587,"#FFE6C2"],[0.13377926421404718,"#FFE6C2"],[0.13712374581939765,"#FFE5C1"],[0.14046822742474896,"#FFE5C0"],[0.14381270903010024,"#FFE4BF"],[0.14715719063545155,"#FFE3BF"],[0.15050167224080285,"#FFE3BE"],[0.15384615384615416,"#FFE2BD"],[0.15719063545150463,"#FFE1BC"],[0.16053511705685594,"#FFE1BC"],[0.16387959866220725,"#FFE0BB"],[0.16722408026755856,"#FFDFBA"],[0.17056856187290986,"#FFDFBA"],[0.17391304347826117,"#FFDEB9"],[0.17725752508361162,"#FFDEB8"],[0.18060200668896292,"#FFDDB7"],[0.18394648829431423,"#FFDCB7"],[0.18729096989966554,"#FFDCB6"],[0.19063545150501685,"#FFDBB5"],[0.19397993311036815,"#FFDAB4"],[0.19732441471571946,"#FFDAB4"],[0.20066889632106993,"#FFD9B3"],[0.20401337792642124,"#FFD8B2"],[0.20735785953177255,"#FFD8B1"],[0.21070234113712386,"#FFD7B1"],[0.21404682274247513,"#FFD7B0"],[0.21739130434782644,"#FFD6AF"],[0.22073578595317692,"#FFD5AE"],[0.22408026755852822,"#FFD5AE"],[0.22742474916387953,"#FFD4AD"],[0.23076923076923084,"#FFD3AC"],[0.23411371237458214,"#FFD3AB"],[0.23745819397993345,"#FFD2AB"],[0.2408026755852839,"#FFD1AA"],[0.24414715719063521,"#FFD1A9"],[0.24749163879598651,"#FFD0A9"],[0.25083612040133785,"#FFD0A8"],[0.25418060200668913,"#FFCFA7"],[0.25752508361204046,"#FFCEA6"],[0.26086956521739174,"#FFCEA6"],[0.26421404682274219,"#FFCDA5"],[0.26755852842809352,"#FFCCA4"],[0.2709030100334448,"#FFCCA3"],[0.27424749163879614,"#FFCBA3"],[0.27759197324414742,"#FFCAA2"],[0.28093645484949792,"#FFCAA1"],[0.2842809364548492,"#FFC9A0"],[0.28762541806020048,"#FFC9A0"],[0.29096989966555181,"#FFC89F"],[0.29431438127090309,"#FFC79E"],[0.29765886287625443,"#FFC79E"],[0.30100334448160571,"#FFC69D"],[0.30434782608695621,"#FFC59C"],[0.30769230769230749,"#FFC59B"],[0.31103678929765882,"#FFC49B"],[0.3143812709030101,"#FFC39A"],[0.31772575250836144,"#FFC399"],[0.32107023411371272,"#FFC298"],[0.32441471571906316,"#FFC198"],[0.3277591973244145,"#FFC197"],[0.33110367892976578,"#FFC096"],[0.33444816053511711,"#FFBF96"],[0.33779264214046839,"#FFBF95"],[0.34113712374581973,"#FFBE94"],[0.34448160535117017,"#FFBE93"],[0.34782608695652151,"#FFBD93"],[0.35117056856187279,"#FFBC92"],[0.35451505016722412,"#FFBC91"],[0.3578595317725754,"#FFBB91"],[0.36120401337792668,"#FFBA90"],[0.36454849498327802,"#FFBA8F"],[0.36789297658862846,"#FFB98E"],[0.3712374581939798,"#FFB88E"],[0.37458193979933108,"#FFB88D"],[0.37792642140468241,"#FFB78C"],[0.38127090301003369,"#FFB68B"],[0.38461538461538414,"#FFB68B"],[0.38795986622073547,"#FFB58A"],[0.39130434782608675,"#FFB489"],[0.39464882943143809,"#FFB489"],[0.39799331103678937,"#FFB388"],[0.4013377926421407,"#FFB287"],[0.40468227424749198,"#FFB286"],[0.40802675585284248,"#FFB186"],[0.41137123745819376,"#FFB085"],[0.4147157190635451,"#FFB084"],[0.41806020066889638,"#FFAF84"],[0.42140468227424771,"#FFAE83"],[0.42474916387959899,"#FFAE82"],[0.42809364548494944,"#FFAD81"],[0.43143812709030077,"#FFAD81"],[0.43478260869565205,"#FFAC80"],[0.43812709030100339,"#FFAB7F"],[0.44147157190635467,"#FFAB7F"],[0.444816053511706,"#FFAA7E"],[0.44816053511705645,"#FFA97D"],[0.45150501672240773,"#FFA97C"],[0.45484949832775906,"#FFA87C"],[0.45819397993311034,"#FFA77B"],[0.46153846153846168,"#FFA77A"],[0.46488294314381295,"#FFA67A"],[0.46822742474916429,"#FFA579"],[0.47157190635451474,"#FFA578"],[0.47491638795986607,"#FFA478"],[0.47826086956521735,"#FFA377"],[0.48160535117056869,"#FFA376"],[0.48494983277591996,"#FFA275"],[0.48829431438127041,"#FFA175"],[0.49163879598662175,"#FFA174"],[0.49498327759197303,"#FFA073"],[0.49832775919732436,"#FF9F73"],[0.5016722408026757,"#FF9E72"],[0.50501672240802697,"#FF9E71"],[0.50836120401337825,"#FF9D70"],[0.51170568561872876,"#FF9C70"],[0.51505016722408004,"#FF9C6F"],[0.51839464882943131,"#FF9B6E"],[0.52173913043478259,"#FF9A6E"],[0.52508361204013398,"#FF9A6D"],[0.52842809364548526,"#FF996C"],[0.53177257525083654,"#FF986C"],[0.53511705685618705,"#FF986B"],[0.53846153846153832,"#FF976A"],[0.5418060200668896,"#FF9669"],[0.54515050167224099,"#FF9669"],[0.54849498327759227,"#FF9568"],[0.55183946488294267,"#FF9467"],[0.55518394648829406,"#FF9467"],[0.55852842809364533,"#FF9366"],[0.56187290969899661,"#FF9265"],[0.56521739130434789,"#FF9165"],[0.56856187290969928,"#FF9164"],[0.57190635451505056,"#FF9063"],[0.57525083612040095,"#FF8F62"],[0.57859531772575234,"#FF8F62"],[0.58193979933110362,"#FF8E61"],[0.5852842809364549,"#FF8D60"],[0.58862876254180618,"#FF8D60"],[0.59197324414715757,"#FF8C5F"],[0.59531772575250796,"#FF8B5E"],[0.59866220735785936,"#FF8A5E"],[0.60200668896321063,"#FF8A5D"],[0.60535117056856191,"#FF895C"],[0.60869565217391319,"#FF885B"],[0.61204013377926458,"#FF885B"],[0.61538461538461497,"#FF875A"],[0.61872909698996625,"#FF8659"],[0.62207357859531764,"#FF8559"],[0.62541806020066892,"#FF8558"],[0.6287625418060202,"#FF8457"],[0.63210702341137148,"#FF8357"],[0.63545150501672287,"#FF8356"],[0.63879598662207326,"#FF8255"],[0.64214046822742465,"#FF8155"],[0.64548494983277593,"#FF8054"],[0.64882943143812721,"#FF8053"],[0.65217391304347849,"#FF7F52"],[0.65551839464882899,"#FF7E52"],[0.65886287625418027,"#FF7D51"],[0.66220735785953155,"#FF7D50"],[0.66555183946488294,"#FF7C50"],[0.66889632107023422,"#FF7B4F"],[0.6722408026755855,"#FF7B4E"],[0.67558528428093678,"#FF7A4E"],[0.67892976588628728,"#FF794D"],[0.68227424749163856,"#FF784C"],[0.68561872909698984,"#FF784C"],[0.68896321070234123,"#FF774B"],[0.69230769230769251,"#FF764A"],[0.69565217391304379,"#FF7549"],[0.69899665551839429,"#FF7549"],[0.70234113712374557,"#FF7448"],[0.70568561872909685,"#FF7347"],[0.70903010033444824,"#FF7247"],[0.71237458193979952,"#FF7146"],[0.7157190635451508,"#FF7145"],[0.7190635451505013,"#FF7045"],[0.72240802675585258,"#FF6F44"],[0.72575250836120386,"#FF6E43"],[0.72909698996655514,"#FF6E42"],[0.73244147157190653,"#FF6D42"],[0.73578595317725781,"#FF6C41"],[0.73913043478260909,"#FF6B40"],[0.74247491638795959,"#FF6A40"],[0.74581939799331087,"#FF6A3F"],[0.74916387959866215,"#FF693E"],[0.75250836120401343,"#FF683E"],[0.75585284280936482,"#FF673D"],[0.75919732441471521,"#FF663C"],[0.7625418060200666,"#FF653C"],[0.76588628762541788,"#FF653B"],[0.76923076923076916,"#FF643A"],[0.77257525083612044,"#FF6339"],[0.77591973244147183,"#FF6239"],[0.77926421404682311,"#FF6138"],[0.7826086956521735,"#FF6037"],[0.78595317725752489,"#FF6037"],[0.78929765886287617,"#FF5F36"],[0.79264214046822745,"#FF5E35"],[0.79598662207357873,"#FF5D34"],[0.79933110367893012,"#FF5C34"],[0.8026755852842814,"#FF5B33"],[0.80602006688963179,"#FF5A32"],[0.80936454849498318,"#FF5A32"],[0.81270903010033446,"#FF5931"],[0.81605351170568574,"#FF5830"],[0.81939799331103702,"#FF5730"],[0.82274247491638752,"#FF562F"],[0.8260869565217388,"#FF552E"],[0.82943143812709019,"#FF542D"],[0.83277591973244147,"#FF532D"],[0.83612040133779275,"#FF522C"],[0.83946488294314403,"#FF512B"],[0.84280936454849542,"#FF502A"],[0.84615384615384581,"#FF4F2A"],[0.84949832775919709,"#FF4E29"],[0.85284280936454848,"#FF4D28"],[0.85618729096989976,"#FF4C27"],[0.85953177257525104,"#FF4B27"],[0.86287625418060154,"#FF4A26"],[0.86622073578595282,"#FF4925"],[0.8695652173913041,"#FF4825"],[0.87290969899665538,"#FF4724"],[0.87625418060200677,"#FF4623"],[0.87959866220735805,"#FF4522"],[0.88294314381270933,"#FF4421"],[0.88628762541805983,"#FF4321"],[0.88963210702341111,"#FF4220"],[0.89297658862876239,"#FF411F"],[0.89632107023411378,"#FF401E"],[0.89966555183946506,"#FF3F1E"],[0.90301003344481634,"#FF3D1D"],[0.90635451505016762,"#FF3C1C"],[0.90969899665551812,"#FF3B1B"],[0.9130434782608694,"#FF3A1A"],[0.91638795986622068,"#FF3819"],[0.91973244147157207,"#FF3719"],[0.92307692307692335,"#FF3618"],[0.92642140468227385,"#FF3517"],[0.92976588628762513,"#FF3316"],[0.93311036789297641,"#FF3215"],[0.93645484949832769,"#FF3014"],[0.93979933110367897,"#FF2F13"],[0.94314381270903036,"#FF2D12"],[0.94648829431438164,"#FF2C11"],[0.94983277591973214,"#FF2A10"],[0.95317725752508342,"#FF290F"],[0.9565217391304347,"#FF270E"],[0.95986622073578598,"#FF250D"],[0.96321070234113737,"#FF230C"],[0.96655518394648776,"#FF210B"],[0.96989966555183993,"#FF1F0A"],[0.97324414715719043,"#FF1D09"],[0.97658862876254171,"#FF1A07"],[0.97993311036789299,"#FF1806"],[0.98327759197324427,"#FF1505"],[0.98662207357859566,"#FF1204"],[0.98996655518394605,"#FF0E03"],[0.99331103678929744,"#FF0A02"],[0.99665551839464872,"#FF0501"],[1,"#FF0000"]],"colorbar":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"thickness":23.039999999999996,"title":"°C","titlefont":{"color":"rgba(0,0,0,1)","family":"Helvetica","size":13.283520132835205},"tickmode":"array","ticktext":["25","26","27","28"],"tickvals":[0.09658730158730125,0.33388888888888857,0.57119047619047592,0.80849206349206326],"tickfont":{"color":"rgba(0,0,0,1)","family":"Helvetica","size":10.62681610626816},"ticklen":2,"len":0.5}},"xaxis":"x","yaxis":"y","frame":null}],"layout":{"margin":{"t":43.762557077625573,"r":7.3059360730593621,"b":25.57077625570777,"l":34.337899543379002},"font":{"color":"rgba(0,0,0,1)","family":"Helvetica","size":14.611872146118724},"title":{"text":"Daily Mean Temperature in Changi for February","font":{"color":"rgba(0,0,0,1)","family":"Helvetica","size":17.534246575342465},"x":0.5,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.90000000000000013,29.899999999999999],"tickmode":"array","ticktext":["0","10","20"],"tickvals":[0,10,20],"categoryorder":"array","categoryarray":["0","10","20"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Helvetica","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"Helvetica","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,5.5999999999999996],"tickmode":"array","ticktext":["1983","1993","2003","2013","2023"],"tickvals":[1,2,3,4,5],"categoryorder":"array","categoryarray":["1983","1993","2003","2013","2023"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Helvetica","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"Helvetica","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"Helvetica","size":10.62681610626816},"title":{"text":"°C","font":{"color":"rgba(0,0,0,1)","family":"Helvetica","size":13.283520132835205}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"1be02066aea":{"x":{},"y":{},"fill":{},"type":"heatmap"}},"cur_data":"1be02066aea","visdat":{"1be02066aea":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure 'Year' is treated as a factor with only display the 5 years</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>feb_combined<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">factor</span>(feb_combined<span class="sc">$</span>Year, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"1983"</span>, <span class="st">"1993"</span>, <span class="st">"2003"</span>, <span class="st">"2013"</span>, <span class="st">"2023"</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the heat map with ggplot, specifying y-axis breaks</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(feb_combined, <span class="fu">aes</span>(<span class="at">x =</span> Day, <span class="at">y =</span> Year, <span class="at">fill =</span> meantemp)) <span class="sc">+</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">0.1</span>) <span class="sc">+</span> </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_tufte</span>(<span class="at">base_family =</span> <span class="st">"Helvetica"</span>) <span class="sc">+</span> <span class="co"># Using Tufte theme for a clean look</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">name =</span> <span class="st">"°C"</span>, <span class="at">low =</span> <span class="st">"lightyellow"</span>, <span class="at">high =</span> <span class="st">"red"</span>) <span class="sc">+</span> <span class="co"># Adjust colour gradient</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"1983"</span>, <span class="st">"1993"</span>, <span class="st">"2003"</span>, <span class="st">"2013"</span>, <span class="st">"2023"</span>)) <span class="sc">+</span> <span class="co"># Specify y-axis to show only these years</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="cn">NULL</span>, </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Daily Mean Temperature in Changi for February"</span>) <span class="sc">+</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>))</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the ggplot object to an interactive plotly object</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>interactive_p <span class="ot">&lt;-</span> <span class="fu">ggplotly</span>(p)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the interactive plot</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>interactive_p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p>This heatmap visualises the daily mean temperatures for the month of February across five different years: 1983, 1993, 2003, 2013, and 2023.</p>
+<ul>
+<li>The X-axis represents the days of February, ranging from 1 to 28.</li>
+<li>The Y-axis lists the years in descending order, with 2023 at the top and 1983 at the bottom.</li>
+<li>Each cell in the heatmap corresponds to a specific day in February for a given year.</li>
+<li>The colour of each cell indicates the mean temperature for that day, according to the colour scale on the right side of the heatmap. The scale ranges from light colours (cooler temperatures) to dark colours (warmer temperatures). Lighter shades of the colour represent cooler temperatures, closer to 25°C, while darker shades signify warmer temperatures, approaching 28°C.</li>
+</ul>
+<p>For instance, if one were to hover over a particular cell:</p>
+<ul>
+<li>The day would be indicated.</li>
+<li>The year would be shown.</li>
+<li>The mean temperature for that specific day and year would be displayed.</li>
+</ul>
+<p>With reference to the image below, we can hover over the 27th February 2024 with a mean temperature of 26.7°C.</p>
+<p><img src="images/heatmap.png" class="img-fluid"></p>
+<p>The heatmap shows variations in temperature across different days and years at a glance. Warmer days are immediately noticeable with darker colours, while cooler days are indicated by lighter colours. One can observe patterns such as particularly warm or cool periods during February for each year and compare the overall temperature profile across years. It seems there are fluctuations in temperature from year to year, with some years having wider spreads of temperatures throughout the month, while others show more uniformity.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why is interactivity useful here?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Interactivity functionality in a heatmap, such as the ability to hover over cells to display specific data points, is particularly useful for several reasons:</p>
+<p><strong>Precision</strong>: While the colour gradations indicate temperature differences, precise values cannot be determined solely by sight, especially when dealing with a colour spectrum. Hovering to get exact figures allows for accurate data interpretation.</p>
+<p><strong>Detail</strong>: A heatmap can only show so much detail at once. Interactivity allows users to delve into the data, seeing the exact mean temperature for any day of interest without overcrowding the visual with numbers.</p>
+<p><strong>Comparison</strong>: It enables quick and easy comparisons between different days or years. Users can hover over various parts of the heatmap to compare specific data points without referring to a legend or scale repeatedly.</p>
+<p><strong>User Engagement</strong>: Interactivity increases user engagement. Users who can interact with the data are more likely to spend time understanding the trends and anomalies presented.</p>
+<p><strong>Accessibility</strong>: For those with colour vision deficiencies, distinguishing between colours might be challenging. Interactive elements that display numerical data can make the information accessible to a wider audience.</p>
+</div>
+</div>
+</section>
+<section id="box-plot-across-5-years" class="level2">
+<h2 class="anchored" data-anchor-id="box-plot-across-5-years">3.4 Box Plot across 5 years</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">The plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">The code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-058e80cf428b320f5db6" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-058e80cf428b320f5db6">{"x":{"visdat":{"1be036139072":["function () ","plotlyVisDat"]},"cur_data":"1be036139072","attrs":{"1be036139072":{"y":{},"x":{},"hoverinfo":"y+x","color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Box Plot of Daily Mean Temperatures for June Over Decades","xaxis":{"domain":[0,1],"automargin":true,"title":"Year","type":"category","categoryorder":"array","categoryarray":["1983","1993","2003","2013","2023"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Mean Temperature (°C)"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(102,194,165,0.5)","y":[27.600000000000001,27.800000000000001,27.899999999999999,26.899999999999999,26.899999999999999,26.800000000000001,27.600000000000001,27.899999999999999,27.399999999999999,27.800000000000001,28,28.100000000000001,28.699999999999999,28.399999999999999,28.5,28.399999999999999,28.699999999999999,28.100000000000001,28.800000000000001,28.800000000000001,28.300000000000001,27.800000000000001,28.300000000000001,27.699999999999999,28.600000000000001,28.5,28.800000000000001,28.600000000000001],"x":["1983","1983","1983","1983","1983","1983","1983","1983","1983","1983","1983","1983","1983","1983","1983","1983","1983","1983","1983","1983","1983","1983","1983","1983","1983","1983","1983","1983"],"hoverinfo":["y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x"],"type":"box","name":"1983","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"line":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(252,141,98,0.5)","y":[26.399999999999999,26.199999999999999,26.5,26.5,26.5,26.5,26.399999999999999,26.899999999999999,27.100000000000001,26.899999999999999,27.5,27.5,26.800000000000001,27,27,26.199999999999999,26.899999999999999,27.100000000000001,27.300000000000001,26.699999999999999,26.399999999999999,26.600000000000001,26.600000000000001,26.800000000000001,26.399999999999999,27,26.800000000000001,25.5],"x":["1993","1993","1993","1993","1993","1993","1993","1993","1993","1993","1993","1993","1993","1993","1993","1993","1993","1993","1993","1993","1993","1993","1993","1993","1993","1993","1993","1993"],"hoverinfo":["y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x"],"type":"box","name":"1993","marker":{"color":"rgba(252,141,98,1)","line":{"color":"rgba(252,141,98,1)"}},"line":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(141,160,203,0.5)","y":[26.5,26.100000000000001,26.199999999999999,26.800000000000001,25.300000000000001,25.800000000000001,26.399999999999999,26.800000000000001,27.800000000000001,27.399999999999999,28.199999999999999,28.199999999999999,27.800000000000001,27.600000000000001,27,25.300000000000001,26.300000000000001,26.899999999999999,26.899999999999999,27.600000000000001,27.300000000000001,27.699999999999999,27.5,27.699999999999999,28,28.100000000000001,27.699999999999999,27.699999999999999],"x":["2003","2003","2003","2003","2003","2003","2003","2003","2003","2003","2003","2003","2003","2003","2003","2003","2003","2003","2003","2003","2003","2003","2003","2003","2003","2003","2003","2003"],"hoverinfo":["y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x"],"type":"box","name":"2003","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"line":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(231,138,195,0.5)","y":[28,28.300000000000001,26.199999999999999,26.699999999999999,26.5,25.699999999999999,27.199999999999999,26,26.699999999999999,24.600000000000001,25.300000000000001,25.600000000000001,26.899999999999999,24.800000000000001,26,26.399999999999999,24.800000000000001,26.5,26.100000000000001,27.199999999999999,26.600000000000001,27.399999999999999,28,27.399999999999999,26.699999999999999,26.699999999999999,27.100000000000001,27.5],"x":["2013","2013","2013","2013","2013","2013","2013","2013","2013","2013","2013","2013","2013","2013","2013","2013","2013","2013","2013","2013","2013","2013","2013","2013","2013","2013","2013","2013"],"hoverinfo":["y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x"],"type":"box","name":"2013","marker":{"color":"rgba(231,138,195,1)","line":{"color":"rgba(231,138,195,1)"}},"line":{"color":"rgba(231,138,195,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(166,216,84,0.5)","y":[26.699999999999999,27,26.800000000000001,24.899999999999999,26.399999999999999,27,27,27.5,27.5,27.5,27.5,25.600000000000001,26.699999999999999,26.800000000000001,26,26.800000000000001,27.100000000000001,27.800000000000001,28,27.199999999999999,27.5,27.5,27.600000000000001,27.899999999999999,27.300000000000001,27.300000000000001,26.699999999999999,24.899999999999999],"x":["2023","2023","2023","2023","2023","2023","2023","2023","2023","2023","2023","2023","2023","2023","2023","2023","2023","2023","2023","2023","2023","2023","2023","2023","2023","2023","2023","2023"],"hoverinfo":["y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x","y+x"],"type":"box","name":"2023","marker":{"color":"rgba(166,216,84,1)","line":{"color":"rgba(166,216,84,1)"}},"line":{"color":"rgba(166,216,84,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>feb_combined<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(feb_combined<span class="sc">$</span>Year)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the Plotly Box Plot</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(feb_combined, <span class="at">y =</span> <span class="sc">~</span><span class="st">`</span><span class="at">meantemp</span><span class="st">`</span>, <span class="at">x =</span> <span class="sc">~</span>Year, <span class="at">type =</span> <span class="st">'box'</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="sc">~</span>Year, </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">hoverinfo =</span> <span class="st">'y+x'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(<span class="at">title =</span> <span class="st">"Box Plot of Daily Mean Temperatures for February Over Decades"</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Year"</span>),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Mean Temperature (°C)"</span>))</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p>The box plot illustrates the distribution of daily mean temperatures for the month of February over five distinct years: 1983, 1993, 2003, 2013, and 2023. For each year, the data is summarised as follows:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Key Findings
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>1983</strong>:</p>
+<ul>
+<li><p>The maximum daily mean temperature reached 28.8°C.</p></li>
+<li><p>The upper quartile (Q3) temperature was 28.55°C, indicating that 75% of the days had a mean temperature of 28.55°C or lower.</p></li>
+<li><p>The median temperature was 28.1°C, which is the midpoint of the data.</p></li>
+<li><p>The lower quartile (Q1) temperature was 27.75°C, suggesting that 25% of the days had a mean temperature below this value.</p></li>
+<li><p>The minimum temperature recorded was 26.8°C.</p></li>
+</ul>
+<p><strong>1993</strong>:</p>
+<ul>
+<li><p>The temperatures peaked at 27.5°C.</p></li>
+<li><p>The third quartile was observed at 27°C.</p></li>
+<li><p>The median temperature for this year was slightly lower at 26.75°C.</p></li>
+<li><p>The first quartile was marked at 26.45°C.</p></li>
+<li><p>There was a notable outlier at 25.5°C, which was significantly lower than the expected range.</p></li>
+</ul>
+<p><strong>2003</strong>:</p>
+<ul>
+<li><p>The highest daily mean temperature noted was 28.2°C.</p></li>
+<li><p>The temperature at the third quartile was 27.77°C.</p></li>
+<li><p>The median temperature was 27.35°C.</p></li>
+<li><p>The first quartile temperature came in at 26.45°C.</p></li>
+<li><p>The lowest temperature recorded for the month was 25.3°C.</p></li>
+</ul>
+<p><strong>2013</strong>:</p>
+<ul>
+<li><p>The maximum temperature reached a similar level as in 2003, at 28.3°C.</p></li>
+<li><p>The upper quartile temperature decreased to 27.2°C.</p></li>
+<li><p>The median temperature was 26.64°C, indicating a slight decrease from 2003.</p></li>
+<li><p>The lower quartile was at 26°C. - The minimum temperature dropped to 24.6°C, showing a significant decrease from previous years.</p></li>
+</ul>
+<p><strong>2023</strong>:</p>
+<ul>
+<li><p>The highest temperature observed was 28°C.</p></li>
+<li><p>The third quartile temperature was at 27.5°C.</p></li>
+<li><p>The median temperature was 27.05°C, suggesting a slight uptick from 2013. - The first quartile was at 26.7°C.</p></li>
+<li><p>The minimum temperature saw a slight increase from the previous decade at 24.9°C, with a noticeable outlier just below the lower fence of 25.6°C.</p></li>
+</ul>
+</div>
+</div>
+<p>From 1983 to 2023, there’s a noticeable fluctuation in temperatures with both the median and the interquartile range varying from year to year. The median temperature appears to show slight variations, without a clear upward or downward trend. However, there is evidence of increasing variability in temperatures, as seen in the wider interquartile ranges in the later years, particularly in 2023.</p>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>4. Conclusion</h1>
+<p><strong>Scatterplot Analysis</strong></p>
+<p>The scatterplot shows both daily mean temperatures and average annual temperatures, indicating fluctuating patterns rather than a clear trend of increasing temperatures. The vertical spread of blue dots (daily mean temperatures) shows variability within years, and the red line (average annual temperature) suggests fluctuating patterns. This plot alone does not confirm the hypothesis of a steady increase in temperatures.</p>
+<p><strong>Lineplot Analysis</strong></p>
+<p>The lineplot reveals a fluctuating temperature trend over the specified decades:</p>
+<ul>
+<li>A significant drop from 1983 to 1993.</li>
+<li>A slight recovery in 2003.</li>
+<li>The lowest point in 2013.</li>
+<li>A partial recovery in 2023.</li>
+</ul>
+<p>These fluctuations show a general downward trend until 2013, with a slight increase by 2023, contradicting the hypothesis of a consistent increase in average temperatures.</p>
+<p><strong>Heatmap Analysis</strong></p>
+<p>The heatmap provides a visual comparison of daily mean temperatures for February across the five selected years, showing variations in temperature with lighter shades indicating cooler temperatures and darker shades for warmer temperatures. This visual representation highlights variability but does not directly support the hypothesis of a continuous increase in temperatures.</p>
+<p><strong>Box Plot Analysis</strong></p>
+<p>The box plot data across the five years show fluctuations in temperatures, with noticeable variability and some years experiencing cooler temperatures than others. The median temperatures and interquartile ranges vary, indicating fluctuations rather than a clear upward trend. For example, the minimum temperatures show a slight decrease in 2013 compared to previous years but a slight increase in 2023.</p>
+<p>In conclusion, based on our analyses, the hypothesis of a consistent increase in daily average temperatures between 1.4 to 4.6 degrees Celsius is not clearly supported. Instead, the temperature data for February from 1983 to 2023 at the Changi weather station shows fluctuations with periods of cooling and slight warming. While there is evidence of variability and slight increases in temperatures in certain years, the overall data do not confirm a steady or significant increase within the hypothesized range. Instead, the data suggest a more complex pattern of temperature changes, including periods of cooling and modest warming, which could be influenced by a variety of natural and anthropogenic factors.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
