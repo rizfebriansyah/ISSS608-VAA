@@ -14,12 +14,18 @@ editor: visual
 
 ## 1.1 Setting the Scene for This Take Home Exercise
 
-As indicated by the office report and the accompanying infographic:
+For this take-home assignment, weare tasked with choosing a module from our proposed Shiny application and accomplishing the tasks listed below:
 
--   The average daily temperatures are expected to rise by 1.4 to 4.6 degrees, and
--   The difference in precipitation between the wet season (November to January) and the dry season (February and June to September) is anticipated to become more distinct.
+1. Assess and identify the required R packages for our Shiny application, ensuring they are available on CRAN,
+2. Develop and verify the specific R codes to ensure they execute properly and yield the anticipated results,
+3. Identify the parameters and outputs that will be made available through the Shiny application,
+4. Choose suitable Shiny UI components for displaying the parameters identified previously.
 
-![](images/Climate_change.jpg)
+For this Take-home Exercise 4, we be asked to create a module report similar in content to one of the aforementioned prototype [modules](https://habaritanzania.netlify.app/). However, there will be a few key differences:
+
+1. Your module report for Take-home Exercise 4 must be published on your own coursework page, serving as your submission for this assignment.
+2. You must include a section titled "UI Design," detailing the different components of the user interface for your proposed design.
+3. For guidance on storyboarding the UI Design, please refer to the provided Storyboard [link](https://giniceseah.netlify.app/posts/2021-07-31-storyboard/).
 
 ## 1.2 The Task
 
