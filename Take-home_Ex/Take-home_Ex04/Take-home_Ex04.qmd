@@ -62,7 +62,7 @@ The following code snippet will outline the sequential steps we will undertake:
 house_ec <- read_excel("data/SES_Public_2023_tidy.xlsx", sheet = "T3.4")
 ```
 
-# EDA
+# EDA: Household Electricity Consumption Trend from 2005 - 2023
 
 Firstly, we want to find out the electricity consumption trend across the years.
 
@@ -104,6 +104,4 @@ p <- ggplot(data=filtered_ec,
 
 ggplotly(p)
 ```
-
-
 
