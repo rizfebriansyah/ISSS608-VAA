@@ -105,18 +105,5 @@ p <- ggplot(data=filtered_ec,
 ggplotly(p)
 ```
 
-::: callout-note
-The code below is to display the combined file:
-
-```{r}
-#| eval: false
-DT::datatable(feb_combined, class= "compact")
-```
-:::
-
-```{r}
-#| echo: false
-DT::datatable(feb_combined, class= "compact")
-```
 
 
