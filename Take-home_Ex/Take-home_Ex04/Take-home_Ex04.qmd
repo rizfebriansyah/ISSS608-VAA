@@ -16,16 +16,16 @@ editor: visual
 
 For this take-home assignment, weare tasked with choosing a module from our proposed Shiny application and accomplishing the tasks listed below:
 
-1. Assess and identify the required R packages for our Shiny application, ensuring they are available on CRAN,
-2. Develop and verify the specific R codes to ensure they execute properly and yield the anticipated results,
-3. Identify the parameters and outputs that will be made available through the Shiny application,
-4. Choose suitable Shiny UI components for displaying the parameters identified previously.
+1.  Assess and identify the required R packages for our Shiny application, ensuring they are available on CRAN,
+2.  Develop and verify the specific R codes to ensure they execute properly and yield the anticipated results,
+3.  Identify the parameters and outputs that will be made available through the Shiny application,
+4.  Choose suitable Shiny UI components for displaying the parameters identified previously.
 
 For this Take-home Exercise 4, we be asked to create a module report similar in content to one of the aforementioned prototype [modules](https://habaritanzania.netlify.app/). However, there will be a few key differences:
 
-1. Your module report for Take-home Exercise 4 must be published on your own coursework page, serving as your submission for this assignment.
-2. You must include a section titled "UI Design," detailing the different components of the user interface for your proposed design.
-3. For guidance on storyboarding the UI Design, please refer to the provided Storyboard [link](https://giniceseah.netlify.app/posts/2021-07-31-storyboard/).
+1.  Your module report for Take-home Exercise 4 must be published on your own coursework page, serving as your submission for this assignment.
+2.  You must include a section titled "UI Design," detailing the different components of the user interface for your proposed design.
+3.  For guidance on storyboarding the UI Design, please refer to the provided Storyboard [link](https://giniceseah.netlify.app/posts/2021-07-31-storyboard/).
 
 # 2. Getting Started
 
@@ -56,13 +56,17 @@ pacman::p_load(ggiraph, plotly,
 
 Of course our next step involves importing the dataset. Our project revolves around electricity consumption in Singapore. This data can be retrieved from [EMA](https://www.ema.gov.sg/resources/singapore-energy-statistics/chapter3) and this excel file contains many sheets.
 
+I will be using the tidy dataset and will be importing sheet T3.4.
+
 The following code snippet will outline the sequential steps we will undertake:
 
 ```{r}
 house_ec <- read_excel("data/SES_Public_2023_tidy.xlsx", sheet = "T3.4")
 ```
 
-# EDA: Household Electricity Consumption Trend from 2005 - 2023
+# 3 EDA
+
+## 3.1 EDA: Household Electricity Consumption Trend from 2005 - 2023
 
 Firstly, we want to find out the electricity consumption trend across the years.
 
@@ -83,7 +87,8 @@ p <- ggplot(data=filtered_house_ec,
 
 ggplotly(p)
 ```
-# EDA: Public vs Private Housing
+
+## 3.2 EDA: Public vs Private Housing
 
 ```{r}
 filtered_ec <- house_ec %>%
@@ -105,3 +110,34 @@ p <- ggplot(data=filtered_ec,
 ggplotly(p)
 ```
 
+## 3.3 EDA: Different Dwelling Types
+
+```{r}
+filtered_dwelling_ec <- house_ec %>%
+  filter(year >= 2005, year <= 2023, 
+         month == "Annual", 
+         DWELLING_TYPE %in% c("1-room / 2-room", "3-room", "4-room", "5-room and Executive", "Private Apartments and Condominiums", "Landed Properties"))
+```
+
+```{r}
+p <- ggplot(data=filtered_dwelling_ec, 
+            aes(x = year,
+                y = consumption_GWh, colour = DWELLING_TYPE)) +
+  geom_point(size=1) +
+  geom_line() +
+  coord_cartesian(xlim=c(2005,2023),
+                  ylim=c(60,2500)) +
+  labs(x = "Year", y = "Total Consumption (GWh)", title = "Public vs Private Housing: Annual Household Electiricty Consumption from 2005 to 2023")
+
+ggplotly(p)
+```
+
+# Prototype & UI Design
+
+## .1 The image below shows a sketch of the prototype.
+
+![](images/storyboard2.png)
+
+
+
+# Storyboard

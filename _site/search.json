@@ -109,7 +109,35 @@
     "href": "Take-home_Ex/Take-home_Ex04/Take-home_Ex04.html#import-dataset",
     "title": "Take-home Exercise 4",
     "section": "2.2 Import dataset",
-    "text": "2.2 Import dataset\nOf course our next step involves importing the dataset. Our project revolves around electricity consumption in Singapore. This data can be retrieved from EMA and this excel file contains many sheets.\nThe following code snippet will outline the sequential steps we will undertake:\n\nhouse_ec &lt;- read_excel(\"data/SES_Public_2023_tidy.xlsx\", sheet = \"T3.4\")"
+    "text": "2.2 Import dataset\nOf course our next step involves importing the dataset. Our project revolves around electricity consumption in Singapore. This data can be retrieved from EMA and this excel file contains many sheets.\nI will be using the tidy dataset and will be importing sheet T3.4.\nThe following code snippet will outline the sequential steps we will undertake:\n\nhouse_ec &lt;- read_excel(\"data/SES_Public_2023_tidy.xlsx\", sheet = \"T3.4\")"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex04/Take-home_Ex04.html#eda-household-electricity-consumption-trend-from-2005---2023",
+    "href": "Take-home_Ex/Take-home_Ex04/Take-home_Ex04.html#eda-household-electricity-consumption-trend-from-2005---2023",
+    "title": "Take-home Exercise 4",
+    "section": "3.1 EDA: Household Electricity Consumption Trend from 2005 - 2023",
+    "text": "3.1 EDA: Household Electricity Consumption Trend from 2005 - 2023\nFirstly, we want to find out the electricity consumption trend across the years.\n\nfiltered_house_ec &lt;- house_ec %&gt;%\n  filter(year &gt;= 2005, year &lt;= 2023, month == \"Annual\", DWELLING_TYPE == \"Overall\")\n\n\np &lt;- ggplot(data=filtered_house_ec, \n            aes(x = year,\n                y = consumption_GWh)) +\n  geom_point(size=1) +\n  geom_line() +\n  coord_cartesian(xlim=c(2005,2023),\n                  ylim=c(0,9000)) +\n  labs(x = \"Year\", y = \"Total Consumption (GWh)\", title = \"Annual Household Electiricty Consumption from 2005 to 2023\")\n\nggplotly(p)"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex04/Take-home_Ex04.html#eda-public-vs-private-housing",
+    "href": "Take-home_Ex/Take-home_Ex04/Take-home_Ex04.html#eda-public-vs-private-housing",
+    "title": "Take-home Exercise 4",
+    "section": "3.2 EDA: Public vs Private Housing",
+    "text": "3.2 EDA: Public vs Private Housing\n\nfiltered_ec &lt;- house_ec %&gt;%\n  filter(year &gt;= 2005, year &lt;= 2023, \n         month == \"Annual\", \n         DWELLING_TYPE %in% c(\"Public Housing\", \"Private Housing\"))\n\n\np &lt;- ggplot(data=filtered_ec, \n            aes(x = year,\n                y = consumption_GWh, colour = DWELLING_TYPE)) +\n  geom_point(size=1) +\n  geom_line() +\n  coord_cartesian(xlim=c(2005,2023),\n                  ylim=c(0,9000)) +\n  labs(x = \"Year\", y = \"Total Consumption (GWh)\", title = \"Public vs Private Housing: Annual Household Electiricty Consumption from 2005 to 2023\")\n\nggplotly(p)"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex04/Take-home_Ex04.html#eda-different-dwelling-types",
+    "href": "Take-home_Ex/Take-home_Ex04/Take-home_Ex04.html#eda-different-dwelling-types",
+    "title": "Take-home Exercise 4",
+    "section": "3.3 EDA: Different Dwelling Types",
+    "text": "3.3 EDA: Different Dwelling Types\n\nfiltered_dwelling_ec &lt;- house_ec %&gt;%\n  filter(year &gt;= 2005, year &lt;= 2023, \n         month == \"Annual\", \n         DWELLING_TYPE %in% c(\"1-room / 2-room\", \"3-room\", \"4-room\", \"5-room and Executive\", \"Private Apartments and Condominiums\", \"Landed Properties\"))\n\n\np &lt;- ggplot(data=filtered_dwelling_ec, \n            aes(x = year,\n                y = consumption_GWh, colour = DWELLING_TYPE)) +\n  geom_point(size=1) +\n  geom_line() +\n  coord_cartesian(xlim=c(2005,2023),\n                  ylim=c(0,9000)) +\n  labs(x = \"Year\", y = \"Total Consumption (GWh)\", title = \"Public vs Private Housing: Annual Household Electiricty Consumption from 2005 to 2023\")\n\nggplotly(p)"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex04/Take-home_Ex04.html#the-image-below-shows-a-sketch-of-the-prototype.",
+    "href": "Take-home_Ex/Take-home_Ex04/Take-home_Ex04.html#the-image-below-shows-a-sketch-of-the-prototype.",
+    "title": "Take-home Exercise 4",
+    "section": ".1 The image below shows a sketch of the prototype.",
+    "text": ".1 The image below shows a sketch of the prototype."
   },
   {
     "objectID": "about.html",
