@@ -150,6 +150,14 @@ p <- ggplot(data=filtered_ec,
 
 ggplotly(p)
 ```
+:::callout-note
+# Observations
+-   Consumption Levels: Public housing consistently shows higher electricity consumption than private housing throughout the given period.
+
+-   Public Housing Trend: Electricity consumption in public housing generally increases from 2005, peaks around 2020-2021, and then shows a slight decrease in the year following.
+
+-   Private Housing Trend: Private housing shows a more steady and gradual increase in electricity consumption over the years with less fluctuation than public housing. However, there is still a slight decrease after the peak around 2020-2021.
+:::
 
 ## 3.3 EDA: Different Dwelling Types
 We will now look into detail on the household electricity consumption from all dwelling types in Singapore across the years.
@@ -176,11 +184,58 @@ p <- ggplot(data=filtered_dwelling_ec,
 
 ggplotly(p)
 ```
+:::callout-note
+# Observations
+-   1-room/2-room (Red line): This category has the lowest consumption overall, with a relatively flat trend throughout the years. There's a slight increase around 2015 but remains quite stable with minimal fluctuation.
+
+-   3-room (Yellow line): Starts off slightly higher than the 1-room/2-room category, shows a gradual increase until around 2017, and then enters a plateau with a slight decline towards 2022.
+
+-   4-room (Green line): Displays a steady increase in consumption until about 2021, then it slightly declines. This category has a notably higher consumption than the 1-room/2-room and 3-room dwellings.
+
+-   5-room and Executive (Cyan line): Similar to the 4-room trend but with an even higher consumption level. It shows a steady increase, peaking around 2021, followed by a slight decline.
+
+-   Landed Properties (Light Blue line): This dwelling type shows a significant increase in consumption over the years, peaking around 2020, then decreasing. The consumption levels are significantly higher than those of HDB apartments (1-5 room and executive).
+
+-   Private Apartments and Condominiums (Pink line): Starts higher than the other categories except for landed properties, increases steadily until around 2021, and then shows a decline.
+
+The general trend for most dwelling types indicates a steady increase in electricity consumption up to around 2021, after which there's a general decline or plateau. This could be due to several reasons:
+
+-   Improved energy efficiency: Over the years, appliances and building standards have become more energy-efficient, which might contribute to the plateau or decrease in consumption after peaking.
+-   Economic factors: Changes in the economy can affect household spending on electricity.
+-   Behaviour changes: There may have been shifts in consumer behavior, such as increased awareness of energy conservation or changes in lifestyle that reduce electricity consumption.
+-   Technological advancements: The adoption of smart home technology can lead to more efficient energy use, contributing to the declining trend.
+
+Lastly, the type of dwelling is a significant factor, with larger or more luxurious dwellings (such as landed properties and private apartments/condominiums) consuming more electricity than smaller dwellings (like 1-room to 4-room HDB apartments). This reflects the generally larger space to be cooled or heated, more appliances in use, and potentially a larger number of occupants.
+:::
 
 # Prototype & UI Design
 
 ## .1 The image below shows a sketch of the prototype.
 
 ![](images/storyboard2.png)
+
+The project's goal is to examine household consumption patterns by dwelling types, with a focus on seasonal variations. Here's a more detailed breakdown of the plan based on the provided annotations:
+
+1. **Objective:**
+   The primary aim is to look in detail at electricity household consumption, comparing different types of dwellings. The focus is on understanding how consumption patterns vary with seasons, implying that weather or seasonal activities might significantly influence electricity consumption levels.
+
+2. **Selection of Dwelling Types:**
+   The analysis starts by selecting two types of dwellings. These could be any classifications of homes such as 1-room/2-room vs Landed Properties. The purpose of selecting two is to perform a comparative analysis.
+
+3. **Boxplot of Consumption:**
+   On the bottom left, there's a mention of a "boxplot of the consumption between 2 types". A boxplot is a standardised way of displaying the distribution of data based on a five-number summary: minimum, first quartile (Q1), median, third quartile (Q3), and maximum. It can reveal outliers, the spread, and skewness of the data and compare the two dwelling types.
+   - The 'whiskers' of the boxplot typically represent the range of the data excluding outliers, which are plotted as individual points outside the whiskers.
+   - The 'box' itself contains the middle 50% of the data, showing the interquartile range (IQR).
+   - The line in the middle of the box represents the median of the data.
+
+4. **Cycle Plot of Consumption:**
+   On the right side, there's a "cycle plot of the consumption between 2 types". Cycle plots are used to show seasonality and trends over time. They can be particularly useful for spotting patterns that repeat over a known cycle, in this case, monthly across multiple years.
+   - The x-axis typically represents time, which is why "year" is noted, while the y-axis represents the consumption levels.
+   - Each line in the cycle plot likely represents a different dwelling type, and their shape shows monthly consumption trends. It seems to suggest a seasonal pattern in consumption, which could vary by dwelling type.
+
+5. **Pre- and Post-COVID Analysis:**
+   The data can be separated by years before and after the COVID-19 pandemic. This suggests an interest in understanding how household consumption patterns might have shifted due to the lifestyle changes brought on by the pandemic. For instance, people might have started working from home, affecting energy consumption in residential areas.
+
+In summary, this sketch outlines a comprehensive analysis plan to compare household electricity consumption across different dwelling types, examining both the overall distribution and the monthly seasonal trends, with the potential to further distinguish changes in consumption patterns that may have arisen before and after the COVID-19 pandemic. This kind of analysis could be very useful for utility companies, urban planners, environmental analysts, and policy-makers interested in understanding and managing household consumption.
 
 # Storyboard
