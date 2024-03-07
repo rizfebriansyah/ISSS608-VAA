@@ -192,8 +192,6 @@ p <- ggplot(data=filtered_dwelling_ec,
 ggplotly(p)
 ```
 
-
-
 ::: callout-note
 # Observations
 
@@ -246,7 +244,37 @@ The project's goal is to examine household consumption patterns by dwelling type
 
 In summary, this sketch outlines a comprehensive analysis plan to compare household electricity consumption across different dwelling types, examining both the overall distribution and the monthly seasonal trends, with the potential to further distinguish changes in consumption patterns that may have arisen before and after the COVID-19 pandemic. This kind of analysis could be very useful for utility companies, urban planners, environmental analysts, and policy-makers interested in understanding and managing household consumption.
 
-# 5.1 Storyboard
+## Shiny Layout Panel & UI Components
+
+![](images/layoutshiny.png)
+
+We will be mainly using the sidebar and main panel. 
+
+The following code shows the basic structure:
+```{r}
+#| eval: false
+ui <- fluidPage(
+  titlePanel("Household Electricity Consumption by Dwelling Types"),
+  sidebarLayout(
+    sidebarPanel(
+    selectInput("DWELLING_TYPE", "Choose Dwelling Type", dwelling_type.name)
+    ),
+    mainPanel(
+      plotOutput("hist")
+    )
+  )
+)
+```
+
+The side panel should include:
+
+-   Dwelling Type 1: Have a dropdown box so user can select which dwelling type (selectInput)
+
+-   Dwelling Type 2: Have a dropdown box so user can select which dwelling type (selectInput)
+
+-   Year: Have a dropdown box so user can select which year (selectInput)
+
+# 5. Storyboard
 
 ## Boxplot
 
@@ -283,7 +311,7 @@ hline.data <- cycleplot %>%
 ggplot() + 
   geom_line(data=cycleplot,
             aes(x=year, 
-                y='cycleplot', 
+                y=consumption_GWh, 
                 group=month), 
             colour="black") +
   geom_hline(aes(yintercept=avgvalue), 
@@ -298,3 +326,5 @@ ggplot() +
   ylab("Electricity Consumption") +
   theme_tufte(base_family = "Helvetica")
 ```
+
+
