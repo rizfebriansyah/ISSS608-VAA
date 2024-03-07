@@ -56,6 +56,11 @@ pacman::p_load(ggiraph, plotly,
 
 Of course our next step involves importing the dataset. Our project revolves around electricity consumption in Singapore. This data can be retrieved from [EMA](https://www.ema.gov.sg/resources/singapore-energy-statistics/chapter3) and this excel file contains many sheets.
 
+:::callout-important
+# IMPORTANT
+2023 values will always appear lower as the datasest contains only 6 months worth of data.
+:::
+
 I will be using the tidy dataset and will be importing sheet T3.4.
 
 The following code snippet will outline the sequential steps we will undertake:
@@ -64,18 +69,24 @@ The following code snippet will outline the sequential steps we will undertake:
 house_ec <- read_excel("data/SES_Public_2023_tidy.xlsx", sheet = "T3.4")
 ```
 
-# 3 EDA
+# 3. EDA
 
 ## 3.1 EDA: Household Electricity Consumption Trend from 2005 - 2023
 
-Firstly, we want to find out the electricity consumption trend across the years.
+Firstly, we want to find out the household electricity consumption trend across the years.
+
+We will filter the data accordingly as shown in the code snippet below:
 
 ```{r}
 filtered_house_ec <- house_ec %>%
   filter(year >= 2005, year <= 2023, month == "Annual", DWELLING_TYPE == "Overall")
 ```
 
+We will then construct a line plot so we could clearly observe a trend in the household electricity consumption across the years.
+
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 p <- ggplot(data=filtered_house_ec, 
             aes(x = year,
                 y = consumption_GWh)) +
@@ -88,8 +99,36 @@ p <- ggplot(data=filtered_house_ec,
 ggplotly(p)
 ```
 
+:::callout-note
+# Observations
+
+-   Overall Trend: There appears to be a general increase in household electricity consumption from 2005 until about 2021, where consumption levels drop off slightly in 2022.
+
+-   Peak Consumption: The peak in consumption is around 2020 or 2021, after which there's a slight decrease.
+
+-   Decerement: Observing a modest decline in energy consumption during 2017 and 2018, it's plausible to attribute this shift to the impactful initiatives by the National Environment Agency (NEA), particularly through its [Energy-Saving Challenge](https://www.nea.gov.sg/media/news/news/index/four-in-five-households-motivated-to-save-energy-if-they-can-save-money-nea-study). This campaign, which spanned the said years, successfully encouraged households to adopt more sustainable energy practices. The 2018 edition of the Energy-Saving Challenge specifically rallied households to cut down on their electricity usage by implementing three straightforward but effective measures: turning off appliances when not in use, maintaining air-conditioner temperatures at 25°C or above, and opting for more energy-efficient appliances, evident through higher tick ratings. Such measures not only promoted environmental stewardship but also offered financial incentives, with reductions in electricity bills by at least one percent making participants eligible for a variety of attractive prizes.  
+:::
 ## 3.2 EDA: Public vs Private Housing
 
+Moving on, we want to find out the household electricity consumption of public and private housing in Singapore across the years.
+
+Public Housing includes:
+
+-   1-room/2-room
+
+-   3-room
+
+-   4-room
+
+-   5-room and Executive
+
+Private Housing includes:
+
+-   Private Apartments and Condominiums
+
+-   Landed Properties
+
+We will filter the data accordingly as shown in the code snippet below:
 ```{r}
 filtered_ec <- house_ec %>%
   filter(year >= 2005, year <= 2023, 
@@ -98,6 +137,8 @@ filtered_ec <- house_ec %>%
 ```
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 p <- ggplot(data=filtered_ec, 
             aes(x = year,
                 y = consumption_GWh, colour = DWELLING_TYPE)) +
@@ -111,7 +152,9 @@ ggplotly(p)
 ```
 
 ## 3.3 EDA: Different Dwelling Types
+We will now look into detail on the household electricity consumption from all dwelling types in Singapore across the years.
 
+We will filter the data accordingly as shown in the code snippet below:
 ```{r}
 filtered_dwelling_ec <- house_ec %>%
   filter(year >= 2005, year <= 2023, 
@@ -120,6 +163,8 @@ filtered_dwelling_ec <- house_ec %>%
 ```
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
 p <- ggplot(data=filtered_dwelling_ec, 
             aes(x = year,
                 y = consumption_GWh, colour = DWELLING_TYPE)) +
@@ -127,7 +172,7 @@ p <- ggplot(data=filtered_dwelling_ec,
   geom_line() +
   coord_cartesian(xlim=c(2005,2023),
                   ylim=c(60,2500)) +
-  labs(x = "Year", y = "Total Consumption (GWh)", title = "Public vs Private Housing: Annual Household Electiricty Consumption from 2005 to 2023")
+  labs(x = "Year", y = "Total Consumption (GWh)", title = "Dwelling Types: Annual Household Electiricty Consumption from 2005 to 2023")
 
 ggplotly(p)
 ```
@@ -137,7 +182,5 @@ ggplotly(p)
 ## .1 The image below shows a sketch of the prototype.
 
 ![](images/storyboard2.png)
-
-
 
 # Storyboard
