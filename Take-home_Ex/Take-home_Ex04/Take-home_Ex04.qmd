@@ -219,7 +219,7 @@ The general trend for most dwelling types indicates a steady increase in electri
 Lastly, the type of dwelling is a significant factor, with larger or more luxurious dwellings (such as landed properties and private apartments/condominiums) consuming more electricity than smaller dwellings (like 1-room to 4-room HDB apartments). This reflects the generally larger space to be cooled or heated, more appliances in use, and potentially a larger number of occupants.
 :::
 
-# Prototype & UI Design
+# 4. Prototype & UI Design
 
 The image below shows a sketch of the prototype.
 
@@ -246,7 +246,7 @@ The project's goal is to examine household consumption patterns by dwelling type
 
 In summary, this sketch outlines a comprehensive analysis plan to compare household electricity consumption across different dwelling types, examining both the overall distribution and the monthly seasonal trends, with the potential to further distinguish changes in consumption patterns that may have arisen before and after the COVID-19 pandemic. This kind of analysis could be very useful for utility companies, urban planners, environmental analysts, and policy-makers interested in understanding and managing household consumption.
 
-# Storyboard
+# 5.1 Storyboard
 
 ## Boxplot
 
@@ -265,7 +265,7 @@ We will filter the data accordingly as shown in the code snippet below:
 ```{r}
 cycleplot <- house_ec %>%
   filter(year >= 2005, year <= 2023, 
-         month >= 1, month <= 12, 
+         month %in% c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"), 
          DWELLING_TYPE %in% c("1-room / 2-room", "3-room", "4-room", "5-room and Executive", "Private Apartments and Condominiums", "Landed Properties"))
 ```
 
@@ -276,14 +276,14 @@ summary(house_ec$month)
 ```{r}
 hline.data <- cycleplot %>% 
   group_by(month) %>%
-  summarise(avgvalue = mean(`cycleplot`))
+  summarise(avgvalue = mean(`consumption_GWh`))
 ```
 
 ```{r}
 ggplot() + 
   geom_line(data=cycleplot,
             aes(x=year, 
-                y='boxplot_analysis', 
+                y='cycleplot', 
                 group=month), 
             colour="black") +
   geom_hline(aes(yintercept=avgvalue), 
@@ -293,8 +293,8 @@ ggplot() +
              size=0.5) + 
   facet_grid(~month) +
   labs(axis.text.x = element_blank(),
-       title = "Visitor arrivals from Vietnam by air, Jan 2010-Dec 2019") +
+       title = "Cycle Plot of Household Electricity Consumption across 2 Dwelling Types") +
   xlab("") +
-  ylab("No. of Visitors") +
+  ylab("Electricity Consumption") +
   theme_tufte(base_family = "Helvetica")
 ```
