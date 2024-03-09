@@ -1,0 +1,79 @@
+---
+title: "In-class Exercise 7"
+author: "Rizqi Febriansyah"
+date: "March 8, 2024"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  freeze: true
+  message: false
+  warning: false
+---
+
+# Load Packages
+
+Code chunk below loads the packages:
+
+```{r}
+#| echo: true
+pacman::p_load(sf, terra, gstat, tmap, viridis, tidyverse)
+```
+
+# Import dataset
+
+Code chunk below imports the dataset:
+
+```{r}
+rfstations <- read_csv("data/aspatial/RainfallStation.csv")
+```
+
+# Plotting IsoMap
+
+```{r}
+rfdata <- read_csv("data/aspatial/DAILYDATA_202402.csv") %>%
+  select(c(1,5)) %>%
+  group_by(Station) %>%
+  summarise(MONTHSUM = sum(`Daily Rainfall Total (mm)`)) %>%
+  ungroup()
+```
+
+```{r}
+rfdata <- rfdata %>%
+  left_join(rfstations)
+```
+
+Joining with 'by = join_by(Station)'
+
+```{r}
+rfdata_sf <- st_as_sf(rfdata,
+                      coords = c("Longitude", "Latitude"),
+                      crs = 4326) %>%
+  st_transform(crs = 3414)
+```
+
+```{r}
+mpsz2019 <- st_read(dsn = "data/geospatial",
+                    layer = "MPSZ-2019") %>%
+  st_transform(crs = 3414)
+```
+
+```{r}
+tmap_options(check.and.fix = TRUE)
+tmap_mode("view")
+tm_shape(mpsz2019) +
+  tm_borders() +
+tm_shape(rfdata_sf) +
+  tm_dots(col = 'MONTHSUM')
+tmap_mode("plot")
+```
+
+```{r}
+grid <- terra::rast(mpsz2019,
+                    nrows = 690,
+                    ncols = 1075)
+
+xy <- terra::xyFromCell(grid,
+                        1:ncell(grid))
+```
+
