@@ -74,7 +74,9 @@ house_ec <- read_excel("data/SES_Public_2023_tidy.xlsx", sheet = "T3.4")
 
 ## 3.1 EDA: Household Electricity Consumption Trend from 2005 - 2023
 
-Firstly, we want to find out the household electricity consumption trend across the years.
+In exploring the nuances of domestic energy consumption over nearly two decades, this section delves into the discernible trends and underlying factors influencing household electricity usage from 2005 to 2023. By filtering the dataset to include annual figures across all dwelling types, a line plot is crafted, providing a clear visual representation of the changes over time. Observations drawn from the data not only reveal the overall trajectory of consumption but also pinpoint specific periods of significant increase or decrease. Notably, the introduction of the National Environment Agency's Energy-Saving Challenge appears to correlate with a marked reduction in usage, highlighting the potential effectiveness of targeted environmental initiatives. This analysis serves as a stepping stone towards understanding the broader implications of energy policies and consumer behaviors on electricity demand.
+
+Therefore, we want to find out the household electricity consumption trend across the years.
 
 We will filter the data accordingly as shown in the code snippet below:
 
@@ -112,7 +114,9 @@ ggplotly(p)
 
 ## 3.2 EDA: Public vs Private Housing
 
-Moving on, we want to find out the household electricity consumption of public and private housing in Singapore across the years.
+Continuing our examination of electricity consumption patterns in Singapore, we turn our focus to comparing the trends between public and private housing sectors from 2005 to 2023. This segment of the analysis categorizes residential units into public housing—ranging from 1-room/2-room to 5-room and executive apartments—and private housing, encompassing both private apartments/condominiums and landed properties. By refining the data to reflect these two broad categories of dwelling types, a clearer picture emerges of the electricity usage disparities and trends within diverse living environments. This approach not only sheds light on the consumption behaviour across different housing types but also provides insights into the efficiency and sustainability practices within Singapore's residential landscape. Through this comparison, stakeholders may better understand sector-specific demands and craft targeted policies to promote energy conservation.
+
+With this in mind, we want to find out the household electricity consumption of public and private housing in Singapore across the years.
 
 Public Housing includes:
 
@@ -165,6 +169,8 @@ ggplotly(p)
 :::
 
 ## 3.3 EDA: Different Dwelling Types
+
+The exploration of household electricity consumption in Singapore takes a finer lens in this section, focusing on the disparate trends across various dwelling types. Data is meticulously segregated for individual categories such as 1-room/2-room units, 3-room, 4-room, 5-room and Executive apartments, landed properties, and private apartments and condominiums. The narrative crafted from the analysis of these figures from 2005 to 2023 unveils the distinct consumption patterns inherent to each dwelling type. Through detailed visualisations, we discern the ebbs and flows of energy use, which may be attributable to factors like evolving efficiency standards, economic shifts, behavioural changes, and technological advancements. This comprehensive view underscores the multifaceted nature of energy consumption and the influence of dwelling size and type on the ecological footprint of residential sectors.
 
 We will now look into detail on the household electricity consumption from all dwelling types in Singapore across the years.
 
