@@ -332,11 +332,15 @@ The side panel should include:
 ## Boxplot
 
 ```{r}
-p <- ggplot(sum_dwelling_type_by_year, aes(DWELLING_TYPE, total_consumption_GWh))
+p <- ggplot(sum_dwelling_type_by_year, aes(DWELLING_TYPE, total_consumption_GWh)) +  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 p <-  p + geom_boxplot()
 
 ggplotly(p)
 
+```
+
+```{r}
+ggplot(sum_dwelling_type_by_year, aes(DWELLING_TYPE, total_consumption_GWh)) + geom_boxplot() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ## Cycle Plot
