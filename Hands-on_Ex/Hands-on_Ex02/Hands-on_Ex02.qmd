@@ -1,7 +1,7 @@
 ---
 title: "Hands-on Exercise 2: Beyond ggplot2 Fundamentals"
 author: "Rizqi Febriansyah"
-date: "18 January 2023"
+date: "18 January 2024"
 execute: 
   eval: true
   echo: true
@@ -300,6 +300,7 @@ patchwork & theme_wsj()
 ```
 
 # 2.6 Reference
+
 -   Patchwork R package goes nerd viral
 -   ggrepel
 -   ggthemes

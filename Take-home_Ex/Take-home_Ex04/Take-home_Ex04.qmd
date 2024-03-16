@@ -340,7 +340,9 @@ ggplotly(p)
 ```
 
 ```{r}
-ggplot(sum_dwelling_type_by_year, aes(DWELLING_TYPE, total_consumption_GWh)) + geom_boxplot() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+ggplot(sum_dwelling_type_by_year, aes(DWELLING_TYPE, total_consumption_GWh)) + geom_boxplot() + theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_y_continuous(breaks = seq(0, max(sum_dwelling_type_by_year$total_consumption_GWh), by = 250))
+  
 ```
 
 ## Cycle Plot
@@ -448,22 +450,20 @@ ggplot(df, aes(x = year, y = consumption_GWh, group = month)) +
   labs(x = "Year", y = "Consumption (GWh)", title = "Monthly Consumption Cycle Plot") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) # Rotate x-axis labels if needed
 
-# Execute this code to render the plot
 ```
 
 ```{r}
 
-# Assuming 'df' is your data frame with columns 'Year', 'Month', 'DWELLING_TYPE', and 'consumption_GWh'
-# First, ensure data types are as expected
+# Ensure data types are as expected
 df$month <- factor(df$month, levels = 1:12, labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
 df$year <- as.factor(df$year)
 df$consumption_GWh <- as.numeric(df$consumption_GWh)
 df$DWELLING_TYPE <- as.factor(df$DWELLING_TYPE)
 
-# Filter the data frame for only '2-room' dwelling type
+# Filter the data frame for only '3-room' dwelling type
 df_filtered <- df[df$DWELLING_TYPE == "3-room", ]
 
-# Create a cycle plot for '2-room' dwelling type
+# Create a cycle plot for '3-room' dwelling type
 ggplot(df_filtered, aes(x = year, y = consumption_GWh, group = month, color = month)) +
   geom_line() +
    # optional: add points to the lines
@@ -473,3 +473,4 @@ ggplot(df_filtered, aes(x = year, y = consumption_GWh, group = month, color = mo
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 3)) # Rotate x-axis labels by 90 degrees
 
 ```
+

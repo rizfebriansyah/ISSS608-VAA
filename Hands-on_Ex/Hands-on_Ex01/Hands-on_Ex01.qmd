@@ -1,7 +1,7 @@
 ---
 title: "Hands-on Exercise 1"
 author: "Rizqi Febriansyah"
-date: "11 January 2023"
+date: "11 January 2024"
 execute: 
   eval: true
   echo: true
@@ -483,7 +483,7 @@ ggplot(data=exam_data,
 
 The *Coordinates* functions map the position of objects onto the plane of the plot. There are a number of different possible coordinate systems to use, they are:
 
-```
+```         
 -   [`coord_cartesian()`](https://ggplot2.tidyverse.org/reference/coord_cartesian.html): the default cartesian coordinate systems, where you specify x and y values (e.g. allows you to zoom in or out).
 -   [`coord_flip()`](https://ggplot2.tidyverse.org/reference/coord_flip.html): a cartesian system with the x and y flipped.
 -   [`coord_fixed()`](https://ggplot2.tidyverse.org/reference/coord_fixed.html): a cartesian system with a "fixed" aspect ratio (e.g. 1.78 for a "widescreen" plot).
@@ -584,9 +584,10 @@ ggplot(data=exam_data,
 ```
 
 # 1.12 Reference
-- Hadley Wickham (2023) [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/). Online 3rd edition.
-- Winston Chang (2013) [R Graphics Cookbook 2nd edition](https://r-graphics.org/). Online version.
-- Healy, Kieran (2019) [Data Visualization: A practical introduction](https://socviz.co/). Online version
-- [Learning ggplot2 on Paper – Components](https://henrywang.nl/learning-ggplot2-on-paper-components/)
-- [Learning ggplot2 on Paper – Layer](https://henrywang.nl/learning-ggplot2-on-paper-layer/)
-- [Learning ggplot2 on Paper – Scale](https://henrywang.nl/tag/learning-ggplot2-on-paper/)
+
+-   Hadley Wickham (2023) [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/). Online 3rd edition.
+-   Winston Chang (2013) [R Graphics Cookbook 2nd edition](https://r-graphics.org/). Online version.
+-   Healy, Kieran (2019) [Data Visualization: A practical introduction](https://socviz.co/). Online version
+-   [Learning ggplot2 on Paper -- Components](https://henrywang.nl/learning-ggplot2-on-paper-components/)
+-   [Learning ggplot2 on Paper -- Layer](https://henrywang.nl/learning-ggplot2-on-paper-layer/)
+-   [Learning ggplot2 on Paper -- Scale](https://henrywang.nl/tag/learning-ggplot2-on-paper/)

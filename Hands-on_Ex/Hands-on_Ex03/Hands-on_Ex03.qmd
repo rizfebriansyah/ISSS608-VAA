@@ -1,7 +1,7 @@
 ---
 title: "Hands-on Exercise 3: Programming Interactive Data Visualisation with R and Programming Animated Statistical Graphics with R"
 author: "Rizqi Febriansyah"
-date: "23 January 2023"
+date: "23 January 2024"
 date-modified: "last-modified"
 execute: 
   eval: true
@@ -771,16 +771,17 @@ This [link](https://davidgohel.github.io/ggiraph/) provides online version of th
 # Part Two: Programming Animated Statistical Graphics with R
 
 # 4.1 Overview
-In narrating a data story driven by visuals, animated graphics often captivate the audience's attention and leave a more profound impression compared to static visuals. In this interactive session, we will gain proficiency in crafting animated data visualisations using the **gganimate** and **plotlyr** R packages. Simultaneously, we will also acquire the skills to:
-(i) reshape data through the **tidyr** package and 
-(ii) process, manipulate, and transform data using the **dplyr** package.
+
+In narrating a data story driven by visuals, animated graphics often captivate the audience's attention and leave a more profound impression compared to static visuals. In this interactive session, we will gain proficiency in crafting animated data visualisations using the **gganimate** and **plotlyr** R packages. Simultaneously, we will also acquire the skills to: (i) reshape data through the **tidyr** package and (ii) process, manipulate, and transform data using the **dplyr** package.
 
 ## 4.1.1 Basic concepts of animation
+
 In the process of crafting animations, the plot itself remains static. Instead, numerous individual plots are constructed and subsequently assembled into sequences resembling movie frames, akin to the traditional method used in flip books or cartoons. Each frame represents a distinct plot capturing motion, constructed from a pertinent subset of the aggregated data. The interconnected frames, when combined, create the animated flow driven by the selected data subsets.
 
 ![](images/basicsanimation.png)
 
 ## 4.1.2 Terminology
+
 Prior to delving into the procedures for generating an animated statistical graph, it is crucial to familiarise ourselves with key concepts and terminology associated with this form of visualisation.
 
 -   Frame: Within an animated line graph, each frame corresponds to a distinct time point or category. As the frame transitions, the data points on the graph dynamically adjust to reflect the updated data.
@@ -792,12 +793,14 @@ Prior to embarking on the creation of animated graphs, it is essential to consid
 :::
 
 # 4.2 Getting Started
+
 ## 4.2.1 Loading the R packages
+
 First, write a code chunk to check, install and load the following R packages:
 
 -   [plotly](https://plotly.com/r/), R library for plotting interactive statistical graphs.
 -   [gganimate](https://gganimate.com/), an ggplot extension for creating animated statistical graphs.
--   [gifski](https://cran.r-project.org/web/packages/gifski/) converts video frames to GIF animations using pngquant’s fancy features for efficient cross-frame palettes and temporal dithering. It produces animated GIFs that use thousands of colors per frame.
+-   [gifski](https://cran.r-project.org/web/packages/gifski/) converts video frames to GIF animations using pngquant's fancy features for efficient cross-frame palettes and temporal dithering. It produces animated GIFs that use thousands of colors per frame.
 -   [gapminder](https://cran.r-project.org/web/packages/gapminder/): An excerpt of the data available at Gapminder.org. We just want to use its country_colors scheme.
 -   [tidyverse](https://www.tidyverse.org/), a family of modern R packages specially designed to support data science, analysis and communication task including creating static statistical graphs.
 
@@ -808,18 +811,14 @@ pacman::p_load(readxl, gifski, gapminder,
 
 package 'gifski' successfully unpacked and MD5 sums checked
 
-The downloaded binary packages are in
-    C:\Users\tskam\AppData\Local\Temp\RtmpAnvU4R\downloaded_packages
-package 'gapminder' successfully unpacked and MD5 sums checked
+The downloaded binary packages are in C:\Users\tskam\AppData\Local\Temp\RtmpAnvU4R\downloaded\_packages package 'gapminder' successfully unpacked and MD5 sums checked
 
-The downloaded binary packages are in
-    C:\Users\tskam\AppData\Local\Temp\RtmpAnvU4R\downloaded_packages
-package 'gganimate' successfully unpacked and MD5 sums checked
+The downloaded binary packages are in C:\Users\tskam\AppData\Local\Temp\RtmpAnvU4R\downloaded\_packages package 'gganimate' successfully unpacked and MD5 sums checked
 
-The downloaded binary packages are in
-    C:\Users\tskam\AppData\Local\Temp\RtmpAnvU4R\downloaded_packages
+The downloaded binary packages are in C:\Users\tskam\AppData\Local\Temp\RtmpAnvU4R\downloaded\_packages
 
 ## 4.2.2 Importing the data
+
 In this hands-on exercise, the Data worksheet from GlobalPopulation Excel workbook will be used.
 
 Write a code chunk to import Data worksheet from GlobalPopulation Excel workbook by using appropriate R package from tidyverse family.
@@ -834,9 +833,10 @@ globalPop <- read_xls("data/GlobalPopulation.xls",
 
 ::: callout-note
 # Things to learn from the code above
+
 -   [read_xls()](https://readxl.tidyverse.org/reference/read_excel.html) of readxl package is used to import the Excel worksheet.
 -   `mutate_each_()` of dplyr package is used to convert all character data type into factor.
--   mutate` of dplyr package is used to convert data values of Year field into integer.
+-   mutate\` of dplyr package is used to convert data values of Year field into integer.
 :::
 
 Unfortunately, `mutate_each_()` was deprecated in dplyr 0.7.0. and `funs()` was deprecated in dplyr 0.8.0. In view of this, we will re-write the code by using [mutate_at()](https://r4va.netlify.app/chap04) as shown in the code chunk below.
@@ -860,6 +860,7 @@ globalPop <- read_xls("data/GlobalPopulation.xls",
 ```
 
 # 4.3 Animated Data Visualisation: gganimate methods
+
 [gganimate](https://gganimate.com/) extends the grammar of graphics as implemented by ggplot2 to include the description of animation. It does this by providing a range of new grammar classes that can be added to the plot object in order to customise how it should change with time.
 
 -   `transition_*()` defines how the data should be spread out and how it relates to itself across time.
@@ -869,6 +870,7 @@ globalPop <- read_xls("data/GlobalPopulation.xls",
 -   `ease_aes()` defines how different aesthetics should be eased during transitions.
 
 ## 4.3.1 Building a static population bubble plot
+
 In the code chunk below, the basic ggplot2 functions are used to create a static bubble plot.
 
 ```{r}
@@ -885,6 +887,7 @@ ggplot(globalPop, aes(x = Old, y = Young,
 ```
 
 ## 4.3.2 Building the animated bubble plot
+
 In the code chunk below,
 
 -   [transition_time()](https://gganimate.com/reference/transition_time.html) of gganimate is used to create transition through distinct states in time (i.e. Year).
@@ -906,13 +909,16 @@ ggplot(globalPop, aes(x = Old, y = Young,
 ```
 
 # 4.4 Animated Data Visualisation: plotly
+
 In **Plotly R** package, both `ggplotly()` and `plot_ly()` support key `frame` animations through the frame argument/aesthetic. They also support an `ids` argument/aesthetic to ensure smooth transitions between objects with the same id (which helps facilitate object constancy).
 
 ## 4.4.1 Building an animated bubble plot: `ggplotly()` method
+
 In this sub-section, you will learn how to create an animated bubble plot by using `ggplotly()` method.
 
-:::panel-tabset
+::: panel-tabset
 # The plot
+
 ```{r}
 #| echo: false
 gg <- ggplot(globalPop, 
@@ -931,9 +937,11 @@ gg <- ggplot(globalPop,
 
 ggplotly(gg)
 ```
+
 The animated bubble plot above includes a play/pause button and a slider component for controlling the animation
 
 # The code
+
 ```{r}
 #| eval: false
 gg <- ggplot(globalPop, 
@@ -952,8 +960,10 @@ gg <- ggplot(globalPop,
 
 ggplotly(gg)
 ```
+
 ::: callout-note
 # Things to learn from code above
+
 -   Appropriate ggplot2 functions are used to create a static bubble plot. The output is then saved as an R object called gg.
 -   `ggplotly()` is then used to convert the R graphic object into an animated svg object.
 :::
@@ -961,9 +971,9 @@ ggplotly(gg)
 
 Notice that although `show.legend = FALSE` argument was used, the legend still appears on the plot. To overcome this problem, `theme(legend.position='none')` should be used as shown in the plot and code chunk below.
 
-:::panel-tabset
-
+::: panel-tabset
 # The plot
+
 ```{r}
 #| echo: false
 gg <- ggplot(globalPop, 
@@ -984,6 +994,7 @@ ggplotly(gg)
 ```
 
 # The code
+
 ```{r}
 #| eval: false
 gg <- ggplot(globalPop, 
@@ -1005,11 +1016,12 @@ ggplotly(gg)
 :::
 
 ## 4.4.2 Building an animated bubble plot: `plot_ly()` method
+
 In this sub-section, you will learn how to create an animated bubble plot by using `plot_ly()` method.
 
 ::: panel-tabset
-
 # The plot
+
 ```{r}
 #| echo: false
 bp <- globalPop %>%
@@ -1029,6 +1041,7 @@ bp
 ```
 
 # The code
+
 ```{r}
 #| eval: false
 bp <- globalPop %>%
@@ -1049,6 +1062,7 @@ bp
 :::
 
 # 4.5 Reference
+
 -   [Getting Started](https://gganimate.com/articles/gganimate.html)
 -   [Visit this link](https://rpubs.com/raymondteo/dataviz8) for a very interesting implementation of gganimate by your senior.
 -   [Building an animation step-by-step with gganimate.](https://www.alexcookson.com/post/2020-10-18-building-an-animation-step-by-step-with-gganimate/)

@@ -1,7 +1,7 @@
 ---
 title: "Hands-on Exercise 8: Network Data Visualisation and Analysis"
 author: "Rizqi Febriansyah"
-date: "25 February 2023"
+date: "25 February 2024"
 date-modified: "last-modified"
 execute: 
   eval: true
@@ -487,14 +487,14 @@ g + theme_graph()
 
 # 8.8 Building Interactive Network Graph with visNetwork
 
-* [visNetwork()](http://datastorm-open.github.io/visNetwork/) is a R package for network visualization, using [vis.js](http://visjs.org/) javascript library.
-* visNetwork() function uses a nodes list and edges list to create an interactive graph.
-    + The nodes list must include an "id" column, and the edge list must have "from" and "to" columns. 
-    + The function also plots the labels for the nodes, using the names of the actors from the "label" column in the node list.
-* The resulting graph is fun to play around with.
-    + You can move the nodes and the graph will use an algorithm to keep the nodes properly spaced.
-    + You can also zoom in and out on the plot and move it around to re-center it.
-         
+-   [visNetwork()](http://datastorm-open.github.io/visNetwork/) is a R package for network visualization, using [vis.js](http://visjs.org/) javascript library.
+-   visNetwork() function uses a nodes list and edges list to create an interactive graph.
+    -   The nodes list must include an "id" column, and the edge list must have "from" and "to" columns.
+    -   The function also plots the labels for the nodes, using the names of the actors from the "label" column in the node list.
+-   The resulting graph is fun to play around with.
+    -   You can move the nodes and the graph will use an algorithm to keep the nodes properly spaced.
+    -   You can also zoom in and out on the plot and move it around to re-center it.
+
 ## 8.8.1 Data preparation
 
 Before we can plot the interactive network graph, we need to prepare the data model by using the code chunk below.
@@ -557,9 +557,9 @@ visNetwork(GAStech_nodes,
 
 ## 8.8.5 Working with visual attributes - Edges
 
-In the code run below visEdges() is used to symbolise the edges. 
+In the code run below visEdges() is used to symbolise the edges.
 
--   The argument arrows is used to define where to place the arrow. 
+-   The argument arrows is used to define where to place the arrow.
 -   The smooth argument is used to plot the edges using a smooth curve.
 
 ```{r}

@@ -1,7 +1,7 @@
 ---
 title: "Hands-on Exercise 4: Fundamentals of Visual Analytics"
 author: "Rizqi Febriansyah"
-date: "31 January 2023"
+date: "31 January 2024"
 date-modified: "last-modified"
 execute: 
   eval: true
@@ -10,7 +10,7 @@ execute:
 editor: visual
 ---
 
-# Part One: **Visualising Distribution***
+# Part One: **Visualising Distribution**\*
 
 # 4.1 Learning Outcome
 
@@ -1062,6 +1062,7 @@ exam %>%
 
 ::: callout-note
 # Your turn
+
 Makeover the plot on previous slide by showing 95% and 99% confidence intervals.
 :::
 
@@ -1170,6 +1171,7 @@ pacman::p_load(tidyverse, FunnelPlotR, plotly, knitr)
 ```
 
 # 7.3 Importing Data
+
 In this section, COVID-19_DKI_Jakarta will be used. The data was downloaded from [Open Data Covid-19 Provinsi DKI Jakarta portal](https://riwayat-file-covid-19-dki-jakarta-jakartagis.hub.arcgis.com/). For this hands-on exercise, we are going to compare the cumulative COVID-19 cases and death by sub-district (i.e. kelurahan) as at 31st July 2021, DKI Jakarta.
 
 The code chunk below imports the data into R and save it into a tibble data frame object called covid19.
@@ -1180,6 +1182,7 @@ covid19 <- read_csv("data/COVID-19_DKI_Jakarta.csv") %>%
 ```
 
 # 7.4 FunnelPlotR methods
+
 [FunnelPlotR](https://nhs-r-community.github.io/FunnelPlotR/) package uses ggplot to generate funnel plots. It requires a `numerator` (events of interest), `denominator` (population to be considered) and `group`. The key arguments selected for customisation are:
 
 -   `limit`: plot limits (95 or 99).
@@ -1190,7 +1193,9 @@ covid19 <- read_csv("data/COVID-19_DKI_Jakarta.csv") %>%
 -   Other aesthetic components such as graph title, axis labels etc.
 
 ## 7.4.1 FunnelPlotR methods: The basic plot
+
 The code chunk below plots a funnel plot.
+
 ```{r}
 funnel_plot(
   numerator = covid19$Positive,
@@ -1202,10 +1207,11 @@ funnel_plot(
 Things to learn from the code chunk above.
 
 -   `group` in this function is different from the scatterplot. Here, it defines the level of the points to be plotted i.e. Sub-district, District or City. If Cityc is chosen, there are only six data points.
--   By default, `data_type` argument is “SR”.
+-   By default, `data_type` argument is "SR".
 -   `limit`: Plot limits, accepted values are: 95 or 99, corresponding to 95% or 99.8% quantiles of the distribution.
 
 ## 7.4.2 FunnelPlotR methods: Makeover 1
+
 The code chunk below plots a funnel plot.
 
 ```{r}
@@ -1219,9 +1225,10 @@ funnel_plot(
 )
 ```
 
-Things to learn from the code chunk above. + `data_type` argument is used to change from default “SR” to “PR” (i.e. proportions). + `xrange` and `yrange` are used to set the range of x-axis and y-axis
+Things to learn from the code chunk above. + `data_type` argument is used to change from default "SR" to "PR" (i.e. proportions). + `xrange` and `yrange` are used to set the range of x-axis and y-axis
 
 ## 7.4.3 FunnelPlotR methods: Makeover 2
+
 The code chunk below plots a funnel plot.
 
 ```{r}
@@ -1246,9 +1253,11 @@ Things to learn from the code chunk above.
 -   `x_label` and `y_label` arguments are used to add/edit x-axis and y-axis titles.
 
 # 7.5 Funnel Plot for Fair Visual Comparison: ggplot2 methods
+
 In this section, we will gain hands-on experience on building funnel plots step-by-step by using ggplot2. It aims to enhance you working experience of ggplot2 to customise speciallised data visualisation like funnel plot.
 
 ## 7.5.1 Computing the basic derived fields
+
 To plot the funnel plot from scratch, we need to derive cumulative death rate and standard error of cumulative death rate.
 
 ```{r}
@@ -1259,12 +1268,15 @@ df <- covid19 %>%
 ```
 
 Next, the fit.mean is computed by using the code chunk below.
+
 ```{r}
 fit.mean <- weighted.mean(df$rate, 1/df$rate.se^2)
 ```
 
 ## 7.5.2 Calculate lower and upper limits for 95% and 99.9% CI
+
 The code chunk below is used to compute the lower and upper limits for 95% confidence interval.
+
 ```{r}
 number.seq <- seq(1, max(df$Positive), 1)
 number.ll95 <- fit.mean - 1.96 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) 
@@ -1276,7 +1288,9 @@ dfCI <- data.frame(number.ll95, number.ul95, number.ll999,
 ```
 
 ## 7.5.3 Plotting a static funnel plot
+
 In the code chunk below, ggplot2 functions are used to plot a static funnel plot.
+
 ```{r}
 p <- ggplot(df, aes(x = Positive, y = rate)) +
   geom_point(aes(label=`Sub-district`), 
@@ -1324,6 +1338,7 @@ p
 ```
 
 ## 7.5.4 Interactive Funnel Plot: plotly + ggplot2
+
 The funnel plot created using ggplot2 functions can be made interactive with `ggplotly()` of **plotly** r package.
 
 ```{r}
@@ -1335,6 +1350,7 @@ fp_ggplotly
 ```
 
 # 7.6 References
+
 -   [funnelPlotR](https://nhs-r-community.github.io/FunnelPlotR/) package
 
 -   [Funnel Plots for Indirectly-standardised ratios](https://nhs-r-community.github.io/FunnelPlotR/articles/funnel_plots.html)
