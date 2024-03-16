@@ -86,17 +86,20 @@ filtered_house_ec <- house_ec %>%
 ```
 
 Some of the columns have already included the aggregated data. Therefore, we will filter those out to only include the raw data.
+
 ```{r}
 df <- house_ec %>%
   filter(!(DWELLING_TYPE %in% c("Overall", "Public Housing", "Private Housing") | month == "Annual"))
 ```
 
 Month is observed as character string format. This line of code will convert the month column from character type to numeric type, allowing us to perform numerical operations on it.
+
 ```{r}
 df$month <- as.numeric(df$month)
 ```
 
 Then, we would want to find the yearly household electricity consumption.
+
 ```{r}
 sum_consumption_by_year <- df %>%
   group_by(year) %>%
@@ -133,7 +136,7 @@ ggplotly(p)
 
 ## 3.2 EDA: Public vs Private Housing
 
-Continuing our examination of electricity consumption patterns in Singapore, we turn our focus to comparing the trends between public and private housing sectors from 2005 to 2023. This segment of the analysis categorizes residential units into public housing—ranging from 1-room/2-room to 5-room and executive apartments—and private housing, encompassing both private apartments/condominiums and landed properties. By refining the data to reflect these two broad categories of dwelling types, a clearer picture emerges of the electricity usage disparities and trends within diverse living environments. This approach not only sheds light on the consumption behaviour across different housing types but also provides insights into the efficiency and sustainability practices within Singapore's residential landscape. Through this comparison, stakeholders may better understand sector-specific demands and craft targeted policies to promote energy conservation.
+Continuing our examination of electricity consumption patterns in Singapore, we turn our focus to comparing the trends between public and private housing sectors from 2005 to 2023. This segment of the analysis categorizes residential units into public housing---ranging from 1-room/2-room to 5-room and executive apartments---and private housing, encompassing both private apartments/condominiums and landed properties. By refining the data to reflect these two broad categories of dwelling types, a clearer picture emerges of the electricity usage disparities and trends within diverse living environments. This approach not only sheds light on the consumption behaviour across different housing types but also provides insights into the efficiency and sustainability practices within Singapore's residential landscape. Through this comparison, stakeholders may better understand sector-specific demands and craft targeted policies to promote energy conservation.
 
 With this in mind, we want to find out the household electricity consumption of public and private housing in Singapore across the years.
 
@@ -163,7 +166,6 @@ filtered_ec <- house_ec %>%
          month == "Annual", 
          DWELLING_TYPE %in% c("Public Housing", "Private Housing"))
 ```
-
 
 ```{r}
 # Assuming your data frame is named df
@@ -242,8 +244,6 @@ p <- ggplot(data=sum_dwelling_type_by_year,
 ggplotly(p)
 ```
 
-
-
 ::: callout-note
 # Observations
 
@@ -300,9 +300,10 @@ In summary, this sketch outlines a comprehensive analysis plan to compare househ
 
 ![](images/layoutshiny.png)
 
-We will be mainly using the sidebar and main panel. 
+We will be mainly using the sidebar and main panel.
 
 The following code shows the basic structure:
+
 ```{r}
 #| eval: false
 ui <- fluidPage(
@@ -379,4 +380,4 @@ ggplot() +
   theme_tufte(base_family = "Helvetica")
 ```
 
-
+![](images/storyboard_draft.png)
