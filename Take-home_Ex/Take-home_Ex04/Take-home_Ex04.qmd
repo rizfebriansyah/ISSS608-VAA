@@ -49,7 +49,7 @@ The code which loads the R packages:
 
 ```{r}
 pacman::p_load(ggiraph, plotly, 
-               patchwork, DT, tidyverse, dplyr, ggthemes, readxl) 
+               patchwork, DT, tidyverse, dplyr, ggthemes, readxl, ggstatsplot) 
 ```
 
 ## 2.2 Import dataset
@@ -78,14 +78,7 @@ In exploring the nuances of domestic energy consumption over nearly two decades,
 
 Therefore, we want to find out the household electricity consumption trend across the years.
 
-We will filter the data accordingly as shown in the code snippet below:
-
-```{r}
-filtered_house_ec <- house_ec %>%
-  filter(year >= 2005, year <= 2023, month == "Annual", DWELLING_TYPE == "Overall")
-```
-
-Some of the columns have already included the aggregated data. Therefore, we will filter those out to only include the raw data.
+Some of the columns have already included the aggregated data. Therefore, we will filter those out to only include the raw data. This means not to include Overall, Public Housing, Private Housing under the column `DWELLING_TYPE` or to not include Annual under the column `month`.
 
 ```{r}
 df <- house_ec %>%
@@ -161,14 +154,8 @@ Private Housing includes:
 We will filter the data accordingly as shown in the code snippet below. We will firstly group the respective dwelling types mentioned above to Public and Private Housing. Afterwards, we will then find out the yearly household electricity consumption for both Public and Private Housing.
 
 ```{r}
-filtered_ec <- house_ec %>%
-  filter(year >= 2005, year <= 2023, 
-         month == "Annual", 
-         DWELLING_TYPE %in% c("Public Housing", "Private Housing"))
-```
+# This will give us a data frame with the sum of consumption_GWh for each dwelling category by year
 
-```{r}
-# Assuming your data frame is named df
 sum_public_private_by_year <- df %>%
   mutate(Dwelling_Category = case_when(
     DWELLING_TYPE %in% c("1-room / 2-room", "3-room", "4-room", "5-room and Executive") ~ "Public Housing",
@@ -177,9 +164,7 @@ sum_public_private_by_year <- df %>%
   )) %>%
   group_by(year, Dwelling_Category) %>%
   summarize(total_consumption_GWh = sum(consumption_GWh, na.rm = TRUE)) %>%
-  ungroup() # Optionally, ungroup if you plan further manipulations that don't need the grouping
-
-# This gives you a data frame with the sum of consumption_GWh for each dwelling category by year
+  ungroup() # Optionally, ungroup if we plan further manipulations that don't need the grouping
 ```
 
 ```{r}
@@ -214,13 +199,6 @@ The exploration of household electricity consumption in Singapore takes a finer 
 We will now look into detail on the household electricity consumption from all dwelling types in Singapore across the years.
 
 We will filter the data accordingly as shown in the code snippet below. We will find out the yearly household electricity consumption for each of the dwelling type.
-
-```{r}
-filtered_dwelling_ec <- house_ec %>%
-  filter(year >= 2005, year <= 2023, 
-         month == "Annual", 
-         DWELLING_TYPE %in% c("1-room / 2-room", "3-room", "4-room", "5-room and Executive", "Private Apartments and Condominiums", "Landed Properties"))
-```
 
 ```{r}
 sum_dwelling_type_by_year <- df %>%
@@ -327,12 +305,136 @@ The side panel should include:
 
 -   Year: Have a dropdown box so user can select which year (selectInput)
 
-# 5. Storyboard
+# 5. Visual Statistical Analysis
 
+## 5.1 Oneway ANOVA Test: ggbetweenstats() 
+
+The `DWELLING_TYPE` column contains the following unique dwelling types: '1-room / 2-room', '3-room', '4-room', '5-room and Executive', 'Private Apartments and Condominiums', 'Landed Properties', and 'Others'. We'll use `ggbetweenstats()` from the `ggstatsplot` package in R to perform and visualise a One-way ANOVA test comparing electricity consumption across these dwelling types. With that in mind, One-way ANOVA test is carried out to determine if there are statistically significant differences in electricity consumption among different dwelling types (e.g., 1-room, 2-room, 3-room, etc.). 
+
+The One-way ANOVA is suitable when we have one categorical independent variable (dwelling type) with more than two levels (different types of housing), and one continuous dependent variable (electricity consumption in GWh).
+
+```{r}
+ggbetweenstats(
+  data = df,
+  x = DWELLING_TYPE, # grouping variable
+  y = consumption_GWh, # dependent variable
+  title = "Electricity Consumption by Dwelling Type",
+  xlab = "Dwelling Type",
+  ylab = "Electricity Consumption (GWh)",
+  type = "p", # for parametric assumptions
+  pairwise.comparisons = TRUE, # perform post-hoc analysis
+  pairwise.display = "significant", # display significant comparisons
+  p.adjust.method = "fdr", # p-values are first sorted and ranked.
+  messages = FALSE # hide messages
+)
+```
+Looking at the provided plot, which is the output of a One-way ANOVA analysis, here are the key conclusions:
+
+1. **Significant Differences**: The ANOVA test result, as indicated by the `F` statistic and the `p` value (`F(6, 594.16) = 15652.20, p = 0.00`), suggests that there are statistically significant differences in electricity consumption among the different dwelling types.
+
+2. **Effect Size**: The omega squared (`ω²`) value is very close to 1 (`ω² = 0.99`), which suggests a very strong effect size. This indicates that the variation in electricity consumption is highly associated with the dwelling type.
+
+3. **Mean Consumption**: The plot displays the mean electricity consumption (GWh) for each dwelling type, with 'Private Apartments and Condominiums' having the highest mean consumption (`μmean = 149.02` GWh) and 'Others' having the lowest (`μmean = 1.25` GWh).
+
+4. **Policy and Decision Making**: Given the significant differences in consumption across dwelling types, policymakers can identify which types of residences might need targeted energy efficiency initiatives. For example, 'Private Apartments and Condominiums' and 'Landed Properties' show the highest mean consumption and might be key areas for energy-saving programmes.
+
+5. **Understanding Consumption Patterns**: The means displayed on the plot (`μmean`) reveal the pattern of consumption across dwelling types. Smaller dwellings like '1-room / 2-room' have much lower consumption compared to larger or more luxurious dwellings such as 'Private Apartments and Condominiums' and 'Landed Properties'.
+
+6. **Possibility of Further Research**: The significant differences invite further research into why these differences occur, such as investigating the influence of socio-economic factors, the age of the buildings, insulation quality, or the presence of energy-efficient appliances.
+
+7. **Pairwise Comparisons**: The lines connecting different dwelling types represent pairwise comparisons, with the corresponding adjusted p-values for the comparisons indicated. Adjustments have likely been made for multiple comparisons, possibly using the Holm method (as indicated by `pHolm-adj`).
+   - All the pairwise comparisons shown on the plot are significant (indicated by p-values less than 0.05), except for one comparison ('3-room' vs. '4-room', `pHolm-adj = 0.03`), which is right at the cusp of typical significance levels.
+
+8. **Visualisation Clarity**: I am aware that overlapping labels make it difficult to read specific values for each pairwise comparison. However, given that all visible p-values are below typical alpha levels (e.g., 0.05, 0.01, 0.001), we can conclude that most dwelling type comparisons differ significantly in terms of electricity consumption.
+
+The plot effectively shows that dwelling type is a significant factor in electricity consumption, with clear variability between different types of dwellings. As mentioned above, the next steps in analysis might involve investigating the reasons behind this variability, such as the size of the dwellings, the number of occupants, or the types of electrical appliances and systems in use.
+
+## 5.2 Significant Test of Correlation: ggscatterstats()
+
+Correlation analysis is a statistical method used to evaluate the strength and direction of the linear relationship between two continuous variables. In the context of the our dataset, we can track electricity consumption over time for various dwelling types. 
+The objectives of carrying out correlation analysis could be:
+
+1. **Identifying Relationships**: To determine whether there is a statistically significant linear relationship between time (months or years) and electricity consumption. This could help identify trends, such as increasing or decreasing electricity usage over the years or months.
+
+2. **Understanding Seasonality**: To understand if there is a seasonal pattern in electricity consumption. For instance, electricity consumption may decrease due to rainy season.
+
+3. **Forecasting**: By establishing the presence of a linear trend, correlation analysis could be a preliminary step before developing forecasting models to predict future consumption based on past trends.
+
+4. **Policy Development**: If significant correlations are found, it could inform energy policy decisions, such as the need for energy conservation measures during certain times of the year or in certain types of dwellings.
+
+The objective of correlation analysis is not to infer causation but rather to measure the strength of association between two variables. It's a starting point that might lead to more detailed analysis, such as regression, to control for other variables and potentially infer causal relationships.
+
+### 5.2.1 Correlation between Year and Electricity Consumption
+
+```{r}
+# For correlation with year
+ggscatterstats(
+  data = sum_consumption_by_year,
+  x = year,
+  y = total_consumption_GWh,
+  title = "Correlation between Year and Electricity Consumption",
+  xlab = "Year",
+  ylab = "Electricity Consumption (GWh)",
+  marginal = FALSE,
+)
+```
+
+From the output above, the key points would be:
+
+- **Correlation Coefficient**: The Pearson correlation coefficient (r) `r̂_Pearson` is 0.34, indicating a modest positive relationship between the year and electricity consumption. However, the confidence interval is wide and includes zero, indicating that the relationship is not statistically significant at the typical alpha levels (e.g., 0.05).
+
+- **P-value**: The p-value is 0.16, which is above 0.05, suggesting that the positive correlation observed is not statistically significant. In other words, there isn't enough evidence to claim that the year is significantly correlated with electricity consumption.
+
+- **Bayes Factor**: The Bayes Factor is close to 0 `(log_e(BF_01)` = 0.17), suggesting that there is not strong evidence against the null hypothesis. The data does not provide strong evidence for a correlation between year and electricity consumption.
+
+- **Regression Line and Confidence Band**: The plot shows a regression line with a positive slope, indicating an increase in electricity consumption over time, but the confidence band is quite wide, reflecting the uncertainty of this trend.
+
+In conclusion, while there is a positive trend indicated by the correlation coefficient and the slope of the regression line, this analysis does not provide strong statistical evidence to confirm a significant relationship between year and electricity consumption based on the data provided. It suggests that if there is a trend, it is relatively weak, and other factors might better explain changes in electricity consumption over time. This analysis could serve as a starting point for more in-depth time series analysis that could account for other variables and use methods that are appropriate for time-dependent data.
+
+### 5.2.2 Correlation between Month and Electricity Consumption
+
+We would like to filter the total electricity consumption by month:
+```{r}
+sum_consumption_by_month <- df %>%
+  group_by(month) %>%
+  summarize(total_consumption_GWh = sum(consumption_GWh, na.rm = TRUE)) %>%
+  ungroup()
+```
+
+```{r}
+# For correlation with month 
+ggscatterstats(
+  data = sum_consumption_by_month,
+  x = month,
+  y = total_consumption_GWh,
+  title = "Correlation between Month and Electricity Consumption",
+  xlab = "Month",
+  ylab = "Electricity Consumption (GWh)",
+  marginal = FALSE,
+)
+```
+
+In the provided plot above, we observe a correlation analysis between 'Month' and 'Electricity Consumption'. The key points from this plot are as follows:
+
+1. **Correlation Coefficient (r)**: The Pearson correlation coefficient, denoted as `r̂_Pearson`, is 0.12, which suggests a very weak positive linear relationship between month and electricity consumption. 
+
+2. **Confidence Interval**: The 95% confidence interval for the Pearson correlation coefficient ranges from -0.49 to 0.65, which is quite wide and includes zero. This indicates that the true correlation could be negative, zero, or positive, and we can't say for sure that there is a meaningful relationship between the variables.
+
+3. **P-value**: The p-value of 0.72 is well above the conventional alpha levels (0.05, 0.01), which suggests that the observed correlation is not statistically significant. In other words, any correlation observed could very well be due to random chance.
+
+4. **Bayes Factor**: The logarithm of the Bayes Factor `(log_e(BF01))` is 0.81, which suggests that the data are 0.81 times as probable under the null hypothesis as they are under the alternative. This indicates that there's insufficient evidence to suggest a correlation exists from a Bayesian perspective.
+
+5. **Sample Size**: There were n_pairs = 12 pairs of data points used in this analysis. This is a relatively small sample size, which can limit the reliability of the correlation coefficient.
+
+6. **Plot Interpretation**: The scatter plot with a fitted line (blue) and a confidence band (grey area) does not show a clear increasing or decreasing trend, further supporting the conclusion that there's no significant linear relationship between month and electricity consumption.
+
+In summary, based on the output, there is no strong evidence to conclude that there is a significant linear relationship between the month of the year and electricity consumption, given the data presented. The weak correlation and high p-value suggest that any observed trend may be due to random variation rather than a consistent pattern. However, it is important to remember that correlation does not imply causation, and this type of analysis cannot determine whether changes in the month cause changes in electricity consumption.
+
+# 6. Storyboard 
 ## Boxplot
 
 ```{r}
-p <- ggplot(sum_dwelling_type_by_year, aes(DWELLING_TYPE, total_consumption_GWh)) +  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+p <- ggplot(sum_dwelling_type_by_year, aes(DWELLING_TYPE, total_consumption_GWh)) +  theme(axis.text.x = element_text(size=5))
 p <-  p + geom_boxplot()
 
 ggplotly(p)
@@ -350,111 +452,7 @@ ggplot(sum_dwelling_type_by_year, aes(DWELLING_TYPE, total_consumption_GWh)) + g
 We will filter the data accordingly as shown in the code snippet below:
 
 ```{r}
-cycleplot <- house_ec %>%
-  filter(year >= 2005, year <= 2023, 
-         month %in% c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"), 
-         DWELLING_TYPE %in% c("1-room / 2-room", "3-room", "4-room", "5-room and Executive", "Private Apartments and Condominiums", "Landed Properties"))
-```
-
-```{r}
-summary(house_ec$month)
-```
-
-```{r}
-hline.data <- cycleplot %>% 
-  group_by(month) %>%
-  summarise(avgvalue = mean(`consumption_GWh`))
-```
-
-```{r}
-ggplot() + 
-  geom_line(data=cycleplot,
-            aes(x=year, 
-                y=consumption_GWh, 
-                group=month), 
-            colour="black") +
-  geom_hline(aes(yintercept=avgvalue), 
-             data=hline.data, 
-             linetype=6, 
-             colour="red", 
-             size=0.5) + 
-  facet_grid(~month) +
-  labs(axis.text.x = element_blank(),
-       title = "Cycle Plot of Household Electricity Consumption across 2 Dwelling Types") +
-  xlab("") +
-  ylab("Electricity Consumption") +
-  theme_tufte(base_family = "Helvetica")
-```
-
-![](images/storyboard_draft.png)
-
-```{r}
-tempdata <- df %>% 
-    group_by(month, year) %>%
-    summarise(temp = mean(consumption_GWh, na.rm = TRUE))
-```
-
-```{r}
-# Plot using ggplot2
-ggplot(df, aes(year, consumption_GWh)) +
-    geom_hline(data = df, aes(yintercept = consumption_GWh)) +
-    geom_line() +
-    facet_grid(~ month, switch = "x") +
-    labs(x = "Year",
-         y = "Consumption GWh") +
-    theme_classic() +
-    theme(axis.ticks.x = element_blank(),
-          axis.text.x = element_blank(),
-          axis.line.x = element_blank())
-```
-
-
-
-
-```{r}
-
-# Assuming 'data' is your data frame with columns 'month', 'year', and 'consumption_GWh'
-# Ensure that 'month' and 'year' are factors and 'consumption_GWh' is numeric
-df$month <- factor(df$month, levels = 1:12)
-df$year <- as.factor(df$year)
-df$consumption_GWh <- as.numeric(df$consumption_GWh)
-
-# Create a cycle plot
-ggplot(df, aes(x = year, y = consumption_GWh, group = month, color = month)) +
-  geom_line() +
-  geom_point() + # optional: add points to the lines
-  theme_minimal() +
-  labs(color = 'Month') +
-  facet_wrap(~month, scales = 'free_y') # this creates a separate line plot for each month
-
-# Execute the plot
-```
-
-```{r}
-# Load the necessary libraries
-library(ggplot2)
-library(dplyr)
-
-# Assuming 'data' is your dataframe with the columns 'month', 'year', and 'consumption_GWh'
-# And that 'month' is represented by numbers 1 to 12
-
-# We'll first ensure that the 'month' column is a factor with levels in the right order
-df$month <- factor(df$month, levels = 1:12)
-
-# Now, we'll create a cycle plot
-ggplot(df, aes(x = year, y = consumption_GWh, group = month)) +
-  geom_line() +
-  geom_point() + # Adding points to the ends of lines for clarity
-  facet_wrap(~month, scales = 'free_y') + # Creating a separate line plot for each month
-  theme_minimal() +
-  labs(x = "Year", y = "Consumption (GWh)", title = "Monthly Consumption Cycle Plot") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) # Rotate x-axis labels if needed
-
-```
-
-```{r}
-
-# Ensure data types are as expected
+# Ensure the data types are as expected
 df$month <- factor(df$month, levels = 1:12, labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
 df$year <- as.factor(df$year)
 df$consumption_GWh <- as.numeric(df$consumption_GWh)
@@ -466,11 +464,15 @@ df_filtered <- df[df$DWELLING_TYPE == "3-room", ]
 # Create a cycle plot for '3-room' dwelling type
 ggplot(df_filtered, aes(x = year, y = consumption_GWh, group = month, color = month)) +
   geom_line() +
-   # optional: add points to the lines
+  # geom_point is optional: add points to the lines
   theme_minimal() +
-  labs(title = "3-Room Electricity Consumption Over The Years", color = 'Month') +
+  labs(x = "Year", y = "Consumption (GWh)", title = "3-Room Electricity Consumption Over The Years", color = 'Month') +
   facet_wrap(~month, scales = 'free_y') + # this creates a separate line plot for each month
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 3)) # Rotate x-axis labels by 90 degrees
-
 ```
+
+![](images/storyboard_draft.png)
+
+
+
 
