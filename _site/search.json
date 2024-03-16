@@ -151,7 +151,7 @@
     "href": "Take-home_Ex/Take-home_Ex04/Take-home_Ex04.html#boxplot",
     "title": "Take-home Exercise 4",
     "section": "Boxplot",
-    "text": "Boxplot\n\np &lt;- ggplot(sum_dwelling_type_by_year, aes(DWELLING_TYPE, total_consumption_GWh))\np &lt;-  p + geom_boxplot()\n\nggplotly(p)"
+    "text": "Boxplot\n\np &lt;- ggplot(sum_dwelling_type_by_year, aes(DWELLING_TYPE, total_consumption_GWh)) +  theme(axis.text.x = element_text(angle = 45, hjust = 1))\np &lt;-  p + geom_boxplot()\n\nggplotly(p)\n\n\n\n\n\n\nggplot(sum_dwelling_type_by_year, aes(DWELLING_TYPE, total_consumption_GWh)) + geom_boxplot() + theme(axis.text.x = element_text(angle = 45, hjust = 1))"
   },
   {
     "objectID": "Take-home_Ex/Take-home_Ex04/Take-home_Ex04.html#cycle-plot",
