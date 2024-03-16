@@ -385,3 +385,91 @@ ggplot() +
 ```
 
 ![](images/storyboard_draft.png)
+
+```{r}
+tempdata <- df %>% 
+    group_by(month, year) %>%
+    summarise(temp = mean(consumption_GWh, na.rm = TRUE))
+```
+
+```{r}
+# Plot using ggplot2
+ggplot(df, aes(year, consumption_GWh)) +
+    geom_hline(data = df, aes(yintercept = consumption_GWh)) +
+    geom_line() +
+    facet_grid(~ month, switch = "x") +
+    labs(x = "Year",
+         y = "Consumption GWh") +
+    theme_classic() +
+    theme(axis.ticks.x = element_blank(),
+          axis.text.x = element_blank(),
+          axis.line.x = element_blank())
+```
+
+
+
+
+```{r}
+
+# Assuming 'data' is your data frame with columns 'month', 'year', and 'consumption_GWh'
+# Ensure that 'month' and 'year' are factors and 'consumption_GWh' is numeric
+df$month <- factor(df$month, levels = 1:12)
+df$year <- as.factor(df$year)
+df$consumption_GWh <- as.numeric(df$consumption_GWh)
+
+# Create a cycle plot
+ggplot(df, aes(x = year, y = consumption_GWh, group = month, color = month)) +
+  geom_line() +
+  geom_point() + # optional: add points to the lines
+  theme_minimal() +
+  labs(color = 'Month') +
+  facet_wrap(~month, scales = 'free_y') # this creates a separate line plot for each month
+
+# Execute the plot
+```
+
+```{r}
+# Load the necessary libraries
+library(ggplot2)
+library(dplyr)
+
+# Assuming 'data' is your dataframe with the columns 'month', 'year', and 'consumption_GWh'
+# And that 'month' is represented by numbers 1 to 12
+
+# We'll first ensure that the 'month' column is a factor with levels in the right order
+df$month <- factor(df$month, levels = 1:12)
+
+# Now, we'll create a cycle plot
+ggplot(df, aes(x = year, y = consumption_GWh, group = month)) +
+  geom_line() +
+  geom_point() + # Adding points to the ends of lines for clarity
+  facet_wrap(~month, scales = 'free_y') + # Creating a separate line plot for each month
+  theme_minimal() +
+  labs(x = "Year", y = "Consumption (GWh)", title = "Monthly Consumption Cycle Plot") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) # Rotate x-axis labels if needed
+
+# Execute this code to render the plot
+```
+
+```{r}
+
+# Assuming 'df' is your data frame with columns 'Year', 'Month', 'DWELLING_TYPE', and 'consumption_GWh'
+# First, ensure data types are as expected
+df$month <- factor(df$month, levels = 1:12, labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+df$year <- as.factor(df$year)
+df$consumption_GWh <- as.numeric(df$consumption_GWh)
+df$DWELLING_TYPE <- as.factor(df$DWELLING_TYPE)
+
+# Filter the data frame for only '2-room' dwelling type
+df_filtered <- df[df$DWELLING_TYPE == "3-room", ]
+
+# Create a cycle plot for '2-room' dwelling type
+ggplot(df_filtered, aes(x = year, y = consumption_GWh, group = month, color = month)) +
+  geom_line() +
+   # optional: add points to the lines
+  theme_minimal() +
+  labs(title = "3-Room Electricity Consumption Over The Years", color = 'Month') +
+  facet_wrap(~month, scales = 'free_y') + # this creates a separate line plot for each month
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 3)) # Rotate x-axis labels by 90 degrees
+
+```
