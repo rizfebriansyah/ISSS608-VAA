@@ -85,14 +85,33 @@ filtered_house_ec <- house_ec %>%
   filter(year >= 2005, year <= 2023, month == "Annual", DWELLING_TYPE == "Overall")
 ```
 
+Some of the columns have already included the aggregated data. Therefore, we will filter those out to only include the raw data.
+```{r}
+df <- house_ec %>%
+  filter(!(DWELLING_TYPE %in% c("Overall", "Public Housing", "Private Housing") | month == "Annual"))
+```
+
+Month is observed as character string format. This line of code will convert the month column from character type to numeric type, allowing us to perform numerical operations on it.
+```{r}
+df$month <- as.numeric(df$month)
+```
+
+Then, we would want to find the yearly household electricity consumption.
+```{r}
+sum_consumption_by_year <- df %>%
+  group_by(year) %>%
+  summarize(total_consumption_GWh = sum(consumption_GWh, na.rm = TRUE)) %>%
+  ungroup()
+```
+
 We will then construct a line plot so we could clearly observe a trend in the household electricity consumption across the years.
 
 ```{r}
 #| code-fold: true
 #| code-summary: "Show the code"
-p <- ggplot(data=filtered_house_ec, 
+p <- ggplot(data=sum_consumption_by_year, 
             aes(x = year,
-                y = consumption_GWh)) +
+                y = total_consumption_GWh)) +
   geom_point(size=1) +
   geom_line() +
   coord_cartesian(xlim=c(2005,2023),
@@ -134,7 +153,9 @@ Private Housing includes:
 
 -   Landed Properties
 
-We will filter the data accordingly as shown in the code snippet below:
+-   Others
+
+We will filter the data accordingly as shown in the code snippet below. We will firstly group the respective dwelling types mentioned above to Public and Private Housing. Afterwards, we will then find out the yearly household electricity consumption for both Public and Private Housing.
 
 ```{r}
 filtered_ec <- house_ec %>%
@@ -143,12 +164,28 @@ filtered_ec <- house_ec %>%
          DWELLING_TYPE %in% c("Public Housing", "Private Housing"))
 ```
 
+
+```{r}
+# Assuming your data frame is named df
+sum_public_private_by_year <- df %>%
+  mutate(Dwelling_Category = case_when(
+    DWELLING_TYPE %in% c("1-room / 2-room", "3-room", "4-room", "5-room and Executive") ~ "Public Housing",
+    DWELLING_TYPE %in% c("Private Apartments and Condominiums", "Landed Properties", "Others") ~ "Private Housing",
+    TRUE ~ NA_character_ # This handles any types not specified
+  )) %>%
+  group_by(year, Dwelling_Category) %>%
+  summarize(total_consumption_GWh = sum(consumption_GWh, na.rm = TRUE)) %>%
+  ungroup() # Optionally, ungroup if you plan further manipulations that don't need the grouping
+
+# This gives you a data frame with the sum of consumption_GWh for each dwelling category by year
+```
+
 ```{r}
 #| code-fold: true
 #| code-summary: "Show the code"
-p <- ggplot(data=filtered_ec, 
+p <- ggplot(data=sum_public_private_by_year, 
             aes(x = year,
-                y = consumption_GWh, colour = DWELLING_TYPE)) +
+                y = total_consumption_GWh, colour = Dwelling_Category)) +
   geom_point(size=1) +
   geom_line() +
   coord_cartesian(xlim=c(2005,2023),
@@ -174,7 +211,7 @@ The exploration of household electricity consumption in Singapore takes a finer 
 
 We will now look into detail on the household electricity consumption from all dwelling types in Singapore across the years.
 
-We will filter the data accordingly as shown in the code snippet below:
+We will filter the data accordingly as shown in the code snippet below. We will find out the yearly household electricity consumption for each of the dwelling type.
 
 ```{r}
 filtered_dwelling_ec <- house_ec %>%
@@ -184,11 +221,18 @@ filtered_dwelling_ec <- house_ec %>%
 ```
 
 ```{r}
+sum_dwelling_type_by_year <- df %>%
+  group_by(year, DWELLING_TYPE) %>%
+  summarize(total_consumption_GWh = sum(consumption_GWh, na.rm = TRUE)) %>%
+  ungroup() # Removes the grouping
+```
+
+```{r}
 #| code-fold: true
 #| code-summary: "Show the code"
-p <- ggplot(data=filtered_dwelling_ec, 
+p <- ggplot(data=sum_dwelling_type_by_year, 
             aes(x = year,
-                y = consumption_GWh, colour = DWELLING_TYPE)) +
+                y = total_consumption_GWh, colour = DWELLING_TYPE)) +
   geom_point(size=1) +
   geom_line() +
   coord_cartesian(xlim=c(2005,2023),
@@ -197,6 +241,8 @@ p <- ggplot(data=filtered_dwelling_ec,
 
 ggplotly(p)
 ```
+
+
 
 ::: callout-note
 # Observations
@@ -285,7 +331,7 @@ The side panel should include:
 ## Boxplot
 
 ```{r}
-p <- ggplot(filtered_dwelling_ec, aes(DWELLING_TYPE, consumption_GWh))
+p <- ggplot(sum_dwelling_type_by_year, aes(DWELLING_TYPE, total_consumption_GWh))
 p <-  p + geom_boxplot()
 
 ggplotly(p)
