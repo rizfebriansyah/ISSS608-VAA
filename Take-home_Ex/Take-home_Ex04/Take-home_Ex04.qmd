@@ -78,7 +78,9 @@ In exploring the nuances of domestic energy consumption over nearly two decades,
 
 Therefore, we want to find out the household electricity consumption trend across the years.
 
-Some of the columns have already included the aggregated data. Therefore, we will filter those out to only include the raw data. This means not to include Overall, Public Housing, Private Housing under the column `DWELLING_TYPE` or to not include Annual under the column `month`.
+Some of the columns have already included the aggregated data. Therefore, we will filter those out to only include the raw data. This means not to include **Overall, Public Housing, Private Housing** under the column `DWELLING_TYPE` or to not include **Annual** under the column `month`.
+
+![](images/aggregated.png)
 
 ```{r}
 df <- house_ec %>%
@@ -470,7 +472,7 @@ df$consumption_GWh <- as.numeric(df$consumption_GWh)
 df$DWELLING_TYPE <- as.factor(df$DWELLING_TYPE)
 
 # Filter the data frame for only '3-room' dwelling type
-df_filtered <- df[df$DWELLING_TYPE == "Landed Properties", ]
+df_filtered <- df[df$DWELLING_TYPE == "3-room", ]
 
 # Create a cycle plot for '3-room' dwelling type
 ggplot(df_filtered, aes(x = year, y = consumption_GWh, group = month, color = month)) +
