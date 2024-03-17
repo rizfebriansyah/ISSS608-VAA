@@ -251,7 +251,7 @@ Lastly, the type of dwelling is a significant factor, with larger or more luxuri
 
 The image below shows a sketch of the prototype.
 
-![](images/storyboard2.png)
+![](images/storyboard_sketch.png)
 
 The project's goal is to examine household consumption patterns by dwelling types, with a focus on seasonal variations. Here's a more detailed breakdown of the plan based on the provided annotations:
 
@@ -259,7 +259,7 @@ The project's goal is to examine household consumption patterns by dwelling type
 
 2.  **Selection of Dwelling Types:** The analysis starts by selecting two types of dwellings. These could be any classifications of homes such as 1-room/2-room vs Landed Properties. The purpose of selecting two is to perform a comparative analysis.
 
-3.  **Boxplot of Electricity Consumption:** On the bottom left, there's a mention of a "boxplot of the consumption between 2 types". A boxplot is a standardised way of displaying the distribution of data based on a five-number summary: minimum, first quartile (Q1), median, third quartile (Q3), and maximum. It can reveal outliers, the spread, and skewness of the data and compare the two dwelling types.
+3.  **Boxplot of Electricity Consumption:** On the bottom left, there's a "boxplot of the consumption between 2 dwelling types". A boxplot is a standardised way of displaying the distribution of data based on a five-number summary: minimum, first quartile (Q1), median, third quartile (Q3), and maximum. It can reveal outliers, the spread, and skewness of the data and compare the two dwelling types.
 
     -   The 'whiskers' of the boxplot typically represent the range of the data excluding outliers, which are plotted as individual points outside the whiskers.
     -   The 'box' itself contains the middle 50% of the data, showing the interquartile range (IQR).
@@ -431,10 +431,21 @@ In the provided plot above, we observe a correlation analysis between 'Month' an
 In summary, based on the output, there is no strong evidence to conclude that there is a significant linear relationship between the month of the year and electricity consumption, given the data presented. The weak correlation and high p-value suggest that any observed trend may be due to random variation rather than a consistent pattern. However, it is important to remember that correlation does not imply causation, and this type of analysis cannot determine whether changes in the month cause changes in electricity consumption.
 
 # 6. Storyboard 
-## Boxplot
+
+Here we will be showing you the overall storyboard design that we aim to replicate in R Shiny App.
+
+![](images/storyboard_1.png)
+
+![](images/storyboard_2.png)
+
+## 6.1 Boxplot
 
 ```{r}
-p <- ggplot(sum_dwelling_type_by_year, aes(DWELLING_TYPE, total_consumption_GWh)) +  theme(axis.text.x = element_text(size=5))
+p <- ggplot(sum_dwelling_type_by_year, aes(DWELLING_TYPE, total_consumption_GWh, color = DWELLING_TYPE)) +  
+  theme_minimal() +
+  labs(x = "Dwelling Type", y = "Consumption (GWh)", title = "Boxplot of Dwelling Types") +
+  theme(axis.text.x = element_text(size=5)) + # change x-labels size
+  guides(color = FALSE) # removes legend at the side
 p <-  p + geom_boxplot()
 
 ggplotly(p)
@@ -447,7 +458,7 @@ ggplot(sum_dwelling_type_by_year, aes(DWELLING_TYPE, total_consumption_GWh)) + g
   
 ```
 
-## Cycle Plot
+## 6.2 Cycle Plot
 
 We will filter the data accordingly as shown in the code snippet below:
 
@@ -459,19 +470,19 @@ df$consumption_GWh <- as.numeric(df$consumption_GWh)
 df$DWELLING_TYPE <- as.factor(df$DWELLING_TYPE)
 
 # Filter the data frame for only '3-room' dwelling type
-df_filtered <- df[df$DWELLING_TYPE == "3-room", ]
+df_filtered <- df[df$DWELLING_TYPE == "Landed Properties", ]
 
 # Create a cycle plot for '3-room' dwelling type
 ggplot(df_filtered, aes(x = year, y = consumption_GWh, group = month, color = month)) +
   geom_line() +
   # geom_point is optional: add points to the lines
   theme_minimal() +
-  labs(x = "Year", y = "Consumption (GWh)", title = "3-Room Electricity Consumption Over The Years", color = 'Month') +
+  labs(x = "Year", y = "Consumption (GWh)", title = "Landed Properties Electricity Consumption Over The Years", color = 'Month') +
   facet_wrap(~month, scales = 'free_y') + # this creates a separate line plot for each month
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 3)) # Rotate x-axis labels by 90 degrees
 ```
 
-![](images/storyboard_draft.png)
+
 
 
 
