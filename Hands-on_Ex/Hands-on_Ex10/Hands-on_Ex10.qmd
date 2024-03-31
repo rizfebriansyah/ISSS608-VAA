@@ -26,7 +26,7 @@ For the purpose of this hands-on exercise, the following R packages will be used
 
 ```{r}
 pacman::p_load(lubridate, ggthemes, reactable,
-reactablefmtr, gt, gtExtras, tidyverse, RODBC)
+reactablefmtr, gt, gtExtras, tidyverse, RODBC, svglite)
 ```
 
 -   [tidyverse](https://www.tidyverse.org/) provides a collection of functions for performing data science task such as importing, tidying, wrangling data and visualising data. It is not a single package but a collection of modern R packages including but not limited to [readr](https://readr.tidyverse.org/), [tidyr](https://tidyr.tidyverse.org/), [dplyr](https://dplyr.tidyverse.org/), [ggplot](https://ggplot2.tidyverse.org/), [tibble](https://tibble.tidyverse.org/), [stringr](https://stringr.tidyverse.org/), [forcats](https://forcats.tidyverse.org/) and \[purrr\](https://purrr.tidyverse.org/.
@@ -56,6 +56,7 @@ For the purpose of this study, a personal database in Microsoft Access mdb forma
 In the code chunk below, `odbcConnectAccess()` of [RODBC](https://cran.r-project.org/web/packages/RODBC/) package is used used to import a database query table into R.
 
 ```{r}
+#| eval: false
 library(RODBC)
 con <- odbcConnectAccess2007('data/Coffee Chain.mdb')
 coffeechain <- sqlFetch(con, 'CoffeeChain Query')
@@ -72,7 +73,12 @@ Note: Before running the code chunk, you need to change the R system to 32bit ve
 The code chunk below is used to import CoffeeChain.rds into R.
 
 ```{r}
+coffeechain <- read_csv("data/CoffeeChain.csv")
+```
+
+```{r}
 coffeechain <- read_rds("data/rds/CoffeeChain.rds")
+
 ```
 
 Note: This step is optional if coffeechain is already available in R.
